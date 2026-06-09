@@ -25,6 +25,58 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* ─── FORCE Dawn color variables (fixes invisible dark-on-dark text) ─────────── */
+/* Dawn derives every text/border/icon color from these RGB triplets. Overriding
+   the background alone left foreground text dark, so we redefine them per scheme. */
+.color-scheme-1,
+.color-scheme-2,
+.color-scheme-3,
+.color-scheme-5 {
+  --color-background: 13, 13, 13 !important;
+  --color-foreground: 245, 240, 232 !important;
+  --color-button: 201, 168, 76 !important;
+  --color-button-text: 13, 13, 13 !important;
+  --color-secondary-button: 13, 13, 13 !important;
+  --color-secondary-button-text: 245, 240, 232 !important;
+  --color-link: 201, 168, 76 !important;
+  --color-icon: 245, 240, 232 !important;
+  --color-shadow: 0, 0, 0 !important;
+}
+
+/* Scheme 4 = inverted gold panel (dark text on gold) */
+.color-scheme-4 {
+  --color-background: 201, 168, 76 !important;
+  --color-foreground: 13, 13, 13 !important;
+  --color-button: 13, 13, 13 !important;
+  --color-button-text: 201, 168, 76 !important;
+}
+
+/* Product page text that uses the RTE / description blocks */
+.product__description,
+.product__description p,
+.product__description li,
+.product__text,
+.rte,
+.rte p,
+.rte li,
+.rte ul,
+.product__accordion .accordion__content,
+.product__accordion summary,
+.product__accordion summary span,
+.product-form__inventory,
+.product__tax,
+.product__tax a,
+.product__view-details,
+.product__view-details a {
+  color: rgba(245, 240, 232, 0.85) !important;
+}
+
+.product__title,
+.product__title h1,
+.product__title a {
+  color: var(--zk-warm-white) !important;
+}
+
 /* ─── FORCE black backgrounds everywhere (overrides color schemes) ──────────── */
 .color-scheme-1,
 .color-scheme-2,
