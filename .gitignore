@@ -8,3 +8,12 @@
 ehthumbs.db
 Thumbs.db
 .shopify
+
+# Source assets — too large for git / theme (upload originals via Shopify admin)
+*.zip
+*.doc
+*.docx
+*.rtf
+Zekulhyda-3-001/
+*.JPG
+/IMG_*.jpg

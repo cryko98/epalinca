@@ -25,6 +25,72 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
+/* ─── FORCE black backgrounds everywhere (overrides color schemes) ──────────── */
+.color-scheme-1,
+.color-scheme-2,
+.color-scheme-3,
+.color-scheme-5,
+.gradient,
+.shopify-section,
+.banner__media,
+main,
+#MainContent,
+.collection,
+.product,
+.cart-page,
+.page-width {
+  background-color: var(--zk-black) !important;
+  --gradient-background: var(--zk-black) !important;
+}
+
+.color-scheme-2,
+.shopify-section-group-footer-group {
+  background-color: var(--zk-dark) !important;
+}
+
+/* Product/collection card MEDIA (image) area — was light grey */
+.card__media,
+.card .media,
+.media--transparent,
+.card__inner,
+.card,
+.media {
+  background-color: var(--zk-dark) !important;
+}
+
+/* Placeholder SVG backgrounds (the grey t-shirt boxes) */
+.placeholder-svg {
+  background-color: var(--zk-dark) !important;
+  fill: rgba(201, 168, 76, 0.25) !important;
+}
+
+.placeholder {
+  background-color: var(--zk-dark) !important;
+}
+
+/* Collection / catalog page header & sorting bar */
+.collection-hero,
+.facets,
+.facets-wrapper,
+.product-grid-container,
+.collection .loading-overlay {
+  background-color: var(--zk-black) !important;
+}
+
+.facets__summary,
+.facets__label,
+.facet-filters__label,
+.facet-filters__sort,
+.collection-product-count {
+  color: var(--zk-warm-white) !important;
+}
+
+/* Keep ONLY the gold scheme (scheme-4) light-on-dark inverted */
+.color-scheme-4 {
+  background-color: var(--zk-gold) !important;
+  --gradient-background: var(--zk-gold) !important;
+}
+
 h1, h2, h3, h4, h5, h6,
 .h0, .h1, .h2, .h3, .h4, .h5,
 .heading {
