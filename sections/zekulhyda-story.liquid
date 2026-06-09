@@ -1,0 +1,90 @@
+<link rel="stylesheet" href="{{ 'zekulhyda.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript>{{ 'zekulhyda.css' | asset_url | stylesheet_tag }}</noscript>
+
+<section class="zk-story" id="zk-story">
+  <div class="zk-story__inner">
+    <span class="zk-story__label">{{ section.settings.label }}</span>
+
+    <h2 class="zk-story__title">{{ section.settings.title }}</h2>
+
+    <span class="zk-story__ornament">✦ ✦ ✦</span>
+
+    {%- if section.settings.paragraph_1 != blank -%}
+      <p class="zk-story__text">{{ section.settings.paragraph_1 }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.paragraph_2 != blank -%}
+      <p class="zk-story__text">{{ section.settings.paragraph_2 }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.paragraph_3 != blank -%}
+      <p class="zk-story__text">{{ section.settings.paragraph_3 }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.paragraph_4 != blank -%}
+      <p class="zk-story__text">{{ section.settings.paragraph_4 }}</p>
+    {%- endif -%}
+
+    {%- if section.settings.quote != blank -%}
+      <blockquote class="zk-story__quote">
+        {{ section.settings.quote }}
+      </blockquote>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Zekulhyda - Povestea noastră",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label (deasupra titlului)",
+      "default": "Povestea noastră"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titlu secțiune",
+      "default": "Scurtă Introducere"
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph_1",
+      "label": "Paragraf 1",
+      "default": "Povestea și producerea pălincii are o datină îndelungată pe Valea Ierului, tradiție pe care am dorit s-o păstrăm și s-o îmbinăm cu tehnologia modernă de ultimă generație și să lăsăm și noi ceva în urma noastră pentru cei care vor avea dorința de a duce mai departe ce am continuat și noi."
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph_2",
+      "label": "Paragraf 2",
+      "default": "În urmă cu ceva vreme, am început să producem pălinca, pălincă de înaltă calitate cu care să ne putem mândri oriunde în țară și în străinătate. Găsind pasiunea în arta de a face un destilat, am căutat soluții pentru a ajunge la țelul dorit, de a face ceva mai special, ani la rând studiind fermentarea, destilarea, bineînțeles totul controlat cu strictețe."
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph_3",
+      "label": "Paragraf 3",
+      "default": "Am făcut primii pași spre ceva mai bun, ceva cu care sa fim prezenți la competiții mari din Europa, dar nu ne-am mulțumit cu atât."
+    },
+    {
+      "type": "textarea",
+      "id": "paragraph_4",
+      "label": "Paragraf 4",
+      "default": "Studiind în continuare și învățând din greșelile făcute, astăzi, am ajuns la o singură concluzie: fără suflet și dăruință nimic nu este posibil, așa cum credem că fructul, în momentul procesării, ne dă sufletul, tot așa trebuie să continuăm cu această idee care sună astfel:"
+    },
+    {
+      "type": "text",
+      "id": "quote",
+      "label": "Citat / Motto",
+      "default": "„Sufletul Fructului, va fi, Fructul Sufletului""
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zekulhyda - Povestea noastră"
+    }
+  ]
+}
+{% endschema %}

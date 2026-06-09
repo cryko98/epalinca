@@ -1,0 +1,81 @@
+<link rel="stylesheet" href="{{ 'zekulhyda.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript>{{ 'zekulhyda.css' | asset_url | stylesheet_tag }}</noscript>
+
+<section class="zk-awards" id="zk-awards">
+  <div class="zk-awards__inner">
+    <div class="zk-awards__header">
+      <span class="zk-awards__label">{{ section.settings.label }}</span>
+      <h2 class="zk-awards__title">{{ section.settings.title }}</h2>
+      <p class="zk-awards__subtitle">{{ section.settings.subtitle }}</p>
+    </div>
+
+    <div class="zk-awards__grid">
+
+      <div class="zk-award-card zk-award-card--champion">
+        <span class="zk-award-card__medal">🏆</span>
+        <span class="zk-award-card__count">2</span>
+        <span class="zk-award-card__type">Titluri de Campion</span>
+        <p class="zk-award-card__desc">Pălincă de mere în butoaie barrique &amp; Pălincă de vișine — Quintessence 2025</p>
+      </div>
+
+      <div class="zk-award-card">
+        <span class="zk-award-card__medal">🥇</span>
+        <span class="zk-award-card__count">5</span>
+        <span class="zk-award-card__type">Medalii de Aur</span>
+        <p class="zk-award-card__desc">Recunoaștere de excelență la cea mai mare competiție din Europa Centrală și de Est</p>
+      </div>
+
+      <div class="zk-award-card">
+        <span class="zk-award-card__medal">🥈</span>
+        <span class="zk-award-card__count">5</span>
+        <span class="zk-award-card__type">Medalii de Argint</span>
+        <p class="zk-award-card__desc">Calitate remarcabilă recunoscută la nivel internațional, ediția 2025</p>
+      </div>
+
+      <div class="zk-award-card">
+        <span class="zk-award-card__medal">🥉</span>
+        <span class="zk-award-card__count">12</span>
+        <span class="zk-award-card__type">Medalii de Bronz</span>
+        <p class="zk-award-card__desc">Portofoliu complex premiat la Quintessence — 2.404 probe din 4 țări</p>
+      </div>
+
+    </div>
+
+    <div class="zk-awards__competition">
+      <p class="zk-awards__competition-name">Quintessence — Ediția a XV-a, 2025</p>
+      <p class="zk-awards__competition-detail">Cea mai mare competiție de pălincă din Europa Centrală și de Est &nbsp;·&nbsp; 2.404 probe din România, Ungaria, Slovacia și Croația &nbsp;·&nbsp; Gyula, 2025</p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Zekulhyda - Premii",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Recunoaștere internațională"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titlu",
+      "default": "22 de Medalii la Quintessence 2025"
+    },
+    {
+      "type": "text",
+      "id": "subtitle",
+      "label": "Subtitlu",
+      "default": "Pălincă de înaltă calitate din Bihor, premiată la cele mai prestigioase competiții din Europa"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zekulhyda - Premii"
+    }
+  ]
+}
+{% endschema %}

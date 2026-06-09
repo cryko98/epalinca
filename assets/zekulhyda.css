@@ -1,0 +1,546 @@
+/* Zekulhyda Premium Theme - Custom Styles */
+
+/* ─── Google Fonts ─────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Raleway:wght@300;400;500;600;700&display=swap');
+
+/* ─── CSS Variables ─────────────────────────────────────────────────────────── */
+:root {
+  --zk-gold: #C9A84C;
+  --zk-gold-light: #E0C068;
+  --zk-gold-dark: #9A7A30;
+  --zk-black: #0D0D0D;
+  --zk-dark: #141414;
+  --zk-warm-white: #F5F0E8;
+  --zk-white: #FFFFFF;
+  --zk-border-gold: rgba(201, 168, 76, 0.3);
+  --zk-font-heading: 'Cormorant Garamond', Georgia, serif;
+  --zk-font-body: 'Raleway', sans-serif;
+}
+
+/* ─── Global Overrides ──────────────────────────────────────────────────────── */
+body {
+  font-family: var(--zk-font-body) !important;
+  background-color: var(--zk-black) !important;
+  color: var(--zk-warm-white) !important;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h0, .h1, .h2, .h3, .h4, .h5,
+.heading {
+  font-family: var(--zk-font-heading) !important;
+  font-weight: 400 !important;
+  letter-spacing: 0.05em;
+  color: var(--zk-warm-white);
+}
+
+/* ─── Header ────────────────────────────────────────────────────────────────── */
+.header {
+  background-color: rgba(13, 13, 13, 0.95) !important;
+  border-bottom: 1px solid var(--zk-border-gold) !important;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}
+
+.header__heading-link,
+.header__heading {
+  font-family: var(--zk-font-heading) !important;
+  font-size: 2.8rem !important;
+  letter-spacing: 0.15em !important;
+  color: var(--zk-gold) !important;
+  text-decoration: none !important;
+  font-weight: 500 !important;
+  text-transform: uppercase;
+}
+
+.header__menu-item,
+.header__menu-item span {
+  color: var(--zk-warm-white) !important;
+  font-family: var(--zk-font-body) !important;
+  font-size: 1.2rem !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  font-weight: 500 !important;
+}
+
+.header__menu-item:hover span,
+.header__menu-item:focus span {
+  color: var(--zk-gold) !important;
+}
+
+.header__icon svg,
+.header__icon path {
+  fill: var(--zk-warm-white);
+  stroke: var(--zk-warm-white);
+}
+
+.header__icon:hover svg,
+.header__icon:hover path {
+  fill: var(--zk-gold);
+  stroke: var(--zk-gold);
+}
+
+/* ─── Buttons ───────────────────────────────────────────────────────────────── */
+.button,
+.button--primary {
+  background-color: transparent !important;
+  color: var(--zk-gold) !important;
+  border: 1px solid var(--zk-gold) !important;
+  font-family: var(--zk-font-body) !important;
+  font-size: 1.2rem !important;
+  letter-spacing: 0.15em !important;
+  text-transform: uppercase !important;
+  font-weight: 500 !important;
+  padding: 1.4rem 3rem !important;
+  transition: all 0.3s ease !important;
+}
+
+.button:hover,
+.button--primary:hover {
+  background-color: var(--zk-gold) !important;
+  color: var(--zk-black) !important;
+}
+
+.button--secondary {
+  background-color: transparent !important;
+  color: var(--zk-warm-white) !important;
+  border: 1px solid rgba(245, 240, 232, 0.4) !important;
+}
+
+.button--secondary:hover {
+  border-color: var(--zk-gold) !important;
+  color: var(--zk-gold) !important;
+}
+
+/* ─── Product Cards ─────────────────────────────────────────────────────────── */
+.card-wrapper {
+  background-color: var(--zk-dark) !important;
+  border: 1px solid var(--zk-border-gold) !important;
+  transition: border-color 0.3s ease, transform 0.3s ease !important;
+}
+
+.card-wrapper:hover {
+  border-color: var(--zk-gold) !important;
+  transform: translateY(-4px);
+}
+
+.card__heading,
+.card__heading a {
+  font-family: var(--zk-font-heading) !important;
+  font-size: 2rem !important;
+  color: var(--zk-warm-white) !important;
+  letter-spacing: 0.05em;
+}
+
+.card__heading a:hover {
+  color: var(--zk-gold) !important;
+}
+
+.price,
+.price__regular,
+.price .price-item {
+  color: var(--zk-gold) !important;
+  font-family: var(--zk-font-body) !important;
+  font-size: 1.6rem !important;
+  font-weight: 500 !important;
+}
+
+/* ─── Announcement Bar ──────────────────────────────────────────────────────── */
+.announcement-bar {
+  background-color: var(--zk-gold) !important;
+  color: var(--zk-black) !important;
+}
+
+.announcement-bar__message,
+.announcement-bar__message p {
+  color: var(--zk-black) !important;
+  font-family: var(--zk-font-body) !important;
+  font-size: 1.2rem !important;
+  letter-spacing: 0.12em !important;
+  text-transform: uppercase !important;
+  font-weight: 600 !important;
+}
+
+/* ─── Image Banner (Hero) ───────────────────────────────────────────────────── */
+.banner__box {
+  background: transparent !important;
+  border: none !important;
+}
+
+.banner .banner__heading {
+  font-family: var(--zk-font-heading) !important;
+  font-size: 7rem !important;
+  font-weight: 300 !important;
+  letter-spacing: 0.2em !important;
+  color: var(--zk-warm-white) !important;
+  text-transform: uppercase;
+  line-height: 1.1;
+}
+
+@media screen and (max-width: 749px) {
+  .banner .banner__heading {
+    font-size: 4rem !important;
+  }
+}
+
+.banner .banner__text {
+  color: rgba(245, 240, 232, 0.85) !important;
+  font-family: var(--zk-font-body) !important;
+  font-size: 1.4rem !important;
+  letter-spacing: 0.2em !important;
+  text-transform: uppercase;
+}
+
+/* ─── Rich Text / Story Section ─────────────────────────────────────────────── */
+.rich-text__heading {
+  font-family: var(--zk-font-heading) !important;
+  font-size: 4.5rem !important;
+  font-weight: 400 !important;
+  color: var(--zk-warm-white) !important;
+}
+
+.rich-text__text,
+.rich-text__text p {
+  color: rgba(245, 240, 232, 0.8) !important;
+  font-family: var(--zk-font-body) !important;
+  font-size: 1.6rem !important;
+  line-height: 1.9 !important;
+  font-weight: 300 !important;
+}
+
+/* ─── Multicolumn (Awards) ───────────────────────────────────────────────────── */
+.multicolumn-card {
+  background: transparent !important;
+  border: 1px solid var(--zk-border-gold) !important;
+  padding: 3rem !important;
+  text-align: center;
+}
+
+.multicolumn-card__title {
+  font-family: var(--zk-font-heading) !important;
+  color: var(--zk-gold) !important;
+  font-size: 2.4rem !important;
+}
+
+.multicolumn-card__info p {
+  color: rgba(245, 240, 232, 0.75) !important;
+  font-family: var(--zk-font-body) !important;
+}
+
+/* ─── Section Titles ────────────────────────────────────────────────────────── */
+.collection__title,
+.featured-collection .title {
+  font-family: var(--zk-font-heading) !important;
+  font-size: 4rem !important;
+  font-weight: 400 !important;
+  color: var(--zk-warm-white) !important;
+  text-align: center;
+}
+
+/* ─── Gold Divider ──────────────────────────────────────────────────────────── */
+.zk-divider {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+  margin: 2rem auto;
+  max-width: 300px;
+}
+
+.zk-divider::before,
+.zk-divider::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: linear-gradient(to right, transparent, var(--zk-gold));
+}
+
+.zk-divider::after {
+  background: linear-gradient(to left, transparent, var(--zk-gold));
+}
+
+.zk-divider span {
+  color: var(--zk-gold);
+  font-size: 1.8rem;
+}
+
+/* ─── Footer ────────────────────────────────────────────────────────────────── */
+.footer {
+  background-color: var(--zk-black) !important;
+  border-top: 1px solid var(--zk-border-gold) !important;
+}
+
+.footer__heading {
+  color: var(--zk-gold) !important;
+  font-family: var(--zk-font-heading) !important;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.footer__column-content,
+.footer__column-content a,
+.footer__column-content p,
+.footer__list-item a {
+  color: rgba(245, 240, 232, 0.65) !important;
+  font-family: var(--zk-font-body) !important;
+  font-size: 1.3rem !important;
+}
+
+.footer__list-item a:hover {
+  color: var(--zk-gold) !important;
+}
+
+.footer__copyright {
+  color: rgba(245, 240, 232, 0.4) !important;
+  font-size: 1.2rem !important;
+  letter-spacing: 0.08em;
+  border-top: 1px solid rgba(201, 168, 76, 0.15);
+  padding-top: 2rem;
+  margin-top: 2rem;
+}
+
+/* ─── Cart Drawer ───────────────────────────────────────────────────────────── */
+.cart-drawer {
+  background-color: var(--zk-dark) !important;
+  border-left: 1px solid var(--zk-border-gold) !important;
+}
+
+.cart-drawer__heading {
+  color: var(--zk-gold) !important;
+  font-family: var(--zk-font-heading) !important;
+}
+
+/* ─── Zekulhyda Story Section ──────────────────────────────────────────────── */
+.zk-story {
+  background-color: var(--zk-dark);
+  padding: 8rem 3rem;
+}
+
+.zk-story__inner {
+  max-width: 900px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.zk-story__label {
+  font-family: var(--zk-font-body);
+  font-size: 1.1rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--zk-gold);
+  margin-bottom: 2rem;
+  display: block;
+}
+
+.zk-story__title {
+  font-family: var(--zk-font-heading);
+  font-size: 5rem;
+  font-weight: 400;
+  color: var(--zk-warm-white);
+  margin-bottom: 1rem;
+  line-height: 1.1;
+}
+
+@media screen and (max-width: 749px) {
+  .zk-story__title {
+    font-size: 3.5rem;
+  }
+}
+
+.zk-story__ornament {
+  color: var(--zk-gold);
+  font-size: 2.5rem;
+  margin: 2rem 0;
+  display: block;
+  letter-spacing: 1rem;
+}
+
+.zk-story__text {
+  font-family: var(--zk-font-body);
+  font-size: 1.6rem;
+  line-height: 2;
+  color: rgba(245, 240, 232, 0.78);
+  font-weight: 300;
+  text-align: left;
+  margin-bottom: 2.5rem;
+}
+
+.zk-story__quote {
+  font-family: var(--zk-font-heading);
+  font-size: 2.4rem;
+  font-style: italic;
+  color: var(--zk-gold);
+  margin: 4rem 0 2rem;
+  padding: 2rem 4rem;
+  border-left: 3px solid var(--zk-gold);
+  text-align: left;
+  line-height: 1.5;
+}
+
+/* ─── Awards Section ────────────────────────────────────────────────────────── */
+.zk-awards {
+  background-color: var(--zk-black);
+  padding: 8rem 3rem;
+  border-top: 1px solid var(--zk-border-gold);
+  border-bottom: 1px solid var(--zk-border-gold);
+}
+
+.zk-awards__inner {
+  max-width: 1280px;
+  margin: 0 auto;
+}
+
+.zk-awards__header {
+  text-align: center;
+  margin-bottom: 6rem;
+}
+
+.zk-awards__label {
+  font-family: var(--zk-font-body);
+  font-size: 1.1rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--zk-gold);
+  margin-bottom: 1.5rem;
+  display: block;
+}
+
+.zk-awards__title {
+  font-family: var(--zk-font-heading);
+  font-size: 4.5rem;
+  font-weight: 400;
+  color: var(--zk-warm-white);
+  margin-bottom: 1.5rem;
+}
+
+.zk-awards__subtitle {
+  color: rgba(245, 240, 232, 0.6);
+  font-size: 1.5rem;
+  font-family: var(--zk-font-body);
+  font-weight: 300;
+}
+
+.zk-awards__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2rem;
+}
+
+@media screen and (max-width: 989px) {
+  .zk-awards__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media screen and (max-width: 749px) {
+  .zk-awards__grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.zk-award-card {
+  border: 1px solid var(--zk-border-gold);
+  padding: 3rem 2rem;
+  text-align: center;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+}
+
+.zk-award-card:hover {
+  border-color: var(--zk-gold);
+  background-color: rgba(201, 168, 76, 0.05);
+}
+
+.zk-award-card__medal {
+  font-size: 4rem;
+  display: block;
+  margin-bottom: 1.5rem;
+}
+
+.zk-award-card__count {
+  font-family: var(--zk-font-heading);
+  font-size: 5rem;
+  color: var(--zk-gold);
+  line-height: 1;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+
+.zk-award-card__type {
+  font-family: var(--zk-font-heading);
+  font-size: 2rem;
+  color: var(--zk-warm-white);
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.zk-award-card__desc {
+  font-family: var(--zk-font-body);
+  font-size: 1.3rem;
+  color: rgba(245, 240, 232, 0.6);
+  font-weight: 300;
+  line-height: 1.6;
+}
+
+.zk-award-card--champion {
+  border-color: var(--zk-gold);
+  background: linear-gradient(135deg, rgba(201, 168, 76, 0.08) 0%, transparent 100%);
+}
+
+.zk-awards__competition {
+  margin-top: 5rem;
+  text-align: center;
+  padding: 3rem;
+  border: 1px solid var(--zk-border-gold);
+}
+
+.zk-awards__competition-name {
+  font-family: var(--zk-font-heading);
+  font-size: 2rem;
+  color: var(--zk-gold);
+  margin-bottom: 0.5rem;
+}
+
+.zk-awards__competition-detail {
+  font-family: var(--zk-font-body);
+  font-size: 1.4rem;
+  color: rgba(245, 240, 232, 0.65);
+  font-weight: 300;
+}
+
+/* ─── Scroll animations ─────────────────────────────────────────────────────── */
+.animate--fade-in {
+  animation: fadeInUp 0.7s ease forwards;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--zk-black);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--zk-gold-dark);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--zk-gold);
+}
+
+/* ─── Selection ─────────────────────────────────────────────────────────────── */
+::selection {
+  background-color: var(--zk-gold);
+  color: var(--zk-black);
+}
