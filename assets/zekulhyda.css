@@ -77,36 +77,43 @@ body {
   color: var(--zk-warm-white) !important;
 }
 
-/* ─── FORCE black backgrounds everywhere (overrides color schemes) ──────────── */
+/* ─── Dark section backgrounds via scheme variables (keeps images visible) ──── */
+/* Drive section backgrounds through Dawn's own --gradient-background variable, so
+   full-bleed images and slideshow slides are NOT covered by an opaque black box.
+   (Forcing background-color on .page-width / .media hid the slide image before.) */
 .color-scheme-1,
-.color-scheme-2,
 .color-scheme-3,
-.color-scheme-5,
-.gradient,
-.shopify-section,
-.banner__media,
-main,
-#MainContent,
-.collection,
-.product,
-.cart-page,
-.page-width {
-  background-color: var(--zk-black) !important;
-  --gradient-background: var(--zk-black) !important;
+.color-scheme-5 {
+  --gradient-background: #0D0D0D !important;
 }
 
-.color-scheme-2,
+.color-scheme-2 {
+  --gradient-background: #141414 !important;
+}
+
+main,
+#MainContent {
+  background-color: var(--zk-black) !important;
+}
+
 .shopify-section-group-footer-group {
   background-color: var(--zk-dark) !important;
 }
 
-/* Product/collection card MEDIA (image) area — was light grey */
-.card__media,
-.card .media,
-.media--transparent,
+/* Image / media wrappers must stay transparent so the picture shows through */
+.media,
+.banner__media,
+.slideshow__media,
+.banner__content,
+.slideshow__text-wrapper,
+.page-width {
+  background-color: transparent !important;
+}
+
+/* Product/collection card media area: dark only as a fallback behind images */
+.card-wrapper .card__media,
 .card__inner,
-.card,
-.media {
+.card {
   background-color: var(--zk-dark) !important;
 }
 
