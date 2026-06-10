@@ -16,7 +16,7 @@
           "type": "slide",
           "settings": {
             "image": "shopify://shop_images/Zekulhyda-Barique-26.jpg",
-            "image_overlay_opacity": 45,
+            "image_overlay_opacity": 40,
             "heading": "Zekulhyda",
             "heading_size": "hxl",
             "subheading": "Sufletul Fructului, va fi, Fructul Sufletului",
@@ -34,7 +34,7 @@
           "type": "slide",
           "settings": {
             "image": "",
-            "image_overlay_opacity": 45,
+            "image_overlay_opacity": 40,
             "heading": "Pălincă Premium din Bihor",
             "heading_size": "hxl",
             "subheading": "Distilată cu pasiune pe Valea Ierului",
@@ -49,7 +49,10 @@
           }
         }
       },
-      "block_order": ["slide_1", "slide_2"],
+      "block_order": [
+        "slide_1",
+        "slide_2"
+      ],
       "settings": {
         "layout": "full_bleed",
         "slide_height": "large",
@@ -75,20 +78,20 @@
     "featured_collection": {
       "type": "featured-collection",
       "settings": {
-        "title": "Produsele Noastre",
-        "heading_size": "h2",
         "collection": "all",
         "products_to_show": 3,
+        "title": "Produsele Noastre",
+        "heading_size": "h2",
         "columns_desktop": 3,
-        "color_scheme": "scheme-1",
         "show_view_all": true,
         "view_all_style": "link",
-        "swipe_on_mobile": true,
+        "color_scheme": "scheme-1",
         "image_ratio": "portrait",
         "show_secondary_image": true,
         "show_vendor": false,
         "show_rating": false,
         "columns_mobile": "2",
+        "swipe_on_mobile": true,
         "padding_top": 60,
         "padding_bottom": 60
       }
@@ -124,22 +127,26 @@
           }
         }
       },
-      "block_order": ["col_1", "col_2", "col_3"],
+      "block_order": [
+        "col_1",
+        "col_2",
+        "col_3"
+      ],
       "settings": {
         "title": "De ce Zekulhyda?",
         "heading_size": "h2",
         "image_width": "third",
         "image_ratio": "adapt",
+        "button_label": "",
+        "button_link": "",
         "columns_desktop": 3,
         "column_alignment": "center",
         "background_style": "none",
-        "button_label": "",
-        "button_link": "",
         "color_scheme": "scheme-2",
         "columns_mobile": "1",
         "swipe_on_mobile": false,
-        "padding_top": 50,
-        "padding_bottom": 50
+        "padding_top": 48,
+        "padding_bottom": 48
       }
     },
     "craft": {
@@ -168,18 +175,22 @@
           }
         }
       },
-      "block_order": ["heading", "text", "button"],
+      "block_order": [
+        "heading",
+        "text",
+        "button"
+      ],
       "settings": {
         "image": "",
         "height": "large",
         "desktop_image_width": "medium",
         "layout": "image_first",
+        "content_layout": "no-overlap",
         "desktop_content_position": "middle",
         "desktop_content_alignment": "left",
-        "content_layout": "no-overlap",
+        "mobile_content_alignment": "center",
         "section_color_scheme": "scheme-1",
         "color_scheme": "scheme-3",
-        "mobile_content_alignment": "center",
         "padding_top": 40,
         "padding_bottom": 40
       }
@@ -220,7 +231,11 @@
           }
         }
       },
-      "block_order": ["row_1", "row_2", "row_3"],
+      "block_order": [
+        "row_1",
+        "row_2",
+        "row_3"
+      ],
       "settings": {
         "caption": "Informații utile",
         "heading": "Întrebări frecvente",
@@ -232,8 +247,8 @@
         "open_first_collapsible_row": false,
         "image_ratio": "adapt",
         "desktop_layout": "image_second",
-        "padding_top": 50,
-        "padding_bottom": 50
+        "padding_top": 48,
+        "padding_bottom": 48
       }
     },
     "newsletter": {
@@ -253,10 +268,15 @@
           }
         },
         "email_form": {
-          "type": "email_form"
+          "type": "email_form",
+          "settings": {}
         }
       },
-      "block_order": ["heading", "paragraph", "email_form"],
+      "block_order": [
+        "heading",
+        "paragraph",
+        "email_form"
+      ],
       "settings": {
         "color_scheme": "scheme-2",
         "full_width": true,
