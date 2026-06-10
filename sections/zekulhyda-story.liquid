@@ -41,45 +41,7 @@
   </div>
 </section>
 
-<script>
-  (function () {
-    if (window.__zkPremiumInit) return;
-    window.__zkPremiumInit = true;
-    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-    function countUp(el) {
-      var target = parseInt(el.getAttribute('data-zk-count'), 10);
-      if (isNaN(target) || reduce) { return; }
-      var dur = 1100, start = null;
-      function step(ts) {
-        if (!start) start = ts;
-        var p = Math.min((ts - start) / dur, 1);
-        var eased = 1 - Math.pow(1 - p, 3);
-        el.textContent = Math.round(target * eased);
-        if (p < 1) requestAnimationFrame(step);
-      }
-      el.textContent = '0';
-      requestAnimationFrame(step);
-    }
-    function run() {
-      var items = document.querySelectorAll('[data-zk-reveal]');
-      if (!('IntersectionObserver' in window) || reduce) {
-        items.forEach(function (el) { el.classList.add('is-visible'); });
-        document.querySelectorAll('[data-zk-count]').forEach(function (el) { el.textContent = el.getAttribute('data-zk-count'); });
-        return;
-      }
-      var io = new IntersectionObserver(function (entries, obs) {
-        entries.forEach(function (entry) {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add('is-visible');
-          entry.target.querySelectorAll('[data-zk-count]').forEach(countUp);
-          obs.unobserve(entry.target);
-        });
-      }, { threshold: 0.2, rootMargin: '0px 0px -10% 0px' });
-      items.forEach(function (el) { io.observe(el); });
-    }
-    if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', run); } else { run(); }
-  })();
-</script>
+{%- comment -%} Reveal handled globally by snippets/zk-premium.liquid {%- endcomment -%}
 
 {% schema %}
 {

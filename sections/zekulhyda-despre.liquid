@@ -1,0 +1,168 @@
+<link rel="stylesheet" href="{{ 'zekulhyda.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript>{{ 'zekulhyda.css' | asset_url | stylesheet_tag }}</noscript>
+
+{%- liquid
+  assign products_list = section.settings.products | split: ','
+-%}
+
+<section class="zk-despre" id="zk-despre">
+
+  {%- comment -%} ── Hero ── {%- endcomment -%}
+  <div class="zk-despre__hero zk-reveal" data-zk-reveal>
+    <span class="zk-despre__eyebrow">{{ section.settings.eyebrow }}</span>
+    <h1 class="zk-despre__title zk-shimmer">{{ section.settings.title }}</h1>
+    <span class="zk-story__ornament" aria-hidden="true">
+      <svg viewBox="0 0 120 16" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+        <path d="M2 8h40" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+        <path d="M78 8h40" stroke="currentColor" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+        <path d="M60 2 62.4 6.2 67 7 63.8 10.3 64.6 15 60 12.8 55.4 15 56.2 10.3 53 7 57.6 6.2Z" fill="currentColor"/>
+        <circle cx="46" cy="8" r="1.6" fill="currentColor" opacity="0.8"/>
+        <circle cx="74" cy="8" r="1.6" fill="currentColor" opacity="0.8"/>
+      </svg>
+    </span>
+    <p class="zk-despre__motto">{{ section.settings.motto }}</p>
+  </div>
+
+  {%- comment -%} ── Story ── {%- endcomment -%}
+  <div class="zk-despre__inner">
+    <div class="zk-despre__story zk-reveal" data-zk-reveal>
+      {%- if section.settings.lead_1 != blank -%}<p class="zk-despre__lead">{{ section.settings.lead_1 }}</p>{%- endif -%}
+      {%- if section.settings.lead_2 != blank -%}<p class="zk-despre__lead">{{ section.settings.lead_2 }}</p>{%- endif -%}
+      {%- if section.settings.lead_3 != blank -%}<p class="zk-despre__lead">{{ section.settings.lead_3 }}</p>{%- endif -%}
+    </div>
+
+    {%- comment -%} ── Founder ── {%- endcomment -%}
+    <div class="zk-despre__founder zk-reveal" data-zk-reveal>
+      <div class="zk-despre__founder-mark" aria-hidden="true">
+        <svg viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" focusable="false">
+          <circle cx="24" cy="16" r="8" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M9 41c1.5-8.5 7.8-13 15-13s13.5 4.5 15 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="zk-despre__founder-body">
+        <span class="zk-despre__founder-role">{{ section.settings.founder_role }}</span>
+        <h2 class="zk-despre__founder-name">{{ section.settings.founder_name }}</h2>
+        <p>{{ section.settings.founder_text }}</p>
+      </div>
+    </div>
+
+    {%- comment -%} ── Awards stats ── {%- endcomment -%}
+    <div class="zk-despre__awards zk-reveal" data-zk-reveal>
+      <span class="zk-despre__section-label">{{ section.settings.awards_label }}</span>
+      <h2 class="zk-despre__section-title">{{ section.settings.awards_title }}</h2>
+      <p class="zk-despre__awards-sub">{{ section.settings.awards_sub }}</p>
+
+      <div class="zk-despre__stats">
+        <div class="zk-despre__stat zk-despre__stat--hero">
+          <span class="zk-despre__stat-num" data-zk-count="22">22</span>
+          <span class="zk-despre__stat-label">Medalii</span>
+        </div>
+        <div class="zk-despre__stat zk-medal--gold">
+          <span class="zk-despre__stat-num" data-zk-count="5">5</span>
+          <span class="zk-despre__stat-label">Aur</span>
+        </div>
+        <div class="zk-despre__stat zk-medal--silver">
+          <span class="zk-despre__stat-num" data-zk-count="5">5</span>
+          <span class="zk-despre__stat-label">Argint</span>
+        </div>
+        <div class="zk-despre__stat zk-medal--bronze">
+          <span class="zk-despre__stat-num" data-zk-count="12">12</span>
+          <span class="zk-despre__stat-label">Bronz</span>
+        </div>
+        <div class="zk-despre__stat">
+          <span class="zk-despre__stat-num" data-zk-count="2">2</span>
+          <span class="zk-despre__stat-label">Titluri de Campion</span>
+        </div>
+      </div>
+
+      <p class="zk-despre__champs">
+        <strong>Titluri de campion la Quintessence 2025:</strong>
+        Pălincă de mere maturată în butoaie barrique &amp; Pălincă de vișine sălbatice —
+        din 2.404 de probe înscrise.
+      </p>
+    </div>
+
+    {%- comment -%} ── Competitions ── {%- endcomment -%}
+    <div class="zk-despre__comps zk-reveal" data-zk-reveal>
+      <span class="zk-despre__section-label">{{ section.settings.comps_label }}</span>
+      <h2 class="zk-despre__section-title">{{ section.settings.comps_title }}</h2>
+      <ul class="zk-despre__comp-list">
+        <li>
+          <span class="zk-despre__comp-name">Quintessence</span>
+          <span class="zk-despre__comp-meta">Ungaria · cea mai mare competiție de pălincă din Europa Centrală și de Est</span>
+        </li>
+        <li>
+          <span class="zk-despre__comp-name">Concursul Brillante</span>
+          <span class="zk-despre__comp-meta">Gyula, Ungaria</span>
+        </li>
+        <li>
+          <span class="zk-despre__comp-name">Transylvanian Spirit</span>
+          <span class="zk-despre__comp-meta">România</span>
+        </li>
+        <li>
+          <span class="zk-despre__comp-name">Blisseva Partium Spirits Awards</span>
+          <span class="zk-despre__comp-meta">Ediția a III-a · Carei</span>
+        </li>
+      </ul>
+    </div>
+
+    {%- comment -%} ── Products ── {%- endcomment -%}
+    {%- if products_list.size > 0 -%}
+      <div class="zk-despre__products zk-reveal" data-zk-reveal>
+        <span class="zk-despre__section-label">{{ section.settings.products_label }}</span>
+        <h2 class="zk-despre__section-title">{{ section.settings.products_title }}</h2>
+        <div class="zk-despre__chips">
+          {%- for item in products_list -%}
+            {%- assign trimmed = item | strip -%}
+            {%- if trimmed != blank -%}<span class="zk-despre__chip">{{ trimmed }}</span>{%- endif -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- comment -%} ── CTA ── {%- endcomment -%}
+    <div class="zk-despre__cta zk-reveal" data-zk-reveal>
+      <p class="zk-despre__cta-text">{{ section.settings.cta_text }}</p>
+      <a href="{{ section.settings.cta_link }}" class="button button--primary">{{ section.settings.cta_label }}</a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Zekulhyda Despre",
+  "tag": "section",
+  "settings": [
+    { "type": "header", "content": "Hero" },
+    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Povestea Zekulhyda" },
+    { "type": "text", "id": "title", "label": "Titlu", "default": "Sufletul Fructului" },
+    { "type": "text", "id": "motto", "label": "Motto", "default": "„Sufletul Fructului, va fi, Fructul Sufletului”" },
+    { "type": "header", "content": "Poveste" },
+    { "type": "textarea", "id": "lead_1", "label": "Paragraf 1", "default": "Zekulhyda este un brand de pălincă premium din Valea Ierului, județul Bihor — o regiune cu o tradiție îndelungată în arta distilării fructelor. Aici, povestea pălincii se scrie de generații, iar noi am ales să o ducem mai departe." },
+    { "type": "textarea", "id": "lead_2", "label": "Paragraf 2", "default": "Combinăm metodele tradiționale cu tehnologia modernă de ultimă generație. Ani la rând am studiat fermentarea și distilarea, totul controlat cu strictețe, pentru a obține un destilat de o puritate și o eleganță aparte — o pălincă cu care să ne mândrim oriunde, în țară și în străinătate." },
+    { "type": "textarea", "id": "lead_3", "label": "Paragraf 3", "default": "Credem că fiecare fruct, în momentul procesării, își dăruiește sufletul. Datoria noastră este să continuăm cu aceeași dăruire, fără compromisuri în privința calității." },
+    { "type": "header", "content": "Fondator" },
+    { "type": "text", "id": "founder_role", "label": "Rol", "default": "Fondator · Maestru pălincar și arbitru internațional" },
+    { "type": "text", "id": "founder_name", "label": "Nume", "default": "Nagy Botond" },
+    { "type": "textarea", "id": "founder_text", "label": "Text", "default": "Maestru pălincar recunoscut și jurat la competiții internaționale, Nagy Botond a fondat Zekulhyda din pasiunea pentru distilatul perfect. Sub îndrumarea sa, brandul a obținut recunoaștere la cele mai prestigioase competiții din Europa." },
+    { "type": "header", "content": "Premii" },
+    { "type": "text", "id": "awards_label", "label": "Label", "default": "Recunoaștere internațională" },
+    { "type": "text", "id": "awards_title", "label": "Titlu", "default": "22 de Medalii la Quintessence 2025" },
+    { "type": "textarea", "id": "awards_sub", "label": "Subtitlu", "default": "La cea de-a XV-a ediție a celei mai mari competiții de pălincă din Europa Centrală și de Est." },
+    { "type": "header", "content": "Competiții" },
+    { "type": "text", "id": "comps_label", "label": "Label", "default": "Pe scena internațională" },
+    { "type": "text", "id": "comps_title", "label": "Titlu", "default": "Competiții & Concursuri" },
+    { "type": "header", "content": "Sortimente" },
+    { "type": "text", "id": "products_label", "label": "Label", "default": "Din livada noastră" },
+    { "type": "text", "id": "products_title", "label": "Titlu", "default": "Sortimente" },
+    { "type": "textarea", "id": "products", "label": "Sortimente (separate prin virgulă)", "default": "Pălincă de prune, Pălincă de mere, Mere în butoaie barrique, Pălincă de vișine, Vișine sălbatice, Pălincă de caise, Pălincă de pere, Pălincă de gutui, Pălincă de afine, Pălincă de zmeură, Pălincă de mure, Pălincă de coacăze, Pălincă de cireșe, Distilat de struguri, Fetească neagră, Tămâioasă" },
+    { "type": "header", "content": "Call to action" },
+    { "type": "text", "id": "cta_text", "label": "Text", "default": "Descoperă sortimentele premiate Zekulhyda." },
+    { "type": "text", "id": "cta_label", "label": "Etichetă buton", "default": "Vezi produsele" },
+    { "type": "url", "id": "cta_link", "label": "Link buton", "default": "/collections/all" }
+  ],
+  "presets": [
+    { "name": "Zekulhyda Despre" }
+  ]
+}
+{% endschema %}

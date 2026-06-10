@@ -8,15 +8,11 @@
  * ------------------------------------------------------------
  */
 {
-  "name": "t:sections.footer.name",
-  "type": "footer",
   "sections": {
-    "zk_legal_bar": {
-      "type": "zekulhyda-legal-bar",
+    "main": {
+      "type": "zekulhyda-despre",
       "settings": {}
     }
   },
-  "order": [
-    "zk_legal_bar"
-  ]
+  "order": ["main"]
 }

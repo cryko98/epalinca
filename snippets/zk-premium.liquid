@@ -1,0 +1,114 @@
+{%- comment -%}
+  Zekulhyda premium global enhancements.
+  Renders once near </body>. Handles:
+   - gold scroll-progress bar
+   - back-to-top button
+   - unified scroll-reveal ([data-zk-reveal]) + count-up ([data-zk-count])
+   - soft reveal for native Dawn sections below the fold (progressive enhancement)
+  Everything is a progressive enhancement: with no JS / no IntersectionObserver,
+  all content is shown immediately.
+{%- endcomment -%}
+
+<div class="zk-progress" id="zk-progress" aria-hidden="true"></div>
+
+<button class="zk-totop" id="zk-totop" type="button" aria-label="Înapoi sus">
+  <svg viewBox="0 0 24 24" width="20" height="20" fill="none" aria-hidden="true" focusable="false">
+    <path d="M12 19V5M12 5l-6 6M12 5l6 6" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+</button>
+
+<script>
+  (function () {
+    if (window.__zkPremiumInit) return;
+    window.__zkPremiumInit = true;
+
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function countUp(el) {
+      var target = parseInt(el.getAttribute('data-zk-count'), 10);
+      if (isNaN(target)) return;
+      if (reduce) { el.textContent = target; return; }
+      var dur = 1100, start = null;
+      function step(ts) {
+        if (!start) start = ts;
+        var p = Math.min((ts - start) / dur, 1);
+        var eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(target * eased);
+        if (p < 1) requestAnimationFrame(step);
+      }
+      el.textContent = '0';
+      requestAnimationFrame(step);
+    }
+
+    function revealAll() {
+      document.querySelectorAll('[data-zk-reveal]').forEach(function (el) { el.classList.add('is-visible'); });
+      document.querySelectorAll('[data-zk-count]').forEach(function (el) { el.textContent = el.getAttribute('data-zk-count'); });
+      document.querySelectorAll('.zk-soft-hidden').forEach(function (el) { el.classList.remove('zk-soft-hidden'); });
+    }
+
+    function init() {
+      try {
+        var vh = window.innerHeight || 800;
+
+        // Soft-reveal native sections that start below the fold.
+        document.querySelectorAll('#MainContent .shopify-section').forEach(function (sec) {
+          if (sec.querySelector('[data-zk-reveal]')) return;   // custom sections animate themselves
+          if (sec.getBoundingClientRect().top > vh * 0.85) {
+            sec.classList.add('zk-soft', 'zk-soft-hidden');
+          }
+        });
+
+        var revealEls = document.querySelectorAll('[data-zk-reveal], .zk-soft-hidden');
+
+        if (!('IntersectionObserver' in window) || reduce) {
+          revealAll();
+        } else {
+          var io = new IntersectionObserver(function (entries, obs) {
+            entries.forEach(function (entry) {
+              if (!entry.isIntersecting) return;
+              var el = entry.target;
+              el.classList.add('is-visible');
+              el.classList.remove('zk-soft-hidden');
+              if (el.querySelectorAll) el.querySelectorAll('[data-zk-count]').forEach(countUp);
+              obs.unobserve(el);
+            });
+          }, { threshold: 0.15, rootMargin: '0px 0px -8% 0px' });
+          revealEls.forEach(function (el) { io.observe(el); });
+          setTimeout(revealAll, 4000); // safety net
+        }
+      } catch (e) {
+        revealAll();
+      }
+
+      // Scroll-progress bar + back-to-top
+      var bar = document.getElementById('zk-progress');
+      var totop = document.getElementById('zk-totop');
+
+      function onScroll() {
+        var st = window.pageYOffset || document.documentElement.scrollTop || 0;
+        var h = document.documentElement.scrollHeight - window.innerHeight;
+        var p = h > 0 ? (st / h) * 100 : 0;
+        if (bar) bar.style.width = p + '%';
+        if (totop) {
+          if (st > 600) totop.classList.add('is-visible');
+          else totop.classList.remove('is-visible');
+        }
+      }
+
+      window.addEventListener('scroll', onScroll, { passive: true });
+      onScroll();
+
+      if (totop) {
+        totop.addEventListener('click', function () {
+          window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+        });
+      }
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script>
