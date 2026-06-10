@@ -1,52 +1,125 @@
 <link rel="stylesheet" href="{{ 'zekulhyda.css' | asset_url }}" media="print" onload="this.media='all'">
 <noscript>{{ 'zekulhyda.css' | asset_url | stylesheet_tag }}</noscript>
 
+{%- capture trophy_svg -%}
+<svg class="zk-medal-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+  <path d="M14 6h20v9a10 10 0 0 1-20 0V6Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+  <path d="M14 9H9.5a4.5 4.5 0 0 0 4.7 6.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M34 9h4.5a4.5 4.5 0 0 1-4.7 6.4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M24 25v6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M17.5 41 19 33h10l1.5 8Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/>
+  <path d="M14 44h20" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M24 9.5 25 12l2.6.3-1.9 1.8.5 2.6L24 17.4 21.8 18.7l.5-2.6L20.4 12.3 23 12Z" fill="currentColor" opacity="0.55"/>
+</svg>
+{%- endcapture -%}
+
+{%- capture medal_svg -%}
+<svg class="zk-medal-svg" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+  <path d="M18.5 5 24 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  <path d="M29.5 5 24 16" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/>
+  <circle cx="24" cy="30" r="12.5" stroke="currentColor" stroke-width="1.6"/>
+  <circle cx="24" cy="30" r="8" stroke="currentColor" stroke-width="1.1" opacity="0.55"/>
+  <path d="M24 24.5 25.9 28.3 30 28.9 27 31.8 27.7 36 24 34 20.3 36 21 31.8 18 28.9 22.1 28.3Z" fill="currentColor" opacity="0.85"/>
+</svg>
+{%- endcapture -%}
+
 <section class="zk-awards" id="zk-awards">
   <div class="zk-awards__inner">
-    <div class="zk-awards__header">
+    <div class="zk-awards__header zk-reveal" data-zk-reveal>
       <span class="zk-awards__label">{{ section.settings.label }}</span>
-      <h2 class="zk-awards__title">{{ section.settings.title }}</h2>
+      <h2 class="zk-awards__title zk-shimmer">{{ section.settings.title }}</h2>
       <p class="zk-awards__subtitle">{{ section.settings.subtitle }}</p>
     </div>
 
     <div class="zk-awards__grid">
 
-      <div class="zk-award-card zk-award-card--champion">
-        <span class="zk-award-card__medal">🏆</span>
-        <span class="zk-award-card__count">2</span>
+      <div class="zk-award-card zk-award-card--champion zk-medal--gold zk-reveal" data-zk-reveal style="--zk-delay:0ms">
+        <span class="zk-award-card__medal">{{ trophy_svg }}</span>
+        <span class="zk-award-card__count" data-zk-count="2">2</span>
         <span class="zk-award-card__type">Titluri de Campion</span>
         <p class="zk-award-card__desc">Pălincă de mere în butoaie barrique &amp; Pălincă de vișine — Quintessence 2025</p>
       </div>
 
-      <div class="zk-award-card">
-        <span class="zk-award-card__medal">🥇</span>
-        <span class="zk-award-card__count">5</span>
+      <div class="zk-award-card zk-medal--gold zk-reveal" data-zk-reveal style="--zk-delay:90ms">
+        <span class="zk-award-card__medal">{{ medal_svg }}</span>
+        <span class="zk-award-card__count" data-zk-count="5">5</span>
         <span class="zk-award-card__type">Medalii de Aur</span>
         <p class="zk-award-card__desc">Recunoaștere de excelență la cea mai mare competiție din Europa Centrală și de Est</p>
       </div>
 
-      <div class="zk-award-card">
-        <span class="zk-award-card__medal">🥈</span>
-        <span class="zk-award-card__count">5</span>
+      <div class="zk-award-card zk-medal--silver zk-reveal" data-zk-reveal style="--zk-delay:180ms">
+        <span class="zk-award-card__medal">{{ medal_svg }}</span>
+        <span class="zk-award-card__count" data-zk-count="5">5</span>
         <span class="zk-award-card__type">Medalii de Argint</span>
         <p class="zk-award-card__desc">Calitate remarcabilă recunoscută la nivel internațional, ediția 2025</p>
       </div>
 
-      <div class="zk-award-card">
-        <span class="zk-award-card__medal">🥉</span>
-        <span class="zk-award-card__count">12</span>
+      <div class="zk-award-card zk-medal--bronze zk-reveal" data-zk-reveal style="--zk-delay:270ms">
+        <span class="zk-award-card__medal">{{ medal_svg }}</span>
+        <span class="zk-award-card__count" data-zk-count="12">12</span>
         <span class="zk-award-card__type">Medalii de Bronz</span>
         <p class="zk-award-card__desc">Portofoliu complex premiat la Quintessence — 2.404 probe din 4 țări</p>
       </div>
 
     </div>
 
-    <div class="zk-awards__competition">
+    <div class="zk-awards__competition zk-reveal" data-zk-reveal>
       <p class="zk-awards__competition-name">Quintessence — Ediția a XV-a, 2025</p>
       <p class="zk-awards__competition-detail">Cea mai mare competiție de pălincă din Europa Centrală și de Est &nbsp;·&nbsp; 2.404 probe din România, Ungaria, Slovacia și Croația &nbsp;·&nbsp; Gyula, 2025</p>
     </div>
   </div>
 </section>
+
+<script>
+  (function () {
+    if (window.__zkPremiumInit) return;
+    window.__zkPremiumInit = true;
+
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+    function countUp(el) {
+      var target = parseInt(el.getAttribute('data-zk-count'), 10);
+      if (isNaN(target) || reduce) { return; }
+      var dur = 1100, start = null;
+      function step(ts) {
+        if (!start) start = ts;
+        var p = Math.min((ts - start) / dur, 1);
+        var eased = 1 - Math.pow(1 - p, 3);
+        el.textContent = Math.round(target * eased);
+        if (p < 1) requestAnimationFrame(step);
+      }
+      el.textContent = '0';
+      requestAnimationFrame(step);
+    }
+
+    function init() {
+      var items = document.querySelectorAll('[data-zk-reveal]');
+      if (!('IntersectionObserver' in window) || reduce) {
+        items.forEach(function (el) { el.classList.add('is-visible'); });
+        document.querySelectorAll('[data-zk-count]').forEach(function (el) {
+          el.textContent = el.getAttribute('data-zk-count');
+        });
+        return;
+      }
+      var io = new IntersectionObserver(function (entries, obs) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          var el = entry.target;
+          el.classList.add('is-visible');
+          el.querySelectorAll('[data-zk-count]').forEach(countUp);
+          obs.unobserve(el);
+        });
+      }, { threshold: 0.2, rootMargin: '0px 0px -10% 0px' });
+      items.forEach(function (el) { io.observe(el); });
+    }
+
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', init);
+    } else {
+      init();
+    }
+  })();
+</script>
 
 {% schema %}
 {

@@ -473,10 +473,14 @@ h1, h2, h3, h4, h5, h6,
 
 .zk-story__ornament {
   color: var(--zk-gold);
-  font-size: 2.5rem;
-  margin: 2rem 0;
+  margin: 2.4rem 0;
   display: block;
-  letter-spacing: 1rem;
+}
+
+.zk-story__ornament svg {
+  width: 16rem;
+  max-width: 60%;
+  height: auto;
 }
 
 .zk-story__text {
@@ -575,9 +579,93 @@ h1, h2, h3, h4, h5, h6,
 }
 
 .zk-award-card__medal {
-  font-size: 4rem;
-  display: block;
-  margin-bottom: 1.5rem;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 8.4rem;
+  height: 8.4rem;
+  margin-bottom: 1.8rem;
+  border-radius: 50%;
+  color: var(--zk-gold);
+  background:
+    radial-gradient(circle at 50% 38%, rgba(201, 168, 76, 0.16), transparent 68%);
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* soft ring + sweeping shine over the medal */
+.zk-award-card__medal::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1px solid rgba(201, 168, 76, 0.25);
+  transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
+
+.zk-award-card__medal::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, 0.45) 50%, transparent 65%);
+  background-size: 250% 250%;
+  background-position: 150% 150%;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.zk-medal-svg {
+  position: relative;
+  width: 4.8rem;
+  height: 4.8rem;
+  z-index: 1;
+  overflow: visible;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.5));
+  transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* metallic tints per rank */
+.zk-medal--gold .zk-award-card__medal { color: #E0C068; }
+.zk-medal--silver .zk-award-card__medal { color: #D8D8DE; }
+.zk-medal--bronze .zk-award-card__medal { color: #C99367; }
+
+.zk-medal--silver .zk-award-card__medal {
+  background: radial-gradient(circle at 50% 38%, rgba(216, 216, 222, 0.14), transparent 68%);
+}
+.zk-medal--bronze .zk-award-card__medal {
+  background: radial-gradient(circle at 50% 38%, rgba(201, 147, 103, 0.14), transparent 68%);
+}
+
+/* idle gentle float */
+.zk-award-card .zk-medal-svg {
+  animation: zkFloat 5s ease-in-out infinite;
+}
+.zk-award-card:nth-child(2) .zk-medal-svg { animation-delay: 0.6s; }
+.zk-award-card:nth-child(3) .zk-medal-svg { animation-delay: 1.2s; }
+.zk-award-card:nth-child(4) .zk-medal-svg { animation-delay: 1.8s; }
+
+@keyframes zkFloat {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-6px); }
+}
+
+/* hover: lift medal, ignite ring + shine sweep */
+.zk-award-card:hover .zk-award-card__medal {
+  transform: scale(1.06);
+}
+.zk-award-card:hover .zk-award-card__medal::before {
+  border-color: rgba(224, 192, 104, 0.7);
+  box-shadow: 0 0 22px rgba(201, 168, 76, 0.35), inset 0 0 12px rgba(201, 168, 76, 0.2);
+}
+.zk-award-card:hover .zk-award-card__medal::after {
+  opacity: 1;
+  animation: zkShineSweep 0.9s ease forwards;
+}
+
+@keyframes zkShineSweep {
+  from { background-position: 150% 150%; }
+  to { background-position: -50% -50%; }
 }
 
 .zk-award-card__count {
@@ -668,4 +756,192 @@ h1, h2, h3, h4, h5, h6,
 ::selection {
   background-color: var(--zk-gold);
   color: var(--zk-black);
+}
+
+/* ════════════════════════════════════════════════════════════════════════════
+   PREMIUM EFFECTS & ANIMATIONS
+   ════════════════════════════════════════════════════════════════════════════ */
+
+/* ─── Scroll reveal ─────────────────────────────────────────────────────────── */
+.zk-reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.9s cubic-bezier(0.22, 1, 0.36, 1),
+              transform 0.9s cubic-bezier(0.22, 1, 0.36, 1);
+  transition-delay: var(--zk-delay, 0ms);
+  will-change: opacity, transform;
+}
+
+.zk-reveal.is-visible {
+  opacity: 1;
+  transform: none;
+}
+
+/* ─── Gold shimmer title ────────────────────────────────────────────────────── */
+.zk-shimmer {
+  background: linear-gradient(
+    100deg,
+    var(--zk-warm-white) 0%,
+    var(--zk-gold-light) 30%,
+    var(--zk-white) 48%,
+    var(--zk-gold) 62%,
+    var(--zk-warm-white) 100%
+  );
+  background-size: 220% auto;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent !important;
+  animation: zkShimmer 7s linear infinite;
+}
+
+@keyframes zkShimmer {
+  to { background-position: -220% center; }
+}
+
+/* ─── Award card: sheen sweep + glow lift ───────────────────────────────────── */
+.zk-award-card {
+  position: relative;
+  overflow: hidden;
+}
+
+.zk-award-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 60%;
+  height: 100%;
+  background: linear-gradient(115deg, transparent, rgba(201, 168, 76, 0.12), transparent);
+  transform: skewX(-18deg);
+  transition: left 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  pointer-events: none;
+}
+
+.zk-award-card:hover {
+  transform: translateY(-6px);
+  border-color: var(--zk-gold) !important;
+  box-shadow: 0 18px 45px -22px rgba(0, 0, 0, 0.9),
+              0 0 0 1px rgba(201, 168, 76, 0.25);
+}
+
+.zk-award-card::before { will-change: left; }
+.zk-award-card:hover::before { left: 130%; }
+
+.zk-award-card {
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.4s ease,
+              box-shadow 0.45s ease,
+              background-color 0.4s ease;
+}
+
+.zk-award-card--champion {
+  box-shadow: 0 0 0 1px rgba(201, 168, 76, 0.25),
+              0 0 40px -18px rgba(201, 168, 76, 0.4);
+}
+
+.zk-award-card__count {
+  background: linear-gradient(180deg, var(--zk-gold-light), var(--zk-gold-dark));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+/* ─── Buttons: gold light sweep on hover ────────────────────────────────────── */
+.button,
+.button--primary {
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+}
+
+.button::after,
+.button--primary::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -120%;
+  width: 55%;
+  height: 100%;
+  background: linear-gradient(120deg, transparent, rgba(255, 255, 255, 0.5), transparent);
+  transform: skewX(-20deg);
+  transition: left 0.6s ease;
+  z-index: -1;
+  pointer-events: none;
+}
+
+.button:hover::after,
+.button--primary:hover::after {
+  left: 140%;
+}
+
+/* ─── Product cards: image zoom + gold glow ─────────────────────────────────── */
+.card-wrapper:hover {
+  box-shadow: 0 22px 50px -26px rgba(0, 0, 0, 0.9),
+              0 0 30px -16px rgba(201, 168, 76, 0.45) !important;
+}
+
+.card__media img,
+.card .media img {
+  transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1) !important;
+}
+
+.card-wrapper:hover .card__media img,
+.card-wrapper:hover .card .media img {
+  transform: scale(1.06);
+}
+
+/* ─── Links: animated gold underline ────────────────────────────────────────── */
+.header__menu-item {
+  position: relative;
+}
+
+.header__menu-item::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  width: 100%;
+  height: 1px;
+  background: var(--zk-gold);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.header__menu-item:hover::after,
+.header__menu-item:focus::after {
+  transform: scaleX(1);
+}
+
+/* ─── Story quote: subtle entrance accent ───────────────────────────────────── */
+.zk-story__quote {
+  position: relative;
+  transition: border-color 0.4s ease;
+}
+
+.zk-story__quote::before {
+  content: '';
+  position: absolute;
+  left: -3px;
+  top: 0;
+  width: 3px;
+  height: 100%;
+  background: linear-gradient(180deg, var(--zk-gold-light), transparent);
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+.zk-story.is-visible .zk-story__quote::before,
+.zk-story__inner.is-visible .zk-story__quote::before {
+  opacity: 1;
+}
+
+/* ─── Respect reduced motion ────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .zk-reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+  .zk-shimmer { animation: none; }
+  .zk-award-card .zk-medal-svg { animation: none; }
+  .card__media img { transition: none !important; }
 }
