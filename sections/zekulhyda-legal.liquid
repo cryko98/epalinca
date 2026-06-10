@@ -16,7 +16,7 @@
   <p><strong>{{ company }}</strong></p>
   <p>Sediu social: {{ address }}</p>
   <p>CUI / CIF: {{ cui }} &nbsp;·&nbsp; Nr. Reg. Com.: {{ regcom }}</p>
-  <p>E-mail: <a href="mailto:{{ email }}">{{ email }}</a> &nbsp;·&nbsp; Telefon: {{ phone }}</p>
+  <p>E-mail: <a href="mailto:{{ email }}">{{ email }}</a>{%- if phone != blank %} &nbsp;·&nbsp; Telefon: {{ phone }}{%- endif -%}</p>
 </div>
 {%- endcapture -%}
 
@@ -164,7 +164,7 @@
       <p>Nu pot fi returnate produsele sigilate care nu pot fi returnate din motive de protecție a sănătății sau din motive de igienă și care au fost desigilate după livrare. În consecință, <strong>sticlele desigilate / deschise nu pot fi returnate</strong>. Produsele returnate trebuie să fie în starea originală, sigilate și nedeteriorate.</p>
 
       <h2>3. Procedura de retur</h2>
-      <p>Pentru exercitarea dreptului de retragere ne puteți transmite o cerere clară la <a href="mailto:{{ email }}">{{ email }}</a> sau telefonic la {{ phone }}, în termenul de 14 zile. Puteți folosi un formular de retragere, fără ca acesta să fie obligatoriu.</p>
+      <p>Pentru exercitarea dreptului de retragere ne puteți transmite o cerere clară la <a href="mailto:{{ email }}">{{ email }}</a>{%- if phone != blank %} sau telefonic la {{ phone }}{%- endif -%}, în termenul de 14 zile. Puteți folosi un formular de retragere, fără ca acesta să fie obligatoriu.</p>
 
       <h2>4. Rambursarea</h2>
       <p>Vă vom rambursa sumele primite (inclusiv costurile de livrare standard) fără întârzieri nejustificate și în cel mult 14 zile de la data la care suntem informați cu privire la decizia de retragere. Putem amâna rambursarea până la primirea produselor returnate. Costurile directe de returnare a produselor sunt suportate de consumator, cu excepția cazului în care produsul este neconform.</p>
@@ -235,43 +235,42 @@
       "type": "text",
       "id": "company_name",
       "label": "Denumire firmă",
-      "default": "[COMPLETAȚI: Denumire firmă S.R.L./P.F.A.]"
+      "default": "SALON EVENIMENTE CENTRAL S.R.L."
     },
     {
       "type": "text",
       "id": "cui",
       "label": "CUI / CIF",
-      "default": "[COMPLETAȚI: CUI/CIF]"
+      "default": "51272310"
     },
     {
       "type": "text",
       "id": "reg_com",
       "label": "Nr. Reg. Comerțului",
-      "default": "[COMPLETAȚI: J__/____/____]"
+      "default": "J2025009645007"
     },
     {
       "type": "text",
       "id": "address",
       "label": "Sediu social",
-      "default": "[COMPLETAȚI: Sediu social complet]"
+      "default": "Mun. Oradea, Str. Grigore Moisil nr. 22, et. 7, ap. 77, jud. Bihor"
     },
     {
       "type": "text",
       "id": "email",
       "label": "E-mail contact",
-      "default": "[COMPLETAȚI: email@exemplu.ro]"
+      "default": "tractorasestiga@outlook.com"
     },
     {
       "type": "text",
       "id": "phone",
-      "label": "Telefon",
-      "default": "[COMPLETAȚI: +40 ...]"
+      "label": "Telefon"
     },
     {
       "type": "text",
       "id": "updated",
       "label": "Data ultimei actualizări",
-      "default": "2025"
+      "default": "iunie 2026"
     }
   ],
   "presets": [
