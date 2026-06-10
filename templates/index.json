@@ -189,6 +189,7 @@
         "button"
       ],
       "settings": {
+        "image": "shopify://shop_images/Zekulhyda-Barique-25.jpg",
         "height": "large",
         "desktop_image_width": "medium",
         "layout": "image_first",
