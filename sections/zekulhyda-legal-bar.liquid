@@ -1,0 +1,103 @@
+<link rel="stylesheet" href="{{ 'zekulhyda.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript>{{ 'zekulhyda.css' | asset_url | stylesheet_tag }}</noscript>
+
+<section class="zk-legalbar">
+  <div class="zk-legalbar__inner">
+
+    <div class="zk-legalbar__age">
+      <span class="zk-legalbar__age-badge">18+</span>
+      <p>Consumul de alcool este interzis minorilor (sub 18 ani). A se consuma cu responsabilitate.</p>
+    </div>
+
+    <div class="zk-legalbar__grid">
+
+      <div class="zk-legalbar__col">
+        <h3 class="zk-legalbar__heading">Date de identificare</h3>
+        <p>{{ section.settings.company_name }}</p>
+        <p>{{ section.settings.address }}</p>
+        <p>CUI/CIF: {{ section.settings.cui }}</p>
+        <p>Reg. Com.: {{ section.settings.reg_com }}</p>
+        {%- if section.settings.email != blank -%}
+          <p><a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a></p>
+        {%- endif -%}
+        {%- if section.settings.phone != blank -%}
+          <p>{{ section.settings.phone }}</p>
+        {%- endif -%}
+      </div>
+
+      <div class="zk-legalbar__col">
+        <h3 class="zk-legalbar__heading">Informații legale</h3>
+        <ul class="zk-legalbar__links">
+          <li><a href="/pages/termeni-si-conditii">Termeni și condiții</a></li>
+          <li><a href="/pages/politica-de-confidentialitate">Politica de confidențialitate</a></li>
+          <li><a href="/pages/politica-cookies">Politica de cookie-uri</a></li>
+          <li><a href="/pages/politica-de-retur">Politica de retur</a></li>
+          <li><a href="/pages/livrare-si-plata">Livrare și plată</a></li>
+        </ul>
+      </div>
+
+      <div class="zk-legalbar__col">
+        <h3 class="zk-legalbar__heading">Protecția consumatorului</h3>
+        <div class="zk-legalbar__badges">
+          <a class="zk-legalbar__badge" href="https://anpc.ro/" target="_blank" rel="noopener nofollow">ANPC</a>
+          <a class="zk-legalbar__badge" href="https://anpc.ro/ce-este-sal/" target="_blank" rel="noopener nofollow">ANPC – SAL</a>
+          <a class="zk-legalbar__badge" href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener nofollow">SOL (UE)</a>
+        </div>
+        <p class="zk-legalbar__note">Soluționarea Alternativă și Online a Litigiilor</p>
+      </div>
+
+    </div>
+
+    <p class="zk-legalbar__copy">© {{ 'now' | date: '%Y' }} {{ section.settings.company_name }}. Toate drepturile rezervate.</p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Zekulhyda - Bara legală",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "company_name",
+      "label": "Denumire firmă",
+      "default": "[COMPLETAȚI: Denumire firmă S.R.L./P.F.A.]"
+    },
+    {
+      "type": "text",
+      "id": "cui",
+      "label": "CUI / CIF",
+      "default": "[COMPLETAȚI: CUI/CIF]"
+    },
+    {
+      "type": "text",
+      "id": "reg_com",
+      "label": "Nr. Reg. Comerțului",
+      "default": "[COMPLETAȚI: J__/____/____]"
+    },
+    {
+      "type": "text",
+      "id": "address",
+      "label": "Sediu social",
+      "default": "[COMPLETAȚI: Sediu social complet]"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "E-mail contact",
+      "default": "[COMPLETAȚI: email@exemplu.ro]"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Telefon",
+      "default": "[COMPLETAȚI: +40 ...]"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zekulhyda - Bara legală"
+    }
+  ]
+}
+{% endschema %}

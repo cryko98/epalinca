@@ -1,0 +1,283 @@
+<link rel="stylesheet" href="{{ 'zekulhyda.css' | asset_url }}" media="print" onload="this.media='all'">
+<noscript>{{ 'zekulhyda.css' | asset_url | stylesheet_tag }}</noscript>
+
+{%- liquid
+  assign company = section.settings.company_name
+  assign cui = section.settings.cui
+  assign regcom = section.settings.reg_com
+  assign address = section.settings.address
+  assign email = section.settings.email
+  assign phone = section.settings.phone
+  assign updated = section.settings.updated
+-%}
+
+{%- capture firma_block -%}
+<div class="zk-legal__firma">
+  <p><strong>{{ company }}</strong></p>
+  <p>Sediu social: {{ address }}</p>
+  <p>CUI / CIF: {{ cui }} &nbsp;·&nbsp; Nr. Reg. Com.: {{ regcom }}</p>
+  <p>E-mail: <a href="mailto:{{ email }}">{{ email }}</a> &nbsp;·&nbsp; Telefon: {{ phone }}</p>
+</div>
+{%- endcapture -%}
+
+{%- capture anpc_block -%}
+<div class="zk-legal__anpc">
+  <p>Pentru soluționarea pe cale amiabilă a eventualelor litigii vă puteți adresa:</p>
+  <ul>
+    <li><strong>ANPC</strong> – Autoritatea Națională pentru Protecția Consumatorilor:
+      <a href="https://anpc.ro/" target="_blank" rel="noopener nofollow">anpc.ro</a></li>
+    <li><strong>SAL</strong> – Soluționarea Alternativă a Litigiilor:
+      <a href="https://anpc.ro/ce-este-sal/" target="_blank" rel="noopener nofollow">anpc.ro/ce-este-sal</a></li>
+    <li><strong>SOL</strong> – Platforma europeană de Soluționare Online a Litigiilor:
+      <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener nofollow">ec.europa.eu/consumers/odr</a></li>
+  </ul>
+</div>
+{%- endcapture -%}
+
+<section class="zk-legal" id="zk-legal">
+  <div class="zk-legal__inner">
+
+    {%- case section.settings.doc -%}
+
+    {%- when 'termeni' -%}
+      <span class="zk-legal__eyebrow">Informații legale</span>
+      <h1 class="zk-legal__title">Termeni și condiții</h1>
+      <p class="zk-legal__updated">Ultima actualizare: {{ updated }}</p>
+
+      <h2>1. Identificarea vânzătorului</h2>
+      {{ firma_block }}
+      <p>Site-ul <strong>epalinca.ro</strong> (denumit în continuare „Site-ul”) este deținut și operat de societatea de mai sus.</p>
+
+      <h2>2. Acceptarea termenilor</h2>
+      <p>Prin accesarea și utilizarea Site-ului, precum și prin plasarea unei comenzi, confirmați că ați citit, ați înțeles și sunteți de acord cu prezentele Termeni și condiții. Dacă nu sunteți de acord, vă rugăm să nu utilizați Site-ul.</p>
+
+      <h2>3. Vârsta minimă (18 ani)</h2>
+      <p>Site-ul comercializează exclusiv băuturi alcoolice. Conform legislației în vigoare, comercializarea și livrarea produselor sunt permise <strong>numai persoanelor care au împlinit vârsta de 18 ani</strong>. Prin plasarea unei comenzi declarați pe propria răspundere că aveți cel puțin 18 ani. Vânzătorul își rezervă dreptul de a solicita dovada vârstei la livrare și de a refuza livrarea către persoane minore.</p>
+
+      <h2>4. Produse și prețuri</h2>
+      <p>Caracteristicile produselor sunt descrise în paginile de produs. Prețurile sunt exprimate în lei (RON) și includ TVA, conform legislației fiscale aplicabile. Vânzătorul își rezervă dreptul de a modifica prețurile în orice moment; prețul aplicabil comenzii este cel afișat la momentul finalizării comenzii.</p>
+
+      <h2>5. Plasarea comenzii și încheierea contractului</h2>
+      <p>Comanda plasată prin Site reprezintă o ofertă de cumpărare. Contractul de vânzare se consideră încheiat în momentul confirmării comenzii de către Vânzător, prin e-mail. Vânzătorul poate refuza o comandă în cazul indisponibilității produsului, al unor erori de preț evidente sau al imposibilității verificării vârstei cumpărătorului.</p>
+
+      <h2>6. Modalități de plată</h2>
+      <p>Plata se poate efectua prin metodele afișate în pagina de finalizare a comenzii (de ex. card bancar, ramburs). Detaliile de plată sunt procesate în condiții de securitate de către procesatorii de plăți parteneri.</p>
+
+      <h2>7. Livrare</h2>
+      <p>Condițiile, termenele și costurile de livrare sunt detaliate în pagina <a href="/pages/livrare-si-plata">Livrare și plată</a>.</p>
+
+      <h2>8. Dreptul de retragere (retur)</h2>
+      <p>Consumatorul beneficiază de dreptul de a se retrage din contract în termen de 14 zile, în condițiile și cu excepțiile prevăzute în pagina <a href="/pages/politica-de-retur">Politica de retur</a>, conform OUG nr. 34/2014.</p>
+
+      <h2>9. Conformitate și garanții</h2>
+      <p>Produsele beneficiază de garanția legală de conformitate conform OUG nr. 140/2021. Vânzătorul răspunde pentru orice lipsă de conformitate existentă la momentul livrării.</p>
+
+      <h2>10. Răspundere</h2>
+      <p>Vânzătorul nu poate fi tras la răspundere pentru consumul iresponsabil al produselor. Consumul excesiv de alcool dăunează grav sănătății. Informațiile de pe Site au caracter informativ și pot conține erori involuntare.</p>
+
+      <h2>11. Protecția datelor cu caracter personal</h2>
+      <p>Prelucrarea datelor personale se realizează conform <a href="/pages/politica-de-confidentialitate">Politicii de confidențialitate</a> și a Regulamentului (UE) 2016/679 (GDPR).</p>
+
+      <h2>12. Soluționarea litigiilor (ANPC / SAL / SOL)</h2>
+      {{ anpc_block }}
+
+      <h2>13. Legea aplicabilă</h2>
+      <p>Prezentele Termeni și condiții sunt guvernate de legea română. Eventualele litigii se vor soluționa pe cale amiabilă sau, în caz contrar, de instanțele competente din România.</p>
+
+    {%- when 'confidentialitate' -%}
+      <span class="zk-legal__eyebrow">Protecția datelor</span>
+      <h1 class="zk-legal__title">Politica de confidențialitate</h1>
+      <p class="zk-legal__updated">Ultima actualizare: {{ updated }}</p>
+
+      <p>Protejarea datelor dumneavoastră cu caracter personal este importantă pentru noi. Prezenta politică explică modul în care colectăm, utilizăm și protejăm datele, în conformitate cu Regulamentul (UE) 2016/679 (GDPR).</p>
+
+      <h2>1. Operatorul de date</h2>
+      {{ firma_block }}
+
+      <h2>2. Datele pe care le colectăm</h2>
+      <ul>
+        <li>Date de identificare și contact: nume, prenume, adresă, e-mail, telefon;</li>
+        <li>Date de livrare și facturare;</li>
+        <li>Date privind comenzile și istoricul acestora;</li>
+        <li>Date tehnice: adresă IP, tip de browser, cookie-uri (vezi <a href="/pages/politica-cookies">Politica de cookie-uri</a>);</li>
+        <li>Confirmarea vârstei (18+).</li>
+      </ul>
+
+      <h2>3. Scopurile și temeiul legal al prelucrării</h2>
+      <ul>
+        <li>Procesarea și livrarea comenzilor – executarea contractului;</li>
+        <li>Emiterea documentelor fiscale – obligație legală;</li>
+        <li>Comunicări de marketing – numai pe baza consimțământului;</li>
+        <li>Îmbunătățirea serviciilor și securitate – interes legitim;</li>
+        <li>Verificarea vârstei minime de 18 ani – obligație legală.</li>
+      </ul>
+
+      <h2>4. Durata stocării</h2>
+      <p>Datele sunt păstrate pe durata necesară îndeplinirii scopurilor, respectiv termenele impuse de legislația fiscală și contabilă (de regulă 10 ani pentru documentele financiar-contabile).</p>
+
+      <h2>5. Destinatarii datelor</h2>
+      <p>Datele pot fi transmise către: firme de curierat (pentru livrare), procesatori de plăți, furnizorul platformei de e-commerce (Shopify), furnizori de servicii contabile și autorități publice, când legea o impune.</p>
+
+      <h2>6. Drepturile dumneavoastră</h2>
+      <p>Conform GDPR aveți dreptul de acces, rectificare, ștergere („dreptul de a fi uitat”), restricționare, portabilitate, opoziție, precum și dreptul de a nu fi supus unei decizii automate. Vă puteți retrage oricând consimțământul. Pentru exercitarea acestor drepturi ne puteți contacta la <a href="mailto:{{ email }}">{{ email }}</a>.</p>
+
+      <h2>7. Autoritatea de supraveghere</h2>
+      <p>Aveți dreptul de a depune o plângere la <strong>ANSPDCP</strong> – Autoritatea Națională de Supraveghere a Prelucrării Datelor cu Caracter Personal:
+        <a href="https://www.dataprotection.ro/" target="_blank" rel="noopener nofollow">dataprotection.ro</a>.</p>
+
+      <h2>8. Securitatea datelor</h2>
+      <p>Aplicăm măsuri tehnice și organizatorice adecvate pentru protejarea datelor împotriva accesului neautorizat, pierderii sau divulgării.</p>
+
+    {%- when 'cookies' -%}
+      <span class="zk-legal__eyebrow">Informații legale</span>
+      <h1 class="zk-legal__title">Politica de cookie-uri</h1>
+      <p class="zk-legal__updated">Ultima actualizare: {{ updated }}</p>
+
+      <h2>1. Ce sunt cookie-urile</h2>
+      <p>Cookie-urile sunt fișiere text de mici dimensiuni stocate de browserul dumneavoastră atunci când vizitați un site. Acestea permit funcționarea corectă a Site-ului și îmbunătățirea experienței de navigare.</p>
+
+      <h2>2. Tipuri de cookie-uri utilizate</h2>
+      <ul>
+        <li><strong>Cookie-uri strict necesare</strong> – esențiale pentru funcționarea Site-ului (coș de cumpărături, sesiune, confirmarea vârstei 18+);</li>
+        <li><strong>Cookie-uri de performanță / analitice</strong> – ne ajută să înțelegem modul de utilizare a Site-ului;</li>
+        <li><strong>Cookie-uri de marketing</strong> – utilizate numai cu consimțământul dumneavoastră.</li>
+      </ul>
+
+      <h2>3. Cookie-uri ale platformei</h2>
+      <p>Site-ul folosește platforma Shopify, care poate seta cookie-uri necesare pentru funcționarea magazinului online și a procesului de plată.</p>
+
+      <h2>4. Gestionarea cookie-urilor</h2>
+      <p>Puteți controla și șterge cookie-urile din setările browserului dumneavoastră. Dezactivarea cookie-urilor strict necesare poate afecta funcționarea Site-ului.</p>
+
+      <h2>5. Confirmarea vârstei</h2>
+      <p>Pentru a reține că ați confirmat vârsta de 18 ani, stocăm local o setare în browserul dumneavoastră, astfel încât fereastra de verificare să nu apară la fiecare vizită.</p>
+
+    {%- when 'retur' -%}
+      <span class="zk-legal__eyebrow">Drepturile consumatorului</span>
+      <h1 class="zk-legal__title">Politica de retur și dreptul de retragere</h1>
+      <p class="zk-legal__updated">Ultima actualizare: {{ updated }}</p>
+
+      <h2>1. Dreptul legal de retragere (14 zile)</h2>
+      <p>Conform OUG nr. 34/2014, consumatorul are dreptul de a se retrage din contractul încheiat la distanță, fără a fi nevoit să justifice decizia, în termen de <strong>14 zile calendaristice</strong> de la data la care intră în posesia fizică a produsului.</p>
+
+      <h2>2. Excepții de la dreptul de retragere</h2>
+      <p>Nu pot fi returnate produsele sigilate care nu pot fi returnate din motive de protecție a sănătății sau din motive de igienă și care au fost desigilate după livrare. În consecință, <strong>sticlele desigilate / deschise nu pot fi returnate</strong>. Produsele returnate trebuie să fie în starea originală, sigilate și nedeteriorate.</p>
+
+      <h2>3. Procedura de retur</h2>
+      <p>Pentru exercitarea dreptului de retragere ne puteți transmite o cerere clară la <a href="mailto:{{ email }}">{{ email }}</a> sau telefonic la {{ phone }}, în termenul de 14 zile. Puteți folosi un formular de retragere, fără ca acesta să fie obligatoriu.</p>
+
+      <h2>4. Rambursarea</h2>
+      <p>Vă vom rambursa sumele primite (inclusiv costurile de livrare standard) fără întârzieri nejustificate și în cel mult 14 zile de la data la care suntem informați cu privire la decizia de retragere. Putem amâna rambursarea până la primirea produselor returnate. Costurile directe de returnare a produselor sunt suportate de consumator, cu excepția cazului în care produsul este neconform.</p>
+
+      <h2>5. Produse deteriorate sau neconforme</h2>
+      <p>Dacă ați primit un produs deteriorat în timpul transportului sau neconform comenzii, vă rugăm să ne contactați în cel mai scurt timp. În aceste cazuri, costurile de returnare și înlocuire sunt suportate de Vânzător, conform garanției legale de conformitate (OUG nr. 140/2021).</p>
+
+      <h2>6. Soluționarea litigiilor</h2>
+      {{ anpc_block }}
+
+    {%- when 'livrare' -%}
+      <span class="zk-legal__eyebrow">Informații utile</span>
+      <h1 class="zk-legal__title">Livrare și plată</h1>
+      <p class="zk-legal__updated">Ultima actualizare: {{ updated }}</p>
+
+      <h2>1. Zone și modalități de livrare</h2>
+      <p>Livrăm în toată România prin curier rapid. Coletele sunt ambalate în siguranță pentru protejarea sticlelor pe durata transportului.</p>
+
+      <h2>2. Termene de livrare</h2>
+      <p>Comenzile sunt procesate și expediate în cel mai scurt timp posibil. Termenul estimativ de livrare este de [COMPLETAȚI: ex. 1–3 zile lucrătoare] de la confirmarea comenzii, în funcție de localitate și de curier.</p>
+
+      <h2>3. Costuri de livrare</h2>
+      <p>Costul livrării este [COMPLETAȚI: ex. tarif fix / gratuit peste o anumită valoare] și este afișat la finalizarea comenzii, înainte de plată.</p>
+
+      <h2>4. Verificarea vârstei la livrare (18+)</h2>
+      <p>Întrucât comercializăm băuturi alcoolice, curierul poate solicita un act de identitate la livrare. Coletele nu vor fi predate persoanelor care nu au împlinit vârsta de <strong>18 ani</strong>.</p>
+
+      <h2>5. Modalități de plată</h2>
+      <ul>
+        <li>Plată cu cardul bancar online (în condiții de securitate);</li>
+        <li>Plată ramburs la livrare [COMPLETAȚI dacă este disponibilă];</li>
+      </ul>
+      <p>Toate prețurile includ TVA. Pentru fiecare comandă se emite document fiscal conform legislației.</p>
+
+    {%- else -%}
+      <h1 class="zk-legal__title">{{ page.title | default: 'Informații legale' }}</h1>
+      <div class="zk-legal__rte rte">{{ page.content }}</div>
+
+    {%- endcase -%}
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Zekulhyda - Legal",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "doc",
+      "label": "Document",
+      "options": [
+        { "value": "termeni", "label": "Termeni și condiții" },
+        { "value": "confidentialitate", "label": "Politica de confidențialitate" },
+        { "value": "cookies", "label": "Politica de cookie-uri" },
+        { "value": "retur", "label": "Politica de retur" },
+        { "value": "livrare", "label": "Livrare și plată" },
+        { "value": "page", "label": "Conținut pagină (page.content)" }
+      ],
+      "default": "termeni"
+    },
+    {
+      "type": "header",
+      "content": "Date firmă (completați)"
+    },
+    {
+      "type": "text",
+      "id": "company_name",
+      "label": "Denumire firmă",
+      "default": "[COMPLETAȚI: Denumire firmă S.R.L./P.F.A.]"
+    },
+    {
+      "type": "text",
+      "id": "cui",
+      "label": "CUI / CIF",
+      "default": "[COMPLETAȚI: CUI/CIF]"
+    },
+    {
+      "type": "text",
+      "id": "reg_com",
+      "label": "Nr. Reg. Comerțului",
+      "default": "[COMPLETAȚI: J__/____/____]"
+    },
+    {
+      "type": "text",
+      "id": "address",
+      "label": "Sediu social",
+      "default": "[COMPLETAȚI: Sediu social complet]"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "E-mail contact",
+      "default": "[COMPLETAȚI: email@exemplu.ro]"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Telefon",
+      "default": "[COMPLETAȚI: +40 ...]"
+    },
+    {
+      "type": "text",
+      "id": "updated",
+      "label": "Data ultimei actualizări",
+      "default": "2025"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Zekulhyda - Legal"
+    }
+  ]
+}
+{% endschema %}

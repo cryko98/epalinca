@@ -1,0 +1,173 @@
+{%- comment -%}
+  Zekulhyda 18+ age verification gate.
+  Shown once per browser (localStorage). Blocks access for under-18 visitors.
+{%- endcomment -%}
+<style>
+  html.zk-age-locked,
+  html.zk-age-locked body { overflow: hidden !important; }
+
+  #zk-age-gate {
+    position: fixed;
+    inset: 0;
+    z-index: 2147483000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    background: radial-gradient(circle at 50% 35%, #161616 0%, #0a0a0a 70%, #050505 100%);
+    -webkit-backdrop-filter: blur(6px);
+    backdrop-filter: blur(6px);
+    opacity: 1;
+    transition: opacity 0.4s ease;
+    font-family: 'Raleway', sans-serif;
+  }
+  #zk-age-gate.zk-age-gate--out { opacity: 0; }
+
+  .zk-age__card {
+    width: 100%;
+    max-width: 52rem;
+    text-align: center;
+    border: 1px solid rgba(201, 168, 76, 0.35);
+    background: rgba(13, 13, 13, 0.85);
+    padding: 5rem 3.5rem;
+    box-shadow: 0 30px 80px -30px rgba(0, 0, 0, 0.9);
+  }
+  .zk-age__brand {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 3.2rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: #C9A84C;
+    margin: 0 0 0.5rem;
+  }
+  .zk-age__badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 6.4rem;
+    height: 6.4rem;
+    margin: 1.5rem auto 2rem;
+    border: 1px solid rgba(201, 168, 76, 0.5);
+    border-radius: 50%;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 2rem;
+    letter-spacing: 0.05em;
+    color: #E0C068;
+  }
+  .zk-age__title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 2.6rem;
+    color: #F5F0E8;
+    margin: 0 0 1.5rem;
+    letter-spacing: 0.04em;
+  }
+  .zk-age__text {
+    font-size: 1.5rem;
+    line-height: 1.7;
+    color: rgba(245, 240, 232, 0.75);
+    font-weight: 300;
+    margin: 0 auto 3rem;
+    max-width: 40rem;
+  }
+  .zk-age__actions {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .zk-age__btn {
+    cursor: pointer;
+    font-family: 'Raleway', sans-serif;
+    font-size: 1.25rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 1.4rem 2.8rem;
+    border: 1px solid #C9A84C;
+    background: transparent;
+    color: #C9A84C;
+    transition: all 0.3s ease;
+  }
+  .zk-age__btn--yes { background: #C9A84C; color: #0D0D0D; }
+  .zk-age__btn--yes:hover { background: #E0C068; border-color: #E0C068; }
+  .zk-age__btn--no { color: rgba(245, 240, 232, 0.7); border-color: rgba(245, 240, 232, 0.3); }
+  .zk-age__btn--no:hover { border-color: #C9A84C; color: #C9A84C; }
+  .zk-age__legal {
+    margin: 3rem auto 0;
+    font-size: 1.15rem;
+    letter-spacing: 0.04em;
+    color: rgba(245, 240, 232, 0.45);
+    font-weight: 300;
+    max-width: 38rem;
+    line-height: 1.6;
+  }
+  .zk-age__deny-title { color: #E0C068; }
+  @media screen and (max-width: 600px) {
+    .zk-age__card { padding: 3.5rem 2rem; }
+    .zk-age__brand { font-size: 2.6rem; }
+    .zk-age__title { font-size: 2.1rem; }
+    .zk-age__btn { width: 100%; }
+  }
+</style>
+
+<div id="zk-age-gate" role="dialog" aria-modal="true" aria-labelledby="zk-age-title">
+  <div class="zk-age__card">
+    <p class="zk-age__brand">Zekulhyda</p>
+
+    <div data-zk-step="ask">
+      <span class="zk-age__badge">18+</span>
+      <h1 class="zk-age__title" id="zk-age-title">Verificarea vârstei</h1>
+      <p class="zk-age__text">
+        Acest site comercializează băuturi alcoolice. Pentru a continua, trebuie să confirmi că ai împlinit
+        vârsta de <strong>18 ani</strong>.
+      </p>
+      <div class="zk-age__actions">
+        <button type="button" class="zk-age__btn zk-age__btn--yes" data-zk-yes>Da, am peste 18 ani</button>
+        <button type="button" class="zk-age__btn zk-age__btn--no" data-zk-no>Nu am 18 ani</button>
+      </div>
+    </div>
+
+    <div data-zk-step="deny" hidden>
+      <span class="zk-age__badge">18+</span>
+      <h1 class="zk-age__title zk-age__deny-title">Ne pare rău</h1>
+      <p class="zk-age__text">
+        Trebuie să ai cel puțin <strong>18 ani</strong> pentru a accesa acest site.
+        Conform legislației în vigoare, vânzarea de băuturi alcoolice către minori este interzisă.
+      </p>
+    </div>
+
+    <p class="zk-age__legal">
+      Consumul de alcool este interzis minorilor. A se consuma cu responsabilitate.
+    </p>
+  </div>
+</div>
+
+<script>
+  (function () {
+    var KEY = 'zk_age_verified';
+    var gate = document.getElementById('zk-age-gate');
+    if (!gate) return;
+    try {
+      if (localStorage.getItem(KEY) === '1') { gate.parentNode && gate.parentNode.removeChild(gate); return; }
+    } catch (e) {}
+
+    document.documentElement.classList.add('zk-age-locked');
+
+    var yes = gate.querySelector('[data-zk-yes]');
+    var no = gate.querySelector('[data-zk-no]');
+
+    yes && yes.addEventListener('click', function () {
+      try { localStorage.setItem(KEY, '1'); } catch (e) {}
+      document.documentElement.classList.remove('zk-age-locked');
+      gate.classList.add('zk-age-gate--out');
+      setTimeout(function () { gate.parentNode && gate.parentNode.removeChild(gate); }, 420);
+    });
+
+    no && no.addEventListener('click', function () {
+      var ask = gate.querySelector('[data-zk-step="ask"]');
+      var deny = gate.querySelector('[data-zk-step="deny"]');
+      if (ask) ask.hidden = true;
+      if (deny) deny.hidden = false;
+    });
+  })();
+</script>
