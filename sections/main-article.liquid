@@ -1,47 +1,38 @@
-{% assign article = articles[article.handle] | default: article %}
-<article class="article-page" style="background:var(--color-bg);padding-top:100px;">
-  <div class="article-hero" style="background:var(--color-surface);border-bottom:1px solid var(--color-surface2);">
-    <div class="article-hero__inner">
-      <div class="article-meta">
-        <span class="article-meta__date" style="color:var(--color-gold);">{{ article.published_at | date: '%d %B %Y' }}</span>
-        {% if article.tags.size > 0 %}
-        <span class="article-meta__sep" style="color:var(--color-gold-lo);">·</span>
-        {% for tag in article.tags %}
-        <span class="article-meta__tag" style="color:var(--color-cream-dim);">{{ tag }}</span>{% unless forloop.last %}, {% endunless %}
-        {% endfor %}
-        {% endif %}
-      </div>
-      <h1 class="article-title" style="color:var(--color-cream);">{{ article.title }}</h1>
-      {% if article.excerpt != blank %}
-      <p class="article-excerpt" style="color:var(--color-cream-dim);">{{ article.excerpt | strip_html }}</p>
-      {% endif %}
-      {% if article.author != blank %}
-      <div class="article-author" style="color:var(--color-gold);">
-        <span class="article-author__line" style="background:var(--color-gold);"></span>
-        {{ article.author }}
-      </div>
-      {% endif %}
-    </div>
-    {% if article.image %}
-    <div class="article-hero__img-wrap">
-      <img src="{{ article.image | img_url: '1400x' }}" alt="{{ article.title }}" class="article-hero__img">
-    </div>
-    {% endif %}
-  </div>
+{%- capture meta -%}
+  {{ article.published_at | date: '%d %B %Y' }}
+  {%- if article.author != blank %} · {{ article.author }}{% endif -%}
+{%- endcapture -%}
 
-  <div class="article-body" style="color:var(--color-cream-dim);">
-    {{ article.content }}
-  </div>
+{% render 'zk-page-head',
+   eyebrow: blog.title,
+   title: article.title,
+   lead: article.excerpt,
+   meta: meta %}
 
-  <div class="article-footer" style="border-top:1px solid var(--color-surface2);padding:40px 60px;display:flex;justify-content:space-between;align-items:center;">
-    <a href="{{ blog.url }}" class="btn-ghost" style="color:var(--color-gold);border-color:var(--color-gold-lo);">← Înapoi la blog</a>
-    <div class="article-share" style="color:var(--color-cream-dim);font-size:12px;letter-spacing:2px;text-transform:uppercase;">Distribuie</div>
+<article class="zk-article">
+  {%- if article.image -%}
+    <div class="zk-article__hero">
+      <img src="{{ article.image | image_url: width: 1600 }}"
+           width="{{ article.image.width }}" height="{{ article.image.height }}"
+           alt="{{ article.title | escape }}" loading="eager">
+    </div>
+  {%- endif -%}
+
+  <div class="wrap zk-body">
+    <div class="zk-rte">{{ article.content }}</div>
+
+    {%- if article.tags.size > 0 -%}
+      <div class="zk-article__tags">
+        {%- for tag in article.tags -%}<span>{{ tag }}</span>{%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <div class="zk-article__foot">
+      <a class="btn" href="{{ blog.url }}">← {{ 'blogs.back' | t }}</a>
+    </div>
   </div>
 </article>
 
 {% schema %}
-{
-  "name": "Main Articol",
-  "settings": []
-}
+{"name": "Main Articol", "settings": []}
 {% endschema %}

@@ -1,0 +1,22 @@
+{%- comment -%}
+  Shared editorial header for the inner pages (collection, search, blog, article, page,
+  cart, 404), so they open the same way the homepage sections do instead of each
+  inventing its own.
+
+  Accepts:
+    eyebrow  - small mono label above the title
+    title    - the heading
+    lead     - optional paragraph under it (may contain HTML)
+    meta     - optional short line under the lead (counts, dates)
+
+  Usage: {% render 'zk-page-head', eyebrow: 'Magazin', title: collection.title %}
+{%- endcomment -%}
+
+<div class="zk-head">
+  <div class="wrap">
+    {%- if eyebrow != blank -%}<div class="eyebrow">{{ eyebrow }}</div>{%- endif -%}
+    <h1 class="zk-head__title">{{ title }}</h1>
+    {%- if lead != blank -%}<div class="zk-head__lead">{{ lead }}</div>{%- endif -%}
+    {%- if meta != blank -%}<p class="zk-head__meta">{{ meta }}</p>{%- endif -%}
+  </div>
+</div>

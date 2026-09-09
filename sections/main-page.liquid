@@ -1,32 +1,9 @@
-<div class="page-default" style="padding-top:80px;">
-  <div class="page-default__hero">
-    <div class="section-inner">
-      <div class="section-label">
-        <span class="section-label-line"></span>
-        <span class="section-label-text">{{ page.title }}</span>
-      </div>
-      <h1 class="page-default__title">{{ page.title }}</h1>
-    </div>
-  </div>
+{% render 'zk-page-head', title: page.title %}
 
-  <div class="section-inner page-default__body">
-    {{ page.content }}
-  </div>
+<div class="wrap zk-body">
+  <div class="zk-rte">{{ page.content }}</div>
 </div>
 
-<style>
-.page-default__hero { padding:80px 0 40px; border-bottom:1px solid rgba(240,234,216,.06); }
-.page-default__title { font-family:var(--font-display); font-size:clamp(40px,4vw,64px); font-weight:400; color:var(--color-cream); margin-top:14px; }
-.page-default__body { padding-top:64px; padding-bottom:120px; max-width:800px; }
-.page-default__body p, .page-default__body li { font-family:var(--font-serif); font-size:17px; font-style:italic; line-height:1.95; color:var(--color-cream-dim); margin-bottom:20px; }
-.page-default__body h2 { font-family:var(--font-display); font-size:32px; font-weight:400; color:var(--color-cream); margin:48px 0 16px; }
-.page-default__body a { color:var(--color-gold); border-bottom:1px solid var(--color-gold-lo); padding-bottom:2px; }
-.page-default__body a:hover { border-color:var(--color-gold); }
-</style>
-
 {% schema %}
-{
-  "name": "Main Pagina",
-  "settings": []
-}
+{"name": "Main Pagina", "settings": []}
 {% endschema %}

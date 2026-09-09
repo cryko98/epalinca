@@ -310,6 +310,8 @@
     "nav_cats": "Categorii",
     "foot_link_cookies": "Politica de cookie-uri",
     "foot_link_returns": "Politica de retur",
-    "foot_link_shipping": "Livrare și plată"
+    "foot_link_shipping": "Livrare și plată",
+    "product_one": "produs",
+    "product_many": "produse"
   }
 }

@@ -310,6 +310,8 @@
     "nav_cats": "Categories",
     "foot_link_cookies": "Cookie policy",
     "foot_link_returns": "Returns policy",
-    "foot_link_shipping": "Delivery and payment"
+    "foot_link_shipping": "Delivery and payment",
+    "product_one": "product",
+    "product_many": "products"
   }
 }

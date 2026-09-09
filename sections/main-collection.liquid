@@ -1,109 +1,99 @@
-<div class="collection-page" style="padding-top: 80px;">
+{%- liquid
+  assign count = collection.products_count
+  if count == 1
+    assign word = 'zk.product_one' | t
+  else
+    assign word = 'zk.product_many' | t
+  endif
+  assign meta = count | append: ' ' | append: word
+-%}
 
-  <div class="collection-page__hero">
-    <div class="collection-page__hero-inner">
-      <div class="section-label">
-        <span class="section-label-line"></span>
-        <span class="section-label-text">{{ 'collections.all' | t }}</span>
-      </div>
-      <h1 class="collection-page__title">{{ collection.title }}</h1>
-      {% if collection.description != blank %}
-        <div class="collection-page__desc">{{ collection.description }}</div>
-      {% endif %}
+{% render 'zk-page-head',
+   eyebrow: collection.title,
+   title: collection.title,
+   lead: collection.description,
+   meta: meta %}
+
+<section class="zk-shop">
+  <div class="wrap">
+
+    {%- comment -%}
+      Sibling categories, so a shopper can move between them without going back to the
+      homepage. The current one is marked and not a link.
+    {%- endcomment -%}
+    {%- assign cats = 'fructe,struguri,wild,barrique,distilat-sticla-albastra' | split: ',' -%}
+    <div class="filters">
+      <a href="{{ routes.all_products_collection_url }}">{{ 'zk.shop_all' | t }}</a>
+      {%- for h in cats -%}
+        {%- assign c = collections[h] -%}
+        {%- if c != blank and c.products_count > 0 -%}
+          {%- if c.handle == collection.handle -%}
+            <span class="on">{{ c.title }}</span>
+          {%- else -%}
+            <a href="{{ c.url }}">{{ c.title }}</a>
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
     </div>
-  </div>
 
-  <div class="collection-page__body">
-    <div class="section-inner">
+    {%- if collection.products.size > 0 -%}
+      <form class="zk-sort" method="get">
+        <label for="SortBy">{{ 'collections.sort_by' | t }}</label>
+        {%- assign sort_by = collection.sort_by | default: collection.default_sort_by -%}
+        <select name="sort_by" id="SortBy" onchange="this.form.submit()">
+          {%- for option in collection.sort_options -%}
+            <option value="{{ option.value }}" {% if option.value == sort_by %}selected{% endif %}>{{ option.name }}</option>
+          {%- endfor -%}
+        </select>
+      </form>
+    {%- endif -%}
 
-      <div class="collection-page__toolbar">
-        <p class="collection-page__count">
-          {{ collection.products_count }}
-          {% if collection.products_count == 1 %}produs{% else %}produse{% endif %}
-        </p>
-        <div class="collection-page__sort">
-          {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
-          <label for="SortBy" class="collection-page__sort-label">Sortează:</label>
-          <select name="sort_by" id="SortBy" class="collection-page__sort-select"
-                  onchange="window.location.href = '{{ collection.url }}?sort_by=' + this.value">
-            {% for option in collection.sort_options %}
-              <option value="{{ option.value }}" {% if option.value == sort_by %}selected{% endif %}>
-                {{ option.name }}
-              </option>
-            {% endfor %}
-          </select>
-        </div>
-      </div>
-
-      {% paginate collection.products by 24 %}
-
-      {% if collection.products.size > 0 %}
-        <div class="product-grid product-grid--3">
-          {% for product in collection.products %}
-            <div class="product-card product-card--dark reveal delay-{{ forloop.index | modulo: 3 | plus: 1 }}">
-              <a href="{{ product.url }}" class="product-card__image-wrap">
-                <div class="product-card__glow"></div>
-                {% if product.featured_image %}
-                  <img src="{{ product.featured_image | image_url: width: 600 }}"
-                       alt="{{ product.title }}"
-                       class="product-card__img" loading="lazy">
-                {% else %}
-                  {% render 'bottle-svg', color: 'premium' %}
-                {% endif %}
-                {% for tag in product.tags %}
-                  {% if tag contains 'badge:' %}
-                    <span class="product-card__badge">{{ tag | remove: 'badge:' }}</span>
-                  {% endif %}
-                {% endfor %}
+    {% paginate collection.products by 24 %}
+      {%- if collection.products.size > 0 -%}
+        <div class="grid">
+          {%- for product in collection.products -%}
+            <div class="card">
+              <a class="pic{% if product.featured_image %} photo{% endif %}" href="{{ product.url }}">
+                {% render 'zk-product-image', product: product %}
+                {% render 'zk-award-mini', product: product %}
+                {%- for tag in product.tags -%}
+                  {%- if tag contains 'badge:' -%}
+                    <span class="badge">{{ tag | remove: 'badge:' }}</span>
+                  {%- endif -%}
+                {%- endfor -%}
               </a>
-              <div class="product-card__info">
-                <p class="product-card__origin">{{ product.vendor }}</p>
-                <h3 class="product-card__name">
-                  <a href="{{ product.url }}">{{ product.title }}</a>
-                </h3>
-                <p class="product-card__desc">{{ product.description | strip_html | truncate: 100 }}</p>
-                <div class="product-card__foot">
-                  <div class="product-card__price">
-                    {% if product.compare_at_price > product.price %}
-                      <span class="product-card__price-compare">
-                        <sub>{{ cart.currency.symbol }}</sub>{{ product.compare_at_price | money_without_currency }}
-                      </span>
-                    {% endif %}
-                    <sub>{{ cart.currency.symbol }}</sub>{{ product.price | money_without_currency }}
-                  </div>
-                  {% if product.available %}
-                    <form action="/cart/add" method="post">
-                      <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+              <div class="body">
+                <span class="fruit">{{ product.type | default: product.vendor }}</span>
+                <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
+                <p class="note">{{ product.description | strip_html | truncate: 96 }}</p>
+                <div class="row">
+                  <div class="price">{{ product.price | money }}</div>
+                  {%- if product.available -%}
+                    <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data">
+                      <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
                       <input type="hidden" name="quantity" value="1">
-                      <button type="submit" class="btn-add-cart">Adaugă →</button>
+                      <button type="submit" class="add">{{ 'products.add_to_cart' | t }}</button>
                     </form>
-                  {% else %}
-                    <span class="product-card__sold-out">Epuizat</span>
-                  {% endif %}
+                  {%- else -%}
+                    <button class="add" disabled>{{ 'products.sold_out' | t }}</button>
+                  {%- endif -%}
                 </div>
               </div>
             </div>
-          {% endfor %}
+          {%- endfor -%}
         </div>
-      {% else %}
-        <p class="collection-page__empty">{{ 'collections.no_products' | t }}</p>
-      {% endif %}
+      {%- else -%}
+        <p class="empty">{{ 'collections.no_products' | t }}</p>
+      {%- endif -%}
 
-      {% if paginate.pages > 1 %}
-        <div class="pagination">
-          {{ paginate | default_pagination }}
-        </div>
-      {% endif %}
+      {%- if paginate.pages > 1 -%}
+        <div class="zk-pager">{{ paginate | default_pagination }}</div>
+      {%- endif -%}
+    {% endpaginate %}
 
-      {% endpaginate %}
-
-    </div>
   </div>
-</div>
+</section>
 
 {% schema %}
-{
-  "name": "Main Colectie",
-  "settings": []
-}
+{"name": "Main Colectie", "settings": []}
 {% endschema %}

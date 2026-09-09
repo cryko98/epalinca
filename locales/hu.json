@@ -310,6 +310,8 @@
     "nav_cats": "Kategóriák",
     "foot_link_cookies": "Cookie-szabályzat",
     "foot_link_returns": "Elállás és visszaküldés",
-    "foot_link_shipping": "Szállítás és fizetés"
+    "foot_link_shipping": "Szállítás és fizetés",
+    "product_one": "termék",
+    "product_many": "termék"
   }
 }

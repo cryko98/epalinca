@@ -2299,3 +2299,157 @@ footer .wrap { align-items: flex-start; }
 .foot-legal a { margin-right: 0; }
 .foot-legal a:hover { color: var(--amber-2); }
 @media (max-width: 860px) { .foot-legal { max-width: none; } }
+
+
+/* ==========================================================================
+   Inner pages
+   The homepage was rebuilt in the reference design's language, but the inner pages
+   were left on the old v5 vocabulary whose rules the merge dropped, so they rendered
+   as good as unstyled — raw selects, no rhythm, no page header. This is the shared
+   furniture they all use: page header, toolbar, sort, pager, rich text.
+   ========================================================================== */
+
+.zk-head {
+  padding: 7.5rem 0 3rem;
+  border-bottom: 1px solid var(--line);
+  background:
+    radial-gradient(120% 140% at 12% 0%, rgba(201, 150, 59, .10), transparent 55%),
+    var(--ink);
+}
+.zk-head__title {
+  font-family: "Cormorant Garamond", Georgia, serif;
+  font-size: clamp(2.4rem, 5.5vw, 4.4rem);
+  font-weight: 500; line-height: 1.03; color: #F3F1EC;
+  margin: .8rem 0 0; text-wrap: balance;
+}
+.zk-head__lead { margin-top: 1.1rem; max-width: 62ch; color: var(--silver); font-size: 1.02rem; line-height: 1.8; }
+.zk-head__lead p { margin: 0 0 .8rem; }
+.zk-head__meta {
+  margin: 1.4rem 0 0; font-family: "IBM Plex Mono", monospace;
+  font-size: .66rem; letter-spacing: .16em; text-transform: uppercase; color: var(--fog);
+}
+
+.zk-shop { padding: 3rem 0 6rem; }
+
+/* Category strip on inner pages: same pills as the shop, on the dark ground. */
+.zk-shop .filters { display: flex; flex-wrap: wrap; gap: .6rem; border-bottom: 0; margin-bottom: 2rem; }
+.zk-shop .filters a,
+.zk-shop .filters span {
+  border: 1px solid var(--line); border-radius: 999px; padding: .62rem 1.2rem;
+  font-family: "IBM Plex Mono", monospace; font-size: .68rem; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--fog); text-decoration: none;
+  transition: color .2s, border-color .2s, background .2s;
+}
+.zk-shop .filters a:hover { color: #F3F1EC; border-color: var(--silver); }
+.zk-shop .filters .on { background: var(--amber); border-color: var(--amber); color: var(--ink); }
+
+/* Selects are the single worst offender when unstyled — the browser default box. */
+.zk-sort { display: flex; align-items: center; gap: .7rem; margin: 0 0 2.2rem; }
+.zk-sort label {
+  font-family: "IBM Plex Mono", monospace; font-size: .64rem;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--fog);
+}
+.zk-sort select,
+.zk-select {
+  -webkit-appearance: none; appearance: none;
+  background: var(--graphite) url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8'><path d='M1 1l5 5 5-5' fill='none' stroke='%238E9197' stroke-width='1.6'/></svg>") no-repeat right .9rem center;
+  border: 1px solid var(--line); border-radius: 2px;
+  color: #F3F1EC; font-family: inherit; font-size: .86rem;
+  padding: .62rem 2.4rem .62rem .9rem; cursor: pointer;
+  transition: border-color .2s;
+}
+.zk-sort select:hover, .zk-select:hover { border-color: var(--fog); }
+.zk-sort select:focus, .zk-select:focus { outline: none; border-color: var(--amber); }
+
+/* Cards sit on the dark ground here, not on paper. */
+.zk-shop .card,
+.zk-article .card { background: var(--graphite); border-color: var(--line); }
+.zk-shop .card .pic { background: linear-gradient(180deg, #17171A, #101012); }
+.zk-shop .card .pic.photo { background: #fff; }
+.zk-shop .card h3 { color: #F3F1EC; }
+.zk-shop .card h3 a { color: inherit; text-decoration: none; }
+.zk-shop .card .note { color: var(--fog); }
+.zk-shop .card .fruit { color: var(--fog); }
+.zk-shop .card .price { color: var(--amber-2); }
+.zk-shop .card:hover { border-color: var(--amber); box-shadow: 0 24px 50px rgba(0, 0, 0, .45); }
+.zk-shop .card:hover .body h3 { color: var(--amber-2); }
+.zk-shop .card .add { background: transparent; border-color: var(--silver); color: #F3F1EC; }
+.zk-shop .card:hover .add { background: var(--amber); border-color: var(--amber); color: var(--ink); }
+
+.zk-pager { margin-top: 3.5rem; display: flex; justify-content: center; }
+.zk-pager .pagination,
+.zk-pager > span { display: flex; gap: .4rem; flex-wrap: wrap; }
+.zk-pager a, .zk-pager span.page.current, .zk-pager .page {
+  display: inline-grid; place-items: center; min-width: 40px; height: 40px; padding: 0 .6rem;
+  border: 1px solid var(--line); border-radius: 2px; text-decoration: none;
+  font-family: "IBM Plex Mono", monospace; font-size: .74rem; color: var(--silver);
+}
+.zk-pager a:hover { border-color: var(--amber); color: var(--amber-2); }
+.zk-pager .current { background: var(--slate); color: #fff; border-color: var(--slate); }
+
+.empty { color: var(--fog); font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 1.2rem; }
+
+
+/* ==========================================================================
+   Legacy token bridge
+   The inner pages were written against the old v5 palette (--color-*, --font-*), which
+   the reference design does not define. 113 references were resolving to nothing, which
+   is why those pages rendered as flat black with browser-default controls. Mapping the
+   old names onto the reference palette fixes every one of them at once; new work should
+   use the reference names directly.
+   ========================================================================== */
+:root {
+  --color-bg:        var(--ink);
+  --color-ink:       var(--ink);
+  --color-graphite:  var(--graphite);
+  --color-surface:   var(--graphite);
+  --color-surface2:  var(--slate);
+  --color-slate:     var(--slate);
+  --color-line:      var(--line);
+  --color-silver:    var(--silver);
+  --color-fog:       var(--fog);
+  --color-gold:      var(--amber);
+  --color-gold-hi:   var(--amber-2);
+  --color-gold-lo:   #7A5416;
+  --color-cream:     #F3F1EC;
+  --color-cream-dim: var(--silver);
+  --color-light-bg:  var(--paper);
+  --color-paper:     var(--paper);
+
+  --font-display: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-serif:   "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-body:    "Manrope", "Helvetica Neue", Arial, sans-serif;
+  --font-mono:    "IBM Plex Mono", ui-monospace, monospace;
+}
+
+/* Long-form content: article bodies and CMS pages. */
+.zk-rte { max-width: 68ch; color: var(--silver); font-size: 1.03rem; line-height: 1.85; }
+.zk-rte > *:first-child { margin-top: 0; }
+.zk-rte p { margin: 0 0 1.3rem; }
+.zk-rte h2 { font-family: "Cormorant Garamond", serif; font-size: 2rem; font-weight: 500; color: #F3F1EC; margin: 2.6rem 0 1rem; }
+.zk-rte h3 { font-family: "Cormorant Garamond", serif; font-size: 1.5rem; font-weight: 500; color: #F3F1EC; margin: 2rem 0 .8rem; }
+.zk-rte h4 { font-family: "IBM Plex Mono", monospace; font-size: .66rem; letter-spacing: .18em; text-transform: uppercase; color: var(--amber); margin: 2rem 0 .9rem; }
+.zk-rte a { color: var(--amber-2); text-decoration: none; border-bottom: 1px solid rgba(201, 150, 59, .4); }
+.zk-rte a:hover { border-color: var(--amber-2); }
+.zk-rte strong { color: #F3F1EC; }
+.zk-rte ul, .zk-rte ol { padding-left: 1.2rem; margin: 0 0 1.3rem; }
+.zk-rte li { margin-bottom: .5rem; }
+.zk-rte blockquote {
+  margin: 2rem 0; padding-left: 1.3rem; border-left: 2px solid var(--amber);
+  font-family: "Cormorant Garamond", serif; font-size: 1.35rem; font-style: italic; color: #F3F1EC;
+}
+.zk-rte img { border-radius: 3px; margin: 1.6rem 0; }
+.zk-rte hr { border: 0; border-top: 1px solid var(--line); margin: 2.6rem 0; }
+
+.zk-body { padding: 3.5rem 0 6rem; }
+
+/* Article ------------------------------------------------------------------- */
+.zk-article__hero { max-width: 1180px; margin: 0 auto; padding: 0 1.5rem; }
+.zk-article__hero img { width: 100%; height: auto; display: block; border-radius: 3px; margin-top: -2.5rem; box-shadow: 0 30px 70px rgba(0, 0, 0, .55); }
+.zk-article__tags { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: 2.5rem; }
+.zk-article__tags span {
+  border: 1px solid var(--line); border-radius: 999px; padding: .35rem .8rem;
+  font-family: "IBM Plex Mono", monospace; font-size: .62rem;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--fog);
+}
+.zk-article__foot { margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--line); }
