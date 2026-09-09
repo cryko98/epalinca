@@ -8,14 +8,27 @@
       · <span>{% render 'zk-t', override: section.settings.foot_legal, key: 'zk.foot_legal' %}</span>
     </div>
 
-    <div>
-      {%- for block in section.blocks -%}
-        <a href="{{ block.settings.link | default: '#' }}" {{ block.shopify_attributes }}>{{ block.settings.label }}</a>
+    {%- comment -%}
+      The legal links a Romanian webshop has to carry: the five policy pages, plus the
+      two dispute-resolution links consumer law requires a trader to link to — ANPC's SAL
+      page and the European Commission's ODR/SOL platform. Extra links can be added as
+      blocks in the theme editor; they replace this list entirely.
+    {%- endcomment -%}
+    <div class="foot-legal">
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          <a href="{{ block.settings.link | default: '#' }}" {{ block.shopify_attributes }}>{{ block.settings.label }}</a>
+        {%- endfor -%}
       {%- else -%}
         <a href="{{ routes.root_url }}pages/termeni-si-conditii">{{ 'zk.foot_link_terms' | t }}</a>
         <a href="{{ routes.root_url }}pages/politica-de-confidentialitate">{{ 'zk.foot_link_privacy' | t }}</a>
-        <a href="https://anpc.ro" target="_blank" rel="noopener">ANPC</a>
-      {%- endfor -%}
+        <a href="{{ routes.root_url }}pages/politica-cookies">{{ 'zk.foot_link_cookies' | t }}</a>
+        <a href="{{ routes.root_url }}pages/politica-de-retur">{{ 'zk.foot_link_returns' | t }}</a>
+        <a href="{{ routes.root_url }}pages/livrare-si-plata">{{ 'zk.foot_link_shipping' | t }}</a>
+        <a href="{{ routes.root_url }}pages/contact">{{ 'zk.nav_contact' | t }}</a>
+        <a href="https://anpc.ro/ce-este-sal/" target="_blank" rel="noopener">ANPC · SAL</a>
+        <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">SOL · ODR</a>
+      {%- endif -%}
     </div>
 
     {% render 'zk-social' %}

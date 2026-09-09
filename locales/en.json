@@ -307,6 +307,9 @@
     "spec_abv": "ABV",
     "spec_region": "Region",
     "pdp_more": "From the same line",
-    "nav_cats": "Categories"
+    "nav_cats": "Categories",
+    "foot_link_cookies": "Cookie policy",
+    "foot_link_returns": "Returns policy",
+    "foot_link_shipping": "Delivery and payment"
   }
 }

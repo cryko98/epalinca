@@ -307,6 +307,9 @@
     "spec_abv": "Alkoholtartalom",
     "spec_region": "Régió",
     "pdp_more": "Ugyanabból a sorból",
-    "nav_cats": "Kategóriák"
+    "nav_cats": "Kategóriák",
+    "foot_link_cookies": "Cookie-szabályzat",
+    "foot_link_returns": "Elállás és visszaküldés",
+    "foot_link_shipping": "Szállítás és fizetés"
   }
 }

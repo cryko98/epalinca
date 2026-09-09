@@ -2232,15 +2232,18 @@ header.top { position: static; }
 
 /* Category menu -------------------------------------------------------------- */
 .zk-cats { position: relative; }
+/* Reads as one of the nav links, not a boxed control: same size, weight, letter
+   spacing and colour as the nav anchors. Only the caret marks it as a menu. */
 .zk-cats__btn {
-  display: inline-flex; align-items: center; gap: .5rem;
-  background: transparent; border: 1px solid var(--line); border-radius: 0;
-  color: #F3F1EC; font-family: "IBM Plex Mono", monospace; font-size: .7rem;
-  letter-spacing: .16em; text-transform: uppercase; padding: .55rem .9rem;
-  transition: border-color .25s, color .25s;
+  display: inline-flex; align-items: center; gap: .35rem;
+  background: transparent; border: 0; padding: 0;
+  font-family: inherit; font-size: .86rem; font-weight: 600; letter-spacing: .04em;
+  text-transform: none; color: var(--silver);
+  transition: color .2s;
 }
-.zk-cats__btn:hover, .zk-cats__btn[aria-expanded="true"] { border-color: var(--amber); color: var(--amber-2); }
-.zk-cats__btn svg { width: 10px; height: 7px; transition: transform .25s; }
+.zk-cats__btn:hover, .zk-cats__btn[aria-expanded="true"] { color: #fff; }
+.zk-cats__btn svg { width: 9px; height: 6px; opacity: .65; transition: transform .25s, opacity .2s; }
+.zk-cats__btn:hover svg { opacity: 1; }
 .zk-cats__btn[aria-expanded="true"] svg { transform: rotate(180deg); }
 
 .zk-cats__menu {
@@ -2288,3 +2291,11 @@ header.top { position: static; }
   .zk-cats { display: block; }
   .zk-cats__menu { left: auto; right: 0; }
 }
+
+/* Eight legal links no longer fit on one line beside the logo and the socials, so they
+   wrap as their own block and the footer stacks instead of spreading. */
+footer .wrap { align-items: flex-start; }
+.foot-legal { display: flex; flex-wrap: wrap; gap: .35rem 1.4rem; max-width: 620px; }
+.foot-legal a { margin-right: 0; }
+.foot-legal a:hover { color: var(--amber-2); }
+@media (max-width: 860px) { .foot-legal { max-width: none; } }
