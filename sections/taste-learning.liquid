@@ -111,10 +111,17 @@
         <label><span>{{ 'zk.bk_date' | t }}</span><input type="date" required id="date" name="contact[Data]"></label>
         <label><span>{{ 'zk.bk_ppl' | t }}</span><input type="number" min="6" max="40" value="8" required id="ppl" name="contact[Persoane]"></label>
         <label><span>{{ 'zk.bk_pack' | t }}</span>
+          {%- comment -%}
+            The pack name comes from the dictionary now, not a block setting, so the
+            option labels have to resolve the same key the card heading does — otherwise
+            the dropdown renders three blank rows.
+          {%- endcomment -%}
           <select id="bkPack" name="contact[Pachet]">
             {%- for block in section.blocks -%}
               {%- if block.type == 'pack' -%}
-                <option{% if block.settings.highlight %} selected{% endif %}>{{ block.settings.name }}</option>
+                {%- assign tk = block.settings.tkey | default: 'pk1' -%}
+                {%- assign k_name = 'zk.' | append: tk | append: '_name' -%}
+                <option{% if block.settings.highlight %} selected{% endif %}>{%- render 'zk-t', override: block.settings.name, key: k_name -%}</option>
               {%- endif -%}
             {%- endfor -%}
           </select>

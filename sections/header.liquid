@@ -11,6 +11,15 @@
   <div class="wrap">
     <a class="brand" href="{{ home }}" aria-label="{{ shop.name }}">{% render 'zk-logo' %}</a>
 
+    {%- comment -%}
+      The design hides nav.main below 860px and offered nothing in its place, so a phone
+      had no navigation at all. This button opens the same links as a panel.
+    {%- endcomment -%}
+    <button type="button" class="zk-burger" id="zkBurger" aria-expanded="false" aria-controls="zkMobileNav"
+            aria-label="{{ 'zk.nav_menu' | t }}">
+      <span></span><span></span><span></span>
+    </button>
+
     <nav class="main">
       {%- comment -%}
         Category menu: the five shop categories, so they are reachable from any page and
@@ -62,6 +71,43 @@
     </div>
   </div>
 </header>
+{%- comment -%}
+  Mobile navigation panel. Mirrors the desktop nav and the category menu rather than
+  inventing a second information architecture.
+{%- endcomment -%}
+<div class="zk-mnav" id="zkMobileNav" hidden>
+  <div class="zk-mnav__inner">
+    {%- if cat_blocks.size > 0 -%}
+      <p class="zk-mnav__label">{{ 'zk.nav_cats' | t }}</p>
+      <div class="zk-mnav__cats">
+        {%- for block in cat_blocks -%}
+          {%- assign c = block.settings.collection -%}
+          {%- if c != blank -%}
+            <a href="{{ c.url }}" data-cat="{{ c.handle }}">
+              <span>{{ block.settings.label | default: c.title }}</span>
+              <i>{{ c.all_products_count }}</i>
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+
+    <p class="zk-mnav__label">{{ 'zk.nav_menu' | t }}</p>
+    <div class="zk-mnav__links">
+      <a href="{{ base }}#range">{% render 'zk-t', override: section.settings.nav_palinka, key: 'zk.nav_palinka' %}</a>
+      <a href="{{ base }}#shop">{% render 'zk-t', override: section.settings.nav_shop, key: 'zk.nav_shop' %}</a>
+      <a href="{{ base }}#story">{% render 'zk-t', override: section.settings.nav_story, key: 'zk.nav_story' %}</a>
+      <a href="{{ base }}#taste">{% render 'zk-t', override: section.settings.nav_taste, key: 'zk.nav_taste' %}</a>
+      <a href="{{ base }}#contact">{% render 'zk-t', override: section.settings.nav_contact, key: 'zk.nav_contact' %}</a>
+    </div>
+
+    <div class="zk-mnav__foot">
+      {% render 'zk-lang' %}
+      {% render 'zk-social' %}
+    </div>
+  </div>
+</div>
+
 
 <script>
   (function () {
@@ -91,6 +137,60 @@
           else { window.location.href = a.href; }
         });
       });
+    }
+
+    // Which section am I in? Mark the matching nav link while scrolling the homepage,
+    // and mark the current collection in the category menu on other pages.
+    var navLinks = [].slice.call(document.querySelectorAll('nav.main a[href*="#"]'));
+    var targets = navLinks
+      .map(function (a) {
+        var id = (a.getAttribute('href') || '').split('#')[1];
+        return id ? { link: a, el: document.getElementById(id) } : null;
+      })
+      .filter(function (t) { return t && t.el; });
+
+    if (targets.length && 'IntersectionObserver' in window) {
+      var seen = {};
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { seen[e.target.id] = e.intersectionRatio; });
+        var best = null, bestRatio = 0;
+        targets.forEach(function (t) {
+          var r = seen[t.el.id] || 0;
+          if (r > bestRatio) { bestRatio = r; best = t; }
+        });
+        navLinks.forEach(function (a) { a.classList.remove('on'); });
+        if (best && bestRatio > 0.08) best.link.classList.add('on');
+      }, { threshold: [0, .1, .25, .5, .75, 1], rootMargin: '-70px 0px -45% 0px' });
+      targets.forEach(function (t) { io.observe(t.el); });
+    }
+
+    // On a collection page the category menu shows where you are.
+    function trimSlash(p) { return p.length > 1 && p.charAt(p.length - 1) === '/' ? p.slice(0, -1) : p; }
+    var here = trimSlash(location.pathname);
+    document.querySelectorAll('.zk-cats__menu a[href]').forEach(function (a) {
+      if (here && trimSlash(a.getAttribute('href')) === here) {
+        a.classList.add('on');
+        var btn = document.querySelector('.zk-cats__btn');
+        if (btn) btn.classList.add('on');
+      }
+    });
+
+    // Burger opens the panel; body scroll is locked while it is open.
+    var burger = document.getElementById("zkBurger");
+    var panel = document.getElementById("zkMobileNav");
+    if (burger && panel) {
+      var setOpen = function (open) {
+        panel.hidden = !open;
+        burger.setAttribute("aria-expanded", open ? "true" : "false");
+        burger.classList.toggle("on", open);
+        document.documentElement.style.overflow = open ? "hidden" : "";
+      };
+      burger.addEventListener("click", function () { setOpen(panel.hidden); });
+      panel.addEventListener("click", function (e) {
+        if (e.target.closest("a") || e.target === panel) setOpen(false);
+      });
+      document.addEventListener("keydown", function (e) { if (e.key === "Escape") setOpen(false); });
+      window.addEventListener("resize", function () { if (window.innerWidth > 860) setOpen(false); });
     }
   })();
 </script>

@@ -172,7 +172,8 @@ function estimate(){
   const food=(f.food.selectedIndex===1 && pi===0)?45:0;
   const total=ppl*(unit+food);
   const fmt=n=>n.toLocaleString('hu-HU');
-  $('#estimate').innerHTML=`<span class="lbl">${t('bk_est')}</span><span class="val">${ppl?'~'+fmt(total):'—'}<small>lei</small></span><span class="calc">${ppl?`${ppl} ${t('pk_people')} × ${unit} lei (${t(we?'pk_weekend':'pk_weekday')})${food?` + ${ppl} × 45 lei ${t('bk_est_food')}`:''} · ${t('bk_est_note')}`:t('bk_est_note')}</span>`;
+  const packName=($('#bkPack').options&&$('#bkPack').options[pi])?$('#bkPack').options[pi].text:'';
+  $('#estimate').innerHTML=`<span class="lbl">${t('bk_est')}</span><span class="val">${ppl?'~'+fmt(total):'—'}<small>lei</small></span><span class="pk">${packName}</span><span class="calc">${ppl?`${ppl} ${t('pk_people')} × ${unit} lei (${t(we?'pk_weekend':'pk_weekday')})${food?` + ${ppl} × 45 lei ${t('bk_est_food')}`:''} · ${t('bk_est_note')}`:t('bk_est_note')}</span>`;
 }
 ['input','change'].forEach(ev=>$('#bkForm').addEventListener(ev,estimate));
 // age gate
