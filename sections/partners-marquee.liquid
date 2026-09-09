@@ -1,9 +1,9 @@
 <section id="partners">
   <div class="wrap">
     <div class="sec-head reveal">
-      <div class="eyebrow">{{ section.settings.partners_eyebrow }}</div>
-      <h2>{{ section.settings.partners_title }}</h2>
-      <p>{{ section.settings.partners_sub }}</p>
+      <div class="eyebrow">{% render 'zk-t', override: section.settings.partners_eyebrow, key: 'zk.partners_eyebrow' %}</div>
+      <h2>{% render 'zk-t', override: section.settings.partners_title, key: 'zk.partners_title' %}</h2>
+      <p>{% render 'zk-t', override: section.settings.partners_sub, key: 'zk.partners_sub' %}</p>
     </div>
   </div>
   {%- comment -%}
@@ -17,11 +17,33 @@
 {
   "name": "Parteneri",
   "settings": [
-    { "type": "text", "id": "partners_eyebrow", "label": "Etichetă", "default": "Unde ne găsești" },
-    { "type": "textarea", "id": "partners_title", "label": "Titlu", "default": "Restaurante, baruri de vin, <em>magazine online.</em>" },
-    { "type": "textarea", "id": "partners_sub", "label": "Subtitlu", "default": "Pălincile Zekulhyda se găsesc și la partenerii de mai jos." },
-    { "type": "paragraph", "content": "Lista partenerilor se editează în assets/zekulhyda.js (constanta PARTNERS)." }
+    {
+      "type": "text",
+      "id": "partners_eyebrow",
+      "label": "Etichetă",
+      "info": "Gol = textul tradus din locales/"
+    },
+    {
+      "type": "textarea",
+      "id": "partners_title",
+      "label": "Titlu",
+      "info": "Gol = textul tradus din locales/"
+    },
+    {
+      "type": "textarea",
+      "id": "partners_sub",
+      "label": "Subtitlu",
+      "info": "Gol = textul tradus din locales/"
+    },
+    {
+      "type": "paragraph",
+      "content": "Lista partenerilor se editează în assets/zekulhyda.js (constanta PARTNERS)."
+    }
   ],
-  "presets": [{ "name": "Parteneri" }]
+  "presets": [
+    {
+      "name": "Parteneri"
+    }
+  ]
 }
 {% endschema %}

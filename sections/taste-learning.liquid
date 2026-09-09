@@ -3,13 +3,13 @@
 
     <div class="intro">
       <div class="reveal">
-        <div class="eyebrow">{{ section.settings.taste_eyebrow }}</div>
-        <h2 style="margin:.6rem 0 1rem">{{ section.settings.taste_title }}</h2>
-        <p style="color:var(--silver)">{{ section.settings.taste_p }}</p>
+        <div class="eyebrow">{% render 'zk-t', override: section.settings.taste_eyebrow, key: 'zk.taste_eyebrow' %}</div>
+        <h2 style="margin:.6rem 0 1rem">{% render 'zk-t', override: section.settings.taste_title, key: 'zk.taste_title' %}</h2>
+        <p style="color:var(--silver)">{% render 'zk-t', override: section.settings.taste_p, key: 'zk.taste_p' %}</p>
         <ul>
-          <li>{{ section.settings.taste_1 }}</li>
-          <li>{{ section.settings.taste_2 }}</li>
-          <li>{{ section.settings.taste_3 }}</li>
+          <li>{% render 'zk-t', override: section.settings.taste_1, key: 'zk.taste_1' %}</li>
+          <li>{% render 'zk-t', override: section.settings.taste_2, key: 'zk.taste_2' %}</li>
+          <li>{% render 'zk-t', override: section.settings.taste_3, key: 'zk.taste_3' %}</li>
         </ul>
       </div>
       <div>
@@ -24,9 +24,9 @@
     </div>
 
     <div class="sec-head reveal">
-      <div class="eyebrow">{{ section.settings.pk_eyebrow }}</div>
-      <h2>{{ section.settings.pk_title }}</h2>
-      <p style="color:var(--fog)">{{ section.settings.pk_sub }}</p>
+      <div class="eyebrow">{% render 'zk-t', override: section.settings.pk_eyebrow, key: 'zk.pk_eyebrow' %}</div>
+      <h2>{% render 'zk-t', override: section.settings.pk_title, key: 'zk.pk_title' %}</h2>
+      <p style="color:var(--fog)">{% render 'zk-t', override: section.settings.pk_sub, key: 'zk.pk_sub' %}</p>
     </div>
 
     <div class="packs">
@@ -37,10 +37,10 @@
             <h3>{{ block.settings.name }}</h3>
             <div class="meta"><span>{{ block.settings.time }}</span><span>{{ block.settings.people }}</span></div>
             <div class="prices">
-              <div><b>{{ block.settings.price_weekday }}<small>lei</small></b><span>în timpul săptămânii</span></div>
-              <div><b>{{ block.settings.price_weekend }}<small>lei</small></b><span>weekend</span></div>
+              <div><b>{{ block.settings.price_weekday }}<small>lei</small></b><span>{{ 'zk.pk_weekday' | t }}</span></div>
+              <div><b>{{ block.settings.price_weekend }}<small>lei</small></b><span>{{ 'zk.pk_weekend' | t }}</span></div>
             </div>
-            <div class="incl">Include</div>
+            <div class="incl">{{ 'zk.pk_incl' | t }}</div>
             <ul>
               {%- for i in (1..4) -%}
                 {%- assign key = 'item_' | append: i -%}
@@ -48,26 +48,26 @@
                 {%- if val != blank %}<li>{{ val }}</li>{% endif -%}
               {%- endfor -%}
             </ul>
-            <a class="btn{% if block.settings.highlight %} primary{% endif %}" href="#booking">Rezervă</a>
+            <a class="btn{% if block.settings.highlight %} primary{% endif %}" href="#booking">{{ 'zk.pk_book' | t }}</a>
           </div>
         {%- endif -%}
       {%- endfor -%}
     </div>
 
     <div class="addons reveal">
-      <div><span>Pogăcele, sărățele</span><b>15 lei</b></div>
-      <div><span>Platou rece (brânză, șuncă, cârnați din Valea Ierului)</span><b>45 lei</b></div>
-      <div><span>Evenimente corporate, peste 20 pers.</span><b>ofertă personalizată</b></div>
-      <div><span>Transfer din Oradea (max. 8 pers.)</span><b>la cerere</b></div>
+      <div><span>{{ 'zk.pk_add1' | t }}</span><b>15 lei</b></div>
+      <div><span>{{ 'zk.pk_add2' | t }}</span><b>45 lei</b></div>
+      <div><span>{{ 'zk.pk_add3' | t }}</span><b>{{ 'zk.pk_add3_v' | t }}</b></div>
+      <div><span>{{ 'zk.pk_add4' | t }}</span><b>{{ 'zk.pk_add4_v' | t }}</b></div>
     </div>
 
-    <p class="pk-note">{{ section.settings.pk_note }}</p>
+    <p class="pk-note">{% render 'zk-t', override: section.settings.pk_note, key: 'zk.pk_note' %}</p>
 
     <div class="booking reveal" id="booking">
       <div>
-        <div class="eyebrow">Rezervare</div>
-        <h3 style="margin-top:.6rem">{{ section.settings.taste_cta }}</h3>
-        <p style="color:var(--fog);font-size:.9rem">{{ section.settings.contact_hours }}</p>
+        <div class="eyebrow">{{ 'zk.bk_title' | t }}</div>
+        <h3 style="margin-top:.6rem">{% render 'zk-t', override: section.settings.taste_cta, key: 'zk.taste_cta' %}</h3>
+        <p style="color:var(--fog);font-size:.9rem">{% render 'zk-t', override: section.settings.contact_hours, key: 'zk.contact_hours' %}</p>
         <p>
           <a href="tel:+40742908047" style="color:var(--amber-2);text-decoration:none">+40 742 908 047</a><br>
           <a href="mailto:office@epalinca.ro" style="color:var(--amber-2);text-decoration:none">office@epalinca.ro</a>
@@ -88,9 +88,9 @@
           <p class="demo" style="color:#e8a1a1">{{ form.errors.translated_fields.email | default: 'Verificați câmpurile' }} — {{ form.errors.messages.email }}</p>
         {%- endif %}
 
-        <label><span>Data</span><input type="date" required id="date" name="contact[Data]"></label>
-        <label><span>Nr. persoane</span><input type="number" min="6" max="40" value="8" required id="ppl" name="contact[Persoane]"></label>
-        <label><span>Pachet</span>
+        <label><span>{{ 'zk.bk_date' | t }}</span><input type="date" required id="date" name="contact[Data]"></label>
+        <label><span>{{ 'zk.bk_ppl' | t }}</span><input type="number" min="6" max="40" value="8" required id="ppl" name="contact[Persoane]"></label>
+        <label><span>{{ 'zk.bk_pack' | t }}</span>
           <select id="bkPack" name="contact[Pachet]">
             {%- for block in section.blocks -%}
               {%- if block.type == 'pack' -%}
@@ -99,17 +99,17 @@
             {%- endfor -%}
           </select>
         </label>
-        <label><span>Mâncare</span>
+        <label><span>{{ 'zk.bk_food' | t }}</span>
           <select id="food" name="contact[Mancare]">
-            <option>Doar pogăcele</option>
-            <option>Platou rece</option>
+            <option>{{ 'zk.bk_food_none' | t }}</option>
+            <option>{{ 'zk.bk_food_cold' | t }}</option>
           </select>
         </label>
-        <label><span>Nume</span><input required name="contact[Nume]"></label>
-        <label><span>Telefon / e-mail</span><input required type="email" name="contact[email]"></label>
+        <label><span>{{ 'zk.bk_name' | t }}</span><input required name="contact[Nume]"></label>
+        <label><span>{{ 'zk.bk_phone' | t }}</span><input required type="email" name="contact[email]"></label>
 
         <div class="estimate" id="estimate"></div>
-        <button class="btn primary full" type="submit">Trimite cererea</button>
+        <button class="btn primary full" type="submit">{{ 'zk.bk_submit' | t }}</button>
         <span class="demo">Prețul afișat este orientativ; confirmarea finală vine pe e-mail.</span>
       {% endform %}
     </div>
@@ -121,35 +121,140 @@
 {
   "name": "Degustare",
   "settings": [
-    { "type": "text", "id": "taste_eyebrow", "label": "Etichetă", "default": "Zekulhyda Taste & Learning" },
-    { "type": "textarea", "id": "taste_title", "label": "Titlu", "default": "Vino la Săcueni, <em>degustă cu maestrul distilator.</em>" },
-    { "type": "textarea", "id": "taste_p", "label": "Descriere", "default": "Sala în care se jurizează și probele Blisseva Partium Spirits Award. Degustare ghidată cu 5 pălinci și prezentarea distileriei." },
-    { "type": "text", "id": "taste_1", "label": "Punct 1", "default": "Degustare ghidată · 5 sortimente" },
-    { "type": "text", "id": "taste_2", "label": "Punct 2", "default": "Masterclass cu jurat internațional" },
-    { "type": "text", "id": "taste_3", "label": "Punct 3", "default": "Grupuri corporate și de prieteni, 6–20 persoane" },
-    { "type": "text", "id": "pk_eyebrow", "label": "Pachete · etichetă", "default": "Pachete de degustare" },
-    { "type": "textarea", "id": "pk_title", "label": "Pachete · titlu", "default": "Alege pachetul — <em>prețul este pe persoană.</em>" },
-    { "type": "textarea", "id": "pk_sub", "label": "Pachete · subtitlu", "default": "Toate degustările se țin cu programare, pentru grupuri de 6–20 persoane." },
-    { "type": "textarea", "id": "pk_note", "label": "Notă", "default": "Vizita distileriei se face cu programare prealabilă. Servim alcool doar persoanelor peste 18 ani." },
-    { "type": "text", "id": "taste_cta", "label": "Titlu rezervare", "default": "Cer o programare" },
-    { "type": "text", "id": "contact_hours", "label": "Program", "default": "Degustări cu programare prealabilă" }
+    {
+      "type": "text",
+      "id": "taste_eyebrow",
+      "label": "Etichetă",
+      "info": "Gol = textul tradus din locales/"
+    },
+    {
+      "type": "textarea",
+      "id": "taste_title",
+      "label": "Titlu",
+      "info": "Gol = textul tradus din locales/"
+    },
+    {
+      "type": "textarea",
+      "id": "taste_p",
+      "label": "Descriere",
+      "info": "Gol = textul tradus din locales/"
+    },
+    {
+      "type": "text",
+      "id": "taste_1",
+      "label": "Punct 1",
+      "info": "Gol = textul tradus din locales/"
+    },
+    {
+      "type": "text",
+      "id": "taste_2",
+      "label": "Punct 2",
+      "info": "Gol = textul tradus din locales/"
+    },
+    {
+      "type": "text",
+      "id": "taste_3",
+      "label": "Punct 3",
+      "info": "Gol = textul tradus din locales/"
+    },
+    {
+      "type": "text",
+      "id": "pk_eyebrow",
+      "label": "Pachete · etichetă",
+      "info": "Gol = textul tradus din locales/"
+    },
+    {
+      "type": "textarea",
+      "id": "pk_title",
+      "label": "Pachete · titlu",
+      "info": "Gol = textul tradus din locales/"
+    },
+    {
+      "type": "textarea",
+      "id": "pk_sub",
+      "label": "Pachete · subtitlu",
+      "info": "Gol = textul tradus din locales/"
+    },
+    {
+      "type": "textarea",
+      "id": "pk_note",
+      "label": "Notă",
+      "info": "Gol = textul tradus din locales/"
+    },
+    {
+      "type": "text",
+      "id": "taste_cta",
+      "label": "Titlu rezervare",
+      "info": "Gol = textul tradus din locales/"
+    },
+    {
+      "type": "text",
+      "id": "contact_hours",
+      "label": "Program",
+      "info": "Gol = textul tradus din locales/"
+    }
   ],
   "blocks": [
     {
       "type": "pack",
       "name": "Pachet",
       "settings": [
-        { "type": "text", "id": "name", "label": "Nume pachet" },
-        { "type": "text", "id": "tag", "label": "Etichetă colț" },
-        { "type": "checkbox", "id": "highlight", "label": "Evidențiat", "default": false },
-        { "type": "text", "id": "time", "label": "Durată" },
-        { "type": "text", "id": "people", "label": "Nr. persoane" },
-        { "type": "number", "id": "price_weekday", "label": "Preț zi lucrătoare (lei)" },
-        { "type": "number", "id": "price_weekend", "label": "Preț weekend (lei)" },
-        { "type": "text", "id": "item_1", "label": "Include 1" },
-        { "type": "text", "id": "item_2", "label": "Include 2" },
-        { "type": "text", "id": "item_3", "label": "Include 3" },
-        { "type": "text", "id": "item_4", "label": "Include 4" }
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Nume pachet"
+        },
+        {
+          "type": "text",
+          "id": "tag",
+          "label": "Etichetă colț"
+        },
+        {
+          "type": "checkbox",
+          "id": "highlight",
+          "label": "Evidențiat",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "time",
+          "label": "Durată"
+        },
+        {
+          "type": "text",
+          "id": "people",
+          "label": "Nr. persoane"
+        },
+        {
+          "type": "number",
+          "id": "price_weekday",
+          "label": "Preț zi lucrătoare (lei)"
+        },
+        {
+          "type": "number",
+          "id": "price_weekend",
+          "label": "Preț weekend (lei)"
+        },
+        {
+          "type": "text",
+          "id": "item_1",
+          "label": "Include 1"
+        },
+        {
+          "type": "text",
+          "id": "item_2",
+          "label": "Include 2"
+        },
+        {
+          "type": "text",
+          "id": "item_3",
+          "label": "Include 3"
+        },
+        {
+          "type": "text",
+          "id": "item_4",
+          "label": "Include 4"
+        }
       ]
     }
   ],
@@ -157,9 +262,49 @@
     {
       "name": "Degustare & pachete",
       "blocks": [
-        { "type": "pack", "settings": { "name": "Degustarea Valea Ierului", "time": "cca. 1,5 ore", "people": "6–20 pers.", "price_weekday": 90, "price_weekend": 110, "item_1": "5 pălinci medaliate, degustare ghidată", "item_2": "Prezentarea distileriei și a distilării", "item_3": "Pahar de degustare, apă, pogăcele" } },
-        { "type": "pack", "settings": { "name": "Degustarea campionilor", "tag": "TOP", "highlight": true, "time": "cca. 2,5 ore", "people": "6–20 pers.", "price_weekday": 140, "price_weekend": 160, "item_1": "8 pălinci: cei doi campioni de categorie și seria Barrique", "item_2": "Vizita distileriei, de la fruct la sticlă", "item_3": "Platou rece cu produse din Valea Ierului", "item_4": "10% reducere la cumpărăturile de la fața locului" } },
-        { "type": "pack", "settings": { "name": "Masterclass cu Botond", "time": "cca. 3 ore", "people": "8–16 pers.", "price_weekday": 220, "price_weekend": 250, "item_1": "10 probe, cu fișă de evaluare ca la concurs", "item_2": "Degustare oarbă și recunoașterea defectelor", "item_3": "Platou rece și o sticlă de 0,35 l cadou", "item_4": "Diplomă de participare" } }
+        {
+          "type": "pack",
+          "settings": {
+            "name": "Degustarea Valea Ierului",
+            "time": "cca. 1,5 ore",
+            "people": "6–20 pers.",
+            "price_weekday": 90,
+            "price_weekend": 110,
+            "item_1": "5 pălinci medaliate, degustare ghidată",
+            "item_2": "Prezentarea distileriei și a distilării",
+            "item_3": "Pahar de degustare, apă, pogăcele"
+          }
+        },
+        {
+          "type": "pack",
+          "settings": {
+            "name": "Degustarea campionilor",
+            "tag": "TOP",
+            "highlight": true,
+            "time": "cca. 2,5 ore",
+            "people": "6–20 pers.",
+            "price_weekday": 140,
+            "price_weekend": 160,
+            "item_1": "8 pălinci: cei doi campioni de categorie și seria Barrique",
+            "item_2": "Vizita distileriei, de la fruct la sticlă",
+            "item_3": "Platou rece cu produse din Valea Ierului",
+            "item_4": "10% reducere la cumpărăturile de la fața locului"
+          }
+        },
+        {
+          "type": "pack",
+          "settings": {
+            "name": "Masterclass cu Botond",
+            "time": "cca. 3 ore",
+            "people": "8–16 pers.",
+            "price_weekday": 220,
+            "price_weekend": 250,
+            "item_1": "10 probe, cu fișă de evaluare ca la concurs",
+            "item_2": "Degustare oarbă și recunoașterea defectelor",
+            "item_3": "Platou rece și o sticlă de 0,35 l cadou",
+            "item_4": "Diplomă de participare"
+          }
+        }
       ]
     }
   ]

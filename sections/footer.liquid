@@ -26,17 +26,41 @@
 {
   "name": "Subsol",
   "settings": [
-    { "type": "text", "id": "company", "label": "Firmă", "default": "Zekulhyda S.R.L." },
-    { "type": "text", "id": "company_ids", "label": "CUI / Reg. Com.", "default": "CUI 40648975 · J05/686/2019" },
-    { "type": "textarea", "id": "foot_legal", "label": "Avertisment", "default": "Consumul excesiv de alcool dăunează sănătății. Interzis minorilor." }
+    {
+      "type": "text",
+      "id": "company",
+      "label": "Firmă",
+      "default": "Zekulhyda S.R.L."
+    },
+    {
+      "type": "text",
+      "id": "company_ids",
+      "label": "CUI / Reg. Com.",
+      "default": "CUI 40648975 · J05/686/2019"
+    },
+    {
+      "type": "textarea",
+      "id": "foot_legal",
+      "label": "Avertisment",
+      "info": "Gol = textul tradus din locales/"
+    }
   ],
   "blocks": [
     {
       "type": "link",
       "name": "Link subsol",
       "settings": [
-        { "type": "text", "id": "label", "label": "Text", "default": "Link" },
-        { "type": "url", "id": "link", "label": "Adresă" }
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Text",
+          "default": "Link"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Adresă"
+        }
       ]
     }
   ]

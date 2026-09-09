@@ -1,5 +1,5 @@
 <section id="barrique" class="band feature" style="background-image:url({{ 'zk-06.jpg' | asset_url }})"><div class="wrap">
-  <div class="reveal"><div class="eyebrow">{{ section.settings.bq_eyebrow }}</div><h2 style="margin:.6rem 0 1.2rem">{{ section.settings.bq_title }}</h2><p>{{ section.settings.bq_p }}</p><a class="btn primary" href="#shop" data-f="barrique">{{ section.settings.bq_cta }}</a></div>
+  <div class="reveal"><div class="eyebrow">{% render 'zk-t', override: section.settings.bq_eyebrow, key: 'zk.bq_eyebrow' %}</div><h2 style="margin:.6rem 0 1.2rem">{% render 'zk-t', override: section.settings.bq_title, key: 'zk.bq_title' %}</h2><p>{% render 'zk-t', override: section.settings.bq_p, key: 'zk.bq_p' %}</p><a class="btn primary" href="#shop" data-f="barrique">{% render 'zk-t', override: section.settings.bq_cta, key: 'zk.bq_cta' %}</a></div>
   <div class="pics reveal"><img src="{{ 'zk-09.jpg' | asset_url }}" alt="Barrique plum in smoke"><img src="{{ 'zk-10.jpg' | asset_url }}" alt="Barrique grape distillate in smoke"></div>
 </div></section>
 
@@ -11,25 +11,25 @@
       "type": "text",
       "id": "bq_eyebrow",
       "label": "Bq eyebrow",
-      "default": "Barrique · Sherry cask finish"
+      "info": "Gol = textul tradus din locales/"
     },
     {
       "type": "text",
       "id": "bq_title",
       "label": "Bq title",
-      "default": "Ce se întâmplă în butoi rămâne în butoi. <em>Până turnăm.</em>"
+      "info": "Gol = textul tradus din locales/"
     },
     {
       "type": "textarea",
       "id": "bq_p",
       "label": "Bq p",
-      "default": "Cinci distilate învechite în baric de stejar, apoi finisate în butoi de sherry. Mărul e campionul de categorie din 2025 — celelalte sunt concurenții anilor următori."
+      "info": "Gol = textul tradus din locales/"
     },
     {
       "type": "text",
       "id": "bq_cta",
       "label": "Bq cta",
-      "default": "Seria Barrique"
+      "info": "Gol = textul tradus din locales/"
     }
   ],
   "presets": [

@@ -1,0 +1,13 @@
+{%- comment -%}
+  Renders a piece of copy with the merchant's override taking precedence over the
+  translated default.
+
+  The section settings exist so a merchant can tweak wording in the theme editor, but a
+  setting holds one fixed string and cannot follow the shopper's language. So the schema
+  defaults are deliberately empty: when a setting is untouched the copy comes from
+  locales/*.json and switches with the locale; the moment a merchant types something it
+  wins, in every language.
+
+  Usage: {% render 'zk-t', override: section.settings.hero_title, key: 'zk.hero_title' %}
+{%- endcomment -%}
+{%- if override != blank -%}{{ override }}{%- else -%}{{ key | t }}{%- endif -%}

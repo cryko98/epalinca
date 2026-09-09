@@ -1,11 +1,11 @@
 <section id="story"><div class="wrap">
-  <div class="text reveal"><div class="eyebrow">{{ section.settings.story_eyebrow }}</div><h2 style="margin:.6rem 0 1.4rem">{{ section.settings.story_title }}</h2><p>{{ section.settings.story_p1 }}</p><p>{{ section.settings.story_p2 }}</p><p>{{ section.settings.story_p3 }}</p><blockquote>{{ section.settings.story_quote }}</blockquote>
-    <div class="timeline"><div><b>2014</b><span>{{ section.settings.tl_2014 }}</span></div><div><b>2018</b><span>{{ section.settings.tl_2018 }}</span></div><div><b>2020</b><span>{{ section.settings.tl_2020 }}</span></div><div><b>2025</b><span>{{ section.settings.tl_2025 }}</span></div><div><b>2026</b><span>{{ section.settings.tl_2026 }}</span></div></div>
+  <div class="text reveal"><div class="eyebrow">{% render 'zk-t', override: section.settings.story_eyebrow, key: 'zk.story_eyebrow' %}</div><h2 style="margin:.6rem 0 1.4rem">{% render 'zk-t', override: section.settings.story_title, key: 'zk.story_title' %}</h2><p>{% render 'zk-t', override: section.settings.story_p1, key: 'zk.story_p1' %}</p><p>{% render 'zk-t', override: section.settings.story_p2, key: 'zk.story_p2' %}</p><p>{% render 'zk-t', override: section.settings.story_p3, key: 'zk.story_p3' %}</p><blockquote>{% render 'zk-t', override: section.settings.story_quote, key: 'zk.story_quote' %}</blockquote>
+    <div class="timeline"><div><b>2014</b><span>{% render 'zk-t', override: section.settings.tl_2014, key: 'zk.tl_2014' %}</span></div><div><b>2018</b><span>{% render 'zk-t', override: section.settings.tl_2018, key: 'zk.tl_2018' %}</span></div><div><b>2020</b><span>{% render 'zk-t', override: section.settings.tl_2020, key: 'zk.tl_2020' %}</span></div><div><b>2025</b><span>{% render 'zk-t', override: section.settings.tl_2025, key: 'zk.tl_2025' %}</span></div><div><b>2026</b><span>{% render 'zk-t', override: section.settings.tl_2026, key: 'zk.tl_2026' %}</span></div></div>
   </div>
   <div class="photos reveal">
-    <figure><img src="{{ 'zk-17.jpg' | asset_url }}" alt="Nagy Botond on stage at Quintessence 2026"><figcaption>{{ section.settings.cap_stage }}</figcaption></figure>
-    <figure><img src="{{ 'zk-18.jpg' | asset_url }}" alt="Nagy Botond receiving the ÁKOVITA award"><figcaption>{{ section.settings.cap_award }}</figcaption></figure>
-    <figure><img src="{{ 'zk-19.jpg' | asset_url }}" alt="Nagy Botond nosing a glass while judging"><figcaption>{{ section.settings.cap_nose }}</figcaption></figure>
+    <figure><img src="{{ 'zk-17.jpg' | asset_url }}" alt="Nagy Botond on stage at Quintessence 2026"><figcaption>{% render 'zk-t', override: section.settings.cap_stage, key: 'zk.cap_stage' %}</figcaption></figure>
+    <figure><img src="{{ 'zk-18.jpg' | asset_url }}" alt="Nagy Botond receiving the ÁKOVITA award"><figcaption>{% render 'zk-t', override: section.settings.cap_award, key: 'zk.cap_award' %}</figcaption></figure>
+    <figure><img src="{{ 'zk-19.jpg' | asset_url }}" alt="Nagy Botond nosing a glass while judging"><figcaption>{% render 'zk-t', override: section.settings.cap_nose, key: 'zk.cap_nose' %}</figcaption></figure>
   </div>
 </div></section>
 
@@ -17,85 +17,85 @@
       "type": "text",
       "id": "story_eyebrow",
       "label": "Story eyebrow",
-      "default": "Povestea lui Botond"
+      "info": "Gol = textul tradus din locales/"
     },
     {
       "type": "text",
       "id": "story_title",
       "label": "Story title",
-      "default": "Cel care a pierdut prima dată, <em>ca apoi să înceapă să învețe.</em>"
+      "info": "Gol = textul tradus din locales/"
     },
     {
       "type": "textarea",
       "id": "story_p1",
       "label": "Story p1",
-      "default": "Nagy Botond este din Săcueni. Campion la tăiat lemne, a reprezentat România la concursuri mondiale și a antrenat naționala. Pălinca a început să o facă acasă, ca toată lumea pe Valea Ierului — apoi, în 2014, a dus prima probă la un concurs din Ungaria și a pierdut."
+      "info": "Gol = textul tradus din locales/"
     },
     {
       "type": "textarea",
       "id": "story_p2",
       "label": "Story p2",
-      "default": "Juriul i-a spus ce nu merge. El a urmat cursul de degustător de pălincă, a reconstruit fermentarea și distilarea, iar în 2018 a câștigat prima medalie maghiară. În toamna lui 2020 hobby-ul a devenit firmă, în 2021 marcă: Zekulhyda, numele Săcueniului din jurul anului 1200."
+      "info": "Gol = textul tradus din locales/"
     },
     {
       "type": "textarea",
       "id": "story_p3",
       "label": "Story p3",
-      "default": "Astăzi este jurat internațional la Quintessence și ÁKOVITA, a fondat Asociația Culturii Pălincii din Valea Ierului, iar în propria sală de degustare se jurizează probele Blisseva Partium Spirits Award. La Quintessence 2025 a adus acasă 22 de medalii din 22 de probe și două titluri de campion; în 2026 a devenit maestrul soiului de strugure."
+      "info": "Gol = textul tradus din locales/"
     },
     {
       "type": "text",
       "id": "story_quote",
       "label": "Story quote",
-      "default": "„Confirmarea că suntem pe drumul cel bun — calitatea fără compromis este datoria noastră.”"
+      "info": "Gol = textul tradus din locales/"
     },
     {
       "type": "text",
       "id": "tl_2014",
       "label": "Tl 2014",
-      "default": "Primul concurs — critici, nu medalii"
+      "info": "Gol = textul tradus din locales/"
     },
     {
       "type": "text",
       "id": "tl_2018",
       "label": "Tl 2018",
-      "default": "Prima medalie de aur în Ungaria"
+      "info": "Gol = textul tradus din locales/"
     },
     {
       "type": "text",
       "id": "tl_2020",
       "label": "Tl 2020",
-      "default": "Zekulhyda SRL, distilerie proprie la Săcueni"
+      "info": "Gol = textul tradus din locales/"
     },
     {
       "type": "text",
       "id": "tl_2025",
       "label": "Tl 2025",
-      "default": "22 medalii, 2 titluri de campion · Quintessence"
+      "info": "Gol = textul tradus din locales/"
     },
     {
       "type": "text",
       "id": "tl_2026",
       "label": "Tl 2026",
-      "default": "Maestrul soiului · Cea mai bună prună din Transilvania · ÁKOVITA"
+      "info": "Gol = textul tradus din locales/"
     },
     {
       "type": "text",
       "id": "cap_stage",
       "label": "Cap stage",
-      "default": "XVI. Quintessence, 2026: opt medalii și titlul de maestru al soiului"
+      "info": "Gol = textul tradus din locales/"
     },
     {
       "type": "text",
       "id": "cap_award",
       "label": "Cap award",
-      "default": "ÁKOVITA: „Cea mai bună pălincă de prune din Transilvania” — Nagy Botond primește diploma"
+      "info": "Gol = textul tradus din locales/"
     },
     {
       "type": "text",
       "id": "cap_nose",
       "label": "Cap nose",
-      "default": "La masa juriului — Botond, degustător internațional"
+      "info": "Gol = textul tradus din locales/"
     }
   ],
   "presets": [

@@ -1,6 +1,6 @@
 <section id="contact"><div class="wrap">
-  <div class="info reveal"><div class="eyebrow">{{ section.settings.contact_eyebrow }}</div><h2 style="margin:.6rem 0 1rem">{{ section.settings.contact_title }}</h2><p>{{ section.settings.contact_addr }}</p><p><a href="tel:+40742908047">+40 742 908 047</a></p><p><a href="mailto:office@epalinca.ro">office@epalinca.ro</a></p><p><a href="https://www.facebook.com/Zekulhyda-101087868715858">Facebook</a> · <a href="https://www.instagram.com/zekulhyda">Instagram</a></p><p style="color:var(--fog);font-size:.9rem">{{ section.settings.contact_hours }}</p></div>
-  <div class="mapbox reveal" style="background:url({{ 'zk-20.jpg' | asset_url }}) center/cover"><iframe title="Zekulhyda on Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Zekulhyda%2C%20Strada%20Pet%C5%91fi%20S%C3%A1ndor%20116%2C%20S%C4%83cueni%20417435%2C%20Romania&z=15&output=embed"></iframe><div class="fallback"><div><b>Zekulhyda Taste &amp; Learning</b>Str. Petőfi Sándor 116, 417435 Săcueni · Oradea 45 min · Debrecen 60 min</div><div style="display:flex;gap:.5rem"><a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Zekulhyda%2C%20Strada%20Pet%C5%91fi%20S%C3%A1ndor%20116%2C%20S%C4%83cueni">{{ section.settings.map_open }}</a><a class="btn primary" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Strada%20Pet%C5%91fi%20S%C3%A1ndor%20116%2C%20S%C4%83cueni%20417435">{{ section.settings.map_dir }}</a></div></div></div>
+  <div class="info reveal"><div class="eyebrow">{% render 'zk-t', override: section.settings.contact_eyebrow, key: 'zk.contact_eyebrow' %}</div><h2 style="margin:.6rem 0 1rem">{% render 'zk-t', override: section.settings.contact_title, key: 'zk.contact_title' %}</h2><p>{% render 'zk-t', override: section.settings.contact_addr, key: 'zk.contact_addr' %}</p><p><a href="tel:+40742908047">+40 742 908 047</a></p><p><a href="mailto:office@epalinca.ro">office@epalinca.ro</a></p><p><a href="https://www.facebook.com/Zekulhyda-101087868715858">Facebook</a> · <a href="https://www.instagram.com/zekulhyda">Instagram</a></p><p style="color:var(--fog);font-size:.9rem">{% render 'zk-t', override: section.settings.contact_hours, key: 'zk.contact_hours' %}</p></div>
+  <div class="mapbox reveal" style="background:url({{ 'zk-20.jpg' | asset_url }}) center/cover"><iframe title="Zekulhyda on Google Maps" loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://www.google.com/maps?q=Zekulhyda%2C%20Strada%20Pet%C5%91fi%20S%C3%A1ndor%20116%2C%20S%C4%83cueni%20417435%2C%20Romania&z=15&output=embed"></iframe><div class="fallback"><div><b>Zekulhyda Taste &amp; Learning</b>Str. Petőfi Sándor 116, 417435 Săcueni · Oradea 45 min · Debrecen 60 min</div><div style="display:flex;gap:.5rem"><a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/search/?api=1&query=Zekulhyda%2C%20Strada%20Pet%C5%91fi%20S%C3%A1ndor%20116%2C%20S%C4%83cueni">{% render 'zk-t', override: section.settings.map_open, key: 'zk.map_open' %}</a><a class="btn primary" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/?api=1&destination=Strada%20Pet%C5%91fi%20S%C3%A1ndor%20116%2C%20S%C4%83cueni%20417435">{% render 'zk-t', override: section.settings.map_dir, key: 'zk.map_dir' %}</a></div></div></div>
 </div></section>
 
 {% schema %}
@@ -11,37 +11,37 @@
       "type": "text",
       "id": "contact_eyebrow",
       "label": "Contact eyebrow",
-      "default": "Contact"
+      "info": "Gol = textul tradus din locales/"
     },
     {
       "type": "text",
       "id": "contact_title",
       "label": "Contact title",
-      "default": "Zekulhyda S.R.L."
+      "info": "Gol = textul tradus din locales/"
     },
     {
       "type": "text",
       "id": "contact_addr",
       "label": "Contact addr",
-      "default": "Str. Petőfi Sándor 116, 417435 Săcueni, Bihor, România"
+      "info": "Gol = textul tradus din locales/"
     },
     {
       "type": "text",
       "id": "contact_hours",
       "label": "Contact hours",
-      "default": "Degustări cu programare prealabilă"
+      "info": "Gol = textul tradus din locales/"
     },
     {
       "type": "text",
       "id": "map_open",
       "label": "Map open",
-      "default": "Deschide în Google Maps"
+      "info": "Gol = textul tradus din locales/"
     },
     {
       "type": "text",
       "id": "map_dir",
       "label": "Map dir",
-      "default": "Indicații"
+      "info": "Gol = textul tradus din locales/"
     }
   ],
   "presets": [

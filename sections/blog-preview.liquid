@@ -61,39 +61,189 @@
 {
   "name": "Preview Blog",
   "settings": [
-    { "type": "header", "content": "Sursă" },
-    { "type": "blog", "id": "blog_handle", "label": "Blog Shopify" },
-    { "type": "range", "id": "articles_count", "min": 1, "max": 6, "step": 1, "label": "Nr. articole afișate", "default": 3 },
-    { "type": "range", "id": "columns", "min": 1, "max": 3, "step": 1, "label": "Coloane", "default": 3 },
-    { "type": "header", "content": "Titlu" },
-    { "type": "text", "id": "eyebrow", "label": "Text mic", "default": "Din Distilerie" },
-    { "type": "textarea", "id": "title", "label": "Titlu", "default": "Povești și" },
-    { "type": "text", "id": "title_italic", "label": "Titlu italic", "default": "Secretele Meșteșugului" },
-    { "type": "text", "id": "all_text", "label": "Text link 'toate'", "default": "Toate articolele" },
-    { "type": "text", "id": "read_more", "label": "Text 'citește mai mult'", "default": "Citește mai mult" },
-    { "type": "header", "content": "Culori" },
-    { "type": "color", "id": "bg_color", "label": "Fundal secțiune", "default": "#0c0b09" },
-    { "type": "color", "id": "accent_color", "label": "Culoare accent", "default": "#b8963e" },
-    { "type": "color", "id": "title_color", "label": "Culoare titlu secțiune", "default": "#f0ead8" },
-    { "type": "color", "id": "muted_color", "label": "Culoare text subtil", "default": "#a89878" },
-    { "type": "color", "id": "card_bg", "label": "Fundal card", "default": "#161410" },
-    { "type": "color", "id": "card_img_bg", "label": "Fundal imagine placeholder", "default": "#1e1b15" },
-    { "type": "color", "id": "card_title_color", "label": "Culoare titlu articol", "default": "#f0ead8" },
-    { "type": "color", "id": "card_desc_color", "label": "Culoare rezumat", "default": "#a89878" },
-    { "type": "range", "id": "img_height", "min": 160, "max": 360, "step": 20, "unit": "px", "label": "Înălțime imagine", "default": 240 },
-    { "type": "range", "id": "card_padding", "min": 16, "max": 48, "step": 4, "unit": "px", "label": "Padding card", "default": 28 },
-    { "type": "range", "id": "padding_top", "min": 60, "max": 160, "step": 10, "unit": "px", "label": "Spațiu sus", "default": 120 },
-    { "type": "range", "id": "padding_bottom", "min": 60, "max": 160, "step": 10, "unit": "px", "label": "Spațiu jos", "default": 120 }
+    {
+      "type": "header",
+      "content": "Sursă"
+    },
+    {
+      "type": "blog",
+      "id": "blog_handle",
+      "label": "Blog Shopify"
+    },
+    {
+      "type": "range",
+      "id": "articles_count",
+      "min": 1,
+      "max": 6,
+      "step": 1,
+      "label": "Nr. articole afișate",
+      "default": 3
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "min": 1,
+      "max": 3,
+      "step": 1,
+      "label": "Coloane",
+      "default": 3
+    },
+    {
+      "type": "header",
+      "content": "Titlu"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Text mic",
+      "default": "Din Distilerie"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Titlu",
+      "default": "Povești și"
+    },
+    {
+      "type": "text",
+      "id": "title_italic",
+      "label": "Titlu italic",
+      "default": "Secretele Meșteșugului"
+    },
+    {
+      "type": "text",
+      "id": "all_text",
+      "label": "Text link 'toate'",
+      "default": "Toate articolele"
+    },
+    {
+      "type": "text",
+      "id": "read_more",
+      "label": "Text 'citește mai mult'",
+      "default": "Citește mai mult"
+    },
+    {
+      "type": "header",
+      "content": "Culori"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Fundal secțiune",
+      "default": "#0c0b09"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Culoare accent",
+      "default": "#b8963e"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Culoare titlu secțiune",
+      "default": "#f0ead8"
+    },
+    {
+      "type": "color",
+      "id": "muted_color",
+      "label": "Culoare text subtil",
+      "default": "#a89878"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Fundal card",
+      "default": "#161410"
+    },
+    {
+      "type": "color",
+      "id": "card_img_bg",
+      "label": "Fundal imagine placeholder",
+      "default": "#1e1b15"
+    },
+    {
+      "type": "color",
+      "id": "card_title_color",
+      "label": "Culoare titlu articol",
+      "default": "#f0ead8"
+    },
+    {
+      "type": "color",
+      "id": "card_desc_color",
+      "label": "Culoare rezumat",
+      "default": "#a89878"
+    },
+    {
+      "type": "range",
+      "id": "img_height",
+      "min": 160,
+      "max": 360,
+      "step": 20,
+      "unit": "px",
+      "label": "Înălțime imagine",
+      "default": 240
+    },
+    {
+      "type": "range",
+      "id": "card_padding",
+      "min": 16,
+      "max": 48,
+      "step": 4,
+      "unit": "px",
+      "label": "Padding card",
+      "default": 28
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 60,
+      "max": 160,
+      "step": 10,
+      "unit": "px",
+      "label": "Spațiu sus",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 60,
+      "max": 160,
+      "step": 10,
+      "unit": "px",
+      "label": "Spațiu jos",
+      "default": 120
+    }
   ],
   "blocks": [
     {
       "type": "article",
       "name": "Articol manual",
       "settings": [
-        { "type": "text", "id": "icon", "label": "Icon emoji", "default": "🥃" },
-        { "type": "text", "id": "date", "label": "Dată", "default": "15 Martie 2025" },
-        { "type": "text", "id": "title", "label": "Titlu articol", "default": "Povestea Zekulhyda" },
-        { "type": "textarea", "id": "excerpt", "label": "Rezumat", "default": "De la primul eșec la campion european — povestea lui Nagy Botond și a pălincii care a pus Bihorul pe harta Europei." }
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Icon emoji",
+          "default": "🥃"
+        },
+        {
+          "type": "text",
+          "id": "date",
+          "label": "Dată",
+          "default": "15 Martie 2025"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Titlu articol",
+          "default": "Povestea Zekulhyda"
+        },
+        {
+          "type": "textarea",
+          "id": "excerpt",
+          "label": "Rezumat",
+          "default": "De la primul eșec la campion european — povestea lui Nagy Botond și a pălincii care a pus Bihorul pe harta Europei."
+        }
       ]
     }
   ],
@@ -101,9 +251,33 @@
     {
       "name": "Preview Blog",
       "blocks": [
-        { "type": "article", "settings": { "icon": "🥃", "date": "15 Martie 2025", "title": "Povestea Zekulhyda: De la eșec la Campion European", "excerpt": "Nagy Botond a pornit cu un eșec răsunător în 2014. Astăzi, Zekulhyda are 22 de medalii și două titluri de campion la cel mai mare concurs din Europa Centrală." }},
-        { "type": "article", "settings": { "icon": "🍑", "date": "10 Februarie 2025", "title": "Ce înseamnă un distilat barrique și de ce contează", "excerpt": "Butoiul de stejar nu e doar un recipient — e un partener care transformă pălinca. Aflați cum funcționează maturarea și de ce Mărul Barrique a cucerit juriul." }},
-        { "type": "article", "settings": { "icon": "🌿", "date": "5 Ianuarie 2025", "title": "Vișinul sălbatic din Bihor — o kuriozitate unicată", "excerpt": "Sunt fructe de pădure pe care nu le poți cumpăra. Trebuie să le culegi. Cum ajunge vișinul sălbatic bihorean în sticla câștigătoare a campionatului." }}
+        {
+          "type": "article",
+          "settings": {
+            "icon": "🥃",
+            "date": "15 Martie 2025",
+            "title": "Povestea Zekulhyda: De la eșec la Campion European",
+            "excerpt": "Nagy Botond a pornit cu un eșec răsunător în 2014. Astăzi, Zekulhyda are 22 de medalii și două titluri de campion la cel mai mare concurs din Europa Centrală."
+          }
+        },
+        {
+          "type": "article",
+          "settings": {
+            "icon": "🍑",
+            "date": "10 Februarie 2025",
+            "title": "Ce înseamnă un distilat barrique și de ce contează",
+            "excerpt": "Butoiul de stejar nu e doar un recipient — e un partener care transformă pălinca. Aflați cum funcționează maturarea și de ce Mărul Barrique a cucerit juriul."
+          }
+        },
+        {
+          "type": "article",
+          "settings": {
+            "icon": "🌿",
+            "date": "5 Ianuarie 2025",
+            "title": "Vișinul sălbatic din Bihor — o kuriozitate unicată",
+            "excerpt": "Sunt fructe de pădure pe care nu le poți cumpăra. Trebuie să le culegi. Cum ajunge vișinul sălbatic bihorean în sticla câștigătoare a campionatului."
+          }
+        }
       ]
     }
   ]

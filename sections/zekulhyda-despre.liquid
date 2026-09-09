@@ -130,36 +130,159 @@
   "name": "Zekulhyda Despre",
   "tag": "section",
   "settings": [
-    { "type": "header", "content": "Hero" },
-    { "type": "text", "id": "eyebrow", "label": "Eyebrow", "default": "Povestea Zekulhyda" },
-    { "type": "text", "id": "title", "label": "Titlu", "default": "Sufletul Fructului" },
-    { "type": "text", "id": "motto", "label": "Motto", "default": "„Sufletul Fructului, va fi, Fructul Sufletului”" },
-    { "type": "header", "content": "Poveste" },
-    { "type": "textarea", "id": "lead_1", "label": "Paragraf 1", "default": "Zekulhyda este un brand de pălincă premium din Valea Ierului, județul Bihor — o regiune cu o tradiție îndelungată în arta distilării fructelor. Aici, povestea pălincii se scrie de generații, iar noi am ales să o ducem mai departe." },
-    { "type": "textarea", "id": "lead_2", "label": "Paragraf 2", "default": "Combinăm metodele tradiționale cu tehnologia modernă de ultimă generație. Ani la rând am studiat fermentarea și distilarea, totul controlat cu strictețe, pentru a obține un destilat de o puritate și o eleganță aparte — o pălincă cu care să ne mândrim oriunde, în țară și în străinătate." },
-    { "type": "textarea", "id": "lead_3", "label": "Paragraf 3", "default": "Credem că fiecare fruct, în momentul procesării, își dăruiește sufletul. Datoria noastră este să continuăm cu aceeași dăruire, fără compromisuri în privința calității." },
-    { "type": "header", "content": "Fondator" },
-    { "type": "text", "id": "founder_role", "label": "Rol", "default": "Fondator · Maestru pălincar și arbitru internațional" },
-    { "type": "text", "id": "founder_name", "label": "Nume", "default": "Nagy Botond" },
-    { "type": "textarea", "id": "founder_text", "label": "Text", "default": "Maestru pălincar recunoscut și jurat la competiții internaționale, Nagy Botond a fondat Zekulhyda din pasiunea pentru distilatul perfect. Sub îndrumarea sa, brandul a obținut recunoaștere la cele mai prestigioase competiții din Europa." },
-    { "type": "header", "content": "Premii" },
-    { "type": "text", "id": "awards_label", "label": "Label", "default": "Recunoaștere internațională" },
-    { "type": "text", "id": "awards_title", "label": "Titlu", "default": "22 de Medalii la Quintessence 2025" },
-    { "type": "textarea", "id": "awards_sub", "label": "Subtitlu", "default": "La cea de-a XV-a ediție a celei mai mari competiții de pălincă din Europa Centrală și de Est." },
-    { "type": "header", "content": "Competiții" },
-    { "type": "text", "id": "comps_label", "label": "Label", "default": "Pe scena internațională" },
-    { "type": "text", "id": "comps_title", "label": "Titlu", "default": "Competiții & Concursuri" },
-    { "type": "header", "content": "Sortimente" },
-    { "type": "text", "id": "products_label", "label": "Label", "default": "Din livada noastră" },
-    { "type": "text", "id": "products_title", "label": "Titlu", "default": "Sortimente" },
-    { "type": "textarea", "id": "products", "label": "Sortimente (separate prin virgulă)", "default": "Pălincă de prune, Pălincă de mere, Mere în butoaie barrique, Pălincă de vișine, Vișine sălbatice, Pălincă de caise, Pălincă de pere, Pălincă de gutui, Pălincă de afine, Pălincă de zmeură, Pălincă de mure, Pălincă de coacăze, Pălincă de cireșe, Distilat de struguri, Fetească neagră, Tămâioasă" },
-    { "type": "header", "content": "Call to action" },
-    { "type": "text", "id": "cta_text", "label": "Text", "default": "Descoperă sortimentele premiate Zekulhyda." },
-    { "type": "text", "id": "cta_label", "label": "Etichetă buton", "default": "Vezi produsele" },
-    { "type": "url", "id": "cta_link", "label": "Link buton", "default": "/collections/all" }
+    {
+      "type": "header",
+      "content": "Hero"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Eyebrow",
+      "default": "Povestea Zekulhyda"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Titlu",
+      "default": "Sufletul Fructului"
+    },
+    {
+      "type": "text",
+      "id": "motto",
+      "label": "Motto",
+      "default": "„Sufletul Fructului, va fi, Fructul Sufletului”"
+    },
+    {
+      "type": "header",
+      "content": "Poveste"
+    },
+    {
+      "type": "textarea",
+      "id": "lead_1",
+      "label": "Paragraf 1",
+      "default": "Zekulhyda este un brand de pălincă premium din Valea Ierului, județul Bihor — o regiune cu o tradiție îndelungată în arta distilării fructelor. Aici, povestea pălincii se scrie de generații, iar noi am ales să o ducem mai departe."
+    },
+    {
+      "type": "textarea",
+      "id": "lead_2",
+      "label": "Paragraf 2",
+      "default": "Combinăm metodele tradiționale cu tehnologia modernă de ultimă generație. Ani la rând am studiat fermentarea și distilarea, totul controlat cu strictețe, pentru a obține un destilat de o puritate și o eleganță aparte — o pălincă cu care să ne mândrim oriunde, în țară și în străinătate."
+    },
+    {
+      "type": "textarea",
+      "id": "lead_3",
+      "label": "Paragraf 3",
+      "default": "Credem că fiecare fruct, în momentul procesării, își dăruiește sufletul. Datoria noastră este să continuăm cu aceeași dăruire, fără compromisuri în privința calității."
+    },
+    {
+      "type": "header",
+      "content": "Fondator"
+    },
+    {
+      "type": "text",
+      "id": "founder_role",
+      "label": "Rol",
+      "default": "Fondator · Maestru pălincar și arbitru internațional"
+    },
+    {
+      "type": "text",
+      "id": "founder_name",
+      "label": "Nume",
+      "default": "Nagy Botond"
+    },
+    {
+      "type": "textarea",
+      "id": "founder_text",
+      "label": "Text",
+      "default": "Maestru pălincar recunoscut și jurat la competiții internaționale, Nagy Botond a fondat Zekulhyda din pasiunea pentru distilatul perfect. Sub îndrumarea sa, brandul a obținut recunoaștere la cele mai prestigioase competiții din Europa."
+    },
+    {
+      "type": "header",
+      "content": "Premii"
+    },
+    {
+      "type": "text",
+      "id": "awards_label",
+      "label": "Label",
+      "default": "Recunoaștere internațională"
+    },
+    {
+      "type": "text",
+      "id": "awards_title",
+      "label": "Titlu",
+      "default": "22 de Medalii la Quintessence 2025"
+    },
+    {
+      "type": "textarea",
+      "id": "awards_sub",
+      "label": "Subtitlu",
+      "default": "La cea de-a XV-a ediție a celei mai mari competiții de pălincă din Europa Centrală și de Est."
+    },
+    {
+      "type": "header",
+      "content": "Competiții"
+    },
+    {
+      "type": "text",
+      "id": "comps_label",
+      "label": "Label",
+      "default": "Pe scena internațională"
+    },
+    {
+      "type": "text",
+      "id": "comps_title",
+      "label": "Titlu",
+      "default": "Competiții & Concursuri"
+    },
+    {
+      "type": "header",
+      "content": "Sortimente"
+    },
+    {
+      "type": "text",
+      "id": "products_label",
+      "label": "Label",
+      "default": "Din livada noastră"
+    },
+    {
+      "type": "text",
+      "id": "products_title",
+      "label": "Titlu",
+      "default": "Sortimente"
+    },
+    {
+      "type": "textarea",
+      "id": "products",
+      "label": "Sortimente (separate prin virgulă)",
+      "default": "Pălincă de prune, Pălincă de mere, Mere în butoaie barrique, Pălincă de vișine, Vișine sălbatice, Pălincă de caise, Pălincă de pere, Pălincă de gutui, Pălincă de afine, Pălincă de zmeură, Pălincă de mure, Pălincă de coacăze, Pălincă de cireșe, Distilat de struguri, Fetească neagră, Tămâioasă"
+    },
+    {
+      "type": "header",
+      "content": "Call to action"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Text",
+      "default": "Descoperă sortimentele premiate Zekulhyda."
+    },
+    {
+      "type": "text",
+      "id": "cta_label",
+      "label": "Etichetă buton",
+      "default": "Vezi produsele"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Link buton",
+      "default": "/collections/all"
+    }
   ],
   "presets": [
-    { "name": "Zekulhyda Despre" }
+    {
+      "name": "Zekulhyda Despre"
+    }
   ]
 }
 {% endschema %}

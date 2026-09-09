@@ -2,12 +2,12 @@
   <div class="bg" id="slides"></div>
   <div class="wrap">
     <div>
-      <div class="eyebrow">{{ section.settings.hero_eyebrow }}</div>
-      <h1 style="margin-top:.8rem">{{ section.settings.hero_title }}</h1>
-      <p class="lead">{{ section.settings.hero_sub }}</p>
+      <div class="eyebrow">{% render 'zk-t', override: section.settings.hero_eyebrow, key: 'zk.hero_eyebrow' %}</div>
+      <h1 style="margin-top:.8rem">{% render 'zk-t', override: section.settings.hero_title, key: 'zk.hero_title' %}</h1>
+      <p class="lead">{% render 'zk-t', override: section.settings.hero_sub, key: 'zk.hero_sub' %}</p>
       <div class="ctas">
-        <a class="btn primary" href="{{ section.settings.cta_link | default: '#shop' }}">{{ section.settings.hero_cta }}</a>
-        <a class="btn" href="{{ section.settings.cta2_link | default: '#story' }}">{{ section.settings.hero_cta2 }}</a>
+        <a class="btn primary" href="{{ section.settings.cta_link | default: '#shop' }}">{% render 'zk-t', override: section.settings.hero_cta, key: 'zk.hero_cta' %}</a>
+        <a class="btn" href="{{ section.settings.cta2_link | default: '#story' }}">{% render 'zk-t', override: section.settings.hero_cta2, key: 'zk.hero_cta2' %}</a>
       </div>
     </div>
   </div>
@@ -32,15 +32,55 @@
 {
   "name": "Hero",
   "settings": [
-    { "type": "text", "id": "hero_eyebrow", "label": "Etichetă", "default": "Săcueni · Valea Ierului · Bihor" },
-    { "type": "textarea", "id": "hero_title", "label": "Titlu", "default": "Sufletul fructului va fi fructul sufletului." },
-    { "type": "textarea", "id": "hero_sub", "label": "Subtitlu", "default": "Pălincă premium din Valea Ierului — 22 de medalii și două titluri de campion la cel mai mare concurs de pălincă din Europa Centrală." },
-    { "type": "text", "id": "hero_cta", "label": "Buton principal", "default": "Vezi pălincile" },
-    { "type": "url", "id": "cta_link", "label": "Link buton principal" },
-    { "type": "text", "id": "hero_cta2", "label": "Buton secundar", "default": "Povestea lui Botond" },
-    { "type": "url", "id": "cta2_link", "label": "Link buton secundar" },
-    { "type": "paragraph", "content": "Imaginile din slideshow vin din design (zk-42…zk-45) și sunt încărcate ca fișiere ale temei." }
+    {
+      "type": "text",
+      "id": "hero_eyebrow",
+      "label": "Etichetă",
+      "info": "Gol = textul tradus din locales/"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_title",
+      "label": "Titlu",
+      "info": "Gol = textul tradus din locales/"
+    },
+    {
+      "type": "textarea",
+      "id": "hero_sub",
+      "label": "Subtitlu",
+      "info": "Gol = textul tradus din locales/"
+    },
+    {
+      "type": "text",
+      "id": "hero_cta",
+      "label": "Buton principal",
+      "info": "Gol = textul tradus din locales/"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Link buton principal"
+    },
+    {
+      "type": "text",
+      "id": "hero_cta2",
+      "label": "Buton secundar",
+      "info": "Gol = textul tradus din locales/"
+    },
+    {
+      "type": "url",
+      "id": "cta2_link",
+      "label": "Link buton secundar"
+    },
+    {
+      "type": "paragraph",
+      "content": "Imaginile din slideshow vin din design (zk-42…zk-45) și sunt încărcate ca fișiere ale temei."
+    }
   ],
-  "presets": [{ "name": "Hero cu slideshow" }]
+  "presets": [
+    {
+      "name": "Hero cu slideshow"
+    }
+  ]
 }
 {% endschema %}

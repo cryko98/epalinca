@@ -27,8 +27,9 @@
 
     <div class="tools">
       {% render 'zk-social' %}
+      {% render 'zk-lang' %}
       <a class="cartbtn" href="{{ routes.cart_url }}">
-        <span>{{ section.settings.cart_label | default: 'Coș' }}</span>
+        <span>{% render 'zk-t', override: section.settings.cart_label, key: 'zk.cart' %}</span>
         <b id="cartCount">{{ cart.item_count }}</b>
       </a>
     </div>
@@ -39,21 +40,63 @@
 {
   "name": "Antet",
   "settings": [
-    { "type": "paragraph", "content": "Fără elemente de meniu adăugate mai jos, antetul folosește navigarea implicită a paginii principale." },
-    { "type": "text", "id": "nav_palinka", "label": "Meniu · Pălincile", "default": "Pălincile" },
-    { "type": "text", "id": "nav_shop", "label": "Meniu · Magazin", "default": "Magazin" },
-    { "type": "text", "id": "nav_story", "label": "Meniu · Poveste", "default": "Povestea lui Botond" },
-    { "type": "text", "id": "nav_taste", "label": "Meniu · Degustare", "default": "Sala de degustare" },
-    { "type": "text", "id": "nav_contact", "label": "Meniu · Contact", "default": "Contact" },
-    { "type": "text", "id": "cart_label", "label": "Etichetă coș", "default": "Coș" }
+    {
+      "type": "paragraph",
+      "content": "Fără elemente de meniu adăugate mai jos, antetul folosește navigarea implicită a paginii principale."
+    },
+    {
+      "type": "text",
+      "id": "nav_palinka",
+      "label": "Meniu · Pălincile",
+      "info": "Gol = textul tradus din locales/"
+    },
+    {
+      "type": "text",
+      "id": "nav_shop",
+      "label": "Meniu · Magazin",
+      "info": "Gol = textul tradus din locales/"
+    },
+    {
+      "type": "text",
+      "id": "nav_story",
+      "label": "Meniu · Poveste",
+      "info": "Gol = textul tradus din locales/"
+    },
+    {
+      "type": "text",
+      "id": "nav_taste",
+      "label": "Meniu · Degustare",
+      "info": "Gol = textul tradus din locales/"
+    },
+    {
+      "type": "text",
+      "id": "nav_contact",
+      "label": "Meniu · Contact",
+      "info": "Gol = textul tradus din locales/"
+    },
+    {
+      "type": "text",
+      "id": "cart_label",
+      "label": "Etichetă coș",
+      "default": "Coș"
+    }
   ],
   "blocks": [
     {
       "type": "link",
       "name": "Element de meniu",
       "settings": [
-        { "type": "text", "id": "label", "label": "Text", "default": "Meniu" },
-        { "type": "url", "id": "link", "label": "Link" }
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Text",
+          "default": "Meniu"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
       ]
     }
   ]

@@ -61,43 +61,202 @@
 {
   "name": "Colecție Fructe (Colorat)",
   "settings": [
-    { "type": "header", "content": "Titlu secțiune" },
-    { "type": "text", "id": "eyebrow", "label": "Text mic (eyebrow)", "default": "Fructele Ținutului" },
-    { "type": "textarea", "id": "title", "label": "Titlu", "default": "Distilate Vii," },
-    { "type": "text", "id": "title_italic", "label": "Titlu italic", "default": "Culori Vii." },
-    { "type": "textarea", "id": "subtitle", "label": "Subtitlu", "default": "Fiecare fruct — o culoare, un caracter, o poveste din Bihor. Distilate artizanale fără compromisuri." },
-    { "type": "range", "id": "columns", "min": 2, "max": 5, "step": 1, "label": "Coloane", "default": 4 },
-    { "type": "header", "content": "Butoane" },
-    { "type": "text", "id": "btn_text", "label": "Text buton cumpără", "default": "Cumpără" },
-    { "type": "text", "id": "cta_text", "label": "Text buton 'toate' (opțional)", "default": "Vezi toate distilatatele" },
-    { "type": "url", "id": "cta_url", "label": "Link buton 'toate'" },
-    { "type": "header", "content": "Culori" },
-    { "type": "color", "id": "bg_color", "label": "Fundal secțiune", "default": "#f0ead8" },
-    { "type": "color", "id": "accent_color", "label": "Culoare accent", "default": "#7a6128" },
-    { "type": "color", "id": "title_color", "label": "Culoare titlu", "default": "#0c0b09" },
-    { "type": "color", "id": "subtitle_color", "label": "Culoare subtitlu", "default": "#5a5040" },
-    { "type": "color", "id": "card_bg", "label": "Fundal card", "default": "#faf6ee" },
-    { "type": "color", "id": "card_title_color", "label": "Culoare titlu produs", "default": "#0c0b09" },
-    { "type": "color", "id": "card_desc_color", "label": "Culoare descriere", "default": "#5a5040" },
-    { "type": "color", "id": "btn_text_color", "label": "Culoare text butoane", "default": "#ffffff" },
-    { "type": "range", "id": "emoji_size", "min": 40, "max": 100, "step": 4, "unit": "px", "label": "Mărime emoji fruct", "default": 64 },
-    { "type": "header", "content": "Spațiere" },
-    { "type": "range", "id": "padding_top", "min": 60, "max": 160, "step": 10, "unit": "px", "label": "Spațiu sus", "default": 120 },
-    { "type": "range", "id": "padding_bottom", "min": 60, "max": 160, "step": 10, "unit": "px", "label": "Spațiu jos", "default": 120 }
+    {
+      "type": "header",
+      "content": "Titlu secțiune"
+    },
+    {
+      "type": "text",
+      "id": "eyebrow",
+      "label": "Text mic (eyebrow)",
+      "default": "Fructele Ținutului"
+    },
+    {
+      "type": "textarea",
+      "id": "title",
+      "label": "Titlu",
+      "default": "Distilate Vii,"
+    },
+    {
+      "type": "text",
+      "id": "title_italic",
+      "label": "Titlu italic",
+      "default": "Culori Vii."
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitlu",
+      "default": "Fiecare fruct — o culoare, un caracter, o poveste din Bihor. Distilate artizanale fără compromisuri."
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "min": 2,
+      "max": 5,
+      "step": 1,
+      "label": "Coloane",
+      "default": 4
+    },
+    {
+      "type": "header",
+      "content": "Butoane"
+    },
+    {
+      "type": "text",
+      "id": "btn_text",
+      "label": "Text buton cumpără",
+      "default": "Cumpără"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Text buton 'toate' (opțional)",
+      "default": "Vezi toate distilatatele"
+    },
+    {
+      "type": "url",
+      "id": "cta_url",
+      "label": "Link buton 'toate'"
+    },
+    {
+      "type": "header",
+      "content": "Culori"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Fundal secțiune",
+      "default": "#f0ead8"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Culoare accent",
+      "default": "#7a6128"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Culoare titlu",
+      "default": "#0c0b09"
+    },
+    {
+      "type": "color",
+      "id": "subtitle_color",
+      "label": "Culoare subtitlu",
+      "default": "#5a5040"
+    },
+    {
+      "type": "color",
+      "id": "card_bg",
+      "label": "Fundal card",
+      "default": "#faf6ee"
+    },
+    {
+      "type": "color",
+      "id": "card_title_color",
+      "label": "Culoare titlu produs",
+      "default": "#0c0b09"
+    },
+    {
+      "type": "color",
+      "id": "card_desc_color",
+      "label": "Culoare descriere",
+      "default": "#5a5040"
+    },
+    {
+      "type": "color",
+      "id": "btn_text_color",
+      "label": "Culoare text butoane",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "emoji_size",
+      "min": 40,
+      "max": 100,
+      "step": 4,
+      "unit": "px",
+      "label": "Mărime emoji fruct",
+      "default": 64
+    },
+    {
+      "type": "header",
+      "content": "Spațiere"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 60,
+      "max": 160,
+      "step": 10,
+      "unit": "px",
+      "label": "Spațiu sus",
+      "default": 120
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 60,
+      "max": 160,
+      "step": 10,
+      "unit": "px",
+      "label": "Spațiu jos",
+      "default": 120
+    }
   ],
   "blocks": [
     {
       "type": "fruit",
       "name": "Fruct / Produs",
       "settings": [
-        { "type": "image_picker", "id": "fruit_image", "label": "Imagine fruct (opțional)" },
-        { "type": "text", "id": "fruit_emoji", "label": "Emoji fruct (dacă nu există imagine)", "default": "🍑" },
-        { "type": "color", "id": "fruit_color", "label": "Culoare accent fruct", "default": "#f28c3a" },
-        { "type": "text", "id": "fruit_type", "label": "Tip distilat", "default": "Distilat de Caise" },
-        { "type": "text", "id": "fruit_name", "label": "Nume produs", "default": "Caisă" },
-        { "type": "textarea", "id": "tasting_notes", "label": "Note de degustare / descriere", "default": "Florale, miere de albine, piersică coaptă. Final lung și catifelat." },
-        { "type": "text", "id": "price", "label": "Preț", "default": "85.00" },
-        { "type": "text", "id": "product_handle", "label": "Handle produs Shopify" }
+        {
+          "type": "image_picker",
+          "id": "fruit_image",
+          "label": "Imagine fruct (opțional)"
+        },
+        {
+          "type": "text",
+          "id": "fruit_emoji",
+          "label": "Emoji fruct (dacă nu există imagine)",
+          "default": "🍑"
+        },
+        {
+          "type": "color",
+          "id": "fruit_color",
+          "label": "Culoare accent fruct",
+          "default": "#f28c3a"
+        },
+        {
+          "type": "text",
+          "id": "fruit_type",
+          "label": "Tip distilat",
+          "default": "Distilat de Caise"
+        },
+        {
+          "type": "text",
+          "id": "fruit_name",
+          "label": "Nume produs",
+          "default": "Caisă"
+        },
+        {
+          "type": "textarea",
+          "id": "tasting_notes",
+          "label": "Note de degustare / descriere",
+          "default": "Florale, miere de albine, piersică coaptă. Final lung și catifelat."
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Preț",
+          "default": "85.00"
+        },
+        {
+          "type": "text",
+          "id": "product_handle",
+          "label": "Handle produs Shopify"
+        }
       ]
     }
   ],
@@ -105,12 +264,72 @@
     {
       "name": "Colecție Fructe",
       "blocks": [
-        { "type": "fruit", "settings": { "fruit_emoji": "🍑", "fruit_color": "#f28c3a", "fruit_type": "Distilat de Caise", "fruit_name": "Caisă", "tasting_notes": "Florale, miere, piersică coaptă. Final catifelat și aromat.", "price": "85.00" }},
-        { "type": "fruit", "settings": { "fruit_emoji": "🍐", "fruit_color": "#7ab83e", "fruit_type": "Distilat de Pere", "fruit_name": "Pară Williams", "tasting_notes": "Proaspăt, floral, cu note de vanilie. Elegant și ușor.", "price": "90.00" }},
-        { "type": "fruit", "settings": { "fruit_emoji": "🍒", "fruit_color": "#c9243a", "fruit_type": "Distilat de Vișine", "fruit_name": "Vișin Sălbatic", "tasting_notes": "Intens, fructat, cu note de migdale și ciocolată. Campion 2025.", "price": "145.00" }},
-        { "type": "fruit", "settings": { "fruit_emoji": "🍎", "fruit_color": "#e8342a", "fruit_type": "Distilat de Mere", "fruit_name": "Măr Barrique", "tasting_notes": "Mere Érmelléki maturate în barique. Complex, rotund, cu final lemnos.", "price": "130.00" }},
-        { "type": "fruit", "settings": { "fruit_emoji": "🫐", "fruit_color": "#5a3aaa", "fruit_type": "Distilat de Prune", "fruit_name": "Prună Neagră", "tasting_notes": "Prun negru copt, condimente discrete, fundal de piele fină.", "price": "95.00" }},
-        { "type": "fruit", "settings": { "fruit_emoji": "🍈", "fruit_color": "#d4a82a", "fruit_type": "Distilat de Gutui", "fruit_name": "Gutui (Birs)", "tasting_notes": "Exotic, parfumat, unic. Gutui coapte din livezile Bihorului.", "price": "110.00" }}
+        {
+          "type": "fruit",
+          "settings": {
+            "fruit_emoji": "🍑",
+            "fruit_color": "#f28c3a",
+            "fruit_type": "Distilat de Caise",
+            "fruit_name": "Caisă",
+            "tasting_notes": "Florale, miere, piersică coaptă. Final catifelat și aromat.",
+            "price": "85.00"
+          }
+        },
+        {
+          "type": "fruit",
+          "settings": {
+            "fruit_emoji": "🍐",
+            "fruit_color": "#7ab83e",
+            "fruit_type": "Distilat de Pere",
+            "fruit_name": "Pară Williams",
+            "tasting_notes": "Proaspăt, floral, cu note de vanilie. Elegant și ușor.",
+            "price": "90.00"
+          }
+        },
+        {
+          "type": "fruit",
+          "settings": {
+            "fruit_emoji": "🍒",
+            "fruit_color": "#c9243a",
+            "fruit_type": "Distilat de Vișine",
+            "fruit_name": "Vișin Sălbatic",
+            "tasting_notes": "Intens, fructat, cu note de migdale și ciocolată. Campion 2025.",
+            "price": "145.00"
+          }
+        },
+        {
+          "type": "fruit",
+          "settings": {
+            "fruit_emoji": "🍎",
+            "fruit_color": "#e8342a",
+            "fruit_type": "Distilat de Mere",
+            "fruit_name": "Măr Barrique",
+            "tasting_notes": "Mere Érmelléki maturate în barique. Complex, rotund, cu final lemnos.",
+            "price": "130.00"
+          }
+        },
+        {
+          "type": "fruit",
+          "settings": {
+            "fruit_emoji": "🫐",
+            "fruit_color": "#5a3aaa",
+            "fruit_type": "Distilat de Prune",
+            "fruit_name": "Prună Neagră",
+            "tasting_notes": "Prun negru copt, condimente discrete, fundal de piele fină.",
+            "price": "95.00"
+          }
+        },
+        {
+          "type": "fruit",
+          "settings": {
+            "fruit_emoji": "🍈",
+            "fruit_color": "#d4a82a",
+            "fruit_type": "Distilat de Gutui",
+            "fruit_name": "Gutui (Birs)",
+            "tasting_notes": "Exotic, parfumat, unic. Gutui coapte din livezile Bihorului.",
+            "price": "110.00"
+          }
+        }
       ]
     }
   ]

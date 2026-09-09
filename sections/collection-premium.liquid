@@ -10,14 +10,14 @@
 <section id="shop">
   <div class="wrap">
     <div class="sec-head reveal">
-      <div class="eyebrow">{{ section.settings.shop_eyebrow }}</div>
-      <h2>{{ section.settings.shop_title }}</h2>
-      <p>{{ section.settings.shop_sub }}</p>
+      <div class="eyebrow">{% render 'zk-t', override: section.settings.shop_eyebrow, key: 'zk.shop_eyebrow' %}</div>
+      <h2>{% render 'zk-t', override: section.settings.shop_title, key: 'zk.shop_title' %}</h2>
+      <p>{% render 'zk-t', override: section.settings.shop_sub, key: 'zk.shop_sub' %}</p>
     </div>
 
     {%- if section.blocks.size > 0 -%}
       <div class="filters">
-        <a class="on" href="{{ routes.all_products_collection_url }}">{{ section.settings.filter_all | default: 'Toate' }}</a>
+        <a class="on" href="{{ routes.all_products_collection_url }}">{% render 'zk-t', override: section.settings.filter_all, key: 'zk.shop_all' %}</a>
         {%- for block in section.blocks -%}
           {%- assign fc = collections[block.settings.collection] -%}
           {%- if fc != blank -%}
@@ -56,16 +56,16 @@
                 <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data">
                   <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
                   <input type="hidden" name="quantity" value="1">
-                  <button type="submit" class="add">{{ section.settings.add_label | default: 'În coș' }}</button>
+                  <button type="submit" class="add">{% render 'zk-t', override: section.settings.add_label, key: 'products.add_to_cart' %}</button>
                 </form>
               {%- else -%}
-                <button class="add" disabled>{{ section.settings.sold_label | default: 'Epuizat' }}</button>
+                <button class="add" disabled>{% render 'zk-t', override: section.settings.sold_label, key: 'products.sold_out' %}</button>
               {%- endif -%}
             </div>
           </div>
         </div>
       {%- else -%}
-        <p class="empty">Nu există produse publicate încă.</p>
+        <p class="empty">{{ 'collections.no_products' | t }}</p>
       {%- endfor -%}
     </div>
   </div>
@@ -75,25 +75,80 @@
 {
   "name": "Magazin",
   "settings": [
-    { "type": "text", "id": "shop_eyebrow", "label": "Etichetă", "default": "Magazin online" },
-    { "type": "textarea", "id": "shop_title", "label": "Titlu", "default": "Comandă direct <em>de la distilerie.</em>" },
-    { "type": "textarea", "id": "shop_sub", "label": "Subtitlu", "default": "Livrare gratuită peste 250 lei în România. Nu vindem alcool persoanelor sub 18 ani." },
-    { "type": "collection", "id": "collection", "label": "Colecție (gol = toate produsele)" },
-    { "type": "range", "id": "products_count", "min": 4, "max": 40, "step": 4, "label": "Număr de produse", "default": 12 },
-    { "type": "text", "id": "filter_all", "label": "Etichetă „toate”", "default": "Toate" },
-    { "type": "text", "id": "add_label", "label": "Buton adăugare", "default": "În coș" },
-    { "type": "text", "id": "sold_label", "label": "Text epuizat", "default": "Epuizat" }
+    {
+      "type": "text",
+      "id": "shop_eyebrow",
+      "label": "Etichetă",
+      "info": "Gol = textul tradus din locales/"
+    },
+    {
+      "type": "textarea",
+      "id": "shop_title",
+      "label": "Titlu",
+      "info": "Gol = textul tradus din locales/"
+    },
+    {
+      "type": "textarea",
+      "id": "shop_sub",
+      "label": "Subtitlu",
+      "info": "Gol = textul tradus din locales/"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Colecție (gol = toate produsele)"
+    },
+    {
+      "type": "range",
+      "id": "products_count",
+      "min": 4,
+      "max": 40,
+      "step": 4,
+      "label": "Număr de produse",
+      "default": 12
+    },
+    {
+      "type": "text",
+      "id": "filter_all",
+      "label": "Etichetă „toate”",
+      "info": "Gol = textul tradus din locales/"
+    },
+    {
+      "type": "text",
+      "id": "add_label",
+      "label": "Buton adăugare",
+      "default": "În coș"
+    },
+    {
+      "type": "text",
+      "id": "sold_label",
+      "label": "Text epuizat",
+      "default": "Epuizat"
+    }
   ],
   "blocks": [
     {
       "type": "filter",
       "name": "Filtru (colecție)",
       "settings": [
-        { "type": "text", "id": "collection", "label": "Handle colecție", "info": "ex. barrique" },
-        { "type": "text", "id": "label", "label": "Etichetă" }
+        {
+          "type": "text",
+          "id": "collection",
+          "label": "Handle colecție",
+          "info": "ex. barrique"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Etichetă"
+        }
       ]
     }
   ],
-  "presets": [{ "name": "Magazin — grilă produse" }]
+  "presets": [
+    {
+      "name": "Magazin — grilă produse"
+    }
+  ]
 }
 {% endschema %}
