@@ -2888,3 +2888,79 @@ html, body { overflow-x: clip; }
 /* Add-to-cart confirmation, and a cart button that reads as full. */
 .card .add.done, .pdp__add.done { background: var(--ok, #4E8B57) !important; border-color: var(--ok, #4E8B57) !important; color: #fff !important; }
 .cartbtn.has b { background: var(--amber); color: var(--ink); }
+
+
+/* ==========================================================================
+   Product filters
+   ========================================================================== */
+.zk-filters { margin: 0 0 2rem; }
+.zk-filters__row { display: flex; flex-wrap: wrap; gap: .6rem; align-items: flex-start; }
+
+.zk-filter { position: relative; }
+.zk-filter > summary {
+  list-style: none; cursor: pointer; user-select: none;
+  display: inline-flex; align-items: center; gap: .5rem;
+  border: 1px solid var(--line); border-radius: 999px; padding: .62rem 1.1rem;
+  font-family: "IBM Plex Mono", monospace; font-size: .66rem;
+  letter-spacing: .14em; text-transform: uppercase; color: var(--silver);
+  transition: border-color .2s, color .2s;
+}
+.zk-filter > summary::-webkit-details-marker { display: none; }
+.zk-filter > summary::after {
+  content: ""; width: 7px; height: 7px; border-right: 1.4px solid currentColor;
+  border-bottom: 1.4px solid currentColor; transform: rotate(45deg) translate(-2px, -2px);
+  opacity: .6;
+}
+.zk-filter[open] > summary,
+.zk-filter > summary:hover { border-color: var(--amber); color: var(--amber-2); }
+.zk-filter[open] > summary::after { transform: rotate(-135deg) translate(-2px, -2px); }
+.zk-filter > summary i {
+  font-style: normal; background: var(--amber); color: var(--ink);
+  border-radius: 999px; min-width: 16px; text-align: center; padding: 0 .3rem; font-size: .6rem;
+}
+
+.zk-filter__body {
+  position: absolute; z-index: 40; top: calc(100% + .5rem); left: 0; min-width: 230px;
+  background: rgba(15, 15, 17, .98); backdrop-filter: blur(10px);
+  border: 1px solid var(--line); border-radius: 3px; padding: .5rem;
+  box-shadow: 0 22px 46px rgba(0, 0, 0, .5);
+}
+.zk-filter__opt {
+  display: flex; align-items: center; gap: .6rem; padding: .55rem .6rem;
+  border-radius: 2px; cursor: pointer; font-size: .88rem; color: var(--silver);
+}
+.zk-filter__opt:hover { background: var(--slate); color: #fff; }
+.zk-filter__opt input { accent-color: var(--amber); width: 15px; height: 15px; }
+.zk-filter__opt span { flex: 1; }
+.zk-filter__opt i { font-style: normal; font-family: "IBM Plex Mono", monospace; font-size: .62rem; color: var(--fog); }
+.zk-filter__opt.is-off { opacity: .4; cursor: not-allowed; }
+
+.zk-filter__price { display: flex; gap: .6rem; }
+.zk-filter__price label { display: flex; flex-direction: column; gap: .3rem; }
+.zk-filter__price span {
+  font-family: "IBM Plex Mono", monospace; font-size: .58rem;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--fog);
+}
+.zk-filter__price input {
+  width: 104px; background: var(--graphite); border: 1px solid var(--line); border-radius: 2px;
+  color: #F3F1EC; padding: .55rem .6rem; font-family: inherit; font-size: .88rem;
+}
+.zk-filter__price input:focus { outline: none; border-color: var(--amber); }
+
+.zk-filters__active { display: flex; flex-wrap: wrap; gap: .45rem; margin-top: .9rem; }
+.zk-chip {
+  display: inline-flex; align-items: center; gap: .45rem; text-decoration: none;
+  border: 1px solid var(--amber); border-radius: 999px; padding: .35rem .75rem;
+  font-family: "IBM Plex Mono", monospace; font-size: .6rem;
+  letter-spacing: .1em; text-transform: uppercase; color: var(--amber-2);
+}
+.zk-chip span { opacity: .7; }
+.zk-chip:hover { background: var(--amber); color: var(--ink); }
+.zk-chip--clear { border-color: var(--line); color: var(--fog); }
+.zk-chip--clear:hover { background: transparent; border-color: var(--silver); color: #fff; }
+
+@media (max-width: 640px) {
+  .zk-filter__body { position: static; min-width: 0; box-shadow: none; margin-top: .4rem; }
+  .zk-filter { width: 100%; }
+  .zk-filter > summary { width: 100%; justify-content: space-between; }
+}

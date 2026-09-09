@@ -1,0 +1,139 @@
+{%- comment -%}
+  Product filters for a collection.
+
+  Built on Shopify's own storefront filters (collection.filters) rather than a
+  client-side pass, so filtering survives pagination, is shareable as a URL and is what
+  the merchant configures in Search & Discovery — whatever they enable shows up here.
+
+  Filtering is a GET form: changing a control submits, and the result is a real URL.
+  A no-JS shopper gets the Apply button instead.
+{%- endcomment -%}
+
+{%- comment -%}
+  Shopify hands back the filter's label in the shop's admin language, so it read
+  "Availability" / "Price" on every locale. Known filters get a translated label; anything
+  the merchant adds later falls back to whatever Shopify calls it.
+{%- endcomment -%}
+{%- capture label_availability %}{{ 'zk.filter_availability' | t }}{% endcapture -%}
+{%- capture label_price %}{{ 'zk.filter_price' | t }}{% endcapture -%}
+
+{%- if collection.filters.size > 0 -%}
+  <form class="zk-filters" id="ZkFilterForm" method="get">
+    {%- comment -%} Keep the current sort when filters change. {%- endcomment -%}
+    {%- if collection.sort_by != blank -%}
+      <input type="hidden" name="sort_by" value="{{ collection.sort_by }}">
+    {%- endif -%}
+
+    <div class="zk-filters__row">
+      {%- for filter in collection.filters -%}
+        {%- liquid
+          assign flabel = filter.label
+          if filter.param_name contains 'availability'
+            assign flabel = label_availability
+          elsif filter.type == 'price_range'
+            assign flabel = label_price
+          endif
+        -%}
+        {%- case filter.type -%}
+
+          {%- when 'list' -%}
+            <details class="zk-filter" {% if filter.active_values.size > 0 %}open{% endif %}>
+              <summary>
+                {{ flabel }}
+                {%- if filter.active_values.size > 0 -%}
+                  <i>{{ filter.active_values.size }}</i>
+                {%- endif -%}
+              </summary>
+              <div class="zk-filter__body">
+                {%- for value in filter.values -%}
+                  <label class="zk-filter__opt{% if value.count == 0 and value.active == false %} is-off{% endif %}">
+                    <input type="checkbox"
+                           name="{{ value.param_name }}"
+                           value="{{ value.value }}"
+                           {% if value.active %}checked{% endif %}
+                           {% if value.count == 0 and value.active == false %}disabled{% endif %}>
+                    <span>{{ value.label }}</span>
+                    <i>{{ value.count }}</i>
+                  </label>
+                {%- endfor -%}
+              </div>
+            </details>
+
+          {%- when 'price_range' -%}
+            <details class="zk-filter" {% if filter.min_value.value or filter.max_value.value %}open{% endif %}>
+              <summary>
+                {{ flabel }}
+                {%- if filter.min_value.value or filter.max_value.value -%}<i>1</i>{%- endif -%}
+              </summary>
+              <div class="zk-filter__body zk-filter__price">
+                <label>
+                  <span>{{ 'zk.filter_from' | t }}</span>
+                  <input type="number" inputmode="numeric" min="0"
+                         max="{{ filter.range_max | divided_by: 100 }}"
+                         name="{{ filter.min_value.param_name }}"
+                         value="{{ filter.min_value.value | divided_by: 100 }}"
+                         placeholder="0">
+                </label>
+                <label>
+                  <span>{{ 'zk.filter_to' | t }}</span>
+                  <input type="number" inputmode="numeric" min="0"
+                         max="{{ filter.range_max | divided_by: 100 }}"
+                         name="{{ filter.max_value.param_name }}"
+                         value="{{ filter.max_value.value | divided_by: 100 }}"
+                         placeholder="{{ filter.range_max | divided_by: 100 }}">
+                </label>
+              </div>
+            </details>
+
+        {%- endcase -%}
+      {%- endfor -%}
+
+      <noscript><button type="submit" class="btn">{{ 'zk.filter_apply' | t }}</button></noscript>
+    </div>
+
+    {%- comment -%} What is currently on, and a way out of it. {%- endcomment -%}
+    {%- assign active_count = 0 -%}
+    {%- for filter in collection.filters -%}
+      {%- assign active_count = active_count | plus: filter.active_values.size -%}
+      {%- if filter.type == 'price_range' and filter.min_value.value or filter.max_value.value -%}
+        {%- assign active_count = active_count | plus: 1 -%}
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- if active_count > 0 -%}
+      <div class="zk-filters__active">
+        {%- for filter in collection.filters -%}
+          {%- for value in filter.active_values -%}
+            <a class="zk-chip" href="{{ value.url_to_remove }}">{{ value.label }} <span>✕</span></a>
+          {%- endfor -%}
+          {%- if filter.type == 'price_range' and filter.min_value.value or filter.max_value.value -%}
+            <a class="zk-chip" href="{{ filter.url_to_remove }}">
+              {{ filter.min_value.value | default: 0 | money }}–{{ filter.max_value.value | default: filter.range_max | money }}
+              <span>✕</span>
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+        <a class="zk-chip zk-chip--clear" href="{{ collection.url }}">{{ 'zk.filter_clear' | t }}</a>
+      </div>
+    {%- endif -%}
+  </form>
+
+  <script>
+    (function () {
+      var form = document.getElementById('ZkFilterForm');
+      if (!form) return;
+      var t;
+      form.addEventListener('change', function (e) {
+        // Typing in a price box should settle before the page reloads.
+        var wait = e.target.type === 'number' ? 600 : 0;
+        clearTimeout(t);
+        t = setTimeout(function () { form.submit(); }, wait);
+      });
+      form.addEventListener('input', function (e) {
+        if (e.target.type !== 'number') return;
+        clearTimeout(t);
+        t = setTimeout(function () { form.submit(); }, 900);
+      });
+    })();
+  </script>
+{%- endif -%}

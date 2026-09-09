@@ -325,6 +325,12 @@
     "win_cta": "Vezi pălinca",
     "win_all": "Toate pălincile premiate",
     "cat_awarded": "Premiate",
-    "nav_menu": "Meniu"
+    "nav_menu": "Meniu",
+    "filter_from": "De la",
+    "filter_to": "Până la",
+    "filter_apply": "Aplică",
+    "filter_clear": "Șterge filtrele",
+    "filter_availability": "Disponibilitate",
+    "filter_price": "Preț"
   }
 }

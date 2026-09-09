@@ -325,6 +325,12 @@
     "win_cta": "View bottle",
     "win_all": "All award winners",
     "cat_awarded": "Award-winning",
-    "nav_menu": "Menu"
+    "nav_menu": "Menu",
+    "filter_from": "From",
+    "filter_to": "To",
+    "filter_apply": "Apply",
+    "filter_clear": "Clear filters",
+    "filter_availability": "Availability",
+    "filter_price": "Price"
   }
 }

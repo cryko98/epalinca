@@ -325,6 +325,12 @@
     "win_cta": "Megnézem",
     "win_all": "Az összes díjnyertes",
     "cat_awarded": "Díjnyertes",
-    "nav_menu": "Menü"
+    "nav_menu": "Menü",
+    "filter_from": "Tól",
+    "filter_to": "Ig",
+    "filter_apply": "Szűrés",
+    "filter_clear": "Szűrők törlése",
+    "filter_availability": "Elérhetőség",
+    "filter_price": "Ár"
   }
 }

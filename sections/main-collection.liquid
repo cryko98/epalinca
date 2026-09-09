@@ -48,6 +48,8 @@
       </form>
     {%- endif -%}
 
+    {% render 'zk-filters' %}
+
     {% paginate collection.products by 24 %}
       {%- if collection.products.size > 0 -%}
         <div class="grid">
