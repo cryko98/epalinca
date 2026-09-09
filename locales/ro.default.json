@@ -306,6 +306,7 @@
     "spec_volume": "Volum",
     "spec_abv": "Concentrație",
     "spec_region": "Regiune",
-    "pdp_more": "Din aceeași linie"
+    "pdp_more": "Din aceeași linie",
+    "nav_cats": "Categorii"
   }
 }

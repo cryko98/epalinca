@@ -306,6 +306,7 @@
     "spec_volume": "Űrtartalom",
     "spec_abv": "Alkoholtartalom",
     "spec_region": "Régió",
-    "pdp_more": "Ugyanabból a sorból"
+    "pdp_more": "Ugyanabból a sorból",
+    "nav_cats": "Kategóriák"
   }
 }

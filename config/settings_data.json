@@ -14,6 +14,51 @@
     "age_gate_text": "Acest site conține informații despre produse alcoolice. Aveți cel puțin 18 ani?",
     "age_gate_yes": "Da, am 18+ ani",
     "age_gate_no": "Nu, ieși",
-    "alcohol_warning": "AVERTISMENT: Consumul de alcool în exces dăunează grav sănătății. Interzis minorilor sub 18 ani. Nu conduceți sub influența alcoolului."
+    "alcohol_warning": "AVERTISMENT: Consumul de alcool în exces dăunează grav sănătății. Interzis minorilor sub 18 ani. Nu conduceți sub influența alcoolului.",
+    "sections": {
+      "header": {
+        "type": "header",
+        "blocks": {
+          "c1": {
+            "type": "category",
+            "settings": {
+              "collection": "fructe"
+            }
+          },
+          "c2": {
+            "type": "category",
+            "settings": {
+              "collection": "struguri"
+            }
+          },
+          "c3": {
+            "type": "category",
+            "settings": {
+              "collection": "wild"
+            }
+          },
+          "c4": {
+            "type": "category",
+            "settings": {
+              "collection": "barrique"
+            }
+          },
+          "c5": {
+            "type": "category",
+            "settings": {
+              "collection": "distilat-sticla-albastra"
+            }
+          }
+        },
+        "block_order": [
+          "c1",
+          "c2",
+          "c3",
+          "c4",
+          "c5"
+        ],
+        "settings": {}
+      }
+    }
   }
 }

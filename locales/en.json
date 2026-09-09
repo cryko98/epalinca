@@ -306,6 +306,7 @@
     "spec_volume": "Volume",
     "spec_abv": "ABV",
     "spec_region": "Region",
-    "pdp_more": "From the same line"
+    "pdp_more": "From the same line",
+    "nav_cats": "Categories"
   }
 }

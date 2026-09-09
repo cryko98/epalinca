@@ -29,40 +29,28 @@
         "f1": {
           "type": "filter",
           "settings": {
-            "collection": "core"
+            "collection": "fructe"
           }
         },
         "f2": {
           "type": "filter",
           "settings": {
-            "collection": "varietal"
+            "collection": "struguri"
           }
         },
         "f3": {
           "type": "filter",
           "settings": {
-            "collection": "orchard"
+            "collection": "wild"
           }
         },
         "f4": {
           "type": "filter",
           "settings": {
-            "collection": "wild"
-          }
-        },
-        "f5": {
-          "type": "filter",
-          "settings": {
-            "collection": "champion"
-          }
-        },
-        "f6": {
-          "type": "filter",
-          "settings": {
             "collection": "barrique"
           }
         },
-        "f7": {
+        "f5": {
           "type": "filter",
           "settings": {
             "collection": "distilat-sticla-albastra"
@@ -74,9 +62,7 @@
         "f2",
         "f3",
         "f4",
-        "f5",
-        "f6",
-        "f7"
+        "f5"
       ]
     },
     "partners": {

@@ -12,8 +12,35 @@
     <a class="brand" href="{{ home }}" aria-label="{{ shop.name }}">{% render 'zk-logo' %}</a>
 
     <nav class="main">
-      {%- if section.blocks.size > 0 -%}
-        {%- for block in section.blocks -%}
+      {%- comment -%}
+        Category menu: the five shop categories, so they are reachable from any page and
+        not only from the filter bar on the homepage. Built from the section's category
+        blocks; falls back to nothing if none are set.
+      {%- endcomment -%}
+      {%- assign cat_blocks = section.blocks | where: 'type', 'category' -%}
+      {%- if cat_blocks.size > 0 -%}
+        <div class="zk-cats">
+          <button type="button" class="zk-cats__btn" aria-expanded="false" aria-controls="zkCatMenu">
+            {%- render 'zk-t', override: section.settings.nav_cats, key: 'zk.nav_cats' -%}
+            <svg viewBox="0 0 12 8" aria-hidden="true"><path d="M1 1l5 5 5-5" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>
+          </button>
+          <div class="zk-cats__menu" id="zkCatMenu" hidden>
+            {%- for block in cat_blocks -%}
+              {%- assign c = block.settings.collection -%}
+              {%- if c != blank -%}
+                <a href="{{ c.url }}" data-cat="{{ c.handle }}" {{ block.shopify_attributes }}>
+                  <span>{{ block.settings.label | default: c.title }}</span>
+                  <i>{{ c.all_products_count }}</i>
+                </a>
+              {%- endif -%}
+            {%- endfor -%}
+          </div>
+        </div>
+      {%- endif -%}
+
+      {%- assign link_blocks = section.blocks | where: 'type', 'link' -%}
+      {%- if link_blocks.size > 0 -%}
+        {%- for block in link_blocks -%}
           <a href="{{ block.settings.link | default: '#' }}" {{ block.shopify_attributes }}>{{ block.settings.label }}</a>
         {%- endfor -%}
       {%- else -%}
@@ -35,6 +62,38 @@
     </div>
   </div>
 </header>
+
+<script>
+  (function () {
+    var wrap = document.querySelector('.zk-cats');
+    if (!wrap) return;
+    var btn = wrap.querySelector('.zk-cats__btn');
+    var menu = wrap.querySelector('.zk-cats__menu');
+
+    function close() { menu.hidden = true; btn.setAttribute('aria-expanded', 'false'); }
+    function open() { menu.hidden = false; btn.setAttribute('aria-expanded', 'true'); }
+
+    btn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      menu.hidden ? open() : close();
+    });
+    document.addEventListener('click', function (e) { if (!wrap.contains(e.target)) close(); });
+    document.addEventListener('keydown', function (e) { if (e.key === 'Escape') close(); });
+
+    // On the homepage the categories filter the grid in place instead of navigating.
+    if (document.getElementById('zkGrid')) {
+      menu.querySelectorAll('a[data-cat]').forEach(function (a) {
+        a.addEventListener('click', function (e) {
+          e.preventDefault();
+          close();
+          var target = document.querySelector('#zkFilters button[data-f="' + a.getAttribute('data-cat') + '"]');
+          if (target) { target.click(); document.getElementById('shop').scrollIntoView({ behavior: 'smooth' }); }
+          else { window.location.href = a.href; }
+        });
+      });
+    }
+  })();
+</script>
 
 {% schema %}
 {
@@ -79,9 +138,32 @@
       "id": "cart_label",
       "label": "Etichetă coș",
       "info": "Gol = textul tradus din locales/"
+    },
+    {
+      "type": "text",
+      "id": "nav_cats",
+      "label": "Meniu · Categorii",
+      "info": "Gol = textul tradus din locales/"
     }
   ],
   "blocks": [
+    {
+      "type": "category",
+      "name": "Categorie",
+      "settings": [
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Colecție"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Etichetă",
+          "info": "Gol = numele colecției"
+        }
+      ]
+    },
     {
       "type": "link",
       "name": "Element de meniu",

@@ -2213,3 +2213,78 @@ footer .foot-inner { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; ga
 
 .pdp__more { margin-top: 6rem; padding-top: 3rem; border-top: 1px solid var(--line); }
 .pdp__more .grid { grid-template-columns: repeat(auto-fill, minmax(210px, 1fr)); }
+
+
+/* ==========================================================================
+   Sticky header, category menu, prominent filters
+   ========================================================================== */
+
+/* The design sets position:sticky on header.top, but Shopify wraps every section in a
+   div, and a sticky element can never leave its parent's box. #shopify-section-header is
+   exactly as tall as the header, so it scrolled away with the page. Making the wrapper
+   the sticky element is what actually pins it. */
+#shopify-section-header {
+  position: sticky;
+  top: 0;
+  z-index: 60;
+}
+header.top { position: static; }
+
+/* Category menu -------------------------------------------------------------- */
+.zk-cats { position: relative; }
+.zk-cats__btn {
+  display: inline-flex; align-items: center; gap: .5rem;
+  background: transparent; border: 1px solid var(--line); border-radius: 0;
+  color: #F3F1EC; font-family: "IBM Plex Mono", monospace; font-size: .7rem;
+  letter-spacing: .16em; text-transform: uppercase; padding: .55rem .9rem;
+  transition: border-color .25s, color .25s;
+}
+.zk-cats__btn:hover, .zk-cats__btn[aria-expanded="true"] { border-color: var(--amber); color: var(--amber-2); }
+.zk-cats__btn svg { width: 10px; height: 7px; transition: transform .25s; }
+.zk-cats__btn[aria-expanded="true"] svg { transform: rotate(180deg); }
+
+.zk-cats__menu {
+  position: absolute; top: calc(100% + .55rem); left: 0; z-index: 70;
+  min-width: 240px; padding: .4rem;
+  background: rgba(15, 15, 17, .97); backdrop-filter: blur(10px);
+  border: 1px solid var(--line); border-radius: 2px;
+  box-shadow: 0 24px 50px rgba(0, 0, 0, .55);
+  display: flex; flex-direction: column;
+}
+.zk-cats__menu a {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem;
+  padding: .7rem .8rem; text-decoration: none; color: var(--silver);
+  font-size: .88rem; border-radius: 2px; transition: background .2s, color .2s;
+}
+.zk-cats__menu a:hover { background: var(--slate); color: #fff; }
+.zk-cats__menu a i {
+  font-style: normal; font-family: "IBM Plex Mono", monospace; font-size: .62rem;
+  letter-spacing: .1em; color: var(--amber); border: 1px solid rgba(201, 150, 59, .35);
+  border-radius: 999px; padding: .1rem .45rem;
+}
+
+/* Give the categories real presence in the shop, rather than a row of quiet tabs. */
+#shop .filters {
+  gap: .6rem; border-bottom: 0; margin-bottom: 2.6rem;
+  display: flex; flex-wrap: wrap;
+}
+#shop .filters button {
+  border: 1px solid var(--line-on-paper); border-radius: 999px;
+  padding: .7rem 1.3rem; margin-bottom: 0;
+  font-family: "IBM Plex Mono", monospace; font-size: .7rem; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--muted-on-paper); background: transparent;
+  transition: background .22s, color .22s, border-color .22s, transform .22s;
+}
+#shop .filters button:hover { border-color: var(--ink-on-paper); color: var(--ink-on-paper); transform: translateY(-1px); }
+#shop .filters button.on {
+  background: var(--ink-on-paper); border-color: var(--ink-on-paper); color: var(--paper);
+}
+
+/* Show the whole bottle: the tile was cropping the artwork at 88% of its height. */
+.card .pic img { height: auto; width: auto; max-height: 100%; max-width: 100%; object-fit: contain; padding: 6% 8%; }
+.card .pic { padding: 0; }
+
+@media (max-width: 860px) {
+  .zk-cats { display: block; }
+  .zk-cats__menu { left: auto; right: 0; }
+}
