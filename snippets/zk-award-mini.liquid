@@ -1,0 +1,61 @@
+{%- comment -%}
+  Small award medal for the corner of a product card.
+
+  Reads the first entry of the product's zekulhyda.awards metafield (same format as
+  zk-awards: metal|ring text|figure|label) and draws a compact version of the same ring,
+  so an award-winning bottle is recognisable straight from the grid.
+
+  Only the first award is shown - the corner of a card is not the place for a list; the
+  product page shows them all via zk-awards.
+
+  Renders nothing when the product has no awards recorded.
+
+  Usage: {% render 'zk-award-mini', product: product %}
+{%- endcomment -%}
+
+{%- assign awards = product.metafields.zekulhyda.awards.value -%}
+
+{%- if awards != blank and awards.size > 0 -%}
+  {%- liquid
+    assign parts = awards[0] | split: '|'
+    assign metal = parts[0] | strip | downcase
+    assign ring  = parts[1] | strip
+    assign fig   = parts[2] | strip
+    assign label = parts[3] | strip
+
+    case metal
+      when 'champ'
+        assign c1 = '#FFF1C2'
+        assign c2 = '#E4B65A'
+        assign c3 = '#8A5F1E'
+      when 'silver'
+        assign c1 = '#F2F2F2'
+        assign c2 = '#B9BCC2'
+        assign c3 = '#6E7178'
+      else
+        assign c1 = '#F6E3A1'
+        assign c2 = '#C9963B'
+        assign c3 = '#7A5416'
+    endcase
+
+    assign uid = 'mini' | append: product.id
+    assign more = awards.size | minus: 1
+  -%}
+
+  <span class="zk-mini" title="{{ ring | escape }} — {{ label | escape }}" aria-label="{{ ring | escape }} — {{ label | escape }}">
+    <svg viewBox="0 0 200 200" role="img">
+      <defs>
+        <linearGradient id="{{ uid }}a" x1="0" y1="0" x2="1" y2="1">
+          <stop offset="0" stop-color="{{ c1 }}"/><stop offset=".5" stop-color="{{ c2 }}"/><stop offset="1" stop-color="{{ c3 }}"/>
+        </linearGradient>
+      </defs>
+      <circle cx="100" cy="100" r="98" fill="url(#{{ uid }}a)"/>
+      <circle cx="100" cy="100" r="86" fill="none" stroke="{{ c3 }}" stroke-opacity=".45" stroke-width="3"/>
+      <circle cx="100" cy="100" r="62" fill="#0F0F11"/>
+      <text x="100" y="{% if fig.size > 2 %}116{% else %}122{% endif %}" text-anchor="middle"
+            font-family="Cormorant Garamond,serif" font-size="{% if fig.size > 2 %}52{% else %}72{% endif %}" fill="{{ c1 }}">{{ fig }}</text>
+      <path d="M42 42 q58 -38 116 0" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="9" stroke-linecap="round"/>
+    </svg>
+    {%- if more > 0 -%}<i class="zk-mini__more">+{{ more }}</i>{%- endif -%}
+  </span>
+{%- endif -%}

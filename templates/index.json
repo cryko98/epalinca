@@ -23,8 +23,61 @@
     "shop": {
       "type": "collection-premium",
       "settings": {
-        "products_count": 12
-      }
+        "products_count": 40
+      },
+      "blocks": {
+        "f1": {
+          "type": "filter",
+          "settings": {
+            "collection": "core"
+          }
+        },
+        "f2": {
+          "type": "filter",
+          "settings": {
+            "collection": "varietal"
+          }
+        },
+        "f3": {
+          "type": "filter",
+          "settings": {
+            "collection": "orchard"
+          }
+        },
+        "f4": {
+          "type": "filter",
+          "settings": {
+            "collection": "wild"
+          }
+        },
+        "f5": {
+          "type": "filter",
+          "settings": {
+            "collection": "champion"
+          }
+        },
+        "f6": {
+          "type": "filter",
+          "settings": {
+            "collection": "barrique"
+          }
+        },
+        "f7": {
+          "type": "filter",
+          "settings": {
+            "collection": "distilat-sticla-albastra"
+          }
+        }
+      },
+      "block_order": [
+        "f1",
+        "f2",
+        "f3",
+        "f4",
+        "f5",
+        "f6",
+        "f7"
+      ]
     },
     "partners": {
       "type": "partners-marquee",

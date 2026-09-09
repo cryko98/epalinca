@@ -16,22 +16,28 @@
     </div>
 
     {%- if section.blocks.size > 0 -%}
-      <div class="filters">
-        <a class="on" href="{{ routes.all_products_collection_url }}">{% render 'zk-t', override: section.settings.filter_all, key: 'zk.shop_all' %}</a>
+      <div class="filters" id="zkFilters">
+        <button type="button" class="on" data-f="*">
+          {%- render 'zk-t', override: section.settings.filter_all, key: 'zk.shop_all' -%}
+        </button>
         {%- for block in section.blocks -%}
-          {%- assign fc = collections[block.settings.collection] -%}
+          {%- assign fc = block.settings.collection -%}
           {%- if fc != blank -%}
-            <a href="{{ fc.url }}" {{ block.shopify_attributes }}>{{ block.settings.label | default: fc.title }}</a>
+            <button type="button" data-f="{{ fc.handle }}" {{ block.shopify_attributes }}>
+              {{- block.settings.label | default: fc.title -}}
+            </button>
           {%- endif -%}
         {%- endfor -%}
       </div>
     {%- endif -%}
 
-    <div class="grid">
+    <div class="grid" id="zkGrid">
       {%- for product in items limit: section.settings.products_count -%}
-        <div class="card reveal">
+        {%- capture handles -%}{%- for c in product.collections -%}{{ c.handle }} {% endfor -%}{%- endcapture -%}
+        <div class="card reveal" data-c="{{ handles | strip }}">
           <a class="pic{% if product.featured_image %} photo{% endif %}" href="{{ product.url }}">
             {% render 'zk-product-image', product: product %}
+            {% render 'zk-award-mini', product: product %}
             {%- for tag in product.tags -%}
               {%- if tag contains 'badge:' -%}
                 <span class="badge">{{ tag | remove: 'badge:' }}</span>
@@ -56,10 +62,10 @@
                 <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data">
                   <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
                   <input type="hidden" name="quantity" value="1">
-                  <button type="submit" class="add">{% render 'zk-t', override: section.settings.add_label, key: 'products.add_to_cart' %}</button>
+                  <button type="submit" class="add">{%- render 'zk-t', override: section.settings.add_label, key: 'products.add_to_cart' -%}</button>
                 </form>
               {%- else -%}
-                <button class="add" disabled>{% render 'zk-t', override: section.settings.sold_label, key: 'products.sold_out' %}</button>
+                <button class="add" disabled>{%- render 'zk-t', override: section.settings.sold_label, key: 'products.sold_out' -%}</button>
               {%- endif -%}
             </div>
           </div>
@@ -68,87 +74,84 @@
         <p class="empty">{{ 'collections.no_products' | t }}</p>
       {%- endfor -%}
     </div>
+
+    <p class="zk-noresult" id="zkNoResult" hidden>{{ 'collections.no_products' | t }}</p>
   </div>
 </section>
+
+<script>
+  (function () {
+    var bar = document.getElementById('zkFilters');
+    var grid = document.getElementById('zkGrid');
+    if (!bar || !grid) return;
+
+    var cards = [].slice.call(grid.querySelectorAll('.card'));
+    var empty = document.getElementById('zkNoResult');
+
+    // The range tiers and the Barrique / Distilat calls to action link here using the
+    // design's own data-f values, which do not all match the collection handles.
+    var ALIAS = { distilat: 'distilat-sticla-albastra' };
+
+    function apply(value) {
+      var want = ALIAS[value] || value;
+      var shown = 0;
+
+      cards.forEach(function (card) {
+        var hit = want === '*' ||
+          (' ' + (card.getAttribute('data-c') || '') + ' ').indexOf(' ' + want + ' ') > -1;
+        card.hidden = !hit;
+        if (hit) shown++;
+      });
+
+      if (empty) empty.hidden = shown > 0;
+
+      [].slice.call(bar.querySelectorAll('button')).forEach(function (b) {
+        var v = b.getAttribute('data-f');
+        b.classList.toggle('on', (ALIAS[v] || v) === want);
+      });
+    }
+
+    bar.addEventListener('click', function (e) {
+      var btn = e.target.closest('button[data-f]');
+      if (!btn) return;
+      e.preventDefault();
+      apply(btn.getAttribute('data-f'));
+    });
+
+    document.querySelectorAll('a[data-f]').forEach(function (a) {
+      a.addEventListener('click', function (e) {
+        e.preventDefault();
+        apply(a.getAttribute('data-f'));
+        var shop = document.getElementById('shop');
+        if (shop) shop.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  })();
+</script>
 
 {% schema %}
 {
   "name": "Magazin",
   "settings": [
-    {
-      "type": "text",
-      "id": "shop_eyebrow",
-      "label": "Etichetă",
-      "info": "Gol = textul tradus din locales/"
-    },
-    {
-      "type": "textarea",
-      "id": "shop_title",
-      "label": "Titlu",
-      "info": "Gol = textul tradus din locales/"
-    },
-    {
-      "type": "textarea",
-      "id": "shop_sub",
-      "label": "Subtitlu",
-      "info": "Gol = textul tradus din locales/"
-    },
-    {
-      "type": "collection",
-      "id": "collection",
-      "label": "Colecție (gol = toate produsele)"
-    },
-    {
-      "type": "range",
-      "id": "products_count",
-      "min": 4,
-      "max": 40,
-      "step": 4,
-      "label": "Număr de produse",
-      "default": 12
-    },
-    {
-      "type": "text",
-      "id": "filter_all",
-      "label": "Etichetă „toate”",
-      "info": "Gol = textul tradus din locales/"
-    },
-    {
-      "type": "text",
-      "id": "add_label",
-      "label": "Buton adăugare",
-      "info": "Gol = textul tradus din locales/"
-    },
-    {
-      "type": "text",
-      "id": "sold_label",
-      "label": "Text epuizat",
-      "info": "Gol = textul tradus din locales/"
-    }
+    { "type": "text", "id": "shop_eyebrow", "label": "Etichetă", "info": "Gol = textul tradus din locales/" },
+    { "type": "textarea", "id": "shop_title", "label": "Titlu", "info": "Gol = textul tradus din locales/" },
+    { "type": "textarea", "id": "shop_sub", "label": "Subtitlu", "info": "Gol = textul tradus din locales/" },
+    { "type": "collection", "id": "collection", "label": "Colecție sursă", "info": "Gol = toate produsele" },
+    { "type": "range", "id": "products_count", "min": 4, "max": 40, "step": 4, "label": "Număr de produse", "default": 40, "info": "Filtrele lucrează pe produsele afișate, deci lăsați valoarea mare." },
+    { "type": "text", "id": "filter_all", "label": "Etichetă „toate”", "info": "Gol = textul tradus din locales/" },
+    { "type": "text", "id": "add_label", "label": "Buton adăugare", "info": "Gol = textul tradus din locales/" },
+    { "type": "text", "id": "sold_label", "label": "Text epuizat", "info": "Gol = textul tradus din locales/" }
   ],
   "blocks": [
     {
       "type": "filter",
-      "name": "Filtru (colecție)",
+      "name": "Filtru",
       "settings": [
-        {
-          "type": "text",
-          "id": "collection",
-          "label": "Handle colecție",
-          "info": "ex. barrique"
-        },
-        {
-          "type": "text",
-          "id": "label",
-          "label": "Etichetă"
-        }
+        { "type": "collection", "id": "collection", "label": "Colecție" },
+        { "type": "text", "id": "label", "label": "Etichetă", "info": "Gol = numele colecției" }
       ]
     }
   ],
-  "presets": [
-    {
-      "name": "Magazin — grilă produse"
-    }
-  ]
+  "presets": [{ "name": "Magazin — grilă produse" }]
 }
 {% endschema %}

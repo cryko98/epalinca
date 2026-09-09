@@ -2057,3 +2057,77 @@ footer .foot-inner { display: grid; grid-template-columns: 1.4fr 1fr 1fr 1fr; ga
   .zk-despre__section-title { font-size: 2.8rem; }
   .zk-despre__lead { font-size: 1.5rem; }
 }
+
+
+/* ==========================================================================
+   Product card corrections
+   ========================================================================== */
+
+/* The artwork tile is meant to be a 4/5 rectangle. A photo respects that, but the
+   bottle-svg fallback has no intrinsic ratio, so it stretched the tile from 289px to
+   570px and cards without a product image rendered ~50% taller than the rest of the
+   grid. Taking the fallback out of the flow lets aspect-ratio decide the height. */
+.card .pic { overflow: hidden; }
+.card .pic > svg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 84%;
+  width: auto;
+  max-width: 86%;
+  transform: translate(-50%, -50%);
+}
+.card:hover .pic > svg,
+.card:focus-within .pic > svg { transform: translate(-50%, -50%) scale(1.07); }
+
+/* Award medal in the corner of a card, so a prize-winning bottle is recognisable
+   straight from the grid. */
+.zk-mini {
+  position: absolute;
+  right: .55rem;
+  bottom: .55rem;
+  width: 52px;
+  height: 52px;
+  z-index: 2;
+  display: block;
+  filter: drop-shadow(0 6px 10px rgba(0, 0, 0, .45));
+  transition: transform .35s cubic-bezier(.2, .7, .2, 1);
+  pointer-events: none;
+}
+.zk-mini svg { width: 100%; height: 100%; display: block; }
+.card:hover .zk-mini { transform: translateY(-4px) rotate(-6deg) scale(1.06); }
+.zk-mini__more {
+  position: absolute;
+  right: -4px;
+  top: -4px;
+  background: var(--ink-on-paper);
+  color: var(--amber-2);
+  font-family: "IBM Plex Mono", monospace;
+  font-size: .58rem;
+  font-style: normal;
+  line-height: 1;
+  padding: .18rem .3rem;
+  border-radius: 2px;
+}
+@media (max-width: 560px) { .zk-mini { width: 42px; height: 42px; } }
+
+/* Filters are buttons now rather than links, so they need the anchor's reset. */
+.filters button { cursor: pointer; font-family: inherit; }
+
+/* Titles and blurbs vary in length, which left cards in different grid rows between 543
+   and 586px tall. Clamping both to a fixed number of lines makes every card the same
+   height regardless of the product's copy. */
+.card .body h3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 2.3em;
+}
+.card .note {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: 3.9em;
+}
