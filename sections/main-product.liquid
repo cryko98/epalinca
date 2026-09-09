@@ -107,6 +107,8 @@
           {{ product.description }}
         </div>
 
+        {% render 'zk-awards', product: product %}
+
         <!-- Meta info from tags -->
         {% assign abv_tag = '' %}
         {% assign vol_tag = '' %}

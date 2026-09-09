@@ -300,6 +300,7 @@
     "foot_link_privacy": "Privacy",
     "bk_success": "Thank you! We have received your request and will confirm shortly.",
     "bk_note": "The price shown is indicative; final confirmation comes by email.",
-    "bk_error": "Please check the fields"
+    "bk_error": "Please check the fields",
+    "awards_title": "Awards and distinctions"
   }
 }

@@ -1,0 +1,84 @@
+{%- comment -%}
+  Award medals for a product, drawn in the same style as the homepage medal strip.
+
+  Data comes from the product metafield zekulhyda.awards (a list of lines), each line:
+
+      metal|ring text|figure|label
+      gold|QUINTESSENCE 2025|AUR|medalie de aur
+
+  metal is gold, champ or silver. The homepage medals are drawn in JavaScript, but here
+  the SVG is built in Liquid so the medals are in the HTML the crawler and the shopper
+  get on first paint - a product's awards are content, not decoration.
+
+  Renders nothing when the product has no awards recorded.
+
+  Usage: {% render 'zk-awards', product: product %}
+{%- endcomment -%}
+
+{%- assign awards = product.metafields.zekulhyda.awards.value -%}
+
+{%- if awards != blank and awards.size > 0 -%}
+  <div class="zk-awards">
+    <div class="zk-awards__head">{{ 'zk.awards_title' | t }}</div>
+    <div class="zk-awards__row">
+      {%- for line in awards -%}
+        {%- liquid
+          assign parts = line | split: '|'
+          assign metal = parts[0] | strip | downcase
+          assign ring  = parts[1] | strip
+          assign fig   = parts[2] | strip
+          assign label = parts[3] | strip
+
+          case metal
+            when 'champ'
+              assign c1 = '#FFF1C2'
+              assign c2 = '#E4B65A'
+              assign c3 = '#8A5F1E'
+            when 'silver'
+              assign c1 = '#F2F2F2'
+              assign c2 = '#B9BCC2'
+              assign c3 = '#6E7178'
+            else
+              assign c1 = '#F6E3A1'
+              assign c2 = '#C9963B'
+              assign c3 = '#7A5416'
+          endcase
+
+          assign uid = 'a' | append: forloop.index | append: product.id
+        -%}
+
+        <div class="badge-m" title="{{ ring | escape }}">
+          <svg viewBox="0 0 200 200" role="img" aria-label="{{ ring | escape }} — {{ label | escape }}">
+            <defs>
+              <linearGradient id="{{ uid }}a" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0" stop-color="{{ c1 }}"/><stop offset=".5" stop-color="{{ c2 }}"/><stop offset="1" stop-color="{{ c3 }}"/>
+              </linearGradient>
+              <linearGradient id="{{ uid }}b" x1="1" y1="0" x2="0" y2="1">
+                <stop offset="0" stop-color="{{ c1 }}"/><stop offset=".55" stop-color="{{ c2 }}"/><stop offset="1" stop-color="{{ c3 }}"/>
+              </linearGradient>
+              <path id="{{ uid }}p" d="M100,100 m-72,0 a72,72 0 1,1 144,0 a72,72 0 1,1 -144,0"/>
+            </defs>
+            <circle cx="100" cy="100" r="98" fill="url(#{{ uid }}a)"/>
+            <circle cx="100" cy="100" r="92" fill="none" stroke="{{ c3 }}" stroke-opacity=".5" stroke-width="1"/>
+            <circle cx="100" cy="100" r="88" fill="url(#{{ uid }}b)"/>
+            <circle cx="100" cy="100" r="58" fill="#0F0F11"/>
+            <circle cx="100" cy="100" r="55" fill="none" stroke="{{ c1 }}" stroke-opacity=".6" stroke-width=".8"/>
+            <text font-family="IBM Plex Mono,monospace" font-size="9.5" letter-spacing="2.2" fill="#1a1408" font-weight="500">
+              <textPath href="#{{ uid }}p" startOffset="50%" text-anchor="middle">{{ ring }}</textPath>
+            </text>
+            <text x="100" y="108" text-anchor="middle" font-family="Cormorant Garamond,serif" font-size="{% if fig.size > 3 %}26{% else %}40{% endif %}" fill="{{ c1 }}">{{ fig }}</text>
+            <text x="100" y="130" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7.5" letter-spacing="1.6" fill="{{ c2 }}">{{ label | upcase }}</text>
+            <path d="M40 40 q60 -40 120 0" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="6" stroke-linecap="round"/>
+          </svg>
+          <span class="l">{{ ring }}</span>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+
+  <style>
+    .zk-awards { margin: 2rem 0; padding-top: 1.6rem; border-top: 1px solid var(--line); }
+    .zk-awards__head { font-family: "IBM Plex Mono", monospace; font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; color: var(--amber); margin-bottom: 1.2rem; }
+    .zk-awards__row { display: flex; flex-wrap: wrap; gap: 1.4rem; }
+  </style>
+{%- endif -%}
