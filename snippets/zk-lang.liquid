@@ -6,27 +6,34 @@
   and carries through to product translations, checkout and notification emails. A purely
   client-side text swap would do none of that.
 
+  The action URL must come from the {% form %} tag, not be built by hand. An earlier
+  version used `{{ routes.root_url }}localization`, which is correct on the default
+  locale (root_url is "/") but broken on every other one, where root_url is "/hu" with no
+  trailing slash - the two concatenated into "/hulocalization" and 404'd. The form tag
+  builds the right path for whichever locale is active.
+
+  return_to is deliberately omitted, as in Dawn: Shopify redirects back to the equivalent
+  URL in the new locale on its own. Passing the current path would send the already
+  localized "/hu/products/x" through and produce a doubled prefix.
+
   Renders nothing while the shop has only one published language, so the control never
   appears as a dead single-option toggle.
 {%- endcomment -%}
 
 {%- if localization.available_languages.size > 1 -%}
-  <form method="post" action="{{ routes.root_url }}localization" class="lang" id="zkLangForm" accept-charset="UTF-8">
-    <input type="hidden" name="form_type" value="localization">
-    <input type="hidden" name="utf8" value="✓">
-    <input type="hidden" name="_method" value="put">
-    <input type="hidden" name="return_to" value="{{ request.path | escape }}">
+  {%- form 'localization', id: 'zkLangForm', class: 'lang' -%}
     {%- for lang in localization.available_languages -%}
       <button
         type="submit"
         name="locale_code"
         value="{{ lang.iso_code }}"
         lang="{{ lang.iso_code }}"
+        hreflang="{{ lang.iso_code }}"
         class="{% if lang.iso_code == localization.language.iso_code %}on{% endif %}"
         {% if lang.iso_code == localization.language.iso_code %}aria-current="true"{% endif %}
         title="{{ lang.endonym_name | capitalize }}">
-        {{ lang.iso_code | upcase }}
+        {{- lang.iso_code | upcase -}}
       </button>
     {%- endfor -%}
-  </form>
+  {%- endform -%}
 {%- endif -%}
