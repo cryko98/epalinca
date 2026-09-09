@@ -1,14 +1,12 @@
-<div class="collections-page" style="padding-top:80px;">
+{%- liquid
+  assign head_eyebrow = 'zk.collections_label' | t
+  if section.settings.label != blank
+    assign head_eyebrow = section.settings.label
+  endif
+-%}
+{% render 'zk-page-head', eyebrow: head_eyebrow, title: page_title %}
 
-  <div class="collections-page__hero">
-    <div class="section-inner">
-      <div class="section-label">
-        <span class="section-label-line"></span>
-        <span class="section-label-text">{% render 'zk-t', override: section.settings.label, key: 'zk.collections_label' %}</span>
-      </div>
-      <h1 class="collections-page__title">{{ page_title }}</h1>
-    </div>
-  </div>
+<div class="collections-page">
 
   <div class="section-inner collections-page__body">
     <div class="collections-grid">

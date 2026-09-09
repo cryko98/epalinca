@@ -312,6 +312,12 @@
     "foot_link_returns": "Elállás és visszaküldés",
     "foot_link_shipping": "Szállítás és fizetés",
     "product_one": "termék",
-    "product_many": "termék"
+    "product_many": "termék",
+    "cart_eyebrow": "A rendelésed",
+    "piece": "db",
+    "cart_shipping_note": "A szállítást és az adókat a pénztárnál számoljuk ki.",
+    "cart_age_note": "Alkoholtartalmú italt 18 éven aluliaknak nem szolgálunk ki.",
+    "cart_discover": "Fedezd fel a kínálatot",
+    "blog_eyebrow": "A főzdéből"
   }
 }

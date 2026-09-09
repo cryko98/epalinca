@@ -312,6 +312,12 @@
     "foot_link_returns": "Returns policy",
     "foot_link_shipping": "Delivery and payment",
     "product_one": "product",
-    "product_many": "products"
+    "product_many": "products",
+    "cart_eyebrow": "Your order",
+    "piece": "ea.",
+    "cart_shipping_note": "Shipping and taxes are calculated at checkout.",
+    "cart_age_note": "The sale of alcohol to anyone under 18 is prohibited.",
+    "cart_discover": "Discover the collection",
+    "blog_eyebrow": "From the distillery"
   }
 }

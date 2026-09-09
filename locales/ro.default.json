@@ -312,6 +312,12 @@
     "foot_link_returns": "Politica de retur",
     "foot_link_shipping": "Livrare și plată",
     "product_one": "produs",
-    "product_many": "produse"
+    "product_many": "produse",
+    "cart_eyebrow": "Comanda ta",
+    "piece": "buc.",
+    "cart_shipping_note": "Transportul și taxele se calculează la finalizarea comenzii.",
+    "cart_age_note": "Vânzarea de băuturi alcoolice este interzisă minorilor sub 18 ani.",
+    "cart_discover": "Descoperă colecția",
+    "blog_eyebrow": "Din distilerie"
   }
 }
