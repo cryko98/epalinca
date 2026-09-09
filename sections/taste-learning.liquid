@@ -33,9 +33,15 @@
       {%- for block in section.blocks -%}
         {%- if block.type == 'pack' -%}
           <div class="pack reveal{% if block.settings.highlight %} hi sel{% endif %}" data-pack="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+            {%- liquid
+              assign tk = block.settings.tkey | default: 'pk1'
+              assign k_name = 'zk.' | append: tk | append: '_name'
+              assign k_time = 'zk.' | append: tk | append: '_time'
+              assign k_ppl  = 'zk.' | append: tk | append: '_ppl'
+            -%}
             {%- if block.settings.tag != blank %}<span class="tag">{{ block.settings.tag }}</span>{% endif %}
-            <h3>{{ block.settings.name }}</h3>
-            <div class="meta"><span>{{ block.settings.time }}</span><span>{{ block.settings.people }}</span></div>
+            <h3>{% render 'zk-t', override: block.settings.name, key: k_name %}</h3>
+            <div class="meta"><span>{% render 'zk-t', override: block.settings.time, key: k_time %}</span><span>{% render 'zk-t', override: block.settings.people, key: k_ppl %}</span></div>
             <div class="prices">
               <div><b>{{ block.settings.price_weekday }}<small>lei</small></b><span>{{ 'zk.pk_weekday' | t }}</span></div>
               <div><b>{{ block.settings.price_weekend }}<small>lei</small></b><span>{{ 'zk.pk_weekend' | t }}</span></div>
@@ -43,9 +49,23 @@
             <div class="incl">{{ 'zk.pk_incl' | t }}</div>
             <ul>
               {%- for i in (1..4) -%}
-                {%- assign key = 'item_' | append: i -%}
-                {%- assign val = block.settings[key] -%}
-                {%- if val != blank %}<li>{{ val }}</li>{% endif -%}
+                {%- liquid
+                  assign sk = 'item_' | append: i
+                  assign val = block.settings[sk]
+                  assign tkey = 'zk.' | append: tk | append: '_' | append: i
+                  assign translated = tkey | t
+                -%}
+                {%- comment -%}
+                  Packs have 3 or 4 bullets, so the 4th key legitimately does not exist for
+                  every pack. The `t` filter returns 'Translation missing: ...' rather than
+                  the key itself, so that is what has to be detected.
+                {%- endcomment -%}
+                {%- if val != blank -%}
+                  <li>{{ val }}</li>
+                {%- elsif translated contains 'Translation missing' -%}
+                {%- else -%}
+                  <li>{{ translated }}</li>
+                {%- endif -%}
               {%- endfor -%}
             </ul>
             <a class="btn{% if block.settings.highlight %} primary{% endif %}" href="#booking">{{ 'zk.pk_book' | t }}</a>
@@ -200,9 +220,31 @@
       "name": "Pachet",
       "settings": [
         {
+          "type": "select",
+          "id": "tkey",
+          "label": "Text tradus",
+          "info": "Ce set de texte traduse folosește pachetul (locales/ zk.pk1_*, pk2_*, pk3_*). Câmpurile de mai jos, dacă sunt completate, au prioritate în toate limbile.",
+          "options": [
+            {
+              "value": "pk1",
+              "label": "Pachet 1"
+            },
+            {
+              "value": "pk2",
+              "label": "Pachet 2"
+            },
+            {
+              "value": "pk3",
+              "label": "Pachet 3"
+            }
+          ],
+          "default": "pk1"
+        },
+        {
           "type": "text",
           "id": "name",
-          "label": "Nume pachet"
+          "label": "Nume pachet",
+          "info": "Gol = textul tradus din locales/"
         },
         {
           "type": "text",
@@ -218,12 +260,14 @@
         {
           "type": "text",
           "id": "time",
-          "label": "Durată"
+          "label": "Durată",
+          "info": "Gol = textul tradus din locales/"
         },
         {
           "type": "text",
           "id": "people",
-          "label": "Nr. persoane"
+          "label": "Nr. persoane",
+          "info": "Gol = textul tradus din locales/"
         },
         {
           "type": "number",
@@ -238,22 +282,26 @@
         {
           "type": "text",
           "id": "item_1",
-          "label": "Include 1"
+          "label": "Include 1",
+          "info": "Gol = textul tradus din locales/"
         },
         {
           "type": "text",
           "id": "item_2",
-          "label": "Include 2"
+          "label": "Include 2",
+          "info": "Gol = textul tradus din locales/"
         },
         {
           "type": "text",
           "id": "item_3",
-          "label": "Include 3"
+          "label": "Include 3",
+          "info": "Gol = textul tradus din locales/"
         },
         {
           "type": "text",
           "id": "item_4",
-          "label": "Include 4"
+          "label": "Include 4",
+          "info": "Gol = textul tradus din locales/"
         }
       ]
     }
@@ -265,44 +313,27 @@
         {
           "type": "pack",
           "settings": {
-            "name": "Degustarea Valea Ierului",
-            "time": "cca. 1,5 ore",
-            "people": "6–20 pers.",
+            "tkey": "pk1",
             "price_weekday": 90,
-            "price_weekend": 110,
-            "item_1": "5 pălinci medaliate, degustare ghidată",
-            "item_2": "Prezentarea distileriei și a distilării",
-            "item_3": "Pahar de degustare, apă, pogăcele"
+            "price_weekend": 110
           }
         },
         {
           "type": "pack",
           "settings": {
-            "name": "Degustarea campionilor",
-            "tag": "TOP",
-            "highlight": true,
-            "time": "cca. 2,5 ore",
-            "people": "6–20 pers.",
+            "tkey": "pk2",
             "price_weekday": 140,
             "price_weekend": 160,
-            "item_1": "8 pălinci: cei doi campioni de categorie și seria Barrique",
-            "item_2": "Vizita distileriei, de la fruct la sticlă",
-            "item_3": "Platou rece cu produse din Valea Ierului",
-            "item_4": "10% reducere la cumpărăturile de la fața locului"
+            "tag": "TOP",
+            "highlight": true
           }
         },
         {
           "type": "pack",
           "settings": {
-            "name": "Masterclass cu Botond",
-            "time": "cca. 3 ore",
-            "people": "8–16 pers.",
+            "tkey": "pk3",
             "price_weekday": 220,
-            "price_weekend": 250,
-            "item_1": "10 probe, cu fișă de evaluare ca la concurs",
-            "item_2": "Degustare oarbă și recunoașterea defectelor",
-            "item_3": "Platou rece și o sticlă de 0,35 l cadou",
-            "item_4": "Diplomă de participare"
+            "price_weekend": 250
           }
         }
       ]

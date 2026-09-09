@@ -40,48 +40,35 @@
         "pack1": {
           "type": "pack",
           "settings": {
-            "name": "Degustarea Valea Ierului",
-            "time": "cca. 1,5 ore",
-            "people": "6–20 pers.",
+            "tkey": "pk1",
             "price_weekday": 90,
-            "price_weekend": 110,
-            "item_1": "5 pălinci medaliate, degustare ghidată",
-            "item_2": "Prezentarea distileriei și a distilării",
-            "item_3": "Pahar de degustare, apă, pogăcele"
+            "price_weekend": 110
           }
         },
         "pack2": {
           "type": "pack",
           "settings": {
-            "name": "Degustarea campionilor",
-            "tag": "TOP",
-            "highlight": true,
-            "time": "cca. 2,5 ore",
-            "people": "6–20 pers.",
+            "tkey": "pk2",
             "price_weekday": 140,
             "price_weekend": 160,
-            "item_1": "8 pălinci: cei doi campioni de categorie și seria Barrique",
-            "item_2": "Vizita distileriei, de la fruct la sticlă",
-            "item_3": "Platou rece cu produse din Valea Ierului",
-            "item_4": "10% reducere la cumpărăturile de la fața locului"
+            "tag": "TOP",
+            "highlight": true
           }
         },
         "pack3": {
           "type": "pack",
           "settings": {
-            "name": "Masterclass cu Botond",
-            "time": "cca. 3 ore",
-            "people": "8–16 pers.",
+            "tkey": "pk3",
             "price_weekday": 220,
-            "price_weekend": 250,
-            "item_1": "10 probe, cu fișă de evaluare ca la concurs",
-            "item_2": "Degustare oarbă și recunoașterea defectelor",
-            "item_3": "Platou rece și o sticlă de 0,35 l cadou",
-            "item_4": "Diplomă de participare"
+            "price_weekend": 250
           }
         }
       },
-      "block_order": ["pack1", "pack2", "pack3"],
+      "block_order": [
+        "pack1",
+        "pack2",
+        "pack3"
+      ],
       "settings": {}
     },
     "contact": {
