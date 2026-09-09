@@ -1,98 +1,107 @@
-<section id="story">
-  <div class="wrap">
-    <div class="text">
-      <div class="sec-head">
-        <p class="eyebrow">{{ section.settings.eyebrow | default: 'Povestea lui Botond' }}</p>
-        <h2>{{ section.settings.title | default: 'Cel care a pierdut prima dată, <em>ca apoi să înceapă să învețe.</em>' }}</h2>
-      </div>
-
-      <p class="reveal">{{ section.settings.p1 | default: 'Nagy Botond este din Săcueni. Campion la tăiat lemne, a reprezentat România la concursuri mondiale și a antrenat naționala. Pălinca a început să o facă acasă, ca toată lumea pe Valea Ierului — apoi, în 2014, a dus prima probă la un concurs din Ungaria și a pierdut.' }}</p>
-      <p class="reveal">{{ section.settings.p2 | default: 'Juriul i-a spus ce nu merge. El a urmat cursul de degustător de pălincă, a reconstruit fermentarea și distilarea, iar în 2018 a câștigat prima medalie maghiară. În toamna lui 2020 hobby-ul a devenit firmă, în 2021 marcă: Zekulhyda, numele Săcueniului din jurul anului 1200.' }}</p>
-      <p class="reveal">{{ section.settings.p3 | default: 'Astăzi este jurat internațional la Quintessence și ÁKOVITA, a fondat Asociația Culturii Pălincii din Valea Ierului, iar în propria sală de degustare se jurizează probele Blisseva Partium Spirits Award. La Quintessence 2025 a adus acasă 22 de medalii din 22 de probe și două titluri de campion; în 2026 a devenit maestrul soiului de strugure.' }}</p>
-
-      <blockquote class="reveal">{{ section.settings.quote | default: '„Confirmarea că suntem pe drumul cel bun — calitatea fără compromis este datoria noastră."' }}</blockquote>
-
-      <!-- Timeline 2014→2026 -->
-      <div class="timeline reveal">
-        <div>
-          <b>2014</b>
-          <span>{{ section.settings.tl_2014 | default: 'Primul concurs — critici, nu medalii' }}</span>
-        </div>
-        <div>
-          <b>2018</b>
-          <span>{{ section.settings.tl_2018 | default: 'Prima medalie de aur în Ungaria' }}</span>
-        </div>
-        <div>
-          <b>2020</b>
-          <span>{{ section.settings.tl_2020 | default: 'Zekulhyda SRL, distilerie proprie la Săcueni' }}</span>
-        </div>
-        <div>
-          <b>2025</b>
-          <span>{{ section.settings.tl_2025 | default: '22 medalii, 2 titluri de campion · Quintessence' }}</span>
-        </div>
-        <div>
-          <b>2026</b>
-          <span>{{ section.settings.tl_2026 | default: 'Maestrul soiului · Cea mai bună prună din Ardeal · ÁKOVITA' }}</span>
-        </div>
-      </div>
-
-      <div style="margin-top:2rem;">
-        <a href="{{ section.settings.cta_url | default: '/blogs/news' }}" class="btn">{{ section.settings.cta_text | default: 'Citește întreaga poveste' }}</a>
-      </div>
-    </div>
-
-    <!-- Photos -->
-    <div class="photos reveal">
-      {% if section.settings.photo1 %}
-        <figure>
-          <img src="{{ section.settings.photo1 | img_url: 'master' }}" alt="{{ section.settings.photo1_caption | default: 'ÁKOVITA — Nagy Botond primește diploma' }}" loading="lazy">
-          <figcaption>{{ section.settings.photo1_caption | default: 'ÁKOVITA: „Cea mai bună pălincă de prune din Transilvania" — Nagy Botond primește diploma' }}</figcaption>
-        </figure>
-      {% else %}
-        <figure style="background:var(--graphite);aspect-ratio:3/2;display:grid;place-items:center;">
-          <span style="color:var(--fog);font-size:.8rem;font-family:'IBM Plex Mono',monospace;letter-spacing:.1em;text-align:center;padding:1rem">Adaugă fotografie<br>Nagy Botond</span>
-        </figure>
-      {% endif %}
-      {% if section.settings.photo2 %}
-        <figure>
-          <img src="{{ section.settings.photo2 | img_url: 'master' }}" alt="{{ section.settings.photo2_caption | default: 'XVI. Quintessence, 2026' }}" loading="lazy">
-          <figcaption>{{ section.settings.photo2_caption | default: 'XVI. Quintessence, 2026: opt medalii și titlul de maestru al soiului' }}</figcaption>
-        </figure>
-      {% endif %}
-      {% if section.settings.photo3 %}
-        <figure>
-          <img src="{{ section.settings.photo3 | img_url: 'master' }}" alt="{{ section.settings.photo3_caption | default: 'La masa juriului — Botond, jurat internațional' }}" loading="lazy">
-          <figcaption>{{ section.settings.photo3_caption | default: 'La masa juriului — Botond, jurat internațional de pălincă' }}</figcaption>
-        </figure>
-      {% endif %}
-    </div>
+<section id="story"><div class="wrap">
+  <div class="text reveal"><div class="eyebrow">{{ section.settings.story_eyebrow }}</div><h2 style="margin:.6rem 0 1.4rem">{{ section.settings.story_title }}</h2><p>{{ section.settings.story_p1 }}</p><p>{{ section.settings.story_p2 }}</p><p>{{ section.settings.story_p3 }}</p><blockquote>{{ section.settings.story_quote }}</blockquote>
+    <div class="timeline"><div><b>2014</b><span>{{ section.settings.tl_2014 }}</span></div><div><b>2018</b><span>{{ section.settings.tl_2018 }}</span></div><div><b>2020</b><span>{{ section.settings.tl_2020 }}</span></div><div><b>2025</b><span>{{ section.settings.tl_2025 }}</span></div><div><b>2026</b><span>{{ section.settings.tl_2026 }}</span></div></div>
   </div>
-</section>
+  <div class="photos reveal">
+    <figure><img src="{{ 'zk-17.jpg' | asset_url }}" alt="Nagy Botond on stage at Quintessence 2026"><figcaption>{{ section.settings.cap_stage }}</figcaption></figure>
+    <figure><img src="{{ 'zk-18.jpg' | asset_url }}" alt="Nagy Botond receiving the ÁKOVITA award"><figcaption>{{ section.settings.cap_award }}</figcaption></figure>
+    <figure><img src="{{ 'zk-19.jpg' | asset_url }}" alt="Nagy Botond nosing a glass while judging"><figcaption>{{ section.settings.cap_nose }}</figcaption></figure>
+  </div>
+</div></section>
 
 {% schema %}
 {
-  "name": "Povestea fondatorului",
+  "name": "Povestea",
   "settings": [
-    {"type":"text","id":"eyebrow","label":"Eyebrow","default":"Povestea lui Botond"},
-    {"type":"text","id":"title","label":"Titlu","default":"Cel care a pierdut prima data"},
-    {"type":"textarea","id":"p1","label":"Paragraf 1"},
-    {"type":"textarea","id":"p2","label":"Paragraf 2"},
-    {"type":"textarea","id":"p3","label":"Paragraf 3"},
-    {"type":"text","id":"quote","label":"Citat Botond","default":"Calitatea fara compromis este datoria noastra."},
-    {"type":"text","id":"tl_2014","label":"Timeline 2014","default":"Primul concurs - critici, nu medalii"},
-    {"type":"text","id":"tl_2018","label":"Timeline 2018","default":"Prima medalie de aur in Ungaria"},
-    {"type":"text","id":"tl_2020","label":"Timeline 2020","default":"Zekulhyda SRL, distilerie proprie"},
-    {"type":"text","id":"tl_2025","label":"Timeline 2025","default":"22 medalii, 2 titluri Quintessence"},
-    {"type":"text","id":"tl_2026","label":"Timeline 2026","default":"Maestrul soiului - AKOVITA"},
-    {"type":"text","id":"cta_text","label":"Buton text","default":"Citeste intreaga poveste"},
-    {"type":"url","id":"cta_url","label":"Buton link"},
-    {"type":"image_picker","id":"photo1","label":"Fotografie 1 (latime completa)"},
-    {"type":"text","id":"photo1_caption","label":"Legenda foto 1","default":"AKOVITA - Nagy Botond primeste diploma"},
-    {"type":"image_picker","id":"photo2","label":"Fotografie 2"},
-    {"type":"text","id":"photo2_caption","label":"Legenda foto 2","default":"Quintessence 2026: opt medalii"},
-    {"type":"image_picker","id":"photo3","label":"Fotografie 3"},
-    {"type":"text","id":"photo3_caption","label":"Legenda foto 3","default":"La masa juriului - Botond, jurat international"}
+    {
+      "type": "text",
+      "id": "story_eyebrow",
+      "label": "Story eyebrow",
+      "default": "Povestea lui Botond"
+    },
+    {
+      "type": "text",
+      "id": "story_title",
+      "label": "Story title",
+      "default": "Cel care a pierdut prima dată, <em>ca apoi să înceapă să învețe.</em>"
+    },
+    {
+      "type": "textarea",
+      "id": "story_p1",
+      "label": "Story p1",
+      "default": "Nagy Botond este din Săcueni. Campion la tăiat lemne, a reprezentat România la concursuri mondiale și a antrenat naționala. Pălinca a început să o facă acasă, ca toată lumea pe Valea Ierului — apoi, în 2014, a dus prima probă la un concurs din Ungaria și a pierdut."
+    },
+    {
+      "type": "textarea",
+      "id": "story_p2",
+      "label": "Story p2",
+      "default": "Juriul i-a spus ce nu merge. El a urmat cursul de degustător de pălincă, a reconstruit fermentarea și distilarea, iar în 2018 a câștigat prima medalie maghiară. În toamna lui 2020 hobby-ul a devenit firmă, în 2021 marcă: Zekulhyda, numele Săcueniului din jurul anului 1200."
+    },
+    {
+      "type": "textarea",
+      "id": "story_p3",
+      "label": "Story p3",
+      "default": "Astăzi este jurat internațional la Quintessence și ÁKOVITA, a fondat Asociația Culturii Pălincii din Valea Ierului, iar în propria sală de degustare se jurizează probele Blisseva Partium Spirits Award. La Quintessence 2025 a adus acasă 22 de medalii din 22 de probe și două titluri de campion; în 2026 a devenit maestrul soiului de strugure."
+    },
+    {
+      "type": "text",
+      "id": "story_quote",
+      "label": "Story quote",
+      "default": "„Confirmarea că suntem pe drumul cel bun — calitatea fără compromis este datoria noastră.”"
+    },
+    {
+      "type": "text",
+      "id": "tl_2014",
+      "label": "Tl 2014",
+      "default": "Primul concurs — critici, nu medalii"
+    },
+    {
+      "type": "text",
+      "id": "tl_2018",
+      "label": "Tl 2018",
+      "default": "Prima medalie de aur în Ungaria"
+    },
+    {
+      "type": "text",
+      "id": "tl_2020",
+      "label": "Tl 2020",
+      "default": "Zekulhyda SRL, distilerie proprie la Săcueni"
+    },
+    {
+      "type": "text",
+      "id": "tl_2025",
+      "label": "Tl 2025",
+      "default": "22 medalii, 2 titluri de campion · Quintessence"
+    },
+    {
+      "type": "text",
+      "id": "tl_2026",
+      "label": "Tl 2026",
+      "default": "Maestrul soiului · Cea mai bună prună din Transilvania · ÁKOVITA"
+    },
+    {
+      "type": "text",
+      "id": "cap_stage",
+      "label": "Cap stage",
+      "default": "XVI. Quintessence, 2026: opt medalii și titlul de maestru al soiului"
+    },
+    {
+      "type": "text",
+      "id": "cap_award",
+      "label": "Cap award",
+      "default": "ÁKOVITA: „Cea mai bună pălincă de prune din Transilvania” — Nagy Botond primește diploma"
+    },
+    {
+      "type": "text",
+      "id": "cap_nose",
+      "label": "Cap nose",
+      "default": "La masa juriului — Botond, degustător internațional"
+    }
   ],
-  "presets": [{"name": "Povestea fondatorului"}]
+  "presets": [
+    {
+      "name": "Povestea lui Botond"
+    }
+  ]
 }
 {% endschema %}

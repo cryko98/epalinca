@@ -1,0 +1,67 @@
+{%- comment -%}
+  Resolves the artwork for a product card, in order of preference:
+    1. the product's own Shopify image
+    2. the matching bottle shot from the reference design, uploaded as a theme asset
+    3. the generic bottle SVG
+
+  Most products in this store have no image yet (only part of the Barrique line does), so
+  step 2 is what keeps the grid looking like the approved design. As soon as real product
+  photos are uploaded in the admin they take over automatically and this map stops mattering.
+
+  Usage: {% render 'zk-product-image', product: product %}
+{%- endcomment -%}
+
+{%- liquid
+  assign fallback = blank
+  case product.handle
+    when 'palinca-mere'
+      assign fallback = 'zk-24.jpg'
+    when 'palinca-prune'
+      assign fallback = 'zk-25.jpg'
+    when 'palinca-struguri'
+      assign fallback = 'zk-26.jpg'
+    when 'palinca-muscat-ottonel'
+      assign fallback = 'zk-26.jpg'
+    when 'palinca-feteasca-neagra'
+      assign fallback = 'zk-26.jpg'
+    when 'palinca-caise'
+      assign fallback = 'zk-27.jpg'
+    when 'palinca-pere'
+      assign fallback = 'zk-28.jpg'
+    when 'mere-barrique'
+      assign fallback = 'zk-29.jpg'
+    when 'prune-barrique'
+      assign fallback = 'zk-30.jpg'
+    when 'gutui-barrique'
+      assign fallback = 'zk-31.jpg'
+    when 'struguri-barrique'
+      assign fallback = 'zk-32.jpg'
+    when 'distilat-de-lamaie'
+      assign fallback = 'zk-34.jpg'
+    when 'distilat-de-portocala'
+      assign fallback = 'zk-35.jpg'
+    when 'distilat-de-lime'
+      assign fallback = 'zk-38.jpg'
+    when 'distilat-de-banana'
+      assign fallback = 'zk-39.jpg'
+    when 'distilat-de-ghimbir'
+      assign fallback = 'zk-40.jpg'
+  endcase
+
+  if fallback == blank
+    if product.handle contains 'tescovina'
+      assign fallback = 'zk-33.jpg'
+    endif
+  endif
+-%}
+
+{%- if product.featured_image -%}
+  <img src="{{ product.featured_image | image_url: width: 700 }}"
+       alt="{{ product.title | escape }}"
+       width="{{ product.featured_image.width }}" height="{{ product.featured_image.height }}"
+       loading="lazy">
+{%- elsif fallback != blank -%}
+  <img src="{{ fallback | asset_url }}" alt="{{ product.title | escape }}" loading="lazy">
+{%- else -%}
+  {% render 'bottle-svg', color: 'premium' %}
+{%- endif -%}

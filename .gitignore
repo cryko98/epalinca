@@ -17,3 +17,10 @@ Thumbs.db
 Zekulhyda-3-001/
 *.JPG
 /IMG_*.jpg
+
+# Theme assets are part of the theme itself and must be versioned. The *.JPG rule above
+# matches case-insensitively on Windows, which silently excluded every .jpg in assets/.
+!assets/*.jpg
+!assets/*.jpeg
+!assets/*.png
+!assets/*.svg

@@ -1,61 +1,48 @@
 <!DOCTYPE html>
-<html lang="ro">
+<html lang="{{ request.locale.iso_code | default: 'ro' }}">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>{% if page_title == blank %}{{ shop.name }}{% else %}{{ page_title }} — {{ shop.name }}{% endif %}</title>
   <meta name="description" content="{% if page_description %}{{ page_description | escape }}{% endif %}">
+  {%- if settings.favicon != blank %}
+    <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 96 }}">
+  {%- else %}
+    <link rel="icon" type="image/png" href="{{ 'zk-01.png' | asset_url }}">
+  {%- endif %}
   {{ content_for_header }}
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Manrope:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500&display=swap">
   {{ 'zekulhyda.css' | asset_url | stylesheet_tag }}
+  {%- comment -%}
+    The design's palette lives in assets/zekulhyda.css. Only the tokens a merchant can
+    actually change are overridden here, so the stylesheet stays the single source of truth.
+  {%- endcomment -%}
   <style>
     :root {
-      /* Paleta din zekulhyda-site_8.html */
-      --color-bg:        {{ settings.color_ink | default: '#0B0B0C' }};
-      --color-ink:       {{ settings.color_ink | default: '#0B0B0C' }};
-      --color-graphite:  #151517;
-      --color-slate:     #1F1F22;
-      --color-line:      #2C2C30;
-      --color-silver:    #C9CBCF;
-      --color-fog:       #8E9197;
-      --color-amber:     {{ settings.color_gold | default: '#C9963B' }};
-      --color-amber-2:   {{ settings.color_gold_hi | default: '#E4B65A' }};
-      --color-paper:     #F1EDE4;
-      --color-paper-2:   #E6E0D3;
-      --color-ink-on-paper: #17171A;
-      --color-muted-on-paper: #5E5A52;
-      --color-line-on-paper: #D6CFC0;
-      /* Backward compat */
-      --color-gold:      {{ settings.color_gold | default: '#C9963B' }};
-      --color-gold-hi:   {{ settings.color_gold_hi | default: '#E4B65A' }};
-      --color-gold-lo:   #7A5416;
-      --color-cream:     #F3F1EC;
-      --color-cream-dim: #C9CBCF;
-      --color-light-bg:  #F1EDE4;
-      --font-display:    'Cormorant Garamond', Georgia, serif;
-      --font-body:       'Manrope', 'Helvetica Neue', Arial, sans-serif;
-      --font-mono:       'IBM Plex Mono', ui-monospace, monospace;
-      --font-serif:      'Cormorant Garamond', Georgia, serif;
+      --ink: {{ settings.color_ink | default: '#0B0B0C' }};
+      --amber: {{ settings.color_gold | default: '#C9963B' }};
+      --amber-2: {{ settings.color_gold_hi | default: '#E4B65A' }};
     }
   </style>
+  {% render 'zk-image-map' %}
 </head>
 <body class="template-{{ template.name }}">
 
-  {% if settings.show_age_gate %}
-    <div id="age-gate" class="age-gate" style="display:none">
-      <div class="age-gate__box">
-        <div class="age-gate__logo">ZEKULHYDA</div>
-        <p class="age-gate__title">{{ settings.age_gate_title | default: 'Verificare vârstă' }}</p>
-        <p class="age-gate__text">{{ settings.age_gate_text | default: 'Trebuie să aveți cel puțin 18 ani pentru a accesa acest site.' }}</p>
-        <div class="age-gate__actions">
-          <button class="btn-primary age-gate__yes" id="AgeYes">{{ settings.age_gate_yes | default: 'Da, am 18+ ani' }}</button>
-          <a href="https://www.google.com" class="btn-ghost age-gate__no">{{ settings.age_gate_no | default: 'Nu, ieși' }}</a>
+  {%- if settings.show_age_gate %}
+    <div id="age" class="modal" hidden>
+      <div class="box">
+        <div class="eyebrow">Zekulhyda</div>
+        <h3>{{ settings.age_gate_title | default: 'Ai peste 18 ani?' }}</h3>
+        <p>{{ settings.age_gate_text | default: 'Vindem băuturi alcoolice doar persoanelor majore. Prin continuare confirmi că ai împlinit 18 ani.' }}</p>
+        <div class="btns">
+          <button class="btn primary" id="ageYes">{{ settings.age_gate_yes | default: 'Da, am peste 18 ani' }}</button>
+          <a class="btn" href="https://www.google.com" id="ageNo">{{ settings.age_gate_no | default: 'Nu' }}</a>
         </div>
-        <p class="age-gate__warning">{{ settings.alcohol_warning | default: 'Consumul de alcool în exces dăunează sănătății. Interzis minorilor.' }}</p>
       </div>
     </div>
-  {% endif %}
+  {%- endif %}
 
   {% section 'header' %}
 
@@ -65,6 +52,6 @@
 
   {% section 'footer' %}
 
-  {{ 'zekulhyda.js' | asset_url | script_tag }}
+  <script src="{{ 'zekulhyda.js' | asset_url }}" defer></script>
 </body>
 </html>

@@ -1,54 +1,104 @@
 {
   "sections": {
-    "hero_main": {
+    "hero": {
       "type": "hero-main",
       "settings": {}
     },
-    "award_marquee": {
+    "medals": {
       "type": "award-marquee",
       "settings": {}
     },
-    "collection_premium": {
-      "type": "collection-premium",
-      "settings": {
-        "collection": "barrique",
-        "products_count": 6
-      }
+    "range": {
+      "type": "range-tiers",
+      "settings": {}
     },
-    "barrique_section": {
+    "barrique": {
       "type": "barrique-section",
       "settings": {}
     },
-    "distilat_section": {
+    "distilat": {
       "type": "distilat-section",
       "settings": {}
     },
-    "founder_story": {
-      "type": "founder-story",
-      "settings": {}
+    "shop": {
+      "type": "collection-premium",
+      "settings": {
+        "products_count": 12
+      }
     },
-    "taste_learning": {
-      "type": "taste-learning",
-      "settings": {}
-    },
-    "partners_marquee": {
+    "partners": {
       "type": "partners-marquee",
       "settings": {}
     },
-    "newsletter": {
-      "type": "newsletter",
+    "story": {
+      "type": "founder-story",
+      "settings": {}
+    },
+    "taste": {
+      "type": "taste-learning",
+      "blocks": {
+        "pack1": {
+          "type": "pack",
+          "settings": {
+            "name": "Degustarea Valea Ierului",
+            "time": "cca. 1,5 ore",
+            "people": "6–20 pers.",
+            "price_weekday": 90,
+            "price_weekend": 110,
+            "item_1": "5 pălinci medaliate, degustare ghidată",
+            "item_2": "Prezentarea distileriei și a distilării",
+            "item_3": "Pahar de degustare, apă, pogăcele"
+          }
+        },
+        "pack2": {
+          "type": "pack",
+          "settings": {
+            "name": "Degustarea campionilor",
+            "tag": "TOP",
+            "highlight": true,
+            "time": "cca. 2,5 ore",
+            "people": "6–20 pers.",
+            "price_weekday": 140,
+            "price_weekend": 160,
+            "item_1": "8 pălinci: cei doi campioni de categorie și seria Barrique",
+            "item_2": "Vizita distileriei, de la fruct la sticlă",
+            "item_3": "Platou rece cu produse din Valea Ierului",
+            "item_4": "10% reducere la cumpărăturile de la fața locului"
+          }
+        },
+        "pack3": {
+          "type": "pack",
+          "settings": {
+            "name": "Masterclass cu Botond",
+            "time": "cca. 3 ore",
+            "people": "8–16 pers.",
+            "price_weekday": 220,
+            "price_weekend": 250,
+            "item_1": "10 probe, cu fișă de evaluare ca la concurs",
+            "item_2": "Degustare oarbă și recunoașterea defectelor",
+            "item_3": "Platou rece și o sticlă de 0,35 l cadou",
+            "item_4": "Diplomă de participare"
+          }
+        }
+      },
+      "block_order": ["pack1", "pack2", "pack3"],
+      "settings": {}
+    },
+    "contact": {
+      "type": "contact-section",
       "settings": {}
     }
   },
   "order": [
-    "hero_main",
-    "award_marquee",
-    "collection_premium",
-    "barrique_section",
-    "distilat_section",
-    "founder_story",
-    "taste_learning",
-    "partners_marquee",
-    "newsletter"
+    "hero",
+    "medals",
+    "range",
+    "barrique",
+    "distilat",
+    "shop",
+    "partners",
+    "story",
+    "taste",
+    "contact"
   ]
 }

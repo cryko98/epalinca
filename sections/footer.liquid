@@ -1,280 +1,42 @@
-<footer class="site-footer">
+<footer>
+  <div class="wrap">
+    {% render 'zk-logo' %}
 
-  <div class="site-footer__main">
-    <div class="footer-inner">
-
-      <div class="footer-brand">
-        <div class="footer-logo">{{ section.settings.logo_text | default: 'ZEKULHYDA' }}</div>
-        <p class="footer-tagline">{{ section.settings.tagline }}</p>
-        <div class="footer-social">
-          {% if section.settings.facebook != blank %}
-            <a href="{{ section.settings.facebook }}" target="_blank" rel="noopener" aria-label="Facebook">FB</a>
-          {% endif %}
-          {% if section.settings.instagram != blank %}
-            <a href="{{ section.settings.instagram }}" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
-          {% endif %}
-        </div>
-      </div>
-
-      {% for block in section.blocks %}
-        {% if block.type == 'link_col' %}
-          <div class="footer-col" {{ block.shopify_attributes }}>
-            <p class="footer-col__head">{{ block.settings.heading }}</p>
-            <ul class="footer-col__links">
-              {% for link in block.settings.menu.links %}
-                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
-              {% endfor %}
-            </ul>
-          </div>
-        {% endif %}
-      {% endfor %}
-
-      <div class="footer-col">
-        <p class="footer-col__head">{{ section.settings.contact_heading | default: 'Contact & Date Legale' }}</p>
-        <address class="footer-address">
-          {% if section.settings.company_name != blank %}<p><strong>{{ section.settings.company_name }}</strong></p>{% endif %}
-          {% if section.settings.address != blank %}<p>{{ section.settings.address }}</p>{% endif %}
-          {% if section.settings.city != blank %}<p>{{ section.settings.city }}</p>{% endif %}
-          {% if section.settings.phone != blank %}<p><a href="tel:{{ section.settings.phone }}">{{ section.settings.phone }}</a></p>{% endif %}
-          {% if section.settings.email != blank %}<p><a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a></p>{% endif %}
-          {% if section.settings.cui != blank %}<p class="footer-legal-id">CUI: {{ section.settings.cui }}</p>{% endif %}
-          {% if section.settings.reg_com != blank %}<p class="footer-legal-id">Nr. Reg. Com.: {{ section.settings.reg_com }}</p>{% endif %}
-        </address>
-      </div>
-
+    <div>
+      © {{ 'now' | date: '%Y' }} {{ section.settings.company | default: 'Zekulhyda S.R.L.' }}
+      {%- if section.settings.company_ids != blank %} · {{ section.settings.company_ids }}{% endif %}
+      · <span>{{ section.settings.foot_legal | default: 'Consumul excesiv de alcool dăunează sănătății. Interzis minorilor.' }}</span>
     </div>
-  </div>
 
-  <div class="footer-warning">
-    <div class="footer-inner">
-      <span>&#9888;</span>
-      <p>{{ section.settings.alcohol_warning | default: 'AVERTISMENT: Consumul de alcool in exces dauneaza grav sanatatii. Interzis minorilor sub 18 ani.' }}</p>
+    <div>
+      {%- for block in section.blocks -%}
+        <a href="{{ block.settings.link | default: '#' }}" {{ block.shopify_attributes }}>{{ block.settings.label }}</a>
+      {%- else -%}
+        <a href="{{ routes.root_url }}pages/termeni-si-conditii">Termeni și condiții</a>
+        <a href="{{ routes.root_url }}pages/politica-de-confidentialitate">Confidențialitate</a>
+        <a href="https://anpc.ro" target="_blank" rel="noopener">ANPC</a>
+      {%- endfor -%}
     </div>
-  </div>
 
-  <div class="footer-legal">
-    <div class="footer-inner footer-legal__inner">
-      <p class="footer-copy">{{ section.settings.copyright | default: '© 2025 Zekulhyda Premium. Toate drepturile rezervate.' }}</p>
-      <div class="footer-legal__links">
-        {% if section.settings.privacy_label != blank %}
-          <a href="{{ section.settings.privacy_url | default: '/pages/confidentialitate' }}">{{ section.settings.privacy_label }}</a>
-        {% endif %}
-        {% if section.settings.terms_label != blank %}
-          <a href="{{ section.settings.terms_url | default: '/pages/termeni' }}">{{ section.settings.terms_label }}</a>
-        {% endif %}
-        {% if section.settings.cookies_label != blank %}
-          <a href="{{ section.settings.cookies_url | default: '/pages/cookies' }}">{{ section.settings.cookies_label }}</a>
-        {% endif %}
-        <a href="https://anpc.ro/" target="_blank" rel="noopener">ANPC</a>
-        <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">SAL / SOL</a>
-      </div>
-    </div>
+    {% render 'zk-social' %}
   </div>
-
 </footer>
-
-<style>
-.site-footer { background: #080705; }
-.footer-inner { max-width:1400px; margin:0 auto; padding:0 60px; }
-.site-footer__main { padding:80px 0 64px; border-bottom:1px solid rgba(240,234,216,.05); }
-.site-footer__main .footer-inner { display:grid; grid-template-columns:2fr 1fr 1fr 1.2fr; gap:60px; }
-.footer-logo { font-family:var(--font-display); font-size:28px; color:var(--color-gold-hi); letter-spacing:4px; margin-bottom:16px; }
-.footer-tagline { font-family:var(--font-serif); font-size:14px; font-style:italic; color:var(--color-cream-dim); line-height:1.7; max-width:260px; margin-bottom:24px; }
-.footer-social { display:flex; gap:16px; }
-.footer-social a { font-size:10px; letter-spacing:3px; color:rgba(240,234,216,.3); border:1px solid rgba(240,234,216,.1); padding:6px 12px; transition:color .3s,border-color .3s; }
-.footer-social a:hover { color:var(--color-gold); border-color:var(--color-gold-lo); }
-.footer-col__head { font-size:9px; letter-spacing:4px; text-transform:uppercase; color:var(--color-gold); margin-bottom:20px; font-weight:300; }
-.footer-col__links { list-style:none; }
-.footer-col__links li + li { margin-top:10px; }
-.footer-col__links a { font-size:13px; color:rgba(240,234,216,.3); font-weight:300; transition:color .3s; }
-.footer-col__links a:hover { color:var(--color-cream); }
-.footer-address { font-style:normal; font-size:13px; color:rgba(240,234,216,.3); line-height:1.9; }
-.footer-address p + p { margin-top:2px; }
-.footer-address a { transition:color .3s; }
-.footer-address a:hover { color:var(--color-cream); }
-.footer-legal-id { font-size:11px; color:rgba(240,234,216,.18); letter-spacing:1px; margin-top:8px; }
-.footer-warning { padding:16px 0; background:rgba(184,150,62,.06); border-top:1px solid rgba(184,150,62,.12); border-bottom:1px solid rgba(184,150,62,.08); }
-.footer-warning .footer-inner { display:flex; align-items:flex-start; gap:12px; }
-.footer-warning span { font-size:16px; flex-shrink:0; }
-.footer-warning p { font-size:11px; letter-spacing:.5px; color:rgba(184,150,62,.55); line-height:1.6; }
-.footer-legal { padding:28px 0; }
-.footer-legal__inner { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
-.footer-copy { font-size:11px; color:rgba(240,234,216,.15); letter-spacing:.5px; }
-.footer-legal__links { display:flex; flex-wrap:wrap; gap:20px; }
-.footer-legal__links a { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:rgba(240,234,216,.2); transition:color .3s; }
-.footer-legal__links a:hover { color:var(--color-cream-dim); }
-@media(max-width:900px){
-  .site-footer__main .footer-inner { grid-template-columns:1fr 1fr; gap:40px; padding:0 24px; }
-  .footer-inner { padding:0 24px; }
-  .footer-legal__inner { flex-direction:column; align-items:flex-start; }
-}
-@media(max-width:600px){
-  .site-footer__main .footer-inner { grid-template-columns:1fr; }
-}
-</style>
 
 {% schema %}
 {
-  "name": "Subsol (Footer)",
+  "name": "Subsol",
   "settings": [
-    {
-      "type": "header",
-      "content": "Brand"
-    },
-    {
-      "type": "text",
-      "id": "logo_text",
-      "label": "Text Logo",
-      "default": "ZEKULHYDA"
-    },
-    {
-      "type": "textarea",
-      "id": "tagline",
-      "label": "Descriere scurta",
-      "default": "Distilate premium din Sacueni, Judetul Bihor, Romania."
-    },
-    {
-      "type": "url",
-      "id": "facebook",
-      "label": "Link Facebook"
-    },
-    {
-      "type": "url",
-      "id": "instagram",
-      "label": "Link Instagram"
-    },
-    {
-      "type": "header",
-      "content": "Date Firma (Obligatorii)"
-    },
-    {
-      "type": "text",
-      "id": "contact_heading",
-      "label": "Titlu coloana contact",
-      "default": "Contact si Date Legale"
-    },
-    {
-      "type": "text",
-      "id": "company_name",
-      "label": "Denumire firma",
-      "default": "Zekulhyda Premium SRL"
-    },
-    {
-      "type": "text",
-      "id": "address",
-      "label": "Adresa strada",
-      "default": "Str. Principala nr. 1"
-    },
-    {
-      "type": "text",
-      "id": "city",
-      "label": "Localitate, Judet",
-      "default": "Sacueni, Judetul Bihor, Romania"
-    },
-    {
-      "type": "text",
-      "id": "phone",
-      "label": "Telefon",
-      "default": "+40 XXX XXX XXX"
-    },
-    {
-      "type": "text",
-      "id": "email",
-      "label": "Email",
-      "default": "contact@zekulhyda.ro"
-    },
-    {
-      "type": "text",
-      "id": "cui",
-      "label": "CUI",
-      "default": "RO XXXXXXXX"
-    },
-    {
-      "type": "text",
-      "id": "reg_com",
-      "label": "Nr. Registrul Comertului",
-      "default": "J05/XXX/XXXX"
-    },
-    {
-      "type": "header",
-      "content": "Avertisment Alcool"
-    },
-    {
-      "type": "textarea",
-      "id": "alcohol_warning",
-      "label": "Text avertisment",
-      "default": "AVERTISMENT: Consumul de alcool in exces dauneaza grav sanatatii. Interzis vanzarea si servirea bauturilor alcoolice minorilor sub 18 ani. Nu conduceti sub influenta alcoolului. Consumati responsabil."
-    },
-    {
-      "type": "header",
-      "content": "Linkuri Legale"
-    },
-    {
-      "type": "text",
-      "id": "copyright",
-      "label": "Text copyright",
-      "default": "2025 Zekulhyda Premium. Toate drepturile rezervate."
-    },
-    {
-      "type": "text",
-      "id": "privacy_label",
-      "label": "Text Politica Confidentialitate",
-      "default": "Politica de Confidentialitate"
-    },
-    {
-      "type": "url",
-      "id": "privacy_url",
-      "label": "Link Politica Confidentialitate"
-    },
-    {
-      "type": "text",
-      "id": "terms_label",
-      "label": "Text Termeni si Conditii",
-      "default": "Termeni si Conditii"
-    },
-    {
-      "type": "url",
-      "id": "terms_url",
-      "label": "Link Termeni si Conditii"
-    },
-    {
-      "type": "text",
-      "id": "cookies_label",
-      "label": "Text Politica Cookies",
-      "default": "Politica de Cookies"
-    },
-    {
-      "type": "url",
-      "id": "cookies_url",
-      "label": "Link Politica Cookies"
-    }
+    { "type": "text", "id": "company", "label": "Firmă", "default": "Zekulhyda S.R.L." },
+    { "type": "text", "id": "company_ids", "label": "CUI / Reg. Com.", "default": "CUI 40648975 · J05/686/2019" },
+    { "type": "textarea", "id": "foot_legal", "label": "Avertisment", "default": "Consumul excesiv de alcool dăunează sănătății. Interzis minorilor." }
   ],
   "blocks": [
     {
-      "type": "link_col",
-      "name": "Coloana Linkuri",
-      "limit": 3,
+      "type": "link",
+      "name": "Link subsol",
       "settings": [
-        {
-          "type": "text",
-          "id": "heading",
-          "label": "Titlu coloana",
-          "default": "Produse"
-        },
-        {
-          "type": "link_list",
-          "id": "menu",
-          "label": "Meniu linkuri"
-        }
-      ]
-    }
-  ],
-  "presets": [
-    {
-      "name": "Subsol",
-      "blocks": [
-        { "type": "link_col", "settings": { "heading": "Produse" } },
-        { "type": "link_col", "settings": { "heading": "Distileria" } }
+        { "type": "text", "id": "label", "label": "Text", "default": "Link" },
+        { "type": "url", "id": "link", "label": "Adresă" }
       ]
     }
   ]

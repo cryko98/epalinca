@@ -1,0 +1,127 @@
+<section id="range"><div class="wrap">
+  <div class="sec-head reveal"><div class="eyebrow">{{ section.settings.range_eyebrow }}</div><h2>{{ section.settings.range_title }}</h2><p>{{ section.settings.range_sub }}</p></div>
+  <div class="tiers">
+    <div class="tier reveal" style="--bg:url({{ 'zk-02.jpg' | asset_url }})"><span class="idx">01</span><div class="sw" style="background:#E8C872"></div><h3>{{ section.settings.tier_core }}</h3><p>{{ section.settings.tier_core_d }}</p><a href="#shop" data-f="core">88 lei</a></div>
+    <div class="tier reveal" style="--bg:url({{ 'zk-03.jpg' | asset_url }})"><span class="idx">02</span><div class="sw" style="background:#5B2A3A"></div><h3>{{ section.settings.tier_varietal }}</h3><p>{{ section.settings.tier_varietal_d }}</p><a href="#shop" data-f="varietal">88 lei</a></div>
+    <div class="tier reveal" style="--bg:url({{ 'zk-04.jpg' | asset_url }})"><span class="idx">03</span><div class="sw" style="background:#F0A24B"></div><h3>{{ section.settings.tier_orchard }}</h3><p>{{ section.settings.tier_orchard_d }}</p><a href="#shop" data-f="orchard">105–132 lei</a></div>
+    <div class="tier reveal" style="--bg:url({{ 'zk-05.jpg' | asset_url }})"><span class="idx">04</span><div class="sw" style="background:#2A3A6B"></div><h3>{{ section.settings.tier_wild }}</h3><p>{{ section.settings.tier_wild_d }}</p><a href="#shop" data-f="wild">180–220 lei</a></div>
+    <div class="tier reveal" style="--bg:url({{ 'zk-06.jpg' | asset_url }})"><span class="idx">05</span><div class="sw" style="background:#C9963B"></div><h3>{{ section.settings.tier_champion }}</h3><p>{{ section.settings.tier_champion_d }}</p><a href="#shop" data-f="champion">132–220 lei</a></div>
+    <div class="tier reveal" style="--bg:url({{ 'zk-07.jpg' | asset_url }})"><span class="idx">06</span><div class="sw" style="background:#B0742A"></div><h3>{{ section.settings.tier_barrique }}</h3><p>{{ section.settings.tier_barrique_d }}</p><a href="#shop" data-f="barrique">200–220 lei</a></div>
+    <div class="tier reveal" style="--bg:url({{ 'zk-08.jpg' | asset_url }})"><span class="idx">07</span><div class="sw" style="background:#2FB3C9"></div><h3>{{ section.settings.tier_distilat }}</h3><p>{{ section.settings.tier_distilat_d }}</p><a href="#shop" data-f="distilat">120 lei</a></div>
+  </div>
+</div></section>
+
+{% schema %}
+{
+  "name": "Gama · Sapte linii",
+  "settings": [
+    {
+      "type": "text",
+      "id": "range_eyebrow",
+      "label": "Range eyebrow",
+      "default": "Pălincile"
+    },
+    {
+      "type": "text",
+      "id": "range_title",
+      "label": "Range title",
+      "default": "Șapte linii, <em>o singură semnătură.</em>"
+    },
+    {
+      "type": "textarea",
+      "id": "range_sub",
+      "label": "Range sub",
+      "default": "Pălincile clasice în sticle de 0,35 l, seriile Barrique și Distilat în 0,5 l. Loturi mici, fără zahăr sau arome adăugate — fructele vin de pe o rază de 30 km, cu excepția citricelor."
+    },
+    {
+      "type": "text",
+      "id": "tier_core",
+      "label": "Tier core",
+      "default": "Linia de bază"
+    },
+    {
+      "type": "text",
+      "id": "tier_core_d",
+      "label": "Tier core d",
+      "default": "Mere, prune, struguri — pălinca de zi cu zi."
+    },
+    {
+      "type": "text",
+      "id": "tier_varietal",
+      "label": "Tier varietal",
+      "default": "Pălinci de soi"
+    },
+    {
+      "type": "textarea",
+      "id": "tier_varietal_d",
+      "label": "Tier varietal d",
+      "default": "Șapte pălinci dintr-un singur soi de strugure: Fetească Neagră, Fetească Regală, Irsai Oliver, Muscat Ottonel, Pinot Gris, Chardonnay."
+    },
+    {
+      "type": "text",
+      "id": "tier_orchard",
+      "label": "Tier orchard",
+      "default": "Linia de livadă"
+    },
+    {
+      "type": "text",
+      "id": "tier_orchard_d",
+      "label": "Tier orchard d",
+      "default": "Caise, cireșe, pere, coacăze negre."
+    },
+    {
+      "type": "text",
+      "id": "tier_wild",
+      "label": "Tier wild",
+      "default": "Linia sălbatică"
+    },
+    {
+      "type": "text",
+      "id": "tier_wild_d",
+      "label": "Tier wild d",
+      "default": "Afine, mure, zmeură — 20–25 kg de fruct pe litru."
+    },
+    {
+      "type": "text",
+      "id": "tier_champion",
+      "label": "Tier champion",
+      "default": "Campioni și învechite"
+    },
+    {
+      "type": "textarea",
+      "id": "tier_champion_d",
+      "label": "Tier champion d",
+      "default": "Mere barrique, vișine sălbatice, Fetească Neagră Strong, distilat de vin, tescovină Izabella."
+    },
+    {
+      "type": "text",
+      "id": "tier_barrique",
+      "label": "Tier barrique",
+      "default": "Barrique — sherry cask"
+    },
+    {
+      "type": "textarea",
+      "id": "tier_barrique_d",
+      "label": "Tier barrique d",
+      "default": "Distilate învechite în baric de stejar și finisate în butoi de sherry: măr, prună, gutuie, struguri, tescovină. 0,5 l."
+    },
+    {
+      "type": "text",
+      "id": "tier_distilat",
+      "label": "Tier distilat",
+      "default": "Distilat — sticla albastră"
+    },
+    {
+      "type": "textarea",
+      "id": "tier_distilat_d",
+      "label": "Tier distilat d",
+      "default": "Lămâie, portocală, mandarină, grepfrut, lime, banană, ghimbir. Modern, curat, și pentru cocktailuri. 0,5 l."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Gama — șapte linii"
+    }
+  ]
+}
+{% endschema %}

@@ -1,165 +1,99 @@
-<section class="section-premium" style="background:{{ section.settings.bg_color }};padding:{{ section.settings.padding_top }}px 60px {{ section.settings.padding_bottom }}px;">
-  <div class="section-inner">
-    <div class="section-head reveal">
-      <div>
-        <div class="section-label">
-          <span class="section-label__line" style="background:{{ section.settings.accent_color }};"></span>
-          <span class="section-label__text" style="color:{{ section.settings.accent_color }};">{{ section.settings.eyebrow }}</span>
-        </div>
-        <h2 class="section-title" style="color:{{ section.settings.title_color }};">
-          {{ section.settings.title }}
-          {% if section.settings.title_italic != blank %}
-          <em style="color:{{ section.settings.accent_color }};">{{ section.settings.title_italic }}</em>
-          {% endif %}
-        </h2>
-        {% if section.settings.subtitle != blank %}
-        <p class="section-subtitle" style="color:{{ section.settings.subtitle_color }};">{{ section.settings.subtitle }}</p>
-        {% endif %}
-      </div>
-      {% if section.settings.view_all_text != blank %}
-      <a href="{{ section.settings.view_all_url | default: '/collections/all' }}" class="view-all" style="color:{{ section.settings.cream_dim_color }};">{{ section.settings.view_all_text }}</a>
-      {% endif %}
+{%- liquid
+  assign col = section.settings.collection
+  if col != blank
+    assign items = col.products
+  else
+    assign items = collections.all.products
+  endif
+-%}
+
+<section id="shop">
+  <div class="wrap">
+    <div class="sec-head reveal">
+      <div class="eyebrow">{{ section.settings.shop_eyebrow }}</div>
+      <h2>{{ section.settings.shop_title }}</h2>
+      <p>{{ section.settings.shop_sub }}</p>
     </div>
 
-    {% assign col = section.settings.collection %}
-    {% if col != blank %}
-      {% assign products = col.products %}
-    {% else %}
-      {% assign products = section.blocks %}
-    {% endif %}
+    {%- if section.blocks.size > 0 -%}
+      <div class="filters">
+        <a class="on" href="{{ routes.all_products_collection_url }}">{{ section.settings.filter_all | default: 'Toate' }}</a>
+        {%- for block in section.blocks -%}
+          {%- assign fc = collections[block.settings.collection] -%}
+          {%- if fc != blank -%}
+            <a href="{{ fc.url }}" {{ block.shopify_attributes }}>{{ block.settings.label | default: fc.title }}</a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
 
-    <div class="products-grid" style="grid-template-columns:repeat({{ section.settings.columns }},1fr);">
-      {% if col != blank %}
-        {% for product in products limit: section.settings.products_count %}
-        <div class="product-card reveal delay-{{ forloop.index }}" style="background:{{ section.settings.card_bg }};">
-          <div class="product-card__image-wrap" style="background:{{ section.settings.card_img_bg }};height:{{ section.settings.card_img_height }}px;">
-            {% if product.featured_image %}
-              <img src="{{ product.featured_image | img_url: '600x' }}" alt="{{ product.title }}" class="product-card__img">
-            {% else %}
-              {% render 'bottle-svg', variant: 'card' %}
-            {% endif %}
-            {% for tag in product.tags %}
-              {% if tag contains 'badge:' %}
-              <span class="product-badge" style="color:{{ section.settings.accent_color }};border-color:{{ section.settings.accent_color | color_modify: 'alpha', 0.4 }};">{{ tag | remove: 'badge:' }}</span>
-              {% endif %}
-            {% endfor %}
-            <div class="product-floor-glow"></div>
-          </div>
-          <div class="product-card__info" style="border-top:1px solid {{ section.settings.card_border }};padding:{{ section.settings.card_padding }}px;">
-            <p class="product-card__origin" style="color:{{ section.settings.accent_color }};">
-              {% for tag in product.tags %}{% if tag contains 'origin:' %}{{ tag | remove: 'origin:' }}{% endif %}{% endfor %}
-              {% if product.product_type != blank %} · {{ product.product_type }}{% endif %}
-            </p>
-            <h3 class="product-card__name" style="color:{{ section.settings.card_title_color }};">{{ product.title }}</h3>
-            <p class="product-card__desc" style="color:{{ section.settings.card_desc_color }};">{{ product.description | strip_html | truncate: 100 }}</p>
-            <div class="product-card__foot">
-              <span class="product-card__price" style="color:{{ section.settings.card_title_color }};">
-                <sub style="color:{{ section.settings.card_desc_color }};">{{ cart.currency.symbol }}</sub>{{ product.price | money_without_currency }}
-              </span>
-              <form action="/cart/add" method="post">
-                <input type="hidden" name="id" value="{{ product.variants.first.id }}">
-                <button type="submit" class="product-add" style="color:{{ section.settings.accent_color }};border-color:{{ section.settings.accent_color | color_modify: 'alpha', 0.4 }};">
-                  {{ section.settings.add_to_cart_text | default: 'Adaugă în coș' }} →
-                </button>
-              </form>
+    <div class="grid">
+      {%- for product in items limit: section.settings.products_count -%}
+        <div class="card reveal">
+          <a class="pic{% if product.featured_image %} photo{% endif %}" href="{{ product.url }}">
+            {% render 'zk-product-image', product: product %}
+            {%- for tag in product.tags -%}
+              {%- if tag contains 'badge:' -%}
+                <span class="badge">{{ tag | remove: 'badge:' }}</span>
+              {%- endif -%}
+            {%- endfor -%}
+          </a>
+
+          <div class="body">
+            <span class="fruit">{{ product.type | default: product.vendor }}</span>
+            <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
+            <p class="note">{{ product.description | strip_html | truncate: 96 }}</p>
+
+            <div class="row">
+              <div class="price">
+                {{ product.price | money }}
+                {%- if product.variants.first.title != 'Default Title' %}
+                  <small>{{ product.variants.first.title }}</small>
+                {%- endif %}
+              </div>
+
+              {%- if product.available -%}
+                <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data">
+                  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                  <input type="hidden" name="quantity" value="1">
+                  <button type="submit" class="add">{{ section.settings.add_label | default: 'În coș' }}</button>
+                </form>
+              {%- else -%}
+                <button class="add" disabled>{{ section.settings.sold_label | default: 'Epuizat' }}</button>
+              {%- endif -%}
             </div>
           </div>
         </div>
-        {% endfor %}
-      {% else %}
-        {% for block in section.blocks %}
-        <div class="product-card reveal delay-{{ forloop.index }}" style="background:{{ section.settings.card_bg }};" {{ block.shopify_attributes }}>
-          <div class="product-card__image-wrap" style="background:{{ section.settings.card_img_bg }};height:{{ section.settings.card_img_height }}px;">
-            {% if block.settings.product_image != blank %}
-              <img src="{{ block.settings.product_image | img_url: '600x' }}" alt="{{ block.settings.product_name }}" class="product-card__img">
-            {% else %}
-              {% render 'bottle-svg', variant: 'card' %}
-            {% endif %}
-            {% if block.settings.badge != blank %}
-            <span class="product-badge" style="color:{{ section.settings.accent_color }};">{{ block.settings.badge }}</span>
-            {% endif %}
-            <div class="product-floor-glow"></div>
-          </div>
-          <div class="product-card__info" style="border-top:1px solid {{ section.settings.card_border }};padding:{{ section.settings.card_padding }}px;">
-            <p class="product-card__origin" style="color:{{ section.settings.accent_color }};">{{ block.settings.origin }}</p>
-            <h3 class="product-card__name" style="color:{{ section.settings.card_title_color }};">{{ block.settings.product_name }}</h3>
-            <p class="product-card__desc" style="color:{{ section.settings.card_desc_color }};">{{ block.settings.product_desc }}</p>
-            <div class="product-card__foot">
-              <span class="product-card__price" style="color:{{ section.settings.card_title_color }};">
-                <sub style="color:{{ section.settings.card_desc_color }};">{{ cart.currency.symbol }}</sub>{{ block.settings.price }}
-              </span>
-              {% if block.settings.product_handle != blank %}
-              <a href="/products/{{ block.settings.product_handle }}" class="product-add" style="color:{{ section.settings.accent_color }};border-color:{{ section.settings.accent_color | color_modify: 'alpha', 0.4 }};">
-                {{ section.settings.add_to_cart_text | default: 'Adaugă în coș' }} →
-              </a>
-              {% endif %}
-            </div>
-          </div>
-        </div>
-        {% endfor %}
-      {% endif %}
+      {%- else -%}
+        <p class="empty">Nu există produse publicate încă.</p>
+      {%- endfor -%}
     </div>
   </div>
 </section>
 
 {% schema %}
 {
-  "name": "Colecție Produse",
+  "name": "Magazin",
   "settings": [
-    { "type": "header", "content": "Sursă produse" },
-    { "type": "collection", "id": "collection", "label": "Colecție Shopify (opțional — altfel folosește blocurile)" },
-    { "type": "range", "id": "products_count", "min": 2, "max": 12, "step": 1, "label": "Nr. produse afișate", "default": 3 },
-    { "type": "range", "id": "columns", "min": 2, "max": 4, "step": 1, "label": "Coloane grid", "default": 3 },
-    { "type": "header", "content": "Titlu secțiune" },
-    { "type": "text", "id": "eyebrow", "label": "Text mic (eyebrow)", "default": "Colecția Premium" },
-    { "type": "textarea", "id": "title", "label": "Titlu", "default": "Expresii de" },
-    { "type": "text", "id": "title_italic", "label": "Titlu italic", "default": "Măiestrie" },
-    { "type": "textarea", "id": "subtitle", "label": "Subtitlu (opțional)" },
-    { "type": "text", "id": "view_all_text", "label": "Text link 'Vezi toate'", "default": "Vezi toate produsele" },
-    { "type": "url", "id": "view_all_url", "label": "Link 'Vezi toate'" },
-    { "type": "text", "id": "add_to_cart_text", "label": "Text buton coș", "default": "Adaugă în coș" },
-    { "type": "header", "content": "Culori secțiune" },
-    { "type": "color", "id": "bg_color", "label": "Fundal secțiune", "default": "#0c0b09" },
-    { "type": "color", "id": "accent_color", "label": "Culoare accent (gold)", "default": "#b8963e" },
-    { "type": "color", "id": "title_color", "label": "Culoare titlu", "default": "#f0ead8" },
-    { "type": "color", "id": "subtitle_color", "label": "Culoare subtitlu", "default": "#a89878" },
-    { "type": "color", "id": "cream_dim_color", "label": "Culoare link 'toate'", "default": "#a89878" },
-    { "type": "header", "content": "Culori card" },
-    { "type": "color", "id": "card_bg", "label": "Fundal card", "default": "#161410" },
-    { "type": "color", "id": "card_img_bg", "label": "Fundal imagine card", "default": "#1e1b15" },
-    { "type": "color", "id": "card_border", "label": "Bordura card", "default": "#28241c" },
-    { "type": "color", "id": "card_title_color", "label": "Culoare titlu produs", "default": "#f0ead8" },
-    { "type": "color", "id": "card_desc_color", "label": "Culoare descriere produs", "default": "#a89878" },
-    { "type": "range", "id": "card_img_height", "min": 280, "max": 560, "step": 20, "unit": "px", "label": "Înălțime imagine card", "default": 420 },
-    { "type": "range", "id": "card_padding", "min": 16, "max": 48, "step": 4, "unit": "px", "label": "Padding info card", "default": 28 },
-    { "type": "header", "content": "Spațiere" },
-    { "type": "range", "id": "padding_top", "min": 60, "max": 160, "step": 10, "unit": "px", "label": "Spațiu sus", "default": 120 },
-    { "type": "range", "id": "padding_bottom", "min": 60, "max": 160, "step": 10, "unit": "px", "label": "Spațiu jos", "default": 120 }
+    { "type": "text", "id": "shop_eyebrow", "label": "Etichetă", "default": "Magazin online" },
+    { "type": "textarea", "id": "shop_title", "label": "Titlu", "default": "Comandă direct <em>de la distilerie.</em>" },
+    { "type": "textarea", "id": "shop_sub", "label": "Subtitlu", "default": "Livrare gratuită peste 250 lei în România. Nu vindem alcool persoanelor sub 18 ani." },
+    { "type": "collection", "id": "collection", "label": "Colecție (gol = toate produsele)" },
+    { "type": "range", "id": "products_count", "min": 4, "max": 40, "step": 4, "label": "Număr de produse", "default": 12 },
+    { "type": "text", "id": "filter_all", "label": "Etichetă „toate”", "default": "Toate" },
+    { "type": "text", "id": "add_label", "label": "Buton adăugare", "default": "În coș" },
+    { "type": "text", "id": "sold_label", "label": "Text epuizat", "default": "Epuizat" }
   ],
   "blocks": [
     {
-      "type": "product_card",
-      "name": "Card Produs Manual",
+      "type": "filter",
+      "name": "Filtru (colecție)",
       "settings": [
-        { "type": "image_picker", "id": "product_image", "label": "Imagine produs" },
-        { "type": "text", "id": "product_name", "label": "Nume produs", "default": "Pălincă Premium" },
-        { "type": "text", "id": "origin", "label": "Origine / tip", "default": "Distilat Artizanal · Premium" },
-        { "type": "textarea", "id": "product_desc", "label": "Descriere scurtă", "default": "Distilat pur din fructele Érmelléki. Aromă intensă, finețe desăvârșită." },
-        { "type": "text", "id": "price", "label": "Preț", "default": "120.00" },
-        { "type": "text", "id": "badge", "label": "Etichetă (ex: Campion 2025)" },
-        { "type": "text", "id": "product_handle", "label": "Handle produs Shopify (pentru link)" }
+        { "type": "text", "id": "collection", "label": "Handle colecție", "info": "ex. barrique" },
+        { "type": "text", "id": "label", "label": "Etichetă" }
       ]
     }
   ],
-  "presets": [
-    {
-      "name": "Colecție Premium",
-      "blocks": [
-        { "type": "product_card", "settings": { "product_name": "Prună Premium", "origin": "Distilat de Prune · Premium", "product_desc": "Prune alese manual din livezile Érmelléki. Bogat, plin, cu final lung și cald.", "price": "95.00", "badge": "Aur Quintessence" }},
-        { "type": "product_card", "settings": { "product_name": "Măr Barrique", "origin": "Mere Barrique · Campion", "product_desc": "Mere fermentate și maturate în butoaie de stejar. Doi ani de răbdare în fiecare picătură.", "price": "130.00", "badge": "Campion 2025" }},
-        { "type": "product_card", "settings": { "product_name": "Vișin Sălbatic", "origin": "Vișine Sălbatice · Campion", "product_desc": "Distilat unic din vișine sălbatice culese din pădurile Bihorului. Kuriozitate absolută.", "price": "145.00", "badge": "Campion 2025" }}
-      ]
-    }
-  ]
+  "presets": [{ "name": "Magazin — grilă produse" }]
 }
 {% endschema %}

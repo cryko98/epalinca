@@ -1,63 +1,41 @@
-<!-- Barrique — Sherry cask finish -->
-<section id="barrique">
-  <div class="wrap">
-    <div class="sec-head">
-      <p class="eyebrow">{{ section.settings.eyebrow | default: 'Barrique · Sherry cask finish' }}</p>
-      <h2>{{ section.settings.title | default: 'Ce se întâmplă în butoi rămâne în butoi. <em>Până turnăm.</em>' }}</h2>
-      <p>{{ section.settings.description | default: 'Cinci distilate învechite în baric de stejar, apoi finisate în butoi de sherry. Mărul e campionul de categorie din 2025 — celelalte sunt concurenții anilor următori.' }}</p>
-    </div>
-
-    <div class="prod-grid" style="margin-top:2rem;">
-      {% assign barrique_collection = collections[section.settings.collection] %}
-      {% if barrique_collection %}
-        {% for product in barrique_collection.products %}
-          <div class="prod-card reveal" style="transition-delay:{{ forloop.index0 | times: 70 }}ms">
-            <div class="pic">
-              {% if product.featured_image %}
-                <img src="{{ product.featured_image | img_url: '400x' }}" alt="{{ product.title }}" loading="lazy">
-              {% else %}
-                <div style="width:60%;aspect-ratio:1/3;background:var(--amber);opacity:.3;border-radius:2px;"></div>
-              {% endif %}
-              {% if product.tags contains 'Campion' or product.tags contains 'champion' %}
-                <span class="rb rb-champion">CAMPION</span>
-              {% elsif product.compare_at_price %}
-                <span class="rb rb-gold">AUR</span>
-              {% endif %}
-            </div>
-            <div class="prod-body">
-              <span class="prod-fruit">{{ section.settings.barrique_label | default: 'barrique · sherry cask' }}</span>
-              <h3>{{ product.title }}</h3>
-              <p class="prod-note">{{ product.description | strip_html | truncate: 80 }}</p>
-              <div class="prod-row">
-                <span class="prod-price">{{ product.price | money_without_trailing_zeros }}</span>
-                <a href="{{ product.url }}" class="prod-add">Detalii</a>
-              </div>
-            </div>
-          </div>
-        {% endfor %}
-      {% else %}
-        <p style="color:var(--fog);font-family:'IBM Plex Mono',monospace;font-size:.8rem;">Selectează o colecție Barrique în setări.</p>
-      {% endif %}
-    </div>
-
-    <div style="margin-top:2.5rem;text-align:center;">
-      <a href="{{ section.settings.cta_url | default: '/collections/barrique' }}" class="btn primary">{{ section.settings.cta_text | default: 'Seria Barrique' }}</a>
-    </div>
-  </div>
-</section>
+<section id="barrique" class="band feature" style="background-image:url({{ 'zk-06.jpg' | asset_url }})"><div class="wrap">
+  <div class="reveal"><div class="eyebrow">{{ section.settings.bq_eyebrow }}</div><h2 style="margin:.6rem 0 1.2rem">{{ section.settings.bq_title }}</h2><p>{{ section.settings.bq_p }}</p><a class="btn primary" href="#shop" data-f="barrique">{{ section.settings.bq_cta }}</a></div>
+  <div class="pics reveal"><img src="{{ 'zk-09.jpg' | asset_url }}" alt="Barrique plum in smoke"><img src="{{ 'zk-10.jpg' | asset_url }}" alt="Barrique grape distillate in smoke"></div>
+</div></section>
 
 {% schema %}
 {
-  "name": "Barrique — Seria",
+  "name": "Barrique",
   "settings": [
-    {"type":"text","id":"eyebrow","label":"Eyebrow","default":"Barrique · Sherry cask finish"},
-    {"type":"text","id":"title","label":"Titlu","default":"Ce se întâmplă în butoi rămâne în butoi. <em>Până turnăm.</em>"},
-    {"type":"textarea","id":"description","label":"Descriere"},
-    {"type":"collection","id":"collection","label":"Colecția Barrique"},
-    {"type":"text","id":"barrique_label","label":"Etichetă tip produs","default":"barrique · sherry cask"},
-    {"type":"text","id":"cta_text","label":"Buton text","default":"Seria Barrique"},
-    {"type":"url","id":"cta_url","label":"Buton link"}
+    {
+      "type": "text",
+      "id": "bq_eyebrow",
+      "label": "Bq eyebrow",
+      "default": "Barrique · Sherry cask finish"
+    },
+    {
+      "type": "text",
+      "id": "bq_title",
+      "label": "Bq title",
+      "default": "Ce se întâmplă în butoi rămâne în butoi. <em>Până turnăm.</em>"
+    },
+    {
+      "type": "textarea",
+      "id": "bq_p",
+      "label": "Bq p",
+      "default": "Cinci distilate învechite în baric de stejar, apoi finisate în butoi de sherry. Mărul e campionul de categorie din 2025 — celelalte sunt concurenții anilor următori."
+    },
+    {
+      "type": "text",
+      "id": "bq_cta",
+      "label": "Bq cta",
+      "default": "Seria Barrique"
+    }
   ],
-  "presets": [{"name": "Barrique"}]
+  "presets": [
+    {
+      "name": "Barrique — sherry cask"
+    }
+  ]
 }
 {% endschema %}

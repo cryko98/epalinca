@@ -1,76 +1,68 @@
-<!-- Distilat — kék üveg sor. Forrás: uploadolt HTML #distilat szekció -->
-<section id="distilat">
-  <div class="wrap">
-
-    <!-- Fotómozaik bal oldalon -->
-    <div class="ds-mosaic">
-      {% for i in (1..6) %}
-        {% assign key = 'photo' | append: i %}
-        {% if section.settings[key] %}
-          <figure>
-            <img src="{{ section.settings[key] | img_url: 'master' }}" alt="Distilat Zekulhyda" loading="lazy">
-          </figure>
-        {% else %}
-          <figure style="background:rgba(30,150,180,.4);display:grid;place-items:center;">
-            <span style="color:rgba(6,43,54,.6);font-size:2rem;font-family:'Cormorant Garamond',serif;">D</span>
-          </figure>
-        {% endif %}
-      {% endfor %}
-    </div>
-
-    <!-- Text jobb oldalon -->
-    <div class="ds-text">
-      <p class="eyebrow">{{ section.settings.eyebrow | default: 'Distilat · Sticla albastră' }}</p>
-      <h2>{{ section.settings.title | default: 'Aceeași mână, <em>alt fruct.</em>' }}</h2>
-      <p style="margin-top:1rem;">{{ section.settings.description | default: 'Șapte distilate curate din citrice, banane și ghimbir — 42%, 0,5 l, în sticla albastră striată. Nu lichior, nu aromă: fruct adevărat, distilat. Simplu, cu gheață sau cu tonic — pentru oaspeții mai tineri și pentru baruri.' }}</p>
-
-      <!-- 7 arome — gombok -->
-      <div class="ds-flavors" id="ds-flavors">
-        <span style="width:100%;font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:#062B36;">{{ section.settings.seven_label | default: 'Șapte arome' }}</span>
-        <button><i style="background:#F2E24A"></i>Lămâie</button>
-        <button><i style="background:#F2A23A"></i>Portocală</button>
-        <button><i style="background:#F0B84A"></i>Mandarină</button>
-        <button><i style="background:#E85C8A"></i>Grepfrut</button>
-        <button><i style="background:#8BD24A"></i>Lime</button>
-        <button><i style="background:#F5D93A"></i>Banană</button>
-        <button><i style="background:#E5405A"></i>Ghimbir</button>
-      </div>
-
-      <!-- Recomandarea casei -->
-      <ul class="ds-serves">
-        <li><b>{{ section.settings.serves_label | default: 'Recomandarea casei' }}</b></li>
-        <li>{{ section.settings.serve1 | default: 'Distilat de lime + tonic + felie de lime' }}</li>
-        <li>{{ section.settings.serve2 | default: 'Distilat de ghimbir + ginger ale, cu gheață' }}</li>
-        <li>{{ section.settings.serve3 | default: 'Distilat de portocale simplu, răcit la −18 °C' }}</li>
-      </ul>
-
-      <a href="{{ section.settings.cta_url | default: '/collections/distilat' }}" class="btn">{{ section.settings.cta_text | default: 'Seria Distilat' }}</a>
-    </div>
-
-  </div>
-</section>
+<section id="distilat"><div class="wrap">
+  <div class="mosaic"><figure><img src="{{ 'zk-11.jpg' | asset_url }}" alt="Grapefruit distillate"></figure><figure><img src="{{ 'zk-12.jpg' | asset_url }}" alt="Ginger distillate"></figure><figure><img src="{{ 'zk-13.jpg' | asset_url }}" alt="Lime distillate in a crate of limes"></figure><figure><img src="{{ 'zk-14.jpg' | asset_url }}" alt="Lemon distillate among lemons"></figure><figure><img src="{{ 'zk-15.jpg' | asset_url }}" alt="Orange distillate"></figure><figure><img src="{{ 'zk-16.jpg' | asset_url }}" alt="Banana distillate"></figure></div>
+  <div class="text reveal"><div class="eyebrow">{{ section.settings.ds_eyebrow }}</div><h2 style="margin:.6rem 0 1.2rem">{{ section.settings.ds_title }}</h2><p>{{ section.settings.ds_p }}</p>
+    <div class="flavors" id="flavors"></div>
+    <ul class="serves"><b>{{ section.settings.ds_serve }}</b><li>{{ section.settings.ds_serve_1 }}</li><li>{{ section.settings.ds_serve_2 }}</li><li>{{ section.settings.ds_serve_3 }}</li></ul>
+    <a class="btn" href="#shop" data-f="distilat">{{ section.settings.ds_cta }}</a></div>
+</div></section>
 
 {% schema %}
 {
   "name": "Distilat",
   "settings": [
-    {"type":"text","id":"eyebrow","label":"Eyebrow","default":"Distilat · Sticla albastră"},
-    {"type":"text","id":"title","label":"Titlu","default":"Aceeași mână, <em>alt fruct.</em>"},
-    {"type":"textarea","id":"description","label":"Descriere","default":"Șapte distilate curate din citrice, banane și ghimbir — 42%, 0,5 l, în sticla albastră striată. Nu lichior, nu aromă: fruct adevărat, distilat."},
-    {"type":"text","id":"seven_label","label":"Etichetă 7 arome","default":"Șapte arome"},
-    {"type":"text","id":"serves_label","label":"Etichetă servire","default":"Recomandarea casei"},
-    {"type":"text","id":"serve1","label":"Servire 1","default":"Distilat de lime + tonic + felie de lime"},
-    {"type":"text","id":"serve2","label":"Servire 2","default":"Distilat de ghimbir + ginger ale, cu gheață"},
-    {"type":"text","id":"serve3","label":"Servire 3","default":"Distilat de portocale simplu, răcit la −18 °C"},
-    {"type":"text","id":"cta_text","label":"Buton text","default":"Seria Distilat"},
-    {"type":"url","id":"cta_url","label":"Buton link"},
-    {"type":"image_picker","id":"photo1","label":"Fotografie 1"},
-    {"type":"image_picker","id":"photo2","label":"Fotografie 2"},
-    {"type":"image_picker","id":"photo3","label":"Fotografie 3"},
-    {"type":"image_picker","id":"photo4","label":"Fotografie 4"},
-    {"type":"image_picker","id":"photo5","label":"Fotografie 5"},
-    {"type":"image_picker","id":"photo6","label":"Fotografie 6"}
+    {
+      "type": "text",
+      "id": "ds_eyebrow",
+      "label": "Ds eyebrow",
+      "default": "Distilat · Sticla albastră"
+    },
+    {
+      "type": "text",
+      "id": "ds_title",
+      "label": "Ds title",
+      "default": "Aceeași mână, <em>alt fruct.</em>"
+    },
+    {
+      "type": "textarea",
+      "id": "ds_p",
+      "label": "Ds p",
+      "default": "Șapte distilate curate din citrice, banane și ghimbir — 42%, 0,5 l, în sticla albastră striată. Nu lichior, nu aromă: fruct adevărat, distilat. Simplu, cu gheață sau cu tonic — pentru oaspeții mai tineri și pentru baruri."
+    },
+    {
+      "type": "text",
+      "id": "ds_serve",
+      "label": "Ds serve",
+      "default": "Recomandarea casei"
+    },
+    {
+      "type": "text",
+      "id": "ds_serve_1",
+      "label": "Ds serve 1",
+      "default": "Distilat de lime + tonic + felie de lime"
+    },
+    {
+      "type": "text",
+      "id": "ds_serve_2",
+      "label": "Ds serve 2",
+      "default": "Distilat de ghimbir + ginger ale, cu gheață"
+    },
+    {
+      "type": "text",
+      "id": "ds_serve_3",
+      "label": "Ds serve 3",
+      "default": "Distilat de portocale simplu, răcit la −18 °C"
+    },
+    {
+      "type": "text",
+      "id": "ds_cta",
+      "label": "Ds cta",
+      "default": "Seria Distilat"
+    }
   ],
-  "presets": [{"name": "Distilat — Sticla albastră"}]
+  "presets": [
+    {
+      "name": "Distilat — sticla albastră"
+    }
+  ]
 }
 {% endschema %}

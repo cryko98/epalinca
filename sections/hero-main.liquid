@@ -1,107 +1,46 @@
-{% assign hero_quote = section.settings.hero_title | default: 'Sufletul fructului devine sufletul tău.' %}
-{% assign hero_sub   = section.settings.hero_sub   | default: 'Pălincă premium din Valea Ierului — 22 de medalii și două titluri de campion la cel mai mare concurs de pălincă din Europa Centrală.' %}
-
-<section class="hero" id="hero">
-
-  <!-- 4 slide-uri din uploaded HTML -->
-  <div class="hero-slide on" style="background-image:url('{{ section.settings.slide1_img | img_url: 'master' }}')"></div>
-  <div class="hero-slide"    style="background-image:url('{{ section.settings.slide2_img | img_url: 'master' }}')"></div>
-  <div class="hero-slide"    style="background-image:url('{{ section.settings.slide3_img | img_url: 'master' }}')"></div>
-  <div class="hero-slide"    style="background-image:url('{{ section.settings.slide4_img | img_url: 'master' }}')"></div>
-
+<section class="hero" id="top">
+  <div class="bg" id="slides"></div>
   <div class="wrap">
-    <p class="eyebrow hero-anim d1">{{ section.settings.hero_eyebrow | default: 'Săcueni · Valea Ierului · Bihor' }}</p>
-    <h1 class="hero-anim d1">{{ hero_quote }}</h1>
-    <p class="lead hero-anim d2">{{ hero_sub }}</p>
-    <div class="ctas hero-anim d3">
-      <a href="{{ section.settings.cta1_url | default: '#shop' }}" class="btn primary">{{ section.settings.cta1_text | default: 'Produsele noastre' }}</a>
-      <a href="{{ section.settings.cta2_url | default: '#story' }}" class="btn">{{ section.settings.cta2_text | default: 'Povestea lui Botond' }}</a>
+    <div>
+      <div class="eyebrow">{{ section.settings.hero_eyebrow }}</div>
+      <h1 style="margin-top:.8rem">{{ section.settings.hero_title }}</h1>
+      <p class="lead">{{ section.settings.hero_sub }}</p>
+      <div class="ctas">
+        <a class="btn primary" href="{{ section.settings.cta_link | default: '#shop' }}">{{ section.settings.hero_cta }}</a>
+        <a class="btn" href="{{ section.settings.cta2_link | default: '#story' }}">{{ section.settings.hero_cta2 }}</a>
+      </div>
     </div>
   </div>
 
-  <!-- Slidebar -->
   <div class="slidebar">
     <div class="wrap">
-      <div class="slide-cap">
-        <span class="slide-num js-slide-num">01 / 04</span>
-        <span class="slide-title js-slide-title">{{ section.settings.slide1_caption | default: 'Seria Barrique — sherry cask finish, din baric de stejar' }}</span>
+      <div class="cap">
+        <span class="num" id="slNum">01 / 04</span>
+        <span class="ttl" id="slTitle"></span>
       </div>
-      <div class="slide-dots">
-        <div class="slide-dot on" data-dot="0"></div>
-        <div class="slide-dot" data-dot="1"></div>
-        <div class="slide-dot" data-dot="2"></div>
-        <div class="slide-dot" data-dot="3"></div>
+      <a class="btn primary" id="slCta" href="{{ section.settings.cta_link | default: '#shop' }}"></a>
+      <div class="nav">
+        <button class="arr" id="slPrev" aria-label="Anterior">←</button>
+        <div class="dots" id="slDots"></div>
+        <button class="arr" id="slNext" aria-label="Următor">→</button>
       </div>
-      <a href="#shop" class="slide-cta js-slide-cta">{{ section.settings.slide1_cta | default: 'Seria Barrique' }}</a>
     </div>
   </div>
-
 </section>
-
-<script>
-(function(){
-  var slides = document.querySelectorAll('.hero-slide');
-  var dots   = document.querySelectorAll('.slide-dot');
-  var numEl  = document.querySelector('.js-slide-num');
-  var titleEl= document.querySelector('.js-slide-title');
-  var ctaEl  = document.querySelector('.js-slide-cta');
-  var captions = [
-    { t:'{{ section.settings.slide1_caption | default: "Seria Barrique — sherry cask finish, din baric de stejar" | escape }}', c:'{{ section.settings.slide1_cta | default: "Seria Barrique" | escape }}', u:'{{ section.settings.slide1_url | default: "#shop" | escape }}' },
-    { t:'{{ section.settings.slide2_caption | default: "22 de medalii și două titluri de campion — Quintessence 2025" | escape }}', c:'{{ section.settings.slide2_cta | default: "Campionii" | escape }}', u:'{{ section.settings.slide2_url | default: "#story" | escape }}' },
-    { t:'{{ section.settings.slide3_caption | default: "Distilat — sticla albastră. Portocală, 42%, cu gheață sau tonic" | escape }}', c:'{{ section.settings.slide3_cta | default: "Seria Distilat" | escape }}', u:'{{ section.settings.slide3_url | default: "#distilat" | escape }}' },
-    { t:'{{ section.settings.slide4_caption | default: "Șapte arome: lămâie, portocală, mandarină, grepfrut, lime, banană, ghimbir" | escape }}', c:'{{ section.settings.slide4_cta | default: "Gustă" | escape }}', u:'{{ section.settings.slide4_url | default: "#shop" | escape }}' }
-  ];
-  var idx = 0;
-  var timer;
-
-  function goTo(n) {
-    slides[idx].classList.remove('on');
-    dots[idx].classList.remove('on');
-    idx = (n + slides.length) % slides.length;
-    slides[idx].classList.add('on');
-    dots[idx].classList.add('on');
-    var pad = ('0' + (idx+1)).slice(-2);
-    numEl.textContent = pad + ' / 0' + slides.length;
-    titleEl.textContent = captions[idx].t;
-    ctaEl.textContent = captions[idx].c + ' →';
-    ctaEl.href = captions[idx].u;
-  }
-
-  function autoplay() { timer = setInterval(function(){ goTo(idx+1); }, 6000); }
-
-  dots.forEach(function(d){ d.addEventListener('click', function(){ clearInterval(timer); goTo(+d.dataset.dot); autoplay(); }); });
-  autoplay();
-})();
-</script>
 
 {% schema %}
 {
-  "name": "Hero Slider",
+  "name": "Hero",
   "settings": [
-    {"type":"image_picker","id":"slide1_img","label":"Slide 1 — kép (Barrique)"},
-    {"type":"image_picker","id":"slide2_img","label":"Slide 2 — kép (Érmek)"},
-    {"type":"image_picker","id":"slide3_img","label":"Slide 3 — kép (Distilat)"},
-    {"type":"image_picker","id":"slide4_img","label":"Slide 4 — kép (7 arome)"},
-    {"type":"text","id":"hero_eyebrow","label":"Eyebrow szöveg","default":"Săcueni · Valea Ierului · Bihor"},
-    {"type":"text","id":"hero_title","label":"Főcím (idézet)","default":"Sufletul fructului devine sufletul tău."},
-    {"type":"textarea","id":"hero_sub","label":"Alcím","default":"Pălincă premium din Valea Ierului — 22 de medalii și două titluri de campion la cel mai mare concurs de pălincă din Europa Centrală."},
-    {"type":"text","id":"cta1_text","label":"CTA 1 szöveg","default":"Produsele noastre"},
-    {"type":"url","id":"cta1_url","label":"CTA 1 link"},
-    {"type":"text","id":"cta2_text","label":"CTA 2 szöveg","default":"Povestea lui Botond"},
-    {"type":"url","id":"cta2_url","label":"CTA 2 link"},
-    {"type":"text","id":"slide1_caption","label":"Slide 1 felirat","default":"Seria Barrique — sherry cask finish, din baric de stejar"},
-    {"type":"text","id":"slide1_cta","label":"Slide 1 CTA","default":"Seria Barrique"},
-    {"type":"url","id":"slide1_url","label":"Slide 1 link"},
-    {"type":"text","id":"slide2_caption","label":"Slide 2 felirat","default":"22 de medalii și două titluri de campion — Quintessence 2025"},
-    {"type":"text","id":"slide2_cta","label":"Slide 2 CTA","default":"Campionii"},
-    {"type":"url","id":"slide2_url","label":"Slide 2 link"},
-    {"type":"text","id":"slide3_caption","label":"Slide 3 felirat","default":"Distilat — sticla albastră. Portocală, 42%, cu gheață sau tonic"},
-    {"type":"text","id":"slide3_cta","label":"Slide 3 CTA","default":"Seria Distilat"},
-    {"type":"url","id":"slide3_url","label":"Slide 3 link"},
-    {"type":"text","id":"slide4_caption","label":"Slide 4 felirat","default":"Șapte arome: lămâie, portocală, mandarină, grepfrut, lime, banană, ghimbir"},
-    {"type":"text","id":"slide4_cta","label":"Slide 4 CTA","default":"Gustă"},
-    {"type":"url","id":"slide4_url","label":"Slide 4 link"}
+    { "type": "text", "id": "hero_eyebrow", "label": "Etichetă", "default": "Săcueni · Valea Ierului · Bihor" },
+    { "type": "textarea", "id": "hero_title", "label": "Titlu", "default": "Sufletul fructului va fi fructul sufletului." },
+    { "type": "textarea", "id": "hero_sub", "label": "Subtitlu", "default": "Pălincă premium din Valea Ierului — 22 de medalii și două titluri de campion la cel mai mare concurs de pălincă din Europa Centrală." },
+    { "type": "text", "id": "hero_cta", "label": "Buton principal", "default": "Vezi pălincile" },
+    { "type": "url", "id": "cta_link", "label": "Link buton principal" },
+    { "type": "text", "id": "hero_cta2", "label": "Buton secundar", "default": "Povestea lui Botond" },
+    { "type": "url", "id": "cta2_link", "label": "Link buton secundar" },
+    { "type": "paragraph", "content": "Imaginile din slideshow vin din design (zk-42…zk-45) și sunt încărcate ca fișiere ale temei." }
   ],
-  "presets": [{"name": "Hero Slider"}]
+  "presets": [{ "name": "Hero cu slideshow" }]
 }
 {% endschema %}
