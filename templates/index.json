@@ -26,6 +26,12 @@
         "products_count": 40
       },
       "blocks": {
+        "f0": {
+          "type": "filter",
+          "settings": {
+            "collection": "premiate"
+          }
+        },
         "f1": {
           "type": "filter",
           "settings": {
@@ -58,6 +64,7 @@
         }
       },
       "block_order": [
+        "f0",
         "f1",
         "f2",
         "f3",
@@ -113,11 +120,16 @@
     "contact": {
       "type": "contact-section",
       "settings": {}
+    },
+    "winners": {
+      "type": "award-winners",
+      "settings": {}
     }
   },
   "order": [
     "hero",
     "medals",
+    "winners",
     "range",
     "barrique",
     "distilat",

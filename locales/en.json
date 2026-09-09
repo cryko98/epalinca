@@ -318,6 +318,12 @@
     "cart_shipping_note": "Shipping and taxes are calculated at checkout.",
     "cart_age_note": "The sale of alcohol to anyone under 18 is prohibited.",
     "cart_discover": "Discover the collection",
-    "blog_eyebrow": "From the distillery"
+    "blog_eyebrow": "From the distillery",
+    "win_eyebrow": "Podium",
+    "win_title": "The pálinkas that <em>reached the podium.</em>",
+    "win_sub": "Quintessence medals and category champion titles — each bottle with its own distinction.",
+    "win_cta": "View bottle",
+    "win_all": "All award winners",
+    "cat_awarded": "Award-winning"
   }
 }

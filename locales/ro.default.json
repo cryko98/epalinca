@@ -318,6 +318,12 @@
     "cart_shipping_note": "Transportul și taxele se calculează la finalizarea comenzii.",
     "cart_age_note": "Vânzarea de băuturi alcoolice este interzisă minorilor sub 18 ani.",
     "cart_discover": "Descoperă colecția",
-    "blog_eyebrow": "Din distilerie"
+    "blog_eyebrow": "Din distilerie",
+    "win_eyebrow": "Podium",
+    "win_title": "Pălincile care au <em>urcat pe podium.</em>",
+    "win_sub": "Medalii Quintessence și titluri de campion de categorie — fiecare sticlă cu distincția ei.",
+    "win_cta": "Vezi pălinca",
+    "win_all": "Toate pălincile premiate",
+    "cat_awarded": "Premiate"
   }
 }

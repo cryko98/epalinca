@@ -1,0 +1,71 @@
+{%- liquid
+  assign col = section.settings.collection
+  unless col
+    assign col = collections['premiate']
+  endunless
+-%}
+
+{%- if col != blank and col.products.size > 0 -%}
+  <section id="premiate" class="zk-winners">
+    <div class="wrap">
+
+      <div class="sec-head reveal">
+        <div class="eyebrow">{% render 'zk-t', override: section.settings.eyebrow, key: 'zk.win_eyebrow' %}</div>
+        <h2>{% render 'zk-t', override: section.settings.title, key: 'zk.win_title' %}</h2>
+        <p>{% render 'zk-t', override: section.settings.subtitle, key: 'zk.win_sub' %}</p>
+      </div>
+
+      <div class="zk-winners__row">
+        {%- for product in col.products limit: section.settings.products_count -%}
+          {%- assign awards = product.metafields.zekulhyda.awards.value -%}
+          <article class="zk-winner reveal">
+            <a class="zk-winner__pic" href="{{ product.url }}">
+              {% render 'zk-product-image', product: product %}
+            </a>
+
+            <div class="zk-winner__body">
+              {%- if awards != blank and awards.size > 0 -%}
+                {%- assign first = awards[0] | split: '|' -%}
+                <div class="zk-winner__ring">
+                  {% render 'zk-award-mini', product: product %}
+                  <span>{{ first[1] | strip }}</span>
+                </div>
+              {%- endif -%}
+
+              <h3><a href="{{ product.url }}">{{ product.title }}</a></h3>
+              <p class="zk-winner__note">{{ product.description | strip_html | truncate: 110 }}</p>
+
+              <div class="zk-winner__foot">
+                <span class="zk-winner__price">{{ product.price | money }}</span>
+                <a class="btn" href="{{ product.url }}">{% render 'zk-t', override: section.settings.cta, key: 'zk.win_cta' %}</a>
+              </div>
+            </div>
+          </article>
+        {%- endfor -%}
+      </div>
+
+      <div class="zk-winners__all">
+        <a class="btn primary" href="{{ col.url }}">
+          {%- render 'zk-t', override: section.settings.all_label, key: 'zk.win_all' -%} →
+        </a>
+      </div>
+
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Premiate",
+  "settings": [
+    { "type": "collection", "id": "collection", "label": "Colecție", "info": "Gol = colecția „premiate”" },
+    { "type": "text", "id": "eyebrow", "label": "Etichetă", "info": "Gol = textul tradus din locales/" },
+    { "type": "textarea", "id": "title", "label": "Titlu", "info": "Gol = textul tradus din locales/" },
+    { "type": "textarea", "id": "subtitle", "label": "Subtitlu", "info": "Gol = textul tradus din locales/" },
+    { "type": "range", "id": "products_count", "min": 2, "max": 8, "step": 1, "label": "Număr de produse", "default": 4 },
+    { "type": "text", "id": "cta", "label": "Buton produs", "info": "Gol = textul tradus din locales/" },
+    { "type": "text", "id": "all_label", "label": "Buton colecție", "info": "Gol = textul tradus din locales/" }
+  ],
+  "presets": [{ "name": "Premiate — pălinci premiate" }]
+}
+{% endschema %}

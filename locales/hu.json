@@ -318,6 +318,12 @@
     "cart_shipping_note": "A szállítást és az adókat a pénztárnál számoljuk ki.",
     "cart_age_note": "Alkoholtartalmú italt 18 éven aluliaknak nem szolgálunk ki.",
     "cart_discover": "Fedezd fel a kínálatot",
-    "blog_eyebrow": "A főzdéből"
+    "blog_eyebrow": "A főzdéből",
+    "win_eyebrow": "Dobogó",
+    "win_title": "A pálinkák, amelyek <em>dobogóra álltak.</em>",
+    "win_sub": "Quintessence érmek és kategóriabajnoki címek — minden üvegen ott a saját elismerése.",
+    "win_cta": "Megnézem",
+    "win_all": "Az összes díjnyertes",
+    "cat_awarded": "Díjnyertes"
   }
 }

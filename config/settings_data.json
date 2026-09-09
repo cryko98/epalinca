@@ -19,6 +19,12 @@
       "header": {
         "type": "header",
         "blocks": {
+          "c0": {
+            "type": "category",
+            "settings": {
+              "collection": "premiate"
+            }
+          },
           "c1": {
             "type": "category",
             "settings": {
@@ -51,6 +57,7 @@
           }
         },
         "block_order": [
+          "c0",
           "c1",
           "c2",
           "c3",

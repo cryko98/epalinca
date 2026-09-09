@@ -2551,3 +2551,65 @@ footer .wrap { align-items: flex-start; }
   .zk-cart__line { grid-area: line; min-width: 0; }
   .zk-cart__rm { grid-area: rm; }
 }
+
+
+/* ==========================================================================
+   Award winners — the featured category
+   Deliberately not another pill in the row: it gets its own band on the homepage,
+   between the medal strip that makes the claim and the range that explains it.
+   ========================================================================== */
+
+.zk-winners {
+  padding: 6rem 0;
+  background:
+    radial-gradient(90% 120% at 50% 0%, rgba(201, 150, 59, .13), transparent 60%),
+    var(--graphite);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.zk-winners__row {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 1.4rem;
+}
+
+.zk-winner {
+  display: flex; flex-direction: column;
+  background: rgba(11, 11, 12, .72); border: 1px solid var(--line); border-radius: 3px;
+  overflow: hidden; transition: transform .3s cubic-bezier(.2,.7,.2,1), border-color .3s, box-shadow .3s;
+}
+.zk-winner:hover { transform: translateY(-6px); border-color: var(--amber); box-shadow: 0 26px 55px rgba(0, 0, 0, .5); }
+
+.zk-winner__pic {
+  position: relative; aspect-ratio: 4/5; display: grid; place-items: center;
+  background: linear-gradient(180deg, #17171A, #0E0E10); overflow: hidden;
+}
+.zk-winner__pic img { max-height: 88%; max-width: 84%; width: auto; height: auto; object-fit: contain; }
+.zk-winner__pic > svg { height: 82%; width: auto; }
+
+.zk-winner__body { padding: 1.3rem 1.2rem 1.4rem; display: flex; flex-direction: column; flex: 1; }
+
+/* The medal and the competition it came from, read together. */
+.zk-winner__ring { display: flex; align-items: center; gap: .6rem; margin-bottom: .8rem; }
+.zk-winner__ring .zk-mini { position: static; width: 40px; height: 40px; flex: none; }
+.zk-winner__ring span {
+  font-family: "IBM Plex Mono", monospace; font-size: .58rem; line-height: 1.4;
+  letter-spacing: .12em; text-transform: uppercase; color: var(--amber-2);
+}
+
+.zk-winner h3 { font-family: "Cormorant Garamond", serif; font-size: 1.4rem; font-weight: 500; line-height: 1.15; }
+.zk-winner h3 a { color: #F3F1EC; text-decoration: none; }
+.zk-winner:hover h3 a { color: var(--amber-2); }
+.zk-winner__note { font-size: .84rem; line-height: 1.7; color: var(--fog); margin: .6rem 0 0; flex: 1; }
+
+.zk-winner__foot { display: flex; align-items: center; justify-content: space-between; gap: .8rem; margin-top: 1.2rem; }
+.zk-winner__price { font-family: "Cormorant Garamond", serif; font-size: 1.5rem; color: var(--amber-2); }
+.zk-winner__foot .btn { padding: .7rem 1rem; font-size: .6rem; }
+
+.zk-winners__all { margin-top: 2.6rem; display: flex; justify-content: center; }
+
+/* The featured category stands out among the filter pills. */
+#shop .filters button[data-f="premiate"] { border-color: var(--amber); color: #7A5416; }
+#shop .filters button[data-f="premiate"]::before { content: "★"; margin-right: .45rem; color: var(--amber); }
+#shop .filters button[data-f="premiate"].on { background: var(--amber); border-color: var(--amber); color: var(--ink); }
+#shop .filters button[data-f="premiate"].on::before { color: var(--ink); }
+.zk-cats__menu a[data-cat="premiate"] span::before { content: "★"; margin-right: .45rem; color: var(--amber); }
