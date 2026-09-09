@@ -8,6 +8,15 @@
   locales/*.json and switches with the locale; the moment a merchant types something it
   wins, in every language.
 
+  The design sets part of each headline in italics via <em>, and several dictionary
+  entries carry that markup. Shopify's `t` filter escapes HTML, which rendered those tags
+  as visible text, so <em> is decoded again below. Only <em> is restored - everything else
+  in a translation stays escaped, so the strings still cannot inject markup.
+
   Usage: {% render 'zk-t', override: section.settings.hero_title, key: 'zk.hero_title' %}
 {%- endcomment -%}
-{%- if override != blank -%}{{ override }}{%- else -%}{{ key | t }}{%- endif -%}
+{%- if override != blank -%}
+  {{- override -}}
+{%- else -%}
+  {{- key | t | replace: '&lt;em&gt;', '<em>' | replace: '&lt;/em&gt;', '</em>' -}}
+{%- endif -%}
