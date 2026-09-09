@@ -2613,3 +2613,53 @@ footer .wrap { align-items: flex-start; }
 #shop .filters button[data-f="premiate"].on { background: var(--amber); border-color: var(--amber); color: var(--ink); }
 #shop .filters button[data-f="premiate"].on::before { color: var(--ink); }
 .zk-cats__menu a[data-cat="premiate"] span::before { content: "★"; margin-right: .45rem; color: var(--amber); }
+
+
+/* ==========================================================================
+   Product artwork — never crop the bottle
+   The product shots are tall portraits (316x760, ratio 0.42) while the tiles are 4/5.
+   The tiles size themselves with aspect-ratio, so a percentage max-height on the image
+   has no definite height to resolve against and behaves as `none`: max-width capped the
+   width, height:auto made it 494px inside a 289px tile, and overflow:hidden cut 206px
+   off the bottom of every bottle.
+
+   Taking the image out of the flow gives it the tile's exact box, and object-fit:contain
+   then letterboxes it — the whole bottle is always visible, whatever its proportions.
+   The tiles are also 3/4 rather than 4/5, which suits a bottle and wastes less space.
+   ========================================================================== */
+
+.card .pic,
+.zk-winner__pic,
+.zk-cart__pic { position: relative; overflow: hidden; }
+
+.card .pic { aspect-ratio: 3/4; }
+.zk-winner__pic { aspect-ratio: 3/4; }
+
+.card .pic > img,
+.zk-winner__pic > img,
+.pdp__stage > img,
+.zk-cart__pic > img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  object-fit: contain;
+  padding: 7% 9%;
+}
+
+.card .pic > img { transition: transform .6s cubic-bezier(.2,.7,.2,1); }
+.card:hover .pic > img,
+.card:focus-within .pic > img { transform: scale(1.05); }
+
+.pdp__stage { position: relative; }
+.pdp__stage > img { padding: 8% 10%; }
+.zk-cart__pic > img { padding: 8%; }
+
+/* The generic bottle SVG gets the same treatment so fallbacks line up with photos. */
+.zk-winner__pic > svg,
+.zk-cart__pic > svg {
+  position: absolute; top: 50%; left: 50%;
+  transform: translate(-50%, -50%); height: 80%; width: auto;
+}
