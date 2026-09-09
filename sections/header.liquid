@@ -192,6 +192,43 @@
       document.addEventListener("keydown", function (e) { if (e.key === "Escape") setOpen(false); });
       window.addEventListener("resize", function () { if (window.innerWidth > 860) setOpen(false); });
     }
+
+    // The header is server-rendered, and Shopify can serve that HTML from cache, so
+    // {{ cart.item_count }} lags the real cart — it kept showing 0 after adding items.
+    // Read the truth from the cart API, and add to the cart without leaving the page so
+    // the number moves the moment the shopper clicks.
+    var CART_URL = {{ routes.cart_url | json }};
+
+    function paintCount(n) {
+      document.querySelectorAll("#cartCount, .cartbtn b").forEach(function (el) { el.textContent = n; });
+      document.querySelectorAll(".cartbtn").forEach(function (el) { el.classList.toggle("has", n > 0); });
+    }
+
+    fetch(CART_URL + ".js", { headers: { Accept: "application/json" } })
+      .then(function (r) { return r.json(); })
+      .then(function (c) { paintCount(c.item_count); })
+      .catch(function () {});
+
+    document.addEventListener("submit", function (e) {
+      var form = e.target.closest('form[action*="/cart/add"]');
+      if (!form) return;
+      e.preventDefault();
+      var btn = form.querySelector('[type="submit"]');
+      var label = btn ? btn.textContent : "";
+      if (btn) { btn.disabled = true; }
+      fetch(CART_URL + "/add.js", { method: "POST", body: new FormData(form) })
+        .then(function (r) { return r.json(); })
+        .then(function () { return fetch(CART_URL + ".js", { headers: { Accept: "application/json" } }); })
+        .then(function (r) { return r.json(); })
+        .then(function (c) {
+          paintCount(c.item_count);
+          if (btn) { btn.textContent = "✓"; btn.classList.add("done"); }
+          setTimeout(function () {
+            if (btn) { btn.textContent = label; btn.classList.remove("done"); btn.disabled = false; }
+          }, 1400);
+        })
+        .catch(function () { if (btn) { btn.disabled = false; form.submit(); } });
+    });
   })();
 </script>
 

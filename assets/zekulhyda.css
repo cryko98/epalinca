@@ -2786,8 +2786,12 @@ nav.main a.on::after {
    form and the contact map.
    ========================================================================== */
 
-/* Nothing may push the page sideways. */
-html, body { overflow-x: hidden; }
+/* Nothing may push the page sideways.
+
+   NOT overflow-x: hidden — that makes the element a scroll container, which moves the
+   scroll off the window and stops position:sticky working, so the header came unstuck on
+   mobile. overflow-x: clip crops the same way without creating a scroll container. */
+html, body { overflow-x: clip; }
 .medals { overflow: hidden; }
 .marquee { overflow: hidden; }
 
@@ -2880,3 +2884,7 @@ html, body { overflow-x: hidden; }
   .zk-winner__note { display: none; }
   footer .wrap { flex-direction: column; align-items: flex-start; gap: 1.2rem; }
 }
+
+/* Add-to-cart confirmation, and a cart button that reads as full. */
+.card .add.done, .pdp__add.done { background: var(--ok, #4E8B57) !important; border-color: var(--ok, #4E8B57) !important; color: #fff !important; }
+.cartbtn.has b { background: var(--amber); color: var(--ink); }
