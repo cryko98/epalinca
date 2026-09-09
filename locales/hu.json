@@ -301,6 +301,11 @@
     "bk_success": "Köszönjük! Megkaptuk a kérést, hamarosan visszaigazoljuk.",
     "bk_note": "A feltüntetett ár tájékoztató jellegű; a végleges visszaigazolás e-mailben érkezik.",
     "bk_error": "Ellenőrizze a mezőket",
-    "awards_title": "Díjak és elismerések"
+    "awards_title": "Díjak és elismerések",
+    "nav_home": "Főoldal",
+    "spec_volume": "Űrtartalom",
+    "spec_abv": "Alkoholtartalom",
+    "spec_region": "Régió",
+    "pdp_more": "Ugyanabból a sorból"
   }
 }

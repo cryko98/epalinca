@@ -1,198 +1,209 @@
-<div class="product-page" style="padding-top: 80px;">
-  <div class="section-inner product-page__inner">
+{%- liquid
+  assign v = product.selected_or_first_available_variant
+  assign home_col = product.collections | first
 
-    <!-- Breadcrumb -->
-    <nav class="breadcrumb" aria-label="Breadcrumb">
-      <a href="/">Acasă</a>
+  assign abv = ''
+  assign vol = ''
+  for tag in product.tags
+    if tag contains 'abv:'
+      assign abv = tag | remove: 'abv:'
+    endif
+    if tag contains 'vol:'
+      assign vol = tag | remove: 'vol:'
+    endif
+  endfor
+-%}
+
+<section class="pdp">
+  <div class="wrap">
+
+    <nav class="pdp__crumbs" aria-label="Breadcrumb">
+      <a href="{{ routes.root_url }}">{{ 'zk.nav_home' | t }}</a>
       <span>—</span>
-      {% if collection %}
-        <a href="{{ collection.url }}">{{ collection.title }}</a>
+      {%- if home_col != blank -%}
+        <a href="{{ home_col.url }}">{{ home_col.title }}</a>
         <span>—</span>
-      {% endif %}
-      <span>{{ product.title }}</span>
+      {%- endif -%}
+      <span aria-current="page">{{ product.title }}</span>
     </nav>
 
-    <div class="product-page__grid">
+    <div class="pdp__top">
 
-      <!-- Images -->
-      <div class="product-page__images">
-        <div class="product-page__main-image" id="MainImage">
-          {% if product.featured_image %}
-            <img src="{{ product.featured_image | image_url: width: 900 }}"
-                 alt="{{ product.title }}" id="MainImg" loading="eager">
-          {% else %}
-            <div class="product-page__no-image">
-              {% render 'bottle-svg', color: 'premium' %}
-            </div>
-          {% endif %}
+      <div class="pdp__media">
+        <div class="pdp__stage">
+          {%- if product.featured_image -%}
+            <img id="MainImg"
+                 src="{{ product.featured_image | image_url: width: 1100 }}"
+                 width="{{ product.featured_image.width }}" height="{{ product.featured_image.height }}"
+                 alt="{{ product.title | escape }}" loading="eager">
+          {%- else -%}
+            {% render 'bottle-svg', color: 'premium' %}
+          {%- endif -%}
+          {% render 'zk-award-mini', product: product %}
         </div>
-        {% if product.images.size > 1 %}
-          <div class="product-page__thumbnails">
-            {% for image in product.images %}
-              <button class="product-page__thumb {% if forloop.first %}active{% endif %}"
-                      onclick="document.getElementById('MainImg').src='{{ image | image_url: width: 900 }}'; this.parentNode.querySelectorAll('.product-page__thumb').forEach(function(t){t.classList.remove('active')}); this.classList.add('active')">
-                <img src="{{ image | image_url: width: 120 }}" alt="{{ product.title }} {{ forloop.index }}" loading="lazy">
+
+        {%- if product.images.size > 1 -%}
+          <div class="pdp__thumbs">
+            {%- for image in product.images -%}
+              <button type="button" class="pdp__thumb{% if forloop.first %} on{% endif %}"
+                      data-full="{{ image | image_url: width: 1100 }}"
+                      aria-label="{{ product.title | escape }} {{ forloop.index }}">
+                <img src="{{ image | image_url: width: 160 }}" alt="" loading="lazy" width="80" height="100">
               </button>
-            {% endfor %}
+            {%- endfor -%}
           </div>
-        {% endif %}
+        {%- endif -%}
       </div>
 
-      <!-- Info -->
-      <div class="product-page__info reveal">
-        <p class="product-page__vendor">{{ product.vendor }}</p>
-        <h1 class="product-page__title">{{ product.title }}</h1>
-
-        <!-- Tags / badges -->
-        {% for tag in product.tags %}
-          {% if tag contains 'badge:' %}
-            <span class="product-card__badge" style="position:static;display:inline-block;margin-bottom:16px;">
-              {{ tag | remove: 'badge:' }}
-            </span>
-          {% endif %}
-        {% endfor %}
-
-        <div class="product-page__price-wrap">
-          {% if product.compare_at_price_max > product.price %}
-            <span class="product-page__price-compare">
-              {{ product.compare_at_price_max | money }}
-            </span>
-          {% endif %}
-          <span class="product-page__price">{{ product.price | money }}</span>
+      <div class="pdp__info reveal">
+        <div class="eyebrow">
+          {{- product.vendor -}}
+          {%- if product.type != blank %} · {{ product.type }}{% endif -%}
         </div>
 
-        {% unless product.has_only_default_variant %}
-          <div class="product-page__variants">
-            {% for option in product.options_with_values %}
-              <div class="product-page__option">
-                <label class="product-page__option-label">{{ option.name }}</label>
-                <select name="option{{ option.position }}"
-                        class="product-page__option-select"
-                        id="Option{{ option.position }}">
-                  {% for value in option.values %}
-                    <option value="{{ value }}">{{ value }}</option>
-                  {% endfor %}
-                </select>
-              </div>
-            {% endfor %}
-          </div>
-        {% endunless %}
+        <h1 class="pdp__title">{{ product.title }}</h1>
 
-        <div class="product-page__qty-wrap">
-          <label class="product-page__option-label">Cantitate</label>
-          <div class="product-page__qty">
-            <button type="button" onclick="var q=document.getElementById('Qty'); if(q.value>1) q.value=parseInt(q.value)-1">−</button>
-            <input type="number" id="Qty" value="1" min="1" max="99">
-            <button type="button" onclick="var q=document.getElementById('Qty'); q.value=parseInt(q.value)+1">+</button>
-          </div>
+        {%- for tag in product.tags -%}
+          {%- if tag contains 'badge:' -%}
+            <span class="pdp__badge">{{ tag | remove: 'badge:' }}</span>
+          {%- endif -%}
+        {%- endfor -%}
+
+        <div class="pdp__price">
+          {%- if product.compare_at_price_max > product.price -%}
+            <s>{{ product.compare_at_price_max | money }}</s>
+          {%- endif -%}
+          <span class="pdp__price-now">{{ product.price | money }}</span>
+          {%- if vol != blank %}<small>{{ vol }} ml</small>{% endif -%}
         </div>
 
-        <form action="/cart/add" method="post" id="ProductForm" class="product-page__form">
-          <input type="hidden" name="id" value="{{ product.variants.first.id }}" id="VariantId">
-          <input type="hidden" name="quantity" id="QuantityInput" value="1">
-          {% if product.available %}
-            <button type="submit" class="btn-primary product-page__add-btn">
-              Adaugă în Coș
-            </button>
-          {% else %}
-            <button type="button" class="btn-primary" disabled style="opacity:.5;cursor:not-allowed;">
-              Epuizat
-            </button>
-          {% endif %}
+        <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" class="pdp__buy" id="ProductForm">
+          <input type="hidden" name="id" id="VariantId" value="{{ v.id }}">
+
+          {%- unless product.has_only_default_variant -%}
+            <div class="pdp__variants">
+              {%- for option in product.options_with_values -%}
+                <label class="pdp__field">
+                  <span>{{ option.name }}</span>
+                  <select data-opt="{{ option.position }}">
+                    {%- for value in option.values -%}
+                      <option value="{{ value | escape }}" {% if option.selected_value == value %}selected{% endif %}>{{ value }}</option>
+                    {%- endfor -%}
+                  </select>
+                </label>
+              {%- endfor -%}
+            </div>
+          {%- endunless -%}
+
+          <div class="pdp__row">
+            <div class="pdp__qty">
+              <button type="button" data-step="-1" aria-label="−">−</button>
+              <input type="number" name="quantity" id="Qty" value="1" min="1" max="99" aria-label="{{ 'products.quantity' | t }}">
+              <button type="button" data-step="1" aria-label="+">+</button>
+            </div>
+
+            {%- if product.available -%}
+              <button type="submit" class="btn primary pdp__add">{{ 'products.add_to_cart' | t }}</button>
+            {%- else -%}
+              <button type="button" class="btn pdp__add" disabled>{{ 'products.sold_out' | t }}</button>
+            {%- endif -%}
+          </div>
         </form>
 
-        <div class="product-page__divider"></div>
-
-        <div class="product-page__description">
-          {{ product.description }}
-        </div>
+        <ul class="pdp__specs">
+          {%- if vol != blank -%}<li><b>{{ vol }} ml</b><span>{{ 'zk.spec_volume' | t }}</span></li>{%- endif -%}
+          {%- if abv != blank -%}<li><b>{{ abv }}%</b><span>{{ 'zk.spec_abv' | t }}</span></li>{%- endif -%}
+          <li><b>Valea Ierului</b><span>{{ 'zk.spec_region' | t }}</span></li>
+          {%- if v.sku != blank -%}<li><b>{{ v.sku }}</b><span>{{ 'products.sku' | t }}</span></li>{%- endif -%}
+        </ul>
 
         {% render 'zk-awards', product: product %}
 
-        <!-- Meta info from tags -->
-        {% assign abv_tag = '' %}
-        {% assign vol_tag = '' %}
-        {% for tag in product.tags %}
-          {% if tag contains 'abv:' %}{% assign abv_tag = tag | remove: 'abv:' %}{% endif %}
-          {% if tag contains 'vol:' %}{% assign vol_tag = tag | remove: 'vol:' %}{% endif %}
-        {% endfor %}
+        <div class="pdp__rte">{{ product.description }}</div>
 
-        {% if abv_tag != '' or vol_tag != '' %}
-          <div class="product-page__specs">
-            {% if abv_tag != '' %}
-              <div class="product-page__spec">
-                <span class="product-page__spec-label">Concentrație alcoolică</span>
-                <span class="product-page__spec-value">{{ abv_tag }}%</span>
-              </div>
-            {% endif %}
-            {% if vol_tag != '' %}
-              <div class="product-page__spec">
-                <span class="product-page__spec-label">Volum</span>
-                <span class="product-page__spec-value">{{ vol_tag }} ml</span>
-              </div>
-            {% endif %}
-          </div>
-        {% endif %}
-
-        <p class="product-page__alcohol-warning">
-          ⚠️ Consumul de alcool în exces dăunează sănătății. Interzis minorilor.
-        </p>
+        <p class="pdp__warning">{{ settings.alcohol_warning | default: 'Consumul de alcool în exces dăunează sănătății. Interzis minorilor.' }}</p>
       </div>
     </div>
-  </div>
-</div>
 
-<style>
-.breadcrumb { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:rgba(240,234,216,.3); margin-bottom:48px; display:flex; gap:12px; align-items:center; }
-.breadcrumb a { color:rgba(240,234,216,.3); transition:color .3s; }
-.breadcrumb a:hover { color:var(--color-cream); }
-.product-page__grid { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; }
-.product-page__inner { padding-top:48px; padding-bottom:120px; }
-.product-page__main-image { background:var(--color-surface2); aspect-ratio:1; display:flex; align-items:center; justify-content:center; overflow:hidden; margin-bottom:8px; }
-.product-page__main-image img { width:100%; height:100%; object-fit:contain; transition:transform .5s ease; }
-.product-page__main-image:hover img { transform:scale(1.03); }
-.product-page__no-image { padding:40px; }
-.product-page__thumbnails { display:flex; gap:8px; flex-wrap:wrap; }
-.product-page__thumb { width:80px; height:80px; border:1px solid rgba(240,234,216,.08); background:var(--color-surface); overflow:hidden; cursor:pointer; transition:border-color .3s; }
-.product-page__thumb.active, .product-page__thumb:hover { border-color:var(--color-gold); }
-.product-page__thumb img { width:100%; height:100%; object-fit:cover; }
-.product-page__vendor { font-size:9px; letter-spacing:4px; text-transform:uppercase; color:var(--color-gold); margin-bottom:12px; }
-.product-page__title { font-family:var(--font-display); font-size:clamp(32px,4vw,52px); font-weight:400; line-height:1.15; color:var(--color-cream); margin-bottom:20px; }
-.product-page__price-wrap { display:flex; align-items:baseline; gap:16px; margin-bottom:28px; }
-.product-page__price { font-family:var(--font-display); font-size:36px; color:var(--color-cream); }
-.product-page__price-compare { font-family:var(--font-display); font-size:22px; color:rgba(240,234,216,.3); text-decoration:line-through; }
-.product-page__option { margin-bottom:20px; }
-.product-page__option-label { display:block; font-size:9px; letter-spacing:3px; text-transform:uppercase; color:var(--color-gold); margin-bottom:8px; }
-.product-page__option-select { width:100%; padding:12px 16px; background:var(--color-surface2); border:1px solid rgba(240,234,216,.1); color:var(--color-cream); font-family:var(--font-body); font-size:14px; outline:none; cursor:pointer; }
-.product-page__option-select:focus { border-color:var(--color-gold-lo); }
-.product-page__qty-wrap { margin-bottom:28px; }
-.product-page__qty { display:flex; align-items:center; gap:0; width:fit-content; }
-.product-page__qty button { width:44px; height:44px; background:var(--color-surface2); border:1px solid rgba(240,234,216,.1); color:var(--color-cream); font-size:18px; cursor:pointer; transition:background .3s; }
-.product-page__qty button:hover { background:var(--color-surface); }
-.product-page__qty input { width:64px; height:44px; text-align:center; background:var(--color-surface); border:1px solid rgba(240,234,216,.1); border-left:none; border-right:none; color:var(--color-cream); font-family:var(--font-display); font-size:18px; outline:none; }
-.product-page__add-btn { width:100%; justify-content:center; padding:18px; font-size:11px; letter-spacing:4px; margin-bottom:24px; }
-.product-page__divider { width:40px; height:1px; background:var(--color-gold-lo); margin:32px 0; }
-.product-page__description { font-family:var(--font-serif); font-size:16px; font-style:italic; line-height:1.9; color:var(--color-cream-dim); }
-.product-page__description p { margin-bottom:16px; }
-.product-page__specs { display:grid; grid-template-columns:1fr 1fr; gap:1px; margin-top:28px; }
-.product-page__spec { background:var(--color-surface); padding:16px 20px; }
-.product-page__spec-label { font-size:8px; letter-spacing:3px; text-transform:uppercase; color:var(--color-gold); display:block; margin-bottom:6px; }
-.product-page__spec-value { font-family:var(--font-display); font-size:18px; color:var(--color-cream); }
-.product-page__alcohol-warning { font-size:10px; color:rgba(240,234,216,.2); margin-top:24px; letter-spacing:1px; line-height:1.5; }
-.product-page__sold-out { font-size:9px; letter-spacing:3px; text-transform:uppercase; color:rgba(240,234,216,.3); }
-@media(max-width:768px){ .product-page__grid{grid-template-columns:1fr;gap:40px;} }
-</style>
+    {%- if home_col != blank and home_col.products.size > 1 -%}
+      <div class="pdp__more">
+        <div class="sec-head">
+          <div class="eyebrow">{{ home_col.title }}</div>
+          <h2>{{ 'zk.pdp_more' | t }}</h2>
+        </div>
+        <div class="grid">
+          {%- for p in home_col.products limit: 4 -%}
+            {%- unless p.id == product.id -%}
+              <div class="card">
+                <a class="pic{% if p.featured_image %} photo{% endif %}" href="{{ p.url }}">
+                  {% render 'zk-product-image', product: p %}
+                  {% render 'zk-award-mini', product: p %}
+                </a>
+                <div class="body">
+                  <span class="fruit">{{ p.type | default: p.vendor }}</span>
+                  <h3><a href="{{ p.url }}">{{ p.title }}</a></h3>
+                  <div class="row">
+                    <div class="price">{{ p.price | money }}</div>
+                  </div>
+                </div>
+              </div>
+            {%- endunless -%}
+          {%- endfor -%}
+        </div>
+      </div>
+    {%- endif -%}
+
+  </div>
+</section>
 
 <script>
-document.addEventListener('DOMContentLoaded', function(){
-  var form = document.getElementById('ProductForm');
-  var qtyInput = document.getElementById('Qty');
-  if(form && qtyInput){
-    form.addEventListener('submit', function(){
-      document.getElementById('QuantityInput').value = qtyInput.value;
+  (function () {
+    var form = document.getElementById('ProductForm');
+    if (!form) return;
+
+    var qty = document.getElementById('Qty');
+    form.querySelectorAll('[data-step]').forEach(function (b) {
+      b.addEventListener('click', function () {
+        var n = parseInt(qty.value || '1', 10) + parseInt(b.getAttribute('data-step'), 10);
+        qty.value = Math.min(99, Math.max(1, n));
+      });
     });
-  }
-});
+
+    // Swap the main image from a thumbnail.
+    var main = document.getElementById('MainImg');
+    document.querySelectorAll('.pdp__thumb').forEach(function (t) {
+      t.addEventListener('click', function () {
+        if (!main) return;
+        main.src = t.getAttribute('data-full');
+        document.querySelectorAll('.pdp__thumb').forEach(function (x) { x.classList.remove('on'); });
+        t.classList.add('on');
+      });
+    });
+
+    // Keep the hidden variant id in step with the option selects.
+    var VARIANTS = {{ product.variants | json }};
+    var selects = [].slice.call(form.querySelectorAll('[data-opt]'));
+    var idField = document.getElementById('VariantId');
+    if (!selects.length || !idField) return;
+
+    selects.forEach(function (s) {
+      s.addEventListener('change', function () {
+        var chosen = selects.map(function (x) { return x.value; });
+        var match = VARIANTS.find(function (variant) {
+          return chosen.every(function (val, i) { return variant.options[i] === val; });
+        });
+        if (!match) return;
+        idField.value = match.id;
+
+        var price = form.closest('.pdp__info').querySelector('.pdp__price-now');
+        if (price && window.Shopify && Shopify.formatMoney) {
+          price.textContent = Shopify.formatMoney(match.price);
+        }
+        var add = form.querySelector('.pdp__add');
+        if (add) add.disabled = !match.available;
+      });
+    });
+  })();
 </script>
 
 {% schema %}
