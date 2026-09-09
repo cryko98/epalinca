@@ -10,7 +10,10 @@
     },
     "collection_premium": {
       "type": "collection-premium",
-      "settings": {}
+      "settings": {
+        "collection": "barrique",
+        "products_count": 6
+      }
     },
     "barrique_section": {
       "type": "barrique-section",
