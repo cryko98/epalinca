@@ -281,6 +281,25 @@
     "md6_l": "aur",
     "medals_note": "Medalii la cel mai mare concurs de pălincă din Europa Centrală — 22 în 2025, 8 în 2026.",
     "lang_name": "Română",
-    "shop_all": "Toate"
+    "shop_all": "Toate",
+    "e404_label": "Eroare 404",
+    "e404_title": "Pagina nu a fost găsită",
+    "e404_text": "Sticla pe care o căutați nu se află în pivniță. Poate a fost mutată, sau linkul nu mai este valid.",
+    "e404_home": "Înapoi la pagina principală",
+    "e404_shop": "Vezi produsele",
+    "collections_label": "Colecții",
+    "pw_title": "În curând",
+    "pw_text": "Pivnița se pregătește. Reveniți în curând.",
+    "nl_submit": "Abonează-te",
+    "blog_all": "Toate articolele",
+    "blog_more": "Citește mai mult",
+    "shop_buy": "Cumpără",
+    "contact_success": "Mulțumim! Mesajul a fost trimis, revenim în cel mai scurt timp.",
+    "contact_submit": "Trimite mesajul",
+    "foot_link_terms": "Termeni și condiții",
+    "foot_link_privacy": "Confidențialitate",
+    "bk_success": "Mulțumim! Am primit cererea, revenim cu confirmarea.",
+    "bk_note": "Prețul afișat este orientativ; confirmarea finală vine pe e-mail.",
+    "bk_error": "Verificați câmpurile"
   }
 }

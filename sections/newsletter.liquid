@@ -16,7 +16,7 @@
           style="border-color:{{ section.settings.input_border }};background:{{ section.settings.input_bg }};color:{{ section.settings.title_color }};"
           required>
         <button type="submit" class="newsletter-btn" style="background:{{ section.settings.btn_bg }};color:{{ section.settings.btn_text }};">
-          {{ section.settings.btn_label | default: 'Abonează-te' }}
+          {% render 'zk-t', override: section.settings.btn_label, key: 'zk.nl_submit' %}
         </button>
       </div>
       <p class="newsletter-gdpr" style="color:{{ section.settings.gdpr_color }};">{{ section.settings.gdpr_text }}</p>
@@ -56,7 +56,7 @@
       "type": "text",
       "id": "btn_label",
       "label": "Text buton",
-      "default": "Abonează-te"
+      "info": "Gol = textul tradus din locales/"
     },
     {
       "type": "textarea",

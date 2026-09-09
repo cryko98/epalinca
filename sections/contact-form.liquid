@@ -8,7 +8,7 @@
     {% form 'contact', class: 'contact-form' %}
       {%- if form.posted_successfully? %}
         <p class="contact-form__success">
-          {{ section.settings.success_text | default: 'Mulțumim! Mesajul a fost trimis, revenim în cel mai scurt timp.' }}
+          {% render 'zk-t', override: section.settings.success_text, key: 'zk.contact_success' %}
         </p>
       {%- endif %}
 
@@ -42,7 +42,7 @@
       </div>
 
       <button type="submit" class="btn-primary contact-form__submit">
-        {{ section.settings.button_label | default: 'Trimite mesajul' }}
+        {% render 'zk-t', override: section.settings.button_label, key: 'zk.contact_submit' %}
       </button>
     {% endform %}
 
@@ -80,13 +80,13 @@
       "type": "text",
       "id": "button_label",
       "label": "Text buton",
-      "default": "Trimite mesajul"
+      "info": "Gol = textul tradus din locales/"
     },
     {
       "type": "textarea",
       "id": "success_text",
       "label": "Mesaj de succes",
-      "default": "Mulțumim! Mesajul a fost trimis, revenim în cel mai scurt timp."
+      "info": "Gol = textul tradus din locales/"
     }
   ],
   "presets": [

@@ -13,7 +13,7 @@
           {% endif %}
         </h2>
       </div>
-      <a href="/blogs/{{ section.settings.blog_handle | default: 'news' }}" class="view-all" style="color:{{ section.settings.muted_color }};">{{ section.settings.all_text | default: 'Toate articolele' }}</a>
+      <a href="/blogs/{{ section.settings.blog_handle | default: 'news' }}" class="view-all" style="color:{{ section.settings.muted_color }};">{% render 'zk-t', override: section.settings.all_text, key: 'zk.blog_all' %}</a>
     </div>
 
     <div class="blog-grid" style="grid-template-columns:repeat({{ section.settings.columns }},1fr);">
@@ -34,7 +34,7 @@
             <p class="blog-card__date" style="color:{{ section.settings.accent_color }};">{{ article.published_at | date: '%d %B %Y' }}</p>
             <h3 class="blog-card__title" style="color:{{ section.settings.card_title_color }};">{{ article.title }}</h3>
             <p class="blog-card__excerpt" style="color:{{ section.settings.card_desc_color }};">{{ article.excerpt | strip_html | truncate: 120 }}</p>
-            <span class="blog-card__more" style="color:{{ section.settings.accent_color }};">{{ section.settings.read_more | default: 'Citește mai mult' }} →</span>
+            <span class="blog-card__more" style="color:{{ section.settings.accent_color }};">{% render 'zk-t', override: section.settings.read_more, key: 'zk.blog_more' %} →</span>
           </div>
         </a>
         {% endfor %}
@@ -48,7 +48,7 @@
             <p class="blog-card__date" style="color:{{ section.settings.accent_color }};">{{ block.settings.date }}</p>
             <h3 class="blog-card__title" style="color:{{ section.settings.card_title_color }};">{{ block.settings.title }}</h3>
             <p class="blog-card__excerpt" style="color:{{ section.settings.card_desc_color }};">{{ block.settings.excerpt }}</p>
-            <span class="blog-card__more" style="color:{{ section.settings.accent_color }};">{{ section.settings.read_more | default: 'Citește mai mult' }} →</span>
+            <span class="blog-card__more" style="color:{{ section.settings.accent_color }};">{% render 'zk-t', override: section.settings.read_more, key: 'zk.blog_more' %} →</span>
           </div>
         </div>
         {% endfor %}
@@ -114,13 +114,13 @@
       "type": "text",
       "id": "all_text",
       "label": "Text link 'toate'",
-      "default": "Toate articolele"
+      "info": "Gol = textul tradus din locales/"
     },
     {
       "type": "text",
       "id": "read_more",
       "label": "Text 'citește mai mult'",
-      "default": "Citește mai mult"
+      "info": "Gol = textul tradus din locales/"
     },
     {
       "type": "header",

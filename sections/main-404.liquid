@@ -3,18 +3,18 @@
 
     <div class="section-label">
       <span class="section-label-line"></span>
-      <span class="section-label-text">{{ section.settings.label | default: 'Eroare 404' }}</span>
+      <span class="section-label-text">{% render 'zk-t', override: section.settings.label, key: 'zk.e404_label' %}</span>
     </div>
 
     <p class="page-404__code">404</p>
-    <h1 class="page-404__title">{{ section.settings.title | default: 'Pagina nu a fost găsită' }}</h1>
+    <h1 class="page-404__title">{% render 'zk-t', override: section.settings.title, key: 'zk.e404_title' %}</h1>
     <p class="page-404__text">
-      {{ section.settings.text | default: 'Sticla pe care o căutați nu se află în pivniță. Poate a fost mutată, sau linkul nu mai este valid.' }}
+      {% render 'zk-t', override: section.settings.text, key: 'zk.e404_text' %}
     </p>
 
     <div class="page-404__actions">
-      <a href="{{ routes.root_url }}" class="btn-primary">{{ section.settings.home_label | default: 'Înapoi la pagina principală' }}</a>
-      <a href="{{ routes.all_products_collection_url }}" class="btn-ghost">{{ section.settings.shop_label | default: 'Vezi produsele' }}</a>
+      <a href="{{ routes.root_url }}" class="btn-primary">{% render 'zk-t', override: section.settings.home_label, key: 'zk.e404_home' %}</a>
+      <a href="{{ routes.all_products_collection_url }}" class="btn-ghost">{% render 'zk-t', override: section.settings.shop_label, key: 'zk.e404_shop' %}</a>
     </div>
 
     <form action="{{ routes.search_url }}" method="get" role="search" class="page-404__search">
@@ -49,31 +49,31 @@
       "type": "text",
       "id": "label",
       "label": "Etichetă",
-      "default": "Eroare 404"
+      "info": "Gol = textul tradus din locales/"
     },
     {
       "type": "text",
       "id": "title",
       "label": "Titlu",
-      "default": "Pagina nu a fost găsită"
+      "info": "Gol = textul tradus din locales/"
     },
     {
       "type": "textarea",
       "id": "text",
       "label": "Text",
-      "default": "Sticla pe care o căutați nu se află în pivniță. Poate a fost mutată, sau linkul nu mai este valid."
+      "info": "Gol = textul tradus din locales/"
     },
     {
       "type": "text",
       "id": "home_label",
       "label": "Buton principal",
-      "default": "Înapoi la pagina principală"
+      "info": "Gol = textul tradus din locales/"
     },
     {
       "type": "text",
       "id": "shop_label",
       "label": "Buton secundar",
-      "default": "Vezi produsele"
+      "info": "Gol = textul tradus din locales/"
     }
   ]
 }

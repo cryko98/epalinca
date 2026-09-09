@@ -281,6 +281,25 @@
     "md6_l": "aranyérem",
     "medals_note": "Közép-Európa legnagyobb pálinkaversenyének érmei — 2025-ben 22, 2026-ban 8.",
     "lang_name": "Magyar",
-    "shop_all": "Összes"
+    "shop_all": "Összes",
+    "e404_label": "404-es hiba",
+    "e404_title": "Az oldal nem található",
+    "e404_text": "A keresett üveg nincs a pincében. Lehet, hogy elmozdult, vagy a link már nem érvényes.",
+    "e404_home": "Vissza a főoldalra",
+    "e404_shop": "Termékek megtekintése",
+    "collections_label": "Kollekciók",
+    "pw_title": "Hamarosan",
+    "pw_text": "A pince készülődik, térjen vissza hamarosan.",
+    "nl_submit": "Feliratkozom",
+    "blog_all": "Összes cikk",
+    "blog_more": "Tovább olvasom",
+    "shop_buy": "Megveszem",
+    "contact_success": "Köszönjük! Az üzenetet megkaptuk, hamarosan válaszolunk.",
+    "contact_submit": "Üzenet küldése",
+    "foot_link_terms": "Általános feltételek",
+    "foot_link_privacy": "Adatvédelem",
+    "bk_success": "Köszönjük! Megkaptuk a kérést, hamarosan visszaigazoljuk.",
+    "bk_note": "A feltüntetett ár tájékoztató jellegű; a végleges visszaigazolás e-mailben érkezik.",
+    "bk_error": "Ellenőrizze a mezőket"
   }
 }

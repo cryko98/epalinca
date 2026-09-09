@@ -39,7 +39,7 @@
             </span>
             <a href="{% if block.settings.product_handle != blank %}/products/{{ block.settings.product_handle }}{% else %}/collections/all{% endif %}"
                class="fruit-add" style="background:{{ block.settings.fruit_color }};color:{{ section.settings.btn_text_color }};">
-              {{ section.settings.btn_text | default: 'Cumpără' }}
+              {% render 'zk-t', override: section.settings.btn_text, key: 'zk.shop_buy' %}
             </a>
           </div>
         </div>
@@ -106,7 +106,7 @@
       "type": "text",
       "id": "btn_text",
       "label": "Text buton cumpără",
-      "default": "Cumpără"
+      "info": "Gol = textul tradus din locales/"
     },
     {
       "type": "text",

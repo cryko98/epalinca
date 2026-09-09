@@ -17,11 +17,11 @@
           <a href="{{ block.settings.link | default: '#' }}" {{ block.shopify_attributes }}>{{ block.settings.label }}</a>
         {%- endfor -%}
       {%- else -%}
-        <a href="{{ base }}#range">{{ section.settings.nav_palinka | default: 'Pălincile' }}</a>
-        <a href="{{ base }}#shop">{{ section.settings.nav_shop | default: 'Magazin' }}</a>
-        <a href="{{ base }}#story">{{ section.settings.nav_story | default: 'Povestea lui Botond' }}</a>
-        <a href="{{ base }}#taste">{{ section.settings.nav_taste | default: 'Sala de degustare' }}</a>
-        <a href="{{ base }}#contact">{{ section.settings.nav_contact | default: 'Contact' }}</a>
+        <a href="{{ base }}#range">{% render 'zk-t', override: section.settings.nav_palinka, key: 'zk.nav_palinka' %}</a>
+        <a href="{{ base }}#shop">{% render 'zk-t', override: section.settings.nav_shop, key: 'zk.nav_shop' %}</a>
+        <a href="{{ base }}#story">{% render 'zk-t', override: section.settings.nav_story, key: 'zk.nav_story' %}</a>
+        <a href="{{ base }}#taste">{% render 'zk-t', override: section.settings.nav_taste, key: 'zk.nav_taste' %}</a>
+        <a href="{{ base }}#contact">{% render 'zk-t', override: section.settings.nav_contact, key: 'zk.nav_contact' %}</a>
       {%- endif -%}
     </nav>
 
@@ -78,7 +78,7 @@
       "type": "text",
       "id": "cart_label",
       "label": "Etichetă coș",
-      "default": "Coș"
+      "info": "Gol = textul tradus din locales/"
     }
   ],
   "blocks": [

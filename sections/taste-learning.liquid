@@ -82,10 +82,10 @@
       {%- endcomment -%}
       {% form 'contact', id: 'bkForm' %}
         {%- if form.posted_successfully? %}
-          <p class="demo" style="color:var(--amber-2)">Mulțumim! Am primit cererea, revenim cu confirmarea.</p>
+          <p class="demo" style="color:var(--amber-2)">{{ 'zk.bk_success' | t }}</p>
         {%- endif %}
         {%- if form.errors %}
-          <p class="demo" style="color:#e8a1a1">{{ form.errors.translated_fields.email | default: 'Verificați câmpurile' }} — {{ form.errors.messages.email }}</p>
+          <p class="demo" style="color:#e8a1a1">{{ form.errors.translated_fields.email | default: '' }}{{ 'zk.bk_error' | t }} — {{ form.errors.messages.email }}</p>
         {%- endif %}
 
         <label><span>{{ 'zk.bk_date' | t }}</span><input type="date" required id="date" name="contact[Data]"></label>
@@ -110,7 +110,7 @@
 
         <div class="estimate" id="estimate"></div>
         <button class="btn primary full" type="submit">{{ 'zk.bk_submit' | t }}</button>
-        <span class="demo">Prețul afișat este orientativ; confirmarea finală vine pe e-mail.</span>
+        <span class="demo">{{ 'zk.bk_note' | t }}</span>
       {% endform %}
     </div>
 

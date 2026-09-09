@@ -5,15 +5,15 @@
     <div>
       © {{ 'now' | date: '%Y' }} {{ section.settings.company | default: 'Zekulhyda S.R.L.' }}
       {%- if section.settings.company_ids != blank %} · {{ section.settings.company_ids }}{% endif %}
-      · <span>{{ section.settings.foot_legal | default: 'Consumul excesiv de alcool dăunează sănătății. Interzis minorilor.' }}</span>
+      · <span>{% render 'zk-t', override: section.settings.foot_legal, key: 'zk.foot_legal' %}</span>
     </div>
 
     <div>
       {%- for block in section.blocks -%}
         <a href="{{ block.settings.link | default: '#' }}" {{ block.shopify_attributes }}>{{ block.settings.label }}</a>
       {%- else -%}
-        <a href="{{ routes.root_url }}pages/termeni-si-conditii">Termeni și condiții</a>
-        <a href="{{ routes.root_url }}pages/politica-de-confidentialitate">Confidențialitate</a>
+        <a href="{{ routes.root_url }}pages/termeni-si-conditii">{{ 'zk.foot_link_terms' | t }}</a>
+        <a href="{{ routes.root_url }}pages/politica-de-confidentialitate">{{ 'zk.foot_link_privacy' | t }}</a>
         <a href="https://anpc.ro" target="_blank" rel="noopener">ANPC</a>
       {%- endfor -%}
     </div>
