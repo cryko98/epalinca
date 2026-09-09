@@ -29,7 +29,8 @@
         "f0": {
           "type": "filter",
           "settings": {
-            "collection": "premiate"
+            "collection": "premiate",
+            "skip_order": true
           }
         },
         "f1": {

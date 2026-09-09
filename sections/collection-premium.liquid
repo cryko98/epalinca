@@ -43,7 +43,7 @@
 
       {%- for block in section.blocks -%}
         {%- assign fc = block.settings.collection -%}
-        {%- if fc == blank -%}{%- continue -%}{%- endif -%}
+        {%- if fc == blank or block.settings.skip_order -%}{%- continue -%}{%- endif -%}
         {%- for product in fc.products -%}
           {%- assign key = '|' | append: product.id | append: '|' -%}
           {%- unless done contains key -%}
@@ -124,22 +124,67 @@
 {
   "name": "Magazin",
   "settings": [
-    { "type": "text", "id": "shop_eyebrow", "label": "Etichetă", "info": "Gol = textul tradus din locales/" },
-    { "type": "textarea", "id": "shop_title", "label": "Titlu", "info": "Gol = textul tradus din locales/" },
-    { "type": "textarea", "id": "shop_sub", "label": "Subtitlu", "info": "Gol = textul tradus din locales/" },
-    { "type": "collection", "id": "collection", "label": "Colecție sursă", "info": "Gol = toate produsele" },
-    { "type": "text", "id": "filter_all", "label": "Etichetă „toate”", "info": "Gol = textul tradus din locales/" }
+    {
+      "type": "text",
+      "id": "shop_eyebrow",
+      "label": "Etichetă",
+      "info": "Gol = textul tradus din locales/"
+    },
+    {
+      "type": "textarea",
+      "id": "shop_title",
+      "label": "Titlu",
+      "info": "Gol = textul tradus din locales/"
+    },
+    {
+      "type": "textarea",
+      "id": "shop_sub",
+      "label": "Subtitlu",
+      "info": "Gol = textul tradus din locales/"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Colecție sursă",
+      "info": "Gol = toate produsele"
+    },
+    {
+      "type": "text",
+      "id": "filter_all",
+      "label": "Etichetă „toate”",
+      "info": "Gol = textul tradus din locales/"
+    }
   ],
   "blocks": [
     {
       "type": "filter",
       "name": "Filtru",
       "settings": [
-        { "type": "collection", "id": "collection", "label": "Colecție" },
-        { "type": "text", "id": "label", "label": "Etichetă", "info": "Gol = numele colecției" }
+        {
+          "type": "collection",
+          "id": "collection",
+          "label": "Colecție"
+        },
+        {
+          "type": "text",
+          "id": "label",
+          "label": "Etichetă",
+          "info": "Gol = numele colecției"
+        },
+        {
+          "type": "checkbox",
+          "id": "skip_order",
+          "label": "Nu influențează ordinea",
+          "default": false,
+          "info": "Pentru categorii transversale (ex. Premiate): rămâne filtru, dar nu schimbă ordinea implicită a grilei."
+        }
       ]
     }
   ],
-  "presets": [{ "name": "Magazin — grilă produse" }]
+  "presets": [
+    {
+      "name": "Magazin — grilă produse"
+    }
+  ]
 }
 {% endschema %}
