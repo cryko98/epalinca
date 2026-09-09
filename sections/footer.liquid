@@ -1,545 +1,282 @@
-{% comment %}theme-check-disable UndefinedObject{% endcomment %}
-{{ 'section-footer.css' | asset_url | stylesheet_tag }}
-{{ 'component-newsletter.css' | asset_url | stylesheet_tag }}
-{{ 'component-list-menu.css' | asset_url | stylesheet_tag }}
-{{ 'component-list-payment.css' | asset_url | stylesheet_tag }}
-{{ 'component-list-social.css' | asset_url | stylesheet_tag }}
+<footer class="site-footer">
 
-{%- style -%}
-  .footer {
-    margin-top: {{ section.settings.margin_top | times: 0.75 | round: 0 }}px;
-  }
+  <div class="site-footer__main">
+    <div class="footer-inner">
 
-  .section-{{ section.id }}-padding {
-    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
-  }
-
-  @media screen and (min-width: 750px) {
-    .footer {
-      margin-top: {{ section.settings.margin_top }}px;
-    }
-
-    .section-{{ section.id }}-padding {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
-    }
-  }
-{%- endstyle -%}
-
-<footer class="footer color-{{ section.settings.color_scheme }} gradient section-{{ section.id }}-padding">
-  {%- liquid
-    assign has_social_icons = true
-    if settings.social_facebook_link == blank and settings.social_instagram_link == blank and settings.social_youtube_link == blank and settings.social_tiktok_link == blank and settings.social_twitter_link == blank and settings.social_pinterest_link == blank and settings.social_snapchat_link == blank and settings.social_tumblr_link == blank and settings.social_vimeo_link == blank
-      assign has_social_icons = false
-    endif
-
-    if settings.brand_image == blank and settings.brand_headline == blank and settings.brand_description == blank
-      assign brand_empty = true
-    endif
-
-    if section.blocks.size == 1 and section.blocks[0].type == 'brand_information' and brand_empty and has_social_icons == false and section.settings.newsletter_enable == false and section.settings.enable_follow_on_shop == false
-      assign only_empty_brand = true
-    endif
-  -%}
-  {%- if section.blocks.size > 0
-    or section.settings.newsletter_enable
-    or section.settings.show_social
-    and has_social_icons == true
-    or section.settings.enable_follow_on_shop
-  -%}
-    {%- unless only_empty_brand -%}
-      <div class="footer__content-top page-width">
-        {%- if section.blocks.size > 0 -%}
-          {%- liquid
-            if section.blocks.size == 9
-              assign footer_grid_class = 'grid--3-col-tablet'
-            elsif section.blocks.size > 6
-              assign footer_grid_class = 'grid--4-col-desktop'
-            elsif section.blocks.size > 4
-              assign footer_grid_class = 'grid--3-col-tablet'
-            endif
-          -%}
-          <div
-            class="footer__blocks-wrapper grid grid--1-col grid--2-col grid--4-col-tablet {{ footer_grid_class }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-            {% if settings.animations_reveal_on_scroll %}
-              data-cascade
-            {% endif %}
-          >
-            {%- for block in section.blocks -%}
-              <div
-                class="footer-block grid__item{% if block.type == 'link_list' %} footer-block--menu{% endif %}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-                {{ block.shopify_attributes }}
-                {% if settings.animations_reveal_on_scroll %}
-                  data-cascade
-                  style="--animation-order: {{ forloop.index }};"
-                {% endif %}
-              >
-                {%- if block.settings.heading != blank -%}
-                  <h2 class="footer-block__heading inline-richtext">{{- block.settings.heading -}}</h2>
-                {%- endif -%}
-
-                {%- case block.type -%}
-                  {%- when '@app' -%}
-                    {% render block %}
-                  {%- when 'text' -%}
-                    <div class="footer-block__details-content rte">
-                      {{ block.settings.subtext }}
-                    </div>
-                  {%- when 'link_list' -%}
-                    {%- if block.settings.menu != blank -%}
-                      <ul class="footer-block__details-content list-unstyled">
-                        {%- for link in block.settings.menu.links -%}
-                          <li>
-                            <a
-                              href="{{ link.url }}"
-                              class="link link--text list-menu__item list-menu__item--link{% if link.active %} list-menu__item--active{% endif %}"
-                            >
-                              {{ link.title | escape }}
-                            </a>
-                          </li>
-                        {%- endfor -%}
-                      </ul>
-                    {%- endif -%}
-                  {%- when 'brand_information' -%}
-                    <div class="footer-block__brand-info">
-                      {%- if settings.brand_image != blank -%}
-                        {%- assign brand_image_height = settings.brand_image_width
-                          | divided_by: settings.brand_image.aspect_ratio
-                        -%}
-                        <div
-                          class="footer-block__image-wrapper"
-                          style="max-width: min(100%, {{ settings.brand_image_width }}px);"
-                        >
-                          {{
-                            settings.brand_image
-                            | image_url: width: 1100
-                            | image_tag:
-                              loading: 'lazy',
-                              widths: '50, 100, 150, 200, 300, 400, 550, 800, 1100',
-                              height: brand_image_height,
-                              width: settings.brand_image_width
-                          }}
-                        </div>
-                      {%- endif -%}
-                      {%- if settings.brand_headline != blank -%}
-                        <h2 class="footer-block__heading rte">{{ settings.brand_headline }}</h2>
-                      {%- endif -%}
-                      {%- if settings.brand_description != blank -%}
-                        <div class="rte">{{ settings.brand_description }}</div>
-                      {%- endif -%}
-                      {%- if block.settings.show_social and has_social_icons -%}
-                        {%- render 'social-icons', class: 'footer__list-social' -%}
-                      {%- endif -%}
-                    </div>
-                  {%- when 'image' -%}
-                    <div class="footer-block__details-content footer-block-image {{ block.settings.alignment }}">
-                      {%- if block.settings.image != blank -%}
-                        {%- assign image_size_2x = block.settings.image_width | times: 2 | at_most: 5760 -%}
-                        <div
-                          class="footer-block__image-wrapper"
-                          style="max-width: min(100%, {{ block.settings.image_width }}px);"
-                        >
-                          <img
-                            srcset="{{ block.settings.image | image_url: width: block.settings.image_width }}, {{ block.settings.image | image_url: width: image_size_2x }} 2x"
-                            src="{{ block.settings.image | image_url: width: 760 }}"
-                            alt="{{ block.settings.image.alt | escape }}"
-                            loading="lazy"
-                            width="{{ block.settings.image.width }}"
-                            height="{{ block.settings.image.height }}"
-                          >
-                        </div>
-                      {%- else -%}
-                        {{ 'image' | placeholder_svg_tag: 'placeholder-svg placeholder' }}
-                      {%- endif -%}
-                    </div>
-                {%- endcase -%}
-              </div>
-            {%- endfor -%}
-          </div>
-        {%- endif -%}
-
-        <div
-          class="footer-block--newsletter{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-          {% if settings.animations_reveal_on_scroll %}
-            data-cascade
+      <div class="footer-brand">
+        <div class="footer-logo">{{ section.settings.logo_text | default: 'ZEKULHYDA' }}</div>
+        <p class="footer-tagline">{{ section.settings.tagline }}</p>
+        <div class="footer-social">
+          {% if section.settings.facebook != blank %}
+            <a href="{{ section.settings.facebook }}" target="_blank" rel="noopener" aria-label="Facebook">FB</a>
           {% endif %}
-        >
-          {%- if section.settings.newsletter_enable -%}
-            <div class="footer-block__newsletter">
-              {%- if section.settings.newsletter_heading != blank -%}
-                <h2 class="footer-block__heading inline-richtext">{{ section.settings.newsletter_heading }}</h2>
-              {%- endif -%}
-              {%- form 'customer', id: 'ContactFooter', class: 'footer__newsletter newsletter-form' -%}
-                <input type="hidden" name="contact[tags]" value="newsletter">
-                <div class="newsletter-form__field-wrapper">
-                  <div class="field">
-                    <input
-                      id="NewsletterForm--{{ section.id }}"
-                      type="email"
-                      name="contact[email]"
-                      class="field__input"
-                      value="{{ form.email }}"
-                      aria-required="true"
-                      autocorrect="off"
-                      autocapitalize="off"
-                      autocomplete="email"
-                      {% if form.errors %}
-                        autofocus
-                        aria-invalid="true"
-                        aria-describedby="ContactFooter-error"
-                      {% elsif form.posted_successfully? %}
-                        aria-describedby="ContactFooter-success"
-                      {% endif %}
-                      placeholder="{{ 'newsletter.label' | t }}"
-                      required
-                    >
-                    <label class="field__label" for="NewsletterForm--{{ section.id }}">
-                      {{ 'newsletter.label' | t }}
-                    </label>
-                    <button
-                      type="submit"
-                      class="newsletter-form__button field__button"
-                      name="commit"
-                      id="Subscribe"
-                      aria-label="{{ 'newsletter.button_label' | t }}"
-                    >
-                      <span class="svg-wrapper">
-                        {{- 'icon-arrow.svg' | inline_asset_content -}}
-                      </span>
-                    </button>
-                  </div>
-                  {%- if form.errors -%}
-                    <small class="newsletter-form__message form__message" id="ContactFooter-error">
-                      <span class="svg-wrapper">
-                        {{- 'icon-error.svg' | inline_asset_content -}}
-                      </span>
-                      {{- form.errors.translated_fields.email | capitalize }}
-                      {{ form.errors.messages.email -}}
-                    </small>
-                  {%- endif -%}
-                </div>
-                {%- if form.posted_successfully? -%}
-                  <h3
-                    class="newsletter-form__message newsletter-form__message--success form__message"
-                    id="ContactFooter-success"
-                    tabindex="-1"
-                    autofocus
-                  >
-                    <span class="svg-wrapper">
-                      {{- 'icon-success.svg' | inline_asset_content -}}
-                    </span>
-                    {{- 'newsletter.success' | t }}
-                  </h3>
-                {%- endif -%}
-              {%- endform -%}
-            </div>
-          {%- endif -%}
-
-          {%- if shop.features.follow_on_shop? and section.settings.enable_follow_on_shop -%}
-            <div class="footer__follow-on-shop">
-              {{ shop | login_button: action: 'follow' }}
-            </div>
-          {%- endif -%}
-
-          {%- if section.settings.show_social and has_social_icons -%}
-            {%- render 'social-icons', class: 'footer__list-social' -%}
-          {%- endif -%}
+          {% if section.settings.instagram != blank %}
+            <a href="{{ section.settings.instagram }}" target="_blank" rel="noopener" aria-label="Instagram">IG</a>
+          {% endif %}
         </div>
       </div>
-    {%- endunless -%}
-  {%- endif -%}
 
-  <div
-    class="footer__content-bottom{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-    {% if settings.animations_reveal_on_scroll %}
-      data-cascade
-    {% endif %}
-  >
-    <div class="footer__content-bottom-wrapper page-width">
-      <div class="footer__column footer__localization isolate">
-        {%- if section.settings.enable_country_selector and localization.available_countries.size > 1 -%}
-          <localization-form>
-            {%- form 'localization', id: 'FooterCountryForm', class: 'localization-form' -%}
-              <div>
-                <h2 class="caption-large text-body" id="FooterCountryLabel">{{ 'localization.country_label' | t }}</h2>
-                {%- render 'country-localization', localPosition: 'FooterCountry' -%}
-              </div>
-            {%- endform -%}
-          </localization-form>
-        {%- endif -%}
-
-        {%- if section.settings.enable_language_selector and localization.available_languages.size > 1 -%}
-          <localization-form>
-            {%- form 'localization', id: 'FooterLanguageForm', class: 'localization-form' -%}
-              <div>
-                <h2 class="caption-large text-body" id="FooterLanguageLabel">
-                  {{ 'localization.language_label' | t }}
-                </h2>
-                {%- render 'language-localization', localPosition: 'FooterLanguage' -%}
-              </div>
-            {%- endform -%}
-          </localization-form>
-        {%- endif -%}
-      </div>
-      <div class="footer__column footer__column--info">
-        {%- if section.settings.payment_enable -%}
-          <div class="footer__payment">
-            <span class="visually-hidden">{{ 'sections.footer.payment' | t }}</span>
-            <ul class="list list-payment" role="list">
-              {%- for type in shop.enabled_payment_types -%}
-                <li class="list-payment__item">
-                  {{ type | payment_type_svg_tag: class: 'icon icon--full-color' }}
-                </li>
-              {%- endfor -%}
+      {% for block in section.blocks %}
+        {% if block.type == 'link_col' %}
+          <div class="footer-col" {{ block.shopify_attributes }}>
+            <p class="footer-col__head">{{ block.settings.heading }}</p>
+            <ul class="footer-col__links">
+              {% for link in block.settings.menu.links %}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+              {% endfor %}
             </ul>
           </div>
-        {%- endif -%}
+        {% endif %}
+      {% endfor %}
+
+      <div class="footer-col">
+        <p class="footer-col__head">{{ section.settings.contact_heading | default: 'Contact & Date Legale' }}</p>
+        <address class="footer-address">
+          {% if section.settings.company_name != blank %}<p><strong>{{ section.settings.company_name }}</strong></p>{% endif %}
+          {% if section.settings.address != blank %}<p>{{ section.settings.address }}</p>{% endif %}
+          {% if section.settings.city != blank %}<p>{{ section.settings.city }}</p>{% endif %}
+          {% if section.settings.phone != blank %}<p><a href="tel:{{ section.settings.phone }}">{{ section.settings.phone }}</a></p>{% endif %}
+          {% if section.settings.email != blank %}<p><a href="mailto:{{ section.settings.email }}">{{ section.settings.email }}</a></p>{% endif %}
+          {% if section.settings.cui != blank %}<p class="footer-legal-id">CUI: {{ section.settings.cui }}</p>{% endif %}
+          {% if section.settings.reg_com != blank %}<p class="footer-legal-id">Nr. Reg. Com.: {{ section.settings.reg_com }}</p>{% endif %}
+        </address>
       </div>
+
     </div>
-    <div class="footer__content-bottom-wrapper page-width{% if section.settings.enable_country_selector == false and section.settings.enable_language_selector == false %} footer__content-bottom-wrapper--center{% endif %}">
-      <div class="footer__copyright caption">
-        <small class="copyright__content"
-          >&copy; {{ 'now' | date: '%Y' }}, {{ shop.name | link_to: routes.root_url -}}
-        </small>
-        <small class="copyright__content">{{ powered_by_link }}</small>
-        {%- if section.settings.show_policy -%}
-          <ul class="policies list-unstyled">
-            {%- for policy in shop.policies -%}
-              {%- if policy != blank -%}
-                <li>
-                  <small class="copyright__content"
-                    ><a href="{{ policy.url }}">{{ policy.title | escape }}</a></small
-                  >
-                </li>
-              {%- endif -%}
-            {%- endfor -%}
-          </ul>
-        {%- endif -%}
+  </div>
+
+  <div class="footer-warning">
+    <div class="footer-inner">
+      <span>&#9888;</span>
+      <p>{{ section.settings.alcohol_warning | default: 'AVERTISMENT: Consumul de alcool in exces dauneaza grav sanatatii. Interzis minorilor sub 18 ani.' }}</p>
+    </div>
+  </div>
+
+  <div class="footer-legal">
+    <div class="footer-inner footer-legal__inner">
+      <p class="footer-copy">{{ section.settings.copyright | default: '© 2025 Zekulhyda Premium. Toate drepturile rezervate.' }}</p>
+      <div class="footer-legal__links">
+        {% if section.settings.privacy_label != blank %}
+          <a href="{{ section.settings.privacy_url | default: '/pages/confidentialitate' }}">{{ section.settings.privacy_label }}</a>
+        {% endif %}
+        {% if section.settings.terms_label != blank %}
+          <a href="{{ section.settings.terms_url | default: '/pages/termeni' }}">{{ section.settings.terms_label }}</a>
+        {% endif %}
+        {% if section.settings.cookies_label != blank %}
+          <a href="{{ section.settings.cookies_url | default: '/pages/cookies' }}">{{ section.settings.cookies_label }}</a>
+        {% endif %}
+        <a href="https://anpc.ro/" target="_blank" rel="noopener">ANPC</a>
+        <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">SAL / SOL</a>
       </div>
     </div>
   </div>
+
 </footer>
+
+<style>
+.site-footer { background: #080705; }
+.footer-inner { max-width:1400px; margin:0 auto; padding:0 60px; }
+.site-footer__main { padding:80px 0 64px; border-bottom:1px solid rgba(240,234,216,.05); }
+.site-footer__main .footer-inner { display:grid; grid-template-columns:2fr 1fr 1fr 1.2fr; gap:60px; }
+.footer-logo { font-family:var(--font-display); font-size:28px; color:var(--color-gold-hi); letter-spacing:4px; margin-bottom:16px; }
+.footer-tagline { font-family:var(--font-serif); font-size:14px; font-style:italic; color:var(--color-cream-dim); line-height:1.7; max-width:260px; margin-bottom:24px; }
+.footer-social { display:flex; gap:16px; }
+.footer-social a { font-size:10px; letter-spacing:3px; color:rgba(240,234,216,.3); border:1px solid rgba(240,234,216,.1); padding:6px 12px; transition:color .3s,border-color .3s; }
+.footer-social a:hover { color:var(--color-gold); border-color:var(--color-gold-lo); }
+.footer-col__head { font-size:9px; letter-spacing:4px; text-transform:uppercase; color:var(--color-gold); margin-bottom:20px; font-weight:300; }
+.footer-col__links { list-style:none; }
+.footer-col__links li + li { margin-top:10px; }
+.footer-col__links a { font-size:13px; color:rgba(240,234,216,.3); font-weight:300; transition:color .3s; }
+.footer-col__links a:hover { color:var(--color-cream); }
+.footer-address { font-style:normal; font-size:13px; color:rgba(240,234,216,.3); line-height:1.9; }
+.footer-address p + p { margin-top:2px; }
+.footer-address a { transition:color .3s; }
+.footer-address a:hover { color:var(--color-cream); }
+.footer-legal-id { font-size:11px; color:rgba(240,234,216,.18); letter-spacing:1px; margin-top:8px; }
+.footer-warning { padding:16px 0; background:rgba(184,150,62,.06); border-top:1px solid rgba(184,150,62,.12); border-bottom:1px solid rgba(184,150,62,.08); }
+.footer-warning .footer-inner { display:flex; align-items:flex-start; gap:12px; }
+.footer-warning span { font-size:16px; flex-shrink:0; }
+.footer-warning p { font-size:11px; letter-spacing:.5px; color:rgba(184,150,62,.55); line-height:1.6; }
+.footer-legal { padding:28px 0; }
+.footer-legal__inner { display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:16px; }
+.footer-copy { font-size:11px; color:rgba(240,234,216,.15); letter-spacing:.5px; }
+.footer-legal__links { display:flex; flex-wrap:wrap; gap:20px; }
+.footer-legal__links a { font-size:10px; letter-spacing:2px; text-transform:uppercase; color:rgba(240,234,216,.2); transition:color .3s; }
+.footer-legal__links a:hover { color:var(--color-cream-dim); }
+@media(max-width:900px){
+  .site-footer__main .footer-inner { grid-template-columns:1fr 1fr; gap:40px; padding:0 24px; }
+  .footer-inner { padding:0 24px; }
+  .footer-legal__inner { flex-direction:column; align-items:flex-start; }
+}
+@media(max-width:600px){
+  .site-footer__main .footer-inner { grid-template-columns:1fr; }
+}
+</style>
 
 {% schema %}
 {
-  "name": "t:sections.footer.name",
-  "blocks": [
+  "name": "Subsol (Footer)",
+  "settings": [
     {
-      "type": "@app"
+      "type": "header",
+      "content": "Brand"
     },
     {
-      "type": "link_list",
-      "name": "t:sections.footer.blocks.link_list.name",
+      "type": "text",
+      "id": "logo_text",
+      "label": "Text Logo",
+      "default": "ZEKULHYDA"
+    },
+    {
+      "type": "textarea",
+      "id": "tagline",
+      "label": "Descriere scurta",
+      "default": "Distilate premium din Sacueni, Judetul Bihor, Romania."
+    },
+    {
+      "type": "url",
+      "id": "facebook",
+      "label": "Link Facebook"
+    },
+    {
+      "type": "url",
+      "id": "instagram",
+      "label": "Link Instagram"
+    },
+    {
+      "type": "header",
+      "content": "Date Firma (Obligatorii)"
+    },
+    {
+      "type": "text",
+      "id": "contact_heading",
+      "label": "Titlu coloana contact",
+      "default": "Contact si Date Legale"
+    },
+    {
+      "type": "text",
+      "id": "company_name",
+      "label": "Denumire firma",
+      "default": "Zekulhyda Premium SRL"
+    },
+    {
+      "type": "text",
+      "id": "address",
+      "label": "Adresa strada",
+      "default": "Str. Principala nr. 1"
+    },
+    {
+      "type": "text",
+      "id": "city",
+      "label": "Localitate, Judet",
+      "default": "Sacueni, Judetul Bihor, Romania"
+    },
+    {
+      "type": "text",
+      "id": "phone",
+      "label": "Telefon",
+      "default": "+40 XXX XXX XXX"
+    },
+    {
+      "type": "text",
+      "id": "email",
+      "label": "Email",
+      "default": "contact@zekulhyda.ro"
+    },
+    {
+      "type": "text",
+      "id": "cui",
+      "label": "CUI",
+      "default": "RO XXXXXXXX"
+    },
+    {
+      "type": "text",
+      "id": "reg_com",
+      "label": "Nr. Registrul Comertului",
+      "default": "J05/XXX/XXXX"
+    },
+    {
+      "type": "header",
+      "content": "Avertisment Alcool"
+    },
+    {
+      "type": "textarea",
+      "id": "alcohol_warning",
+      "label": "Text avertisment",
+      "default": "AVERTISMENT: Consumul de alcool in exces dauneaza grav sanatatii. Interzis vanzarea si servirea bauturilor alcoolice minorilor sub 18 ani. Nu conduceti sub influenta alcoolului. Consumati responsabil."
+    },
+    {
+      "type": "header",
+      "content": "Linkuri Legale"
+    },
+    {
+      "type": "text",
+      "id": "copyright",
+      "label": "Text copyright",
+      "default": "2025 Zekulhyda Premium. Toate drepturile rezervate."
+    },
+    {
+      "type": "text",
+      "id": "privacy_label",
+      "label": "Text Politica Confidentialitate",
+      "default": "Politica de Confidentialitate"
+    },
+    {
+      "type": "url",
+      "id": "privacy_url",
+      "label": "Link Politica Confidentialitate"
+    },
+    {
+      "type": "text",
+      "id": "terms_label",
+      "label": "Text Termeni si Conditii",
+      "default": "Termeni si Conditii"
+    },
+    {
+      "type": "url",
+      "id": "terms_url",
+      "label": "Link Termeni si Conditii"
+    },
+    {
+      "type": "text",
+      "id": "cookies_label",
+      "label": "Text Politica Cookies",
+      "default": "Politica de Cookies"
+    },
+    {
+      "type": "url",
+      "id": "cookies_url",
+      "label": "Link Politica Cookies"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "link_col",
+      "name": "Coloana Linkuri",
+      "limit": 3,
       "settings": [
         {
-          "type": "inline_richtext",
+          "type": "text",
           "id": "heading",
-          "default": "t:sections.footer.blocks.link_list.settings.heading.default",
-          "label": "t:sections.footer.blocks.link_list.settings.heading.label"
+          "label": "Titlu coloana",
+          "default": "Produse"
         },
         {
           "type": "link_list",
           "id": "menu",
-          "default": "footer",
-          "label": "t:sections.footer.blocks.link_list.settings.menu.label"
-        }
-      ]
-    },
-    {
-      "type": "brand_information",
-      "name": "t:sections.footer.blocks.brand_information.name",
-      "settings": [
-        {
-          "type": "paragraph",
-          "content": "t:sections.footer.blocks.brand_information.settings.paragraph.content"
-        },
-        {
-          "type": "checkbox",
-          "id": "show_social",
-          "default": true,
-          "label": "t:sections.footer.blocks.brand_information.settings.show_social.label",
-          "info": "t:sections.footer.blocks.brand_information.settings.show_social.info"
-        }
-      ]
-    },
-    {
-      "type": "text",
-      "name": "t:sections.footer.blocks.text.name",
-      "settings": [
-        {
-          "type": "inline_richtext",
-          "id": "heading",
-          "default": "t:sections.footer.blocks.text.settings.heading.default",
-          "label": "t:sections.footer.blocks.text.settings.heading.label"
-        },
-        {
-          "type": "richtext",
-          "id": "subtext",
-          "default": "t:sections.footer.blocks.text.settings.subtext.default",
-          "label": "t:sections.footer.blocks.text.settings.subtext.label"
-        }
-      ]
-    },
-    {
-      "type": "image",
-      "name": "Image",
-      "settings": [
-        {
-          "type": "image_picker",
-          "id": "image",
-          "label": "Image"
-        },
-        {
-          "type": "range",
-          "id": "image_width",
-          "min": 50,
-          "max": 550,
-          "step": 5,
-          "unit": "px",
-          "label": "Width",
-          "default": 100
-        },
-        {
-          "type": "select",
-          "id": "alignment",
-          "label": "Alignment",
-          "options": [
-            {
-              "value": "",
-              "label": "Left"
-            },
-            {
-              "value": "center",
-              "label": "Center"
-            },
-            {
-              "value": "right",
-              "label": "Right"
-            }
-          ],
-          "default": "center"
+          "label": "Meniu linkuri"
         }
       ]
     }
   ],
-  "settings": [
+  "presets": [
     {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "t:sections.all.colors.label",
-      "default": "scheme-1"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.footer.settings.header__1.content",
-      "info": "t:sections.footer.settings.header__1.info"
-    },
-    {
-      "type": "checkbox",
-      "id": "newsletter_enable",
-      "default": true,
-      "label": "t:sections.footer.settings.newsletter_enable.label"
-    },
-    {
-      "type": "inline_richtext",
-      "id": "newsletter_heading",
-      "default": "t:sections.footer.settings.newsletter_heading.default",
-      "label": "t:sections.footer.settings.newsletter_heading.label"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.footer.settings.header__9.content"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_follow_on_shop",
-      "default": true,
-      "label": "t:sections.footer.settings.enable_follow_on_shop.label",
-      "info": "t:sections.footer.settings.enable_follow_on_shop.info"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_social",
-      "default": true,
-      "label": "t:sections.footer.settings.show_social.label",
-      "info": "t:sections.footer.settings.show_social.info"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_country_selector",
-      "default": true,
-      "label": "t:sections.footer.settings.enable_country_selector.label",
-      "info": "t:sections.footer.settings.enable_country_selector.info"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_language_selector",
-      "default": true,
-      "label": "t:sections.footer.settings.enable_language_selector.label",
-      "info": "t:sections.footer.settings.enable_language_selector.info"
-    },
-    {
-      "type": "checkbox",
-      "id": "payment_enable",
-      "default": true,
-      "label": "t:sections.footer.settings.payment_enable.label"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_policy",
-      "default": true,
-      "label": "t:sections.footer.settings.show_policy.label",
-      "info": "t:sections.footer.settings.show_policy.info"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.all.spacing"
-    },
-    {
-      "type": "range",
-      "id": "margin_top",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "t:sections.footer.settings.margin_top.label",
-      "default": 0
-    },
-    {
-      "type": "header",
-      "content": "t:sections.all.padding.section_padding_heading"
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "t:sections.all.padding.padding_top",
-      "default": 36
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "t:sections.all.padding.padding_bottom",
-      "default": 36
+      "name": "Subsol",
+      "blocks": [
+        { "type": "link_col", "settings": { "heading": "Produse" } },
+        { "type": "link_col", "settings": { "heading": "Distileria" } }
+      ]
     }
-  ],
-  "default": {
-    "blocks": [
-      {
-        "type": "link_list"
-      },
-      {
-        "type": "text"
-      }
-    ]
-  }
+  ]
 }
 {% endschema %}

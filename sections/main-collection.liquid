@@ -1,0 +1,106 @@
+<div class="collection-page" style="padding-top: 80px;">
+
+  <div class="collection-page__hero">
+    <div class="collection-page__hero-inner">
+      <div class="section-label">
+        <span class="section-label-line"></span>
+        <span class="section-label-text">{{ 'collections.all' | t }}</span>
+      </div>
+      <h1 class="collection-page__title">{{ collection.title }}</h1>
+      {% if collection.description != blank %}
+        <div class="collection-page__desc">{{ collection.description }}</div>
+      {% endif %}
+    </div>
+  </div>
+
+  <div class="collection-page__body">
+    <div class="section-inner">
+
+      <div class="collection-page__toolbar">
+        <p class="collection-page__count">
+          {{ collection.products_count }}
+          {% if collection.products_count == 1 %}produs{% else %}produse{% endif %}
+        </p>
+        <div class="collection-page__sort">
+          {% assign sort_by = collection.sort_by | default: collection.default_sort_by %}
+          <label for="SortBy" class="collection-page__sort-label">Sortează:</label>
+          <select name="sort_by" id="SortBy" class="collection-page__sort-select"
+                  onchange="window.location.href = '{{ collection.url }}?sort_by=' + this.value">
+            {% for option in collection.sort_options %}
+              <option value="{{ option.value }}" {% if option.value == sort_by %}selected{% endif %}>
+                {{ option.name }}
+              </option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      {% paginate collection.products by 24 %}
+
+      {% if collection.products.size > 0 %}
+        <div class="product-grid product-grid--3">
+          {% for product in collection.products %}
+            <div class="product-card product-card--dark reveal delay-{{ forloop.index | modulo: 3 | plus: 1 }}">
+              <a href="{{ product.url }}" class="product-card__image-wrap">
+                <div class="product-card__glow"></div>
+                {% if product.featured_image %}
+                  <img src="{{ product.featured_image | image_url: width: 600 }}"
+                       alt="{{ product.title }}"
+                       class="product-card__img" loading="lazy">
+                {% else %}
+                  {% render 'bottle-svg', color: 'premium' %}
+                {% endif %}
+                {% for tag in product.tags %}
+                  {% if tag contains 'badge:' %}
+                    <span class="product-card__badge">{{ tag | remove: 'badge:' }}</span>
+                  {% endif %}
+                {% endfor %}
+              </a>
+              <div class="product-card__info">
+                <p class="product-card__origin">{{ product.vendor }}</p>
+                <h3 class="product-card__name">
+                  <a href="{{ product.url }}">{{ product.title }}</a>
+                </h3>
+                <p class="product-card__desc">{{ product.description | strip_html | truncate: 100 }}</p>
+                <div class="product-card__foot">
+                  <div class="product-card__price">
+                    {% if product.compare_at_price > product.price %}
+                      <span class="product-card__price-compare">
+                        <sub>{{ cart.currency.symbol }}</sub>{{ product.compare_at_price | money_without_currency }}
+                      </span>
+                    {% endif %}
+                    <sub>{{ cart.currency.symbol }}</sub>{{ product.price | money_without_currency }}
+                  </div>
+                  {% if product.available %}
+                    <form action="/cart/add" method="post">
+                      <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+                      <input type="hidden" name="quantity" value="1">
+                      <button type="submit" class="btn-add-cart">Adaugă →</button>
+                    </form>
+                  {% else %}
+                    <span class="product-card__sold-out">Epuizat</span>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p class="collection-page__empty">{{ 'collections.no_products' | t }}</p>
+      {% endif %}
+
+      {% if paginate.pages > 1 %}
+        <div class="pagination">
+          {{ paginate | default_pagination }}
+        </div>
+      {% endif %}
+
+      {% endpaginate %}
+
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{"name": "Main Colectie", "settings": []}
+{% endschema %}

@@ -1,140 +1,68 @@
-{{ 'component-card.css' | asset_url | stylesheet_tag }}
-{{ 'section-collection-list.css' | asset_url | stylesheet_tag }}
+<div class="collections-page" style="padding-top:80px;">
 
-<div class="page-width">
-  <h1 class="title title--primary inline-richtext{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-    {{ section.settings.title }}
-  </h1>
-  {%- liquid
-    case section.settings.sort
-      when 'products_high', 'products_low'
-        assign collections = collections | sort: 'all_products_count'
-      when 'date', 'date_reversed'
-        assign collections = collections | sort: 'published_at'
-    endcase
+  <div class="collections-page__hero">
+    <div class="section-inner">
+      <div class="section-label">
+        <span class="section-label-line"></span>
+        <span class="section-label-text">{{ section.settings.label | default: 'Colecții' }}</span>
+      </div>
+      <h1 class="collections-page__title">{{ page_title }}</h1>
+    </div>
+  </div>
 
-    if section.settings.sort == 'products_high' or section.settings.sort == 'date_reversed' or section.settings.sort == 'alphabetical_reversed'
-      assign collections = collections | reverse
-    endif
-
-    assign moduloResult = 28 | modulo: section.settings.columns_desktop
-    assign paginate_by = 30
-    if moduloResult == 0
-      assign paginate_by = 28
-    endif
-  -%}
-  {%- paginate collections by paginate_by -%}
-    <ul
-      class="collection-list grid grid--{{ section.settings.columns_desktop }}-col-desktop grid--{{ section.settings.columns_mobile }}-col-tablet-down"
-      role="list"
-    >
+  <div class="section-inner collections-page__body">
+    <div class="collections-grid">
       {%- for collection in collections -%}
-        <li
-          class="collection-list__item grid__item{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-          {% if settings.animations_reveal_on_scroll %}
-            data-cascade
-            style="--animation-order: {{ forloop.index }};"
-          {% endif %}
-        >
-          {% render 'card-collection',
-            card_collection: collection,
-            media_aspect_ratio: section.settings.image_ratio,
-            columns: 3
-          %}
-        </li>
+        <a href="{{ collection.url }}" class="collection-tile">
+          <div class="collection-tile__media">
+            {%- if collection.featured_image -%}
+              <img src="{{ collection.featured_image | image_url: width: 800 }}"
+                   alt="{{ collection.title | escape }}"
+                   width="{{ collection.featured_image.width }}" height="{{ collection.featured_image.height }}"
+                   loading="lazy">
+            {%- else -%}
+              {% render 'bottle-svg', color: 'premium' %}
+            {%- endif -%}
+            <span class="collection-tile__veil"></span>
+          </div>
+          <div class="collection-tile__info">
+            <h2 class="collection-tile__name">{{ collection.title }}</h2>
+            <p class="collection-tile__count">
+              {{ collection.all_products_count }}
+              {%- if collection.all_products_count == 1 %} produs{% else %} produse{% endif -%}
+            </p>
+          </div>
+        </a>
+      {%- else -%}
+        <p class="collections-page__empty">Nu există colecții publicate încă.</p>
       {%- endfor -%}
-    </ul>
-    {% render 'pagination', paginate: paginate %}
-  {%- endpaginate -%}
+    </div>
+  </div>
 </div>
+
+<style>
+.collections-page__hero { padding:80px 0 40px; border-bottom:1px solid rgba(240,234,216,.06); }
+.collections-page__title { font-family:var(--font-display); font-size:clamp(40px,4vw,64px); font-weight:400; color:var(--color-cream); margin-top:14px; }
+.collections-page__body { padding:64px 0 120px; }
+.collections-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:28px; }
+.collection-tile { display:block; border:1px solid var(--color-line); background:var(--color-graphite); transition:border-color .3s ease; }
+.collection-tile:hover { border-color:var(--color-gold-lo); }
+.collection-tile__media { position:relative; aspect-ratio:4/3; overflow:hidden; background:var(--color-slate); }
+.collection-tile__media img { width:100%; height:100%; object-fit:cover; transition:transform .6s ease; }
+.collection-tile:hover .collection-tile__media img { transform:scale(1.04); }
+.collection-tile__veil { position:absolute; inset:0; background:linear-gradient(to top, rgba(11,11,12,.75), transparent 55%); }
+.collection-tile__info { padding:24px; }
+.collection-tile__name { font-family:var(--font-display); font-size:26px; font-weight:400; color:var(--color-cream); }
+.collection-tile:hover .collection-tile__name { color:var(--color-gold); }
+.collection-tile__count { font-family:var(--font-mono); font-size:11px; letter-spacing:.1em; text-transform:uppercase; color:var(--color-fog); margin-top:8px; }
+.collections-page__empty { font-family:var(--font-serif); font-style:italic; font-size:17px; color:var(--color-cream-dim); }
+</style>
+
 {% schema %}
 {
-  "name": "t:sections.main-list-collections.name",
-  "class": "section",
+  "name": "Main Colectii",
   "settings": [
-    {
-      "type": "inline_richtext",
-      "id": "title",
-      "label": "t:sections.main-list-collections.settings.title.label",
-      "default": "t:sections.main-list-collections.settings.title.default"
-    },
-    {
-      "type": "select",
-      "id": "sort",
-      "options": [
-        {
-          "value": "alphabetical",
-          "label": "t:sections.main-list-collections.settings.sort.options__1.label"
-        },
-        {
-          "value": "alphabetical_reversed",
-          "label": "t:sections.main-list-collections.settings.sort.options__2.label"
-        },
-        {
-          "value": "date_reversed",
-          "label": "t:sections.main-list-collections.settings.sort.options__3.label"
-        },
-        {
-          "value": "date",
-          "label": "t:sections.main-list-collections.settings.sort.options__4.label"
-        },
-        {
-          "value": "products_high",
-          "label": "t:sections.main-list-collections.settings.sort.options__5.label"
-        },
-        {
-          "value": "products_low",
-          "label": "t:sections.main-list-collections.settings.sort.options__6.label"
-        }
-      ],
-      "default": "alphabetical",
-      "label": "t:sections.main-list-collections.settings.sort.label"
-    },
-    {
-      "type": "select",
-      "id": "image_ratio",
-      "options": [
-        {
-          "value": "adapt",
-          "label": "t:sections.main-list-collections.settings.image_ratio.options__1.label"
-        },
-        {
-          "value": "portrait",
-          "label": "t:sections.main-list-collections.settings.image_ratio.options__2.label"
-        },
-        {
-          "value": "square",
-          "label": "t:sections.main-list-collections.settings.image_ratio.options__3.label"
-        }
-      ],
-      "default": "adapt",
-      "label": "t:sections.main-list-collections.settings.image_ratio.label"
-    },
-    {
-      "type": "range",
-      "id": "columns_desktop",
-      "min": 1,
-      "max": 6,
-      "step": 1,
-      "default": 3,
-      "label": "t:sections.main-list-collections.settings.columns_desktop.label"
-    },
-    {
-      "type": "select",
-      "id": "columns_mobile",
-      "options": [
-        {
-          "value": "1",
-          "label": "t:sections.main-list-collections.settings.columns_mobile.options__1.label"
-        },
-        {
-          "value": "2",
-          "label": "t:sections.main-list-collections.settings.columns_mobile.options__2.label"
-        }
-      ],
-      "default": "2",
-      "label": "t:sections.main-list-collections.settings.columns_mobile.label"
-    }
+    { "type": "text", "id": "label", "label": "Etichetă", "default": "Colecții" }
   ]
 }
 {% endschema %}

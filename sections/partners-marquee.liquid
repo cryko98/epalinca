@@ -1,0 +1,83 @@
+<!-- Partners marquee — forrás: uploadolt HTML PARTNERS array -->
+<section id="partners">
+  <div class="wrap">
+    <div class="sec-head" style="text-align:center;margin:0 auto 2.6rem;">
+      <p class="eyebrow" style="justify-content:center;">{{ section.settings.eyebrow | default: 'Unde ne găsești' }}</p>
+      <h2>{{ section.settings.title | default: 'Restaurante, baruri de vin, <em>magazine online.</em>' }}</h2>
+      <p>{{ section.settings.subtitle | default: 'Pălincile Zekulhyda se găsesc și la partenerii de mai jos.' }}</p>
+    </div>
+  </div>
+  <div class="marquee">
+    <div class="track" id="partners-track">
+
+      <!-- epalinca.ro — webshop propriu -->
+      <a class="partner-logo" href="https://epalinca.ro" target="_blank" rel="noopener">
+        <span class="nm mono">epalinca.ro</span>
+        <span class="ty">webshop · Zekulhyda</span>
+      </a>
+
+      <!-- Zekulhyda Taste & Learning -->
+      <a class="partner-logo" href="#taste">
+        <span class="nm" style="font-size:1rem;">Taste &amp; Learning</span>
+        <span class="ty">bar / degustare · Săcueni</span>
+      </a>
+
+      <!-- Old Chef Restaurant Biharia -->
+      <a class="partner-logo" href="https://www.facebook.com/Oldchefbiharia/" target="_blank" rel="noopener">
+        <span class="nm">Old Chef Restaurant</span>
+        <span class="ty">restaurant · Biharia</span>
+      </a>
+
+      <!-- Partener restaurant Oradea -->
+      <a class="partner-logo" href="#">
+        <span class="nm">Restaurant partener</span>
+        <span class="ty">restaurant · Oradea / Nagyvárad</span>
+      </a>
+
+      <!-- Borbár Cluj -->
+      <a class="partner-logo" href="#">
+        <span class="nm sans">Borbár partener</span>
+        <span class="ty">bară de vin · Cluj / Kolozsvár</span>
+      </a>
+
+      <!-- Hotel Félix -->
+      <a class="partner-logo" href="#">
+        <span class="nm">Hotel partener</span>
+        <span class="ty">hotel · Băile Felix / Félixfürdő</span>
+      </a>
+
+      <!-- Delikátesz Debrecen -->
+      <a class="partner-logo" href="#">
+        <span class="nm mono" style="font-size:.9rem;">Delicatese</span>
+        <span class="ty">delicatese · Debrecen</span>
+      </a>
+
+      <!-- Webshop Romania -->
+      <a class="partner-logo" href="#">
+        <span class="nm">Webshop partener</span>
+        <span class="ty">magazin online · România</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<script>
+// Duplicate track for seamless loop
+(function(){
+  var track = document.getElementById('partners-track');
+  if(track) { track.innerHTML += track.innerHTML; }
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Parteneri Marquee",
+  "settings": [
+    {"type":"text","id":"eyebrow","label":"Eyebrow","default":"Unde ne găsești"},
+    {"type":"text","id":"title","label":"Titlu","default":"Restaurante, baruri de vin, <em>magazine online.</em>"},
+    {"type":"textarea","id":"subtitle","label":"Subtitlu","default":"Pălincile Zekulhyda se găsesc și la partenerii de mai jos. Lista se actualizează pe baza listei lui Botond."}
+  ],
+  "presets": [{"name": "Parteneri"}]
+}
+{% endschema %}

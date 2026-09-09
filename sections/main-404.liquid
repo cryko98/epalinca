@@ -1,23 +1,55 @@
-<style type="text/css">
-  .template-404 .title + * {
-    margin-top: 1rem;
-  }
+<div class="page-404" style="padding-top:80px;">
+  <div class="section-inner page-404__inner">
 
-  @media screen and (min-width: 750px) {
-    .template-404 .title + * {
-      margin-top: 2rem;
-    }
-  }
+    <div class="section-label">
+      <span class="section-label-line"></span>
+      <span class="section-label-text">{{ section.settings.label | default: 'Eroare 404' }}</span>
+    </div>
+
+    <p class="page-404__code">404</p>
+    <h1 class="page-404__title">{{ section.settings.title | default: 'Pagina nu a fost găsită' }}</h1>
+    <p class="page-404__text">
+      {{ section.settings.text | default: 'Sticla pe care o căutați nu se află în pivniță. Poate a fost mutată, sau linkul nu mai este valid.' }}
+    </p>
+
+    <div class="page-404__actions">
+      <a href="{{ routes.root_url }}" class="btn-primary">{{ section.settings.home_label | default: 'Înapoi la pagina principală' }}</a>
+      <a href="{{ routes.all_products_collection_url }}" class="btn-ghost">{{ section.settings.shop_label | default: 'Vezi produsele' }}</a>
+    </div>
+
+    <form action="{{ routes.search_url }}" method="get" role="search" class="page-404__search">
+      <label for="Search404" class="visually-hidden">{{ 'general.search' | t }}</label>
+      <input type="search" name="q" id="Search404" placeholder="{{ 'general.search' | t }}…" class="page-404__search-input">
+      <button type="submit" class="page-404__search-btn">→</button>
+    </form>
+
+  </div>
+</div>
+
+<style>
+.page-404__inner { padding:96px 0 140px; text-align:center; max-width:720px; }
+.page-404__code { font-family:var(--font-display); font-size:clamp(88px,14vw,180px); line-height:1; color:var(--color-gold); opacity:.22; margin:24px 0 -18px; }
+.page-404__title { font-family:var(--font-display); font-size:clamp(32px,4vw,52px); font-weight:400; color:var(--color-cream); }
+.page-404__text { font-family:var(--font-serif); font-style:italic; font-size:17px; line-height:1.9; color:var(--color-cream-dim); margin:18px auto 36px; max-width:520px; }
+.page-404__actions { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; margin-bottom:48px; }
+.page-404__search { display:flex; gap:0; max-width:420px; margin:0 auto; border:1px solid var(--color-line); border-radius:2px; overflow:hidden; }
+.page-404__search-input { flex:1; background:transparent; border:0; padding:14px 16px; color:var(--color-cream); font-family:var(--font-body); font-size:14px; }
+.page-404__search-input::placeholder { color:var(--color-fog); }
+.page-404__search-input:focus { outline:none; }
+.page-404__search-btn { background:var(--color-gold); border:0; color:var(--color-ink); padding:0 20px; font-size:17px; cursor:pointer; }
+.page-404__search-btn:hover { background:var(--color-gold-hi); }
+.visually-hidden { position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
 </style>
 
-<div class="template-404 page-width page-margin center">
-  <p>
-    {{ 'templates.404.subtext' | t }}
-  </p>
-  <h1 class="title">
-    {{ 'templates.404.title' | t }}
-  </h1>
-  <a href="{{ routes.all_products_collection_url }}" class="button">
-    {{ 'general.continue_shopping' | t }}
-  </a>
-</div>
+{% schema %}
+{
+  "name": "Main 404",
+  "settings": [
+    { "type": "text", "id": "label", "label": "Etichetă", "default": "Eroare 404" },
+    { "type": "text", "id": "title", "label": "Titlu", "default": "Pagina nu a fost găsită" },
+    { "type": "textarea", "id": "text", "label": "Text", "default": "Sticla pe care o căutați nu se află în pivniță. Poate a fost mutată, sau linkul nu mai este valid." },
+    { "type": "text", "id": "home_label", "label": "Buton principal", "default": "Înapoi la pagina principală" },
+    { "type": "text", "id": "shop_label", "label": "Buton secundar", "default": "Vezi produsele" }
+  ]
+}
+{% endschema %}

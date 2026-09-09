@@ -1,6 +1,3 @@
-<link rel="stylesheet" href="{{ 'zekulhyda.css' | asset_url }}" media="print" onload="this.media='all'">
-<noscript>{{ 'zekulhyda.css' | asset_url | stylesheet_tag }}</noscript>
-
 {%- liquid
   assign products_list = section.settings.products | split: ','
 -%}

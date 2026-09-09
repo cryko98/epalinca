@@ -1,218 +1,79 @@
-{{ 'section-contact-form.css' | asset_url | stylesheet_tag }}
+<div class="contact-section">
+  <div class="section-inner contact-section__inner">
 
-{%- style -%}
-  .section-{{ section.id }}-padding {
-    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
-  }
+    {%- if section.settings.title != blank %}
+      <h2 class="contact-section__title">{{ section.settings.title }}</h2>
+    {%- endif %}
 
-  @media screen and (min-width: 750px) {
-    .section-{{ section.id }}-padding {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
-    }
-  }
-{%- endstyle -%}
+    {% form 'contact', class: 'contact-form' %}
+      {%- if form.posted_successfully? %}
+        <p class="contact-form__success">
+          {{ section.settings.success_text | default: 'Mulțumim! Mesajul a fost trimis, revenim în cel mai scurt timp.' }}
+        </p>
+      {%- endif %}
 
-<div class="color-{{ section.settings.color_scheme }} gradient">
-  <div class="contact page-width page-width--narrow section-{{ section.id }}-padding">
-    {%- if section.settings.heading != blank -%}
-      <h2 class="title title-wrapper--no-top-margin inline-richtext {{ section.settings.heading_size }}{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
-        {{ section.settings.heading }}
-      </h2>
-    {%- else -%}
-      <h2 class="visually-hidden">{{ 'templates.contact.form.title' | t }}</h2>
-    {%- endif -%}
-    {%- liquid
-      assign contact_form_class = 'isolate'
-      if settings.animations_reveal_on_scroll
-        assign contact_form_class = 'isolate scroll-trigger animate--slide-in'
-      endif
-    -%}
-    {%- form 'contact', id: 'ContactForm', class: contact_form_class -%}
-      {%- if form.posted_successfully? -%}
-        <h2 class="form-status form-status-list form__message" tabindex="-1" autofocus>
-          {{- 'icon-success.svg' | inline_asset_content -}}
-          {{ 'templates.contact.form.post_success' | t }}
-        </h2>
-      {%- elsif form.errors -%}
-        <div class="form__message">
-          <h2 class="form-status caption-large text-body" role="alert" tabindex="-1" autofocus>
-            {{- 'icon-error.svg' | inline_asset_content -}}
-            {{ 'templates.contact.form.error_heading' | t }}
-          </h2>
+      {%- if form.errors %}
+        <div class="contact-form__errors">
+          {%- for field in form.errors %}
+            <p>{{ form.errors.messages[field] }}</p>
+          {%- endfor %}
         </div>
-        <ul class="form-status-list caption-large" role="list">
-          <li>
-            <a href="#ContactForm-email" class="link">
-              {{ form.errors.translated_fields.email | capitalize }}
-              {{ form.errors.messages.email }}
-            </a>
-          </li>
-        </ul>
-      {%- endif -%}
-      <div class="contact__fields">
-        <div class="field">
-          <input
-            class="field__input"
-            autocomplete="name"
-            type="text"
-            id="ContactForm-name"
-            name="contact[{{ 'templates.contact.form.name' | t }}]"
-            value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
-            placeholder="{{ 'templates.contact.form.name' | t }}"
-          >
-          <label class="field__label" for="ContactForm-name">{{ 'templates.contact.form.name' | t }}</label>
+      {%- endif %}
+
+      <div class="contact-form__row">
+        <div class="contact-form__field">
+          <label for="ContactName">Nume</label>
+          <input type="text" id="ContactName" name="contact[name]" value="{{ form.name }}" autocomplete="name">
         </div>
-        <div class="field field--with-error">
-          <input
-            autocomplete="email"
-            type="email"
-            id="ContactForm-email"
-            class="field__input"
-            name="contact[email]"
-            spellcheck="false"
-            autocapitalize="off"
-            value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
-            aria-required="true"
-            {% if form.errors contains 'email' %}
-              aria-invalid="true"
-              aria-describedby="ContactForm-email-error"
-            {% endif %}
-            placeholder="{{ 'templates.contact.form.email' | t }}"
-          >
-          <label class="field__label" for="ContactForm-email">
-            {{- 'templates.contact.form.email' | t }}
-            <span aria-hidden="true">*</span></label
-          >
-          {%- if form.errors contains 'email' -%}
-            <small class="contact__field-error" id="ContactForm-email-error">
-              <span class="visually-hidden">{{ 'accessibility.error' | t }}</span>
-              <span class="form__message">
-                <span class="svg-wrapper">
-                  {{- 'icon-error.svg' | inline_asset_content -}}
-                </span>
-                {{- form.errors.translated_fields.email | capitalize }}
-                {{ form.errors.messages.email -}}
-              </span>
-            </small>
-          {%- endif -%}
+        <div class="contact-form__field">
+          <label for="ContactEmail">E-mail <span aria-hidden="true">*</span></label>
+          <input type="email" id="ContactEmail" name="contact[email]" value="{{ form.email }}" autocomplete="email" required>
         </div>
       </div>
-      <div class="field">
-        <input
-          type="tel"
-          id="ContactForm-phone"
-          class="field__input"
-          autocomplete="tel"
-          name="contact[{{ 'templates.contact.form.phone' | t }}]"
-          pattern="[0-9\-]*"
-          value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
-          placeholder="{{ 'templates.contact.form.phone' | t }}"
-        >
-        <label class="field__label" for="ContactForm-phone">{{ 'templates.contact.form.phone' | t }}</label>
+
+      <div class="contact-form__field">
+        <label for="ContactPhone">Telefon</label>
+        <input type="tel" id="ContactPhone" name="contact[phone]" value="{{ form.phone }}" autocomplete="tel">
       </div>
-      <div class="field">
-        <textarea
-          rows="10"
-          id="ContactForm-body"
-          class="text-area field__input"
-          name="contact[{{ 'templates.contact.form.comment' | t }}]"
-          placeholder="{{ 'templates.contact.form.comment' | t }}"
-        >
-          {{- form.body -}}
-        </textarea>
-        <label class="form__label field__label" for="ContactForm-body">
-          {{- 'templates.contact.form.comment' | t -}}
-        </label>
+
+      <div class="contact-form__field">
+        <label for="ContactBody">Mesaj <span aria-hidden="true">*</span></label>
+        <textarea id="ContactBody" name="contact[body]" rows="7" required>{{ form.body }}</textarea>
       </div>
-      <div class="contact__button">
-        <button type="submit" class="button">
-          {{ 'templates.contact.form.send' | t }}
-        </button>
-      </div>
-    {%- endform -%}
+
+      <button type="submit" class="btn-primary contact-form__submit">
+        {{ section.settings.button_label | default: 'Trimite mesajul' }}
+      </button>
+    {% endform %}
+
   </div>
 </div>
 
+<style>
+.contact-section__inner { padding:64px 0 120px; max-width:760px; }
+.contact-section__title { font-family:var(--font-display); font-size:clamp(28px,3vw,40px); font-weight:400; color:var(--color-cream); margin-bottom:32px; }
+.contact-form__row { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+@media (max-width:640px) { .contact-form__row { grid-template-columns:1fr; } }
+.contact-form__field { margin-bottom:20px; }
+.contact-form__field label { display:block; font-family:var(--font-mono); font-size:11px; letter-spacing:.12em; text-transform:uppercase; color:var(--color-fog); margin-bottom:8px; }
+.contact-form__field input, .contact-form__field textarea {
+  width:100%; background:var(--color-graphite); border:1px solid var(--color-line); border-radius:2px;
+  padding:13px 14px; color:var(--color-cream); font-family:var(--font-body); font-size:15px;
+}
+.contact-form__field input:focus, .contact-form__field textarea:focus { outline:none; border-color:var(--color-gold-lo); }
+.contact-form__submit { margin-top:8px; }
+.contact-form__success { border:1px solid var(--color-gold-lo); background:rgba(201,150,59,.08); color:var(--color-gold-hi); padding:16px 18px; margin-bottom:28px; font-family:var(--font-serif); font-style:italic; }
+.contact-form__errors { border:1px solid #7a2727; background:rgba(160,50,50,.1); color:#e8a1a1; padding:16px 18px; margin-bottom:28px; font-size:14px; }
+</style>
+
 {% schema %}
 {
-  "name": "t:sections.contact-form.name",
-  "tag": "section",
-  "class": "section",
-  "disabled_on": {
-    "groups": ["header", "footer"]
-  },
+  "name": "Formular contact",
   "settings": [
-    {
-      "type": "inline_richtext",
-      "id": "heading",
-      "default": "t:sections.contact-form.settings.title.default",
-      "label": "t:sections.contact-form.settings.title.label"
-    },
-    {
-      "type": "select",
-      "id": "heading_size",
-      "options": [
-        {
-          "value": "h2",
-          "label": "t:sections.all.heading_size.options__1.label"
-        },
-        {
-          "value": "h1",
-          "label": "t:sections.all.heading_size.options__2.label"
-        },
-        {
-          "value": "h0",
-          "label": "t:sections.all.heading_size.options__3.label"
-        },
-        {
-          "value": "hxl",
-          "label": "t:sections.all.heading_size.options__4.label"
-        },
-        {
-          "value": "hxxl",
-          "label": "t:sections.all.heading_size.options__5.label"
-        }
-      ],
-      "default": "h1",
-      "label": "t:sections.all.heading_size.label"
-    },
-    {
-      "type": "color_scheme",
-      "id": "color_scheme",
-      "label": "t:sections.all.colors.label",
-      "default": "scheme-1"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.all.padding.section_padding_heading"
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "t:sections.all.padding.padding_top",
-      "default": 36
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "t:sections.all.padding.padding_bottom",
-      "default": 36
-    }
+    { "type": "text", "id": "title", "label": "Titlu", "default": "Scrieți-ne" },
+    { "type": "text", "id": "button_label", "label": "Text buton", "default": "Trimite mesajul" },
+    { "type": "textarea", "id": "success_text", "label": "Mesaj de succes", "default": "Mulțumim! Mesajul a fost trimis, revenim în cel mai scurt timp." }
   ],
-  "presets": [
-    {
-      "name": "t:sections.contact-form.presets.name"
-    }
-  ]
+  "presets": [{ "name": "Formular contact" }]
 }
 {% endschema %}

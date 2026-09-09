@@ -1,0 +1,56 @@
+{
+  "general": {
+    "page": "Pagina",
+    "search": "Caută",
+    "close": "Închide",
+    "loading": "Se încarcă..."
+  },
+  "products": {
+    "add_to_cart": "Adaugă în Coș",
+    "sold_out": "Epuizat",
+    "unavailable": "Indisponibil",
+    "price": "Preț",
+    "quantity": "Cantitate",
+    "sku": "Cod produs"
+  },
+  "cart": {
+    "title": "Coșul tău",
+    "empty": "Coșul tău este gol.",
+    "continue_shopping": "Continuă cumpărăturile",
+    "checkout": "Finalizează comanda",
+    "subtotal": "Subtotal",
+    "remove": "Elimină",
+    "update": "Actualizează"
+  },
+  "collections": {
+    "all": "Toate produsele",
+    "sort_by": "Sortează după",
+    "filter": "Filtrează",
+    "no_products": "Nu există produse în această colecție."
+  },
+  "blogs": {
+    "article": "Articol",
+    "back": "Înapoi la blog",
+    "read_more": "Citește mai mult",
+    "posted_on": "Publicat pe",
+    "by": "de"
+  },
+  "newsletter": {
+    "label": "Abonează-te la newsletter",
+    "submit": "Abonează-te",
+    "success": "Mulțumim! Te-ai abonat cu succes."
+  },
+  "customer": {
+    "login": "Autentifică-te",
+    "logout": "Deconectează-te",
+    "register": "Creează cont",
+    "email": "Adresă email",
+    "password": "Parolă",
+    "name": "Nume",
+    "submit": "Trimite"
+  },
+  "pagination": {
+    "previous": "Anterior",
+    "next": "Următor"
+  }
+}

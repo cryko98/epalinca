@@ -1,0 +1,56 @@
+{% comment %}
+  Renders a decorative bottle SVG.
+  Usage: {% render 'bottle-svg', variant: 'hero' %}
+  Variants: hero, card, featured
+{% endcomment %}
+
+{% assign bottle_width = 190 %}
+{% if variant == 'card' %}{% assign bottle_width = 110 %}{% endif %}
+{% if variant == 'featured' %}{% assign bottle_width = 170 %}{% endif %}
+
+<svg width="{{ bottle_width }}" viewBox="0 0 140 420" fill="none" xmlns="http://www.w3.org/2000/svg" class="bottle-svg bottle-svg--{{ variant | default: 'card' }}" aria-hidden="true">
+  <defs>
+    <linearGradient id="bGrad-{{ variant }}" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#080705"/>
+      <stop offset="22%"  stop-color="#1c1810"/>
+      <stop offset="48%"  stop-color="#2a2418"/>
+      <stop offset="78%"  stop-color="#181410"/>
+      <stop offset="100%" stop-color="#080705"/>
+    </linearGradient>
+    <linearGradient id="liqG-{{ variant }}" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%"   stop-color="#c9a84c" stop-opacity=".35"/>
+      <stop offset="100%" stop-color="#4a3210" stop-opacity=".65"/>
+    </linearGradient>
+    <linearGradient id="capG-{{ variant }}" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%"   stop-color="#5a4820"/>
+      <stop offset="45%"  stop-color="#d4af62"/>
+      <stop offset="100%" stop-color="#7a6228"/>
+    </linearGradient>
+  </defs>
+  <!-- Capsulă -->
+  <rect x="52" y="2" width="36" height="22" rx="5" fill="#7a6028"/>
+  <rect x="55" y="4" width="30" height="18" rx="4" fill="url(#capG-{{ variant }})"/>
+  <!-- Corp sticlă -->
+  <path d="M56 24 L56 60 Q56 65 46 70 L46 380 Q46 392 70 392 Q94 392 94 380 L94 70 Q84 65 84 60 L84 24 Z" fill="url(#bGrad-{{ variant }})"/>
+  <!-- Lichid -->
+  <path d="M47 112 L47 378 Q47 390 70 390 Q93 390 93 378 L93 112 Z" fill="url(#liqG-{{ variant }})"/>
+  <!-- Etichetă fundal -->
+  <rect x="49" y="148" width="42" height="156" rx="3" fill="rgba(18,14,6,.92)" stroke="#c9a84c" stroke-width=".7"/>
+  <rect x="52" y="153" width="36" height="146" rx="2" fill="none" stroke="rgba(184,150,62,.22)" stroke-width=".4"/>
+  <!-- Linie decorativă sus -->
+  <line x1="53" y1="165" x2="87" y2="165" stroke="#b8963e" stroke-width=".5" opacity=".65"/>
+  <!-- Monogramă Z -->
+  <text x="70" y="224" text-anchor="middle" font-family="Georgia, serif" font-size="36" fill="#c9a84c" font-style="italic" opacity=".95">Z</text>
+  <!-- Nume brand -->
+  <text x="70" y="244" text-anchor="middle" font-family="sans-serif" font-size="5" fill="#b8963e" opacity=".7" letter-spacing="3">ZEKULHYDA</text>
+  <!-- An -->
+  <text x="70" y="258" text-anchor="middle" font-family="sans-serif" font-size="4" fill="#7a6228" opacity=".6" letter-spacing="2">SĂCUENI · BIHOR</text>
+  <!-- Linie decorativă jos -->
+  <line x1="53" y1="276" x2="87" y2="276" stroke="#b8963e" stroke-width=".5" opacity=".65"/>
+  <!-- Reflexie sticlă -->
+  <path d="M48 68 Q51 230 50 378" stroke="rgba(255,255,255,.055)" stroke-width="3.5" fill="none"/>
+  <path d="M53 58 Q55 230 54 382" stroke="rgba(255,255,255,.025)" stroke-width="1.5" fill="none"/>
+  <!-- Fund -->
+  <ellipse cx="70" cy="382" rx="24" ry="8" fill="#040302"/>
+  <ellipse cx="70" cy="379" rx="19" ry="5" fill="#0c0a06" opacity=".85"/>
+</svg>

@@ -1,58 +1,29 @@
-{{ 'section-main-page.css' | asset_url | stylesheet_tag }}
+<div class="page-default" style="padding-top:80px;">
+  <div class="page-default__hero">
+    <div class="section-inner">
+      <div class="section-label">
+        <span class="section-label-line"></span>
+        <span class="section-label-text">{{ page.title }}</span>
+      </div>
+      <h1 class="page-default__title">{{ page.title }}</h1>
+    </div>
+  </div>
 
-{%- style -%}
-  .section-{{ section.id }}-padding {
-    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
-  }
-
-  @media screen and (min-width: 750px) {
-    .section-{{ section.id }}-padding {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
-    }
-  }
-{%- endstyle -%}
-
-<div class="page-width page-width--narrow section-{{ section.id }}-padding">
-  <h1 class="main-page-title page-title h0{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-    {{ page.title | escape }}
-  </h1>
-  <div class="rte{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}">
+  <div class="section-inner page-default__body">
     {{ page.content }}
   </div>
 </div>
 
+<style>
+.page-default__hero { padding:80px 0 40px; border-bottom:1px solid rgba(240,234,216,.06); }
+.page-default__title { font-family:var(--font-display); font-size:clamp(40px,4vw,64px); font-weight:400; color:var(--color-cream); margin-top:14px; }
+.page-default__body { padding-top:64px; padding-bottom:120px; max-width:800px; }
+.page-default__body p, .page-default__body li { font-family:var(--font-serif); font-size:17px; font-style:italic; line-height:1.95; color:var(--color-cream-dim); margin-bottom:20px; }
+.page-default__body h2 { font-family:var(--font-display); font-size:32px; font-weight:400; color:var(--color-cream); margin:48px 0 16px; }
+.page-default__body a { color:var(--color-gold); border-bottom:1px solid var(--color-gold-lo); padding-bottom:2px; }
+.page-default__body a:hover { border-color:var(--color-gold); }
+</style>
+
 {% schema %}
-{
-  "name": "t:sections.main-page.name",
-  "tag": "section",
-  "class": "section",
-  "settings": [
-    {
-      "type": "header",
-      "content": "t:sections.all.padding.section_padding_heading"
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "t:sections.all.padding.padding_top",
-      "default": 36
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "t:sections.all.padding.padding_bottom",
-      "default": 36
-    }
-  ]
-}
+{"name": "Main Pagina", "settings": []}
 {% endschema %}

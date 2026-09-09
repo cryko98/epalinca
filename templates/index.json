@@ -1,310 +1,51 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
 {
   "sections": {
-    "hero_slideshow": {
-      "type": "slideshow",
-      "blocks": {
-        "slide_1": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/Zekulhyda-Barique-26.jpg",
-            "image_overlay_opacity": 70,
-            "heading": "Zekulhyda",
-            "heading_size": "hxl",
-            "subheading": "Sufletul Fructului, va fi, Fructul Sufletului",
-            "button_label": "Descoperă produsele",
-            "link": "shopify://collections/all",
-            "button_style_secondary": false,
-            "show_text_box": false,
-            "box_align": "bottom-center",
-            "text_alignment": "center",
-            "text_alignment_mobile": "center",
-            "color_scheme": "scheme-3"
-          }
-        },
-        "slide_2": {
-          "type": "slide",
-          "settings": {
-            "image": "shopify://shop_images/Zekulhyda-Barique-33.jpg",
-            "image_overlay_opacity": 70,
-            "heading": "Pălincă Premium din Bihor",
-            "heading_size": "hxl",
-            "subheading": "Distilată cu pasiune pe Valea Ierului",
-            "button_label": "Vezi colecția",
-            "link": "shopify://collections/all",
-            "button_style_secondary": false,
-            "show_text_box": false,
-            "box_align": "bottom-center",
-            "text_alignment": "center",
-            "text_alignment_mobile": "center",
-            "color_scheme": "scheme-3"
-          }
-        }
-      },
-      "block_order": [
-        "slide_1",
-        "slide_2"
-      ],
-      "settings": {
-        "layout": "full_bleed",
-        "slide_height": "large",
-        "slider_visual": "dots",
-        "auto_rotate": true,
-        "change_slides_speed": 5,
-        "image_behavior": "none",
-        "show_text_below": false,
-        "accessibility_info": "Slideshow about our brand"
-      }
+    "hero_main": {
+      "type": "hero-main",
+      "settings": {}
     },
-    "zekulhyda_story": {
-      "type": "zekulhyda-story",
-      "settings": {
-        "label": "Povestea noastră",
-        "title": "Scurtă Introducere",
-        "paragraph_1": "Povestea și producerea pălincii are o datină îndelungată pe Valea Ierului, tradiție pe care am dorit s-o păstrăm și s-o îmbinăm cu tehnologia modernă de ultimă generație și să lăsăm și noi ceva în urma noastră pentru cei care vor avea dorința de a duce mai departe ce am continuat și noi.",
-        "paragraph_2": "În urmă cu ceva vreme, am început să producem pălinca, pălincă de înaltă calitate cu care să ne putem mândri oriunde în țară și în străinătate. Găsind pasiunea în arta de a face un destilat, am căutat soluții pentru a ajunge la țelul dorit, de a face ceva mai special, ani la rând studiind fermentarea, destilarea, bineînțeles totul controlat cu strictețe.",
-        "paragraph_3": "Am făcut primii pași spre ceva mai bun, ceva cu care sa fim prezenți la competiții mari din Europa, dar nu ne-am mulțumit cu atât.",
-        "paragraph_4": "Studiind în continuare și învățând din greșelile făcute, astăzi, am ajuns la o singură concluzie: fără suflet și dăruință nimic nu este posibil, așa cum credem că fructul, în momentul procesării, ne dă sufletul, tot așa trebuie să continuăm cu această idee care sună astfel:",
-        "quote": "„Sufletul Fructului, va fi, Fructul Sufletului”"
-      }
+    "award_marquee": {
+      "type": "award-marquee",
+      "settings": {}
     },
-    "featured_collection": {
-      "type": "featured-collection",
-      "settings": {
-        "collection": "barrique",
-        "products_to_show": 6,
-        "title": "Colecția Barrique",
-        "heading_size": "h2",
-        "description": "<p>Distilate premium maturate în butoaie de castan și stejar, finisate în butoi de cireș.</p>",
-        "show_description": true,
-        "description_style": "body",
-        "columns_desktop": 3,
-        "enable_desktop_slider": false,
-        "full_width": false,
-        "show_view_all": true,
-        "view_all_style": "link",
-        "color_scheme": "scheme-1",
-        "image_ratio": "portrait",
-        "image_shape": "default",
-        "show_secondary_image": true,
-        "show_vendor": false,
-        "show_rating": false,
-        "quick_add": "none",
-        "columns_mobile": "2",
-        "swipe_on_mobile": true,
-        "padding_top": 60,
-        "padding_bottom": 60
-      }
+    "collection_premium": {
+      "type": "collection-premium",
+      "settings": {}
     },
-    "values": {
-      "type": "multicolumn",
-      "blocks": {
-        "col_1": {
-          "type": "column",
-          "settings": {
-            "title": "Tradiție pe Valea Ierului",
-            "text": "<p>Datină îndelungată în arta distilării, păstrată cu grijă și transmisă mai departe.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "col_2": {
-          "type": "column",
-          "settings": {
-            "title": "Fructe de calitate superioară",
-            "text": "<p>Fructe atent selectate și procesate imediat, pentru arome pure și autentice.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        },
-        "col_3": {
-          "type": "column",
-          "settings": {
-            "title": "Premiat internațional",
-            "text": "<p>22 de medalii la Quintessence 2025, una dintre cele mai mari competiții din Europa.</p>",
-            "link_label": "",
-            "link": ""
-          }
-        }
-      },
-      "block_order": [
-        "col_1",
-        "col_2",
-        "col_3"
-      ],
-      "settings": {
-        "title": "De ce Zekulhyda?",
-        "heading_size": "h2",
-        "image_width": "third",
-        "image_ratio": "adapt",
-        "button_label": "",
-        "button_link": "",
-        "columns_desktop": 3,
-        "column_alignment": "center",
-        "background_style": "none",
-        "color_scheme": "scheme-2",
-        "columns_mobile": "1",
-        "swipe_on_mobile": false,
-        "padding_top": 48,
-        "padding_bottom": 48
-      }
+    "barrique_section": {
+      "type": "barrique-section",
+      "settings": {}
     },
-    "craft": {
-      "type": "image-with-text",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Sufletul Fructului",
-            "heading_size": "h1"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Fiecare sticlă de pălincă Zekulhyda este rezultatul unui proces controlat cu strictețe — de la fermentare până la distilare. Combinăm datina de pe Valea Ierului cu tehnologie modernă, pentru a obține destilate elegante, cu arome curate și caracter inconfundabil.</p>",
-            "text_style": "body"
-          }
-        },
-        "button": {
-          "type": "button",
-          "settings": {
-            "button_label": "Comandă acum",
-            "button_link": "shopify://collections/all",
-            "button_style_secondary": false
-          }
-        }
-      },
-      "block_order": [
-        "heading",
-        "text",
-        "button"
-      ],
-      "settings": {
-        "image": "shopify://shop_images/Zekulhyda-Barique-25.jpg",
-        "height": "large",
-        "desktop_image_width": "medium",
-        "layout": "image_first",
-        "image_behavior": "none",
-        "content_layout": "no-overlap",
-        "desktop_content_position": "middle",
-        "desktop_content_alignment": "left",
-        "mobile_content_alignment": "center",
-        "section_color_scheme": "scheme-1",
-        "color_scheme": "scheme-3",
-        "padding_top": 40,
-        "padding_bottom": 40
-      }
+    "distilat_section": {
+      "type": "distilat-section",
+      "settings": {}
     },
-    "zekulhyda_awards": {
-      "type": "zekulhyda-awards",
-      "settings": {
-        "label": "Recunoaștere internațională",
-        "title": "22 de Medalii la Quintessence 2025",
-        "subtitle": "Pălincă de înaltă calitate din Bihor, premiată la cele mai prestigioase competiții din Europa"
-      }
+    "founder_story": {
+      "type": "founder-story",
+      "settings": {}
     },
-    "faq": {
-      "type": "collapsible-content",
-      "blocks": {
-        "row_1": {
-          "type": "collapsible_row",
-          "settings": {
-            "heading": "Cum se face livrarea?",
-            "icon": "truck",
-            "row_content": "<p>Livrăm în toată România prin curier rapid. Comenzile sunt procesate și expediate în cel mai scurt timp, cu ambalaj sigur pentru sticle.</p>",
-            "page": ""
-          }
-        },
-        "row_2": {
-          "type": "collapsible_row",
-          "settings": {
-            "heading": "Trebuie să am 18 ani pentru a comanda?",
-            "icon": "question_mark",
-            "row_content": "<p>Da. Comercializăm exclusiv băuturi alcoolice, iar comenzile pot fi plasate doar de persoane care au împlinit vârsta de 18 ani.</p>",
-            "page": ""
-          }
-        },
-        "row_3": {
-          "type": "collapsible_row",
-          "settings": {
-            "heading": "Cum se păstrează pălinca?",
-            "icon": "snowflake",
-            "row_content": "<p>Păstrați sticla în poziție verticală, într-un loc răcoros și ferit de lumina directă a soarelui. Pălinca își menține calitatea timp îndelungat.</p>",
-            "page": ""
-          }
-        }
-      },
-      "block_order": [
-        "row_1",
-        "row_2",
-        "row_3"
-      ],
-      "settings": {
-        "caption": "Informații utile",
-        "heading": "Întrebări frecvente",
-        "heading_size": "h2",
-        "heading_alignment": "center",
-        "layout": "section",
-        "container_color_scheme": "scheme-2",
-        "color_scheme": "scheme-1",
-        "open_first_collapsible_row": false,
-        "image_ratio": "adapt",
-        "desktop_layout": "image_second",
-        "padding_top": 48,
-        "padding_bottom": 48
-      }
+    "taste_learning": {
+      "type": "taste-learning",
+      "settings": {}
+    },
+    "partners_marquee": {
+      "type": "partners-marquee",
+      "settings": {}
     },
     "newsletter": {
       "type": "newsletter",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Rămâi la curent",
-            "heading_size": "h2"
-          }
-        },
-        "paragraph": {
-          "type": "paragraph",
-          "settings": {
-            "text": "<p>Abonează-te pentru noutăți, ediții limitate și oferte speciale.</p>"
-          }
-        },
-        "email_form": {
-          "type": "email_form",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "heading",
-        "paragraph",
-        "email_form"
-      ],
-      "settings": {
-        "color_scheme": "scheme-2",
-        "full_width": true,
-        "padding_top": 60,
-        "padding_bottom": 60
-      }
+      "settings": {}
     }
   },
   "order": [
-    "hero_slideshow",
-    "zekulhyda_story",
-    "featured_collection",
-    "values",
-    "craft",
-    "zekulhyda_awards",
-    "faq",
+    "hero_main",
+    "award_marquee",
+    "collection_premium",
+    "barrique_section",
+    "distilat_section",
+    "founder_story",
+    "taste_learning",
+    "partners_marquee",
     "newsletter"
   ]
 }

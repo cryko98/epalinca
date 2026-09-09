@@ -1,0 +1,96 @@
+<section class="section-taste" style="background:{{ section.settings.bg_color }};padding:{{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;">
+  <div class="taste-inner">
+    {% if section.settings.image != blank %}
+    <div class="taste-visual">
+      <img src="{{ section.settings.image | img_url: '1200x' }}" alt="{{ section.settings.image_alt | default: 'Taste & Learning' }}" class="taste-visual__img">
+      <div class="taste-visual__overlay" style="background:{{ section.settings.overlay_color }};opacity:{{ section.settings.overlay_opacity | divided_by: 100.0 }};"></div>
+    </div>
+    {% else %}
+    <div class="taste-visual taste-visual--placeholder" style="background:{{ section.settings.placeholder_bg }};"></div>
+    {% endif %}
+
+    <div class="taste-content reveal" style="background:{{ section.settings.content_bg }};">
+      <div class="section-label">
+        <span class="section-label__line" style="background:{{ section.settings.accent_color }};"></span>
+        <span class="section-label__text" style="color:{{ section.settings.accent_color }};">{{ section.settings.eyebrow }}</span>
+      </div>
+      <h2 class="taste-title" style="color:{{ section.settings.title_color }};">
+        {{ section.settings.title }}
+        {% if section.settings.title_italic != blank %}
+        <em style="color:{{ section.settings.accent_color }};">{{ section.settings.title_italic }}</em>
+        {% endif %}
+      </h2>
+      <p class="taste-body" style="color:{{ section.settings.body_color }};">{{ section.settings.body_text }}</p>
+
+      <div class="taste-features">
+        {% for block in section.blocks %}
+        <div class="taste-feature" {{ block.shopify_attributes }}>
+          <span class="taste-feature__icon" style="color:{{ section.settings.accent_color }};">{{ block.settings.icon }}</span>
+          <div>
+            <div class="taste-feature__title" style="color:{{ section.settings.title_color }};">{{ block.settings.title }}</div>
+            <div class="taste-feature__text" style="color:{{ section.settings.body_color }};">{{ block.settings.text }}</div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+
+      {% if section.settings.cta_text != blank %}
+      <a href="{{ section.settings.cta_url }}" class="btn-primary" style="background:{{ section.settings.accent_color }};color:{{ section.settings.btn_text_color }};margin-top:40px;display:inline-block;">
+        {{ section.settings.cta_text }}
+      </a>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Taste & Learning",
+  "settings": [
+    { "type": "header", "content": "Conținut" },
+    { "type": "text", "id": "eyebrow", "label": "Text mic", "default": "Taste & Learning" },
+    { "type": "textarea", "id": "title", "label": "Titlu", "default": "Vino să guști" },
+    { "type": "text", "id": "title_italic", "label": "Titlu italic", "default": "Érmelléki-ul." },
+    { "type": "textarea", "id": "body_text", "label": "Text descriere", "default": "Sala Taste & Learning Zekulhyda din Săcueni este locul unde pălinca nu se consumă — se înțelege. Organizăm degustări ghidate, workshopuri și evenimente private. Suntem și gazda oficială a Blisseva Partium Spirits Awards." },
+    { "type": "text", "id": "cta_text", "label": "Text buton", "default": "Rezervă o degustare" },
+    { "type": "url", "id": "cta_url", "label": "Link buton" },
+    { "type": "header", "content": "Imagine" },
+    { "type": "image_picker", "id": "image", "label": "Imagine" },
+    { "type": "text", "id": "image_alt", "label": "Alt imagine" },
+    { "type": "color", "id": "overlay_color", "label": "Culoare overlay imagine", "default": "#0c0b09" },
+    { "type": "range", "id": "overlay_opacity", "min": 0, "max": 80, "step": 5, "label": "Opacitate overlay (%)", "default": 40 },
+    { "type": "color", "id": "placeholder_bg", "label": "Fundal placeholder (fără imagine)", "default": "#161410" },
+    { "type": "header", "content": "Culori" },
+    { "type": "color", "id": "bg_color", "label": "Fundal secțiune", "default": "#0c0b09" },
+    { "type": "color", "id": "content_bg", "label": "Fundal conținut", "default": "#161410" },
+    { "type": "color", "id": "accent_color", "label": "Culoare accent", "default": "#b8963e" },
+    { "type": "color", "id": "title_color", "label": "Culoare titlu", "default": "#f0ead8" },
+    { "type": "color", "id": "body_color", "label": "Culoare text", "default": "#a89878" },
+    { "type": "color", "id": "btn_text_color", "label": "Culoare text buton", "default": "#0c0b09" },
+    { "type": "range", "id": "padding_top", "min": 0, "max": 120, "step": 10, "unit": "px", "label": "Spațiu sus", "default": 0 },
+    { "type": "range", "id": "padding_bottom", "min": 0, "max": 120, "step": 10, "unit": "px", "label": "Spațiu jos", "default": 0 }
+  ],
+  "blocks": [
+    {
+      "type": "feature",
+      "name": "Caracteristică",
+      "settings": [
+        { "type": "text", "id": "icon", "label": "Icon (emoji sau simbol)", "default": "✦" },
+        { "type": "text", "id": "title", "label": "Titlu", "default": "Degustări ghidate" },
+        { "type": "text", "id": "text", "label": "Descriere scurtă", "default": "Explorați aromele cu un maestru distilator" }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Taste & Learning",
+      "blocks": [
+        { "type": "feature", "settings": { "icon": "🥃", "title": "Degustări ghidate", "text": "Cu maestrul distilator Nagy Botond sau echipa sa" }},
+        { "type": "feature", "settings": { "icon": "🏆", "title": "Blisseva Spirits Awards", "text": "Gazda oficială — 876 mostre din 4 țări, 18 jurați" }},
+        { "type": "feature", "settings": { "icon": "📚", "title": "Workshopuri", "text": "Învățați arta distilării artizanale" }},
+        { "type": "feature", "settings": { "icon": "🎉", "title": "Evenimente private", "text": "Sărbătoriți momentele speciale cu pălincă premium" }}
+      ]
+    }
+  ]
+}
+{% endschema %}

@@ -1,143 +1,54 @@
-{{ 'component-article-card.css' | asset_url | stylesheet_tag }}
-{{ 'component-card.css' | asset_url | stylesheet_tag }}
-{{ 'section-main-blog.css' | asset_url | stylesheet_tag }}
+<div class="blog-page" style="padding-top:80px;">
+  <div class="blog-page__hero">
+    <div class="section-inner">
+      <div class="section-label">
+        <span class="section-label-line"></span>
+        <span class="section-label-text">Din Distilerie</span>
+      </div>
+      <h1 class="blog-page__title">{{ blog.title }}</h1>
+    </div>
+  </div>
 
-{%- style -%}
-  .section-{{ section.id }}-padding {
-    padding-top: {{ section.settings.padding_top | times: 0.75 | round: 0 }}px;
-    padding-bottom: {{ section.settings.padding_bottom | times: 0.75 | round: 0 }}px;
-  }
+  <div class="section-inner" style="padding-top:80px;padding-bottom:120px;">
+    {% paginate blog.articles by 12 %}
 
-  @media screen and (min-width: 750px) {
-    .section-{{ section.id }}-padding {
-      padding-top: {{ section.settings.padding_top }}px;
-      padding-bottom: {{ section.settings.padding_bottom }}px;
-    }
-  }
-{%- endstyle -%}
-
-{%- paginate blog.articles by 6 -%}
-  <div class="main-blog page-width section-{{ section.id }}-padding">
-    <h1 class="title--primary{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--fade-in{% endif %}">
-      {{ blog.title | escape }}
-    </h1>
-
-    <div class="blog-articles {% if section.settings.layout == 'collage' %}blog-articles--collage{% endif %}">
-      {%- for article in blog.articles -%}
-        <div
-          class="blog-articles__article article{% if settings.animations_reveal_on_scroll %} scroll-trigger animate--slide-in{% endif %}"
-          {% if settings.animations_reveal_on_scroll %}
-            data-cascade
-            style="--animation-order: {{ forloop.index }};"
+    <div class="blog-grid">
+      {% for article in blog.articles %}
+        <article class="blog-card reveal delay-{{ forloop.index | modulo: 3 | plus: 1 }}">
+          {% if article.image %}
+            <a href="{{ article.url }}" class="blog-card__img-wrap">
+              <img src="{{ article.image | image_url: width:800 }}" alt="{{ article.title }}" loading="lazy">
+            </a>
           {% endif %}
-        >
-          {%- render 'article-card',
-            article: article,
-            media_height: section.settings.image_height,
-            media_aspect_ratio: article.image.aspect_ratio,
-            show_image: section.settings.show_image,
-            show_date: section.settings.show_date,
-            show_author: section.settings.show_author,
-            show_excerpt: true
-          -%}
-        </div>
-      {%- endfor -%}
+          <div class="blog-card__body">
+            <p class="blog-card__date">{{ article.published_at | date: '%d %B %Y' }}</p>
+            <h3 class="blog-card__title"><a href="{{ article.url }}">{{ article.title }}</a></h3>
+            <p class="blog-card__excerpt">{{ article.excerpt | strip_html | truncate: 140 }}</p>
+            <a href="{{ article.url }}" class="blog-card__link">Citește mai mult →</a>
+          </div>
+        </article>
+      {% else %}
+        <p style="color:var(--color-cream-dim);font-family:var(--font-serif);font-style:italic;">
+          Nu există articole publicate încă.
+        </p>
+      {% endfor %}
     </div>
 
-    {%- if paginate.pages > 1 -%}
-      {%- render 'pagination', paginate: paginate -%}
-    {%- endif -%}
+    {% if paginate.pages > 1 %}
+      <div class="pagination" style="margin-top:60px;text-align:center;">
+        {{ paginate | default_pagination }}
+      </div>
+    {% endif %}
+
+    {% endpaginate %}
   </div>
-{%- endpaginate -%}
+</div>
+
+<style>
+.blog-page__hero { padding:80px 0 40px; border-bottom:1px solid rgba(240,234,216,.06); }
+.blog-page__title { font-family:var(--font-display); font-size:clamp(40px,4vw,64px); font-weight:400; color:var(--color-cream); margin-top:14px; }
+</style>
 
 {% schema %}
-{
-  "name": "t:sections.main-blog.name",
-  "tag": "section",
-  "class": "section",
-  "settings": [
-    {
-      "type": "select",
-      "id": "layout",
-      "options": [
-        {
-          "value": "grid",
-          "label": "t:sections.main-blog.settings.layout.options__1.label"
-        },
-        {
-          "value": "collage",
-          "label": "t:sections.main-blog.settings.layout.options__2.label"
-        }
-      ],
-      "default": "collage",
-      "label": "t:sections.main-blog.settings.layout.label"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_image",
-      "default": true,
-      "label": "t:sections.main-blog.settings.show_image.label"
-    },
-    {
-      "type": "select",
-      "id": "image_height",
-      "options": [
-        {
-          "value": "adapt",
-          "label": "t:sections.main-blog.settings.image_height.options__1.label"
-        },
-        {
-          "value": "small",
-          "label": "t:sections.main-blog.settings.image_height.options__2.label"
-        },
-        {
-          "value": "medium",
-          "label": "t:sections.main-blog.settings.image_height.options__3.label"
-        },
-        {
-          "value": "large",
-          "label": "t:sections.main-blog.settings.image_height.options__4.label"
-        }
-      ],
-      "default": "medium",
-      "label": "t:sections.main-blog.settings.image_height.label"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_date",
-      "default": true,
-      "label": "t:sections.main-blog.settings.show_date.label"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_author",
-      "default": false,
-      "label": "t:sections.main-blog.settings.show_author.label"
-    },
-    {
-      "type": "header",
-      "content": "t:sections.all.padding.section_padding_heading"
-    },
-    {
-      "type": "range",
-      "id": "padding_top",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "t:sections.all.padding.padding_top",
-      "default": 36
-    },
-    {
-      "type": "range",
-      "id": "padding_bottom",
-      "min": 0,
-      "max": 100,
-      "step": 4,
-      "unit": "px",
-      "label": "t:sections.all.padding.padding_bottom",
-      "default": 36
-    }
-  ]
-}
+{"name": "Main Blog", "settings": []}
 {% endschema %}
