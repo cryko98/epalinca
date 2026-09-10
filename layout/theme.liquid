@@ -3,8 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>{% if page_title == blank %}{{ shop.name }}{% else %}{{ page_title }} — {{ shop.name }}{% endif %}</title>
-  <meta name="description" content="{% if page_description %}{{ page_description | escape }}{% endif %}">
+  {% render 'zk-seo' %}
+  {%- if template.name == 'index' %}
+    {%- comment -%} The first hero slide is the largest paint on the homepage; fetch it before the CSS asks for it. {%- endcomment -%}
+    <link rel="preload" as="image" href="{{ 'zk-42.jpg' | asset_url }}" fetchpriority="high">
+  {%- endif %}
   {%- if settings.favicon != blank %}
     <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 96 }}">
   {%- else %}
@@ -27,6 +30,7 @@
     }
   </style>
   {% render 'zk-image-map' %}
+  {% render 'zk-schema' %}
 </head>
 <body class="template-{{ template.name }}">
 

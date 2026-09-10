@@ -1,0 +1,220 @@
+{%- comment -%}
+  Structured data (JSON-LD). One graph per page type:
+    - every page:  Organization + WebSite
+    - index:       Distillery (the tasting room as a local business)
+    - product:     Product with Offer, brand, award, plus a BreadcrumbList
+    - collection:  CollectionPage with an ItemList of the products, plus breadcrumbs
+    - article:     Article
+    - page:        breadcrumbs
+
+  All strings go through | json so quotes and diacritics are escaped correctly.
+{%- endcomment -%}
+
+{%- liquid
+  assign org_id = shop.url | append: '/#organization'
+  assign logo = 'zk-01.png' | asset_url | replace_first: '//', 'https://'
+  assign share = 'zk-43.jpg' | asset_url | replace_first: '//', 'https://'
+  assign home_name = 'zk.nav_home' | t
+-%}
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": {{ org_id | json }},
+      "name": "Zekulhyda",
+      "legalName": "Grădina Verde S.R.L.",
+      "url": {{ shop.url | json }},
+      "logo": {{ logo | json }},
+      "email": "office@epalinca.ro",
+      "telephone": "+40742908047",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Str. Morii 24",
+        "addressLocality": "Săcueni",
+        "addressRegion": "Bihor",
+        "postalCode": "417435",
+        "addressCountry": "RO"
+      },
+      "sameAs": [
+        "https://www.facebook.com/Zekulhyda-101087868715858",
+        "https://www.instagram.com/zekulhyda"
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": {{ shop.url | append: '/#website' | json }},
+      "url": {{ shop.url | json }},
+      "name": "Zekulhyda",
+      "inLanguage": {{ request.locale.iso_code | json }},
+      "publisher": { "@id": {{ org_id | json }} },
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": { "@type": "EntryPoint", "urlTemplate": "{{ shop.url }}/search?q={search_term_string}" },
+        "query-input": "required name=search_term_string"
+      }
+    }
+    {%- if template.name == 'index' -%}
+    ,{
+      "@type": "Distillery",
+      "@id": {{ shop.url | append: '/#tasting-room' | json }},
+      "name": "Zekulhyda Taste & Learning",
+      "image": {{ share | json }},
+      "url": {{ shop.url | append: '/#taste' | json }},
+      "telephone": "+40742908047",
+      "email": "office@epalinca.ro",
+      "priceRange": "$$",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Str. Petőfi Sándor 116",
+        "addressLocality": "Săcueni",
+        "addressRegion": "Bihor",
+        "postalCode": "417435",
+        "addressCountry": "RO"
+      },
+      "parentOrganization": { "@id": {{ org_id | json }} },
+      "description": {{ 'zk.taste_p' | t | strip_html | json }}
+    }
+    {%- endif -%}
+
+    {%- if template.name == 'product' -%}
+    {%- liquid
+      assign v = product.selected_or_first_available_variant
+      assign abv = ''
+      assign vol = ''
+      for tag in product.tags
+        if tag contains 'abv:'
+          assign abv = tag | remove: 'abv:'
+        endif
+        if tag contains 'vol:'
+          assign vol = tag | remove: 'vol:'
+        endif
+      endfor
+      assign awards = product.metafields.zekulhyda.awards.value
+      assign home_col = product.collections | first
+    -%}
+    ,{
+      "@type": "Product",
+      "@id": {{ shop.url | append: product.url | append: '#product' | json }},
+      "name": {{ product.title | json }},
+      "url": {{ shop.url | append: product.url | json }},
+      "description": {{ page_description | default: product.description | strip_html | strip_newlines | truncate: 300 | json }},
+      "sku": {{ v.sku | json }},
+      "brand": { "@type": "Brand", "name": "Zekulhyda" },
+      "manufacturer": { "@id": {{ org_id | json }} },
+      "category": {{ product.type | json }},
+      "image": [
+        {%- if product.images.size > 0 -%}
+          {%- for image in product.images -%}
+            {%- assign img_abs = image | image_url: width: 1200 | replace_first: '//', 'https://' -%}
+            {{ img_abs | json }}{% unless forloop.last %},{% endunless %}
+          {%- endfor -%}
+        {%- else -%}
+          {{ share | json }}
+        {%- endif -%}
+      ],
+      {%- if awards != blank and awards.size > 0 -%}
+      "award": [
+        {%- for line in awards -%}
+          {%- assign parts = line | split: '|' -%}
+          {{ parts[1] | strip | append: ' — ' | append: parts[3] | strip | json }}{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
+      ],
+      {%- endif -%}
+      "additionalProperty": [
+        {%- if vol != blank -%}{ "@type": "PropertyValue", "name": "Volum", "value": {{ vol | append: ' ml' | json }} }{%- endif -%}
+        {%- if vol != blank and abv != blank -%},{%- endif -%}
+        {%- if abv != blank -%}{ "@type": "PropertyValue", "name": "Alcool", "value": {{ abv | append: '% vol.' | json }} }{%- endif -%}
+      ],
+      "offers": {
+        "@type": "Offer",
+        "url": {{ shop.url | append: product.url | json }},
+        "priceCurrency": {{ cart.currency.iso_code | json }},
+        "price": {{ v.price | divided_by: 100.0 | json }},
+        "priceValidUntil": {{ 'now' | date: '%s' | plus: 31536000 | date: '%Y-%m-%d' | json }},
+        "availability": {% if product.available %}"https://schema.org/InStock"{% else %}"https://schema.org/OutOfStock"{% endif %},
+        "itemCondition": "https://schema.org/NewCondition",
+        "seller": { "@id": {{ org_id | json }} },
+        "shippingDetails": {
+          "@type": "OfferShippingDetails",
+          "shippingDestination": { "@type": "DefinedRegion", "addressCountry": "RO" }
+        },
+        "hasMerchantReturnPolicy": {
+          "@type": "MerchantReturnPolicy",
+          "applicableCountry": "RO",
+          "returnPolicyCategory": "https://schema.org/MerchantReturnFiniteReturnWindow",
+          "merchantReturnDays": 14,
+          "returnMethod": "https://schema.org/ReturnByMail",
+          "returnFees": "https://schema.org/ReturnFeesCustomerResponsibility"
+        }
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": {{ home_name | json }}, "item": {{ shop.url | append: routes.root_url | json }} }
+        {%- if home_col != blank -%}
+        ,{ "@type": "ListItem", "position": 2, "name": {{ home_col.title | json }}, "item": {{ shop.url | append: home_col.url | json }} }
+        ,{ "@type": "ListItem", "position": 3, "name": {{ product.title | json }}, "item": {{ shop.url | append: product.url | json }} }
+        {%- else -%}
+        ,{ "@type": "ListItem", "position": 2, "name": {{ product.title | json }}, "item": {{ shop.url | append: product.url | json }} }
+        {%- endif -%}
+      ]
+    }
+    {%- endif -%}
+
+    {%- if template.name == 'collection' -%}
+    ,{
+      "@type": "CollectionPage",
+      "@id": {{ shop.url | append: collection.url | append: '#collection' | json }},
+      "name": {{ collection.title | json }},
+      "url": {{ shop.url | append: collection.url | json }},
+      "description": {{ page_description | default: collection.description | strip_html | strip_newlines | truncate: 300 | json }},
+      "isPartOf": { "@id": {{ shop.url | append: '/#website' | json }} },
+      "mainEntity": {
+        "@type": "ItemList",
+        "numberOfItems": {{ collection.products_count | json }},
+        "itemListElement": [
+          {%- for p in collection.products limit: 24 -%}
+            { "@type": "ListItem", "position": {{ forloop.index }}, "name": {{ p.title | json }}, "url": {{ shop.url | append: p.url | json }} }{% unless forloop.last %},{% endunless %}
+          {%- endfor -%}
+        ]
+      }
+    },
+    {
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": {{ home_name | json }}, "item": {{ shop.url | append: routes.root_url | json }} },
+        { "@type": "ListItem", "position": 2, "name": {{ collection.title | json }}, "item": {{ shop.url | append: collection.url | json }} }
+      ]
+    }
+    {%- endif -%}
+
+    {%- if template.name == 'article' -%}
+    ,{
+      "@type": "Article",
+      "headline": {{ article.title | json }},
+      "url": {{ shop.url | append: article.url | json }},
+      "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%S%z' | json }},
+      "dateModified": {{ article.updated_at | date: '%Y-%m-%dT%H:%M:%S%z' | json }},
+      {%- if article.image -%}{%- assign art_abs = article.image | image_url: width: 1200 | replace_first: '//', 'https://' -%}"image": {{ art_abs | json }},{%- endif -%}
+      "author": { "@type": "Person", "name": {{ article.author | json }} },
+      "publisher": { "@id": {{ org_id | json }} },
+      "description": {{ page_description | default: article.excerpt | strip_html | truncate: 300 | json }}
+    }
+    {%- endif -%}
+
+    {%- if template.name == 'page' -%}
+    ,{
+      "@type": "BreadcrumbList",
+      "itemListElement": [
+        { "@type": "ListItem", "position": 1, "name": {{ home_name | json }}, "item": {{ shop.url | append: routes.root_url | json }} },
+        { "@type": "ListItem", "position": 2, "name": {{ page.title | json }}, "item": {{ shop.url | append: page.url | json }} }
+      ]
+    }
+    {%- endif -%}
+  ]
+}
+</script>

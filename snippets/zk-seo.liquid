@@ -1,0 +1,99 @@
+{%- comment -%}
+  Head metadata: title, description, canonical, robots, Open Graph and Twitter cards.
+
+  Titles come from Shopify's SEO fields when they are set (page_title already resolves
+  them) and get the brand appended once, unless the merchant wrote it in. The homepage
+  has no SEO field in the admin, so its title and description live in the locale files
+  and follow the storefront language.
+{%- endcomment -%}
+
+{%- liquid
+  assign brand = 'Zekulhyda'
+  assign og_type = 'website'
+  assign og_image = 'zk-43.jpg' | asset_url
+
+  case template.name
+    when 'index'
+      assign seo_title = 'zk.seo_home_title' | t
+      assign seo_desc = 'zk.seo_home_desc' | t
+    when 'product'
+      assign seo_title = page_title
+      assign seo_desc = page_description
+      assign og_type = 'product'
+      if product.featured_image
+        assign og_image = product.featured_image | image_url: width: 1200
+      endif
+    when 'collection'
+      assign seo_title = page_title
+      assign seo_desc = page_description
+      if collection.image
+        assign og_image = collection.image | image_url: width: 1200
+      endif
+    when 'article'
+      assign seo_title = page_title
+      assign seo_desc = page_description
+      assign og_type = 'article'
+      if article.image
+        assign og_image = article.image | image_url: width: 1200
+      endif
+    else
+      assign seo_title = page_title
+      assign seo_desc = page_description
+  endcase
+
+  if seo_title == blank
+    assign seo_title = shop.name
+  endif
+  unless seo_title contains brand
+    assign seo_title = seo_title | append: ' | ' | append: brand
+  endunless
+
+  if seo_desc == blank
+    assign seo_desc = 'zk.seo_home_desc' | t
+  endif
+  assign seo_desc = seo_desc | strip_html | strip_newlines | replace: '  ', ' ' | truncate: 155
+
+  # image_url gives protocol-relative URLs; social crawlers want absolute https.
+  unless og_image contains 'https://'
+    assign og_image = og_image | replace_first: '//', 'https://'
+  endunless
+
+  assign noindex = false
+  case template.name
+    when 'search' or 'cart' or '404' or 'password' or 'gift_card'
+      assign noindex = true
+  endcase
+-%}
+
+<title>{{ seo_title | escape }}</title>
+<meta name="description" content="{{ seo_desc | escape }}">
+<link rel="canonical" href="{{ canonical_url }}">
+{%- if noindex %}
+<meta name="robots" content="noindex, follow">
+{%- else %}
+<meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1">
+{%- endif %}
+<meta name="theme-color" content="#0B0B0C">
+<link rel="apple-touch-icon" href="{{ 'zk-01.png' | asset_url }}">
+
+<meta property="og:site_name" content="{{ brand }}">
+<meta property="og:type" content="{{ og_type }}">
+<meta property="og:title" content="{{ seo_title | escape }}">
+<meta property="og:description" content="{{ seo_desc | escape }}">
+<meta property="og:url" content="{{ canonical_url }}">
+<meta property="og:image" content="{{ og_image }}">
+<meta property="og:locale" content="{% case request.locale.iso_code %}{% when 'hu' %}hu_HU{% when 'en' %}en_GB{% else %}ro_RO{% endcase %}">
+{%- for loc in shop.published_locales -%}
+  {%- unless loc.iso_code == request.locale.iso_code -%}
+    <meta property="og:locale:alternate" content="{% case loc.iso_code %}{% when 'hu' %}hu_HU{% when 'en' %}en_GB{% else %}ro_RO{% endcase %}">
+  {%- endunless -%}
+{%- endfor %}
+{%- if template.name == 'product' %}
+<meta property="product:price:amount" content="{{ product.selected_or_first_available_variant.price | money_without_currency | remove: '.' | replace: ',', '.' }}">
+<meta property="product:price:currency" content="{{ cart.currency.iso_code }}">
+<meta property="product:availability" content="{% if product.available %}in stock{% else %}out of stock{% endif %}">
+{%- endif %}
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="{{ seo_title | escape }}">
+<meta name="twitter:description" content="{{ seo_desc | escape }}">
+<meta name="twitter:image" content="{{ og_image }}">
