@@ -138,7 +138,7 @@ function medalSVG(key,kind,i){
 <path d="M40 40 q60 -40 120 0" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="6" stroke-linecap="round"/></svg>`;
 }
 function renderMedals(){
-  $('#medals').innerHTML = MEDALS.map(([k,kind],i)=>`<a class="badge-m" href="#story">${medalSVG(k,kind,i)}<span class="l">${t(k+'_ring').split(' · ')[0]}</span></a>`).join('') + `<p class="medals-note">${t('medals_note')}</p>`;
+  $('#medals').innerHTML = MEDALS.map(([k,kind],i)=>`<a class="badge-m" href="/collections/premiate" data-f="premiate">${medalSVG(k,kind,i)}<span class="l">${t(k+'_ring').split(' · ')[0]}</span></a>`).join('') + `<p class="medals-note">${t('medals_note')}</p>`;
 }
 function selectPack(i){
   document.querySelectorAll('.pack').forEach(p=>p.classList.toggle('sel',p.dataset.pack==String(i)));

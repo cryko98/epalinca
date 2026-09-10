@@ -30,7 +30,7 @@
     <div class="pdp__top">
 
       <div class="pdp__media">
-        <div class="pdp__stage">
+        <div class="pdp__stage" id="zkStage" title="{{ 'zk.zoom_hint' | t }}">
           {%- if product.featured_image -%}
             <img id="MainImg"
                  src="{{ product.featured_image | image_url: width: 1100 }}"
@@ -156,6 +156,12 @@
   </div>
 </section>
 
+{%- comment -%} Lightbox: the stage opens the full-size shot; Esc, backdrop or × closes. {%- endcomment -%}
+<div class="zk-lightbox" id="zkLightbox" hidden role="dialog" aria-modal="true" aria-label="{{ product.title | escape }}">
+  <button type="button" class="zk-lightbox__x" id="zkLightboxX" aria-label="{{ 'general.close' | t }}">✕</button>
+  <img id="zkLightboxImg" src="" alt="{{ product.title | escape }}">
+</div>
+
 <script>
   (function () {
     var form = document.getElementById('ProductForm');
@@ -168,6 +174,40 @@
         qty.value = Math.min(99, Math.max(1, n));
       });
     });
+
+    // Zoom: click the stage to open the full-size image; hover pans a magnified view.
+    var stage = document.getElementById('zkStage');
+    var box = document.getElementById('zkLightbox');
+    var boxImg = document.getElementById('zkLightboxImg');
+    if (stage && box && boxImg) {
+      var open = function () {
+        var img = stage.querySelector('img');
+        if (!img) return;
+        // Ask the CDN for a larger rendition than the stage uses.
+        var src = img.getAttribute('data-full') || img.src;
+        boxImg.src = src.indexOf('width=') > -1 ? src.replace(/width=\d+/, 'width=2000') : src;
+        box.hidden = false;
+        document.documentElement.style.overflow = 'hidden';
+      };
+      var close = function () { box.hidden = true; document.documentElement.style.overflow = ''; };
+      stage.addEventListener('click', function (e) { if (e.target.closest('img')) open(); });
+      box.addEventListener('click', function (e) { if (e.target === box || e.target.id === 'zkLightboxX') close(); });
+      document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !box.hidden) close(); });
+
+      // Hover pan: shift the image's origin toward the pointer so the cursor magnifies
+      // the part of the bottle it is over.
+      stage.addEventListener('mousemove', function (e) {
+        var img = stage.querySelector('img'); if (!img) return;
+        var r = stage.getBoundingClientRect();
+        var x = ((e.clientX - r.left) / r.width) * 100, y = ((e.clientY - r.top) / r.height) * 100;
+        img.style.transformOrigin = x + '% ' + y + '%';
+        img.style.transform = 'scale(1.8)';
+      });
+      stage.addEventListener('mouseleave', function () {
+        var img = stage.querySelector('img'); if (!img) return;
+        img.style.transform = ''; img.style.transformOrigin = '';
+      });
+    }
 
     // Swap the main image from a thumbnail.
     var main = document.getElementById('MainImg');

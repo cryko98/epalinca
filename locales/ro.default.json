@@ -331,6 +331,8 @@
     "filter_apply": "Aplică",
     "filter_clear": "Șterge filtrele",
     "filter_availability": "Disponibilitate",
-    "filter_price": "Preț"
+    "filter_price": "Preț",
+    "filter_instock": "Doar în stoc",
+    "zoom_hint": "Click pentru mărire"
   }
 }

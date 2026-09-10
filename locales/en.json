@@ -331,6 +331,8 @@
     "filter_apply": "Apply",
     "filter_clear": "Clear filters",
     "filter_availability": "Availability",
-    "filter_price": "Price"
+    "filter_price": "Price",
+    "filter_instock": "In stock only",
+    "zoom_hint": "Click to zoom"
   }
 }

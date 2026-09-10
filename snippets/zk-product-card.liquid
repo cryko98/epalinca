@@ -11,9 +11,17 @@
 
 {%- capture handles -%}{%- for c in product.collections -%}{{ c.handle }} {% endfor -%}{%- endcapture -%}
 
-<div class="card reveal" data-c="{{ handles | strip }}">
-  <a class="pic{% if product.featured_image %} photo{% endif %}" href="{{ product.url }}">
+{%- comment -%}
+  data-price (in cents) and data-stock let the homepage filter bar narrow the grid by
+  price and availability without another request; data-c carries the categories.
+{%- endcomment -%}
+<div class="card reveal" data-c="{{ handles | strip }}" data-price="{{ product.price }}" data-stock="{{ product.available }}">
+  <a class="pic{% if product.featured_image %} photo{% endif %}{% if product.images.size > 1 %} has-alt{% endif %}" href="{{ product.url }}">
     {% render 'zk-product-image', product: product %}
+    {%- if product.images.size > 1 -%}
+      {%- comment -%} Second shot, crossfaded in on hover. {%- endcomment -%}
+      <img class="pic-alt" src="{{ product.images[1] | image_url: width: 700 }}" alt="" loading="lazy" aria-hidden="true">
+    {%- endif -%}
     {% render 'zk-award-mini', product: product %}
     {%- for tag in product.tags -%}
       {%- if tag contains 'badge:' -%}

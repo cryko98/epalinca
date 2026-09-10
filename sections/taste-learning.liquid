@@ -109,7 +109,10 @@
         {%- endif %}
 
         <label><span>{{ 'zk.bk_date' | t }}</span><input type="date" required id="date" name="contact[Data]"></label>
-        <label><span>{{ 'zk.bk_ppl' | t }}</span><input type="number" min="6" max="40" value="8" required id="ppl" name="contact[Persoane]"></label>
+        <label><span>{{ 'zk.bk_ppl' | t }}</span><select id="ppl" name="contact[Persoane]" required>
+            {%- for n in (6..20) -%}<option value="{{ n }}"{% if n == 8 %} selected{% endif %}>{{ n }}</option>{%- endfor -%}
+            <option value="25">25</option><option value="30">30</option><option value="35">35</option><option value="40">40</option>
+          </select></label>
         <label><span>{{ 'zk.bk_pack' | t }}</span>
           {%- comment -%}
             The pack name comes from the dictionary now, not a block setting, so the

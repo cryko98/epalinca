@@ -29,6 +29,22 @@
           {%- endif -%}
         {%- endfor -%}
       </div>
+
+      {%- comment -%}
+        Second row: narrow by price and by stock. Works on the cards already on the page,
+        combined with whichever category is selected above.
+      {%- endcomment -%}
+      <div class="filters filters--fine" id="zkFine">
+        <span class="filters__lbl">{{ 'zk.filter_price' | t }}</span>
+        <button type="button" class="on" data-p="*">{{ 'zk.shop_all' | t }}</button>
+        <button type="button" data-p="0-10000">&lt; 100 lei</button>
+        <button type="button" data-p="10000-15000">100–150 lei</button>
+        <button type="button" data-p="15000-99999999">&gt; 150 lei</button>
+        <label class="filters__chk">
+          <input type="checkbox" id="zkInStock">
+          <span>{{ 'zk.filter_instock' | t }}</span>
+        </label>
+      </div>
     {%- endif -%}
 
     {%- comment -%}
@@ -73,49 +89,76 @@
 <script>
   (function () {
     var bar = document.getElementById('zkFilters');
+    var fine = document.getElementById('zkFine');
     var grid = document.getElementById('zkGrid');
     if (!bar || !grid) return;
 
     var cards = [].slice.call(grid.querySelectorAll('.card'));
     var empty = document.getElementById('zkNoResult');
+    var stockBox = document.getElementById('zkInStock');
 
-    // The range tiers and the Barrique / Distilat calls to action link here using the
-    // design's own data-f values, which do not all match the collection handles.
+    // The range tiers, the Barrique / Distilat calls to action and the medal strip link
+    // here using the design's own data-f values, which do not all match the handles.
     var ALIAS = { distilat: 'distilat-sticla-albastra' };
 
-    function apply(value) {
-      var want = ALIAS[value] || value;
+    // Three independent criteria; a card must pass all of them.
+    var state = { cat: '*', price: '*', stock: false };
+
+    function passes(card) {
+      if (state.cat !== '*') {
+        var cats = ' ' + (card.getAttribute('data-c') || '') + ' ';
+        if (cats.indexOf(' ' + state.cat + ' ') < 0) return false;
+      }
+      if (state.price !== '*') {
+        var p = parseInt(card.getAttribute('data-price') || '0', 10);
+        var lo = parseInt(state.price.split('-')[0], 10), hi = parseInt(state.price.split('-')[1], 10);
+        if (p < lo || p > hi) return false;
+      }
+      if (state.stock && card.getAttribute('data-stock') !== 'true') return false;
+      return true;
+    }
+
+    function render() {
       var shown = 0;
-
-      cards.forEach(function (card) {
-        var hit = want === '*' ||
-          (' ' + (card.getAttribute('data-c') || '') + ' ').indexOf(' ' + want + ' ') > -1;
-        card.hidden = !hit;
-        if (hit) shown++;
-      });
-
+      cards.forEach(function (card) { var ok = passes(card); card.hidden = !ok; if (ok) shown++; });
       if (empty) empty.hidden = shown > 0;
-
       [].slice.call(bar.querySelectorAll('button')).forEach(function (b) {
         var v = b.getAttribute('data-f');
-        b.classList.toggle('on', (ALIAS[v] || v) === want);
+        b.classList.toggle('on', (ALIAS[v] || v) === state.cat);
+      });
+      if (fine) [].slice.call(fine.querySelectorAll('button')).forEach(function (b) {
+        b.classList.toggle('on', b.getAttribute('data-p') === state.price);
       });
     }
+
+    function setCat(value) { state.cat = ALIAS[value] || value; render(); }
 
     bar.addEventListener('click', function (e) {
       var btn = e.target.closest('button[data-f]');
       if (!btn) return;
       e.preventDefault();
-      apply(btn.getAttribute('data-f'));
+      setCat(btn.getAttribute('data-f'));
     });
 
-    document.querySelectorAll('a[data-f]').forEach(function (a) {
-      a.addEventListener('click', function (e) {
-        e.preventDefault();
-        apply(a.getAttribute('data-f'));
-        var shop = document.getElementById('shop');
-        if (shop) shop.scrollIntoView({ behavior: 'smooth' });
+    if (fine) {
+      fine.addEventListener('click', function (e) {
+        var btn = e.target.closest('button[data-p]');
+        if (!btn) return;
+        state.price = btn.getAttribute('data-p');
+        render();
       });
+    }
+    if (stockBox) stockBox.addEventListener('change', function () { state.stock = stockBox.checked; render(); });
+
+    // Delegated: the medal strip is drawn by zekulhyda.js after this script runs, so a
+    // static querySelectorAll would miss those links.
+    document.addEventListener('click', function (e) {
+      var a = e.target.closest('a[data-f]');
+      if (!a || bar.contains(a)) return;
+      e.preventDefault();
+      setCat(a.getAttribute('data-f'));
+      var shop = document.getElementById('shop');
+      if (shop) shop.scrollIntoView({ behavior: 'smooth' });
     });
   })();
 </script>

@@ -331,6 +331,8 @@
     "filter_apply": "Szűrés",
     "filter_clear": "Szűrők törlése",
     "filter_availability": "Elérhetőség",
-    "filter_price": "Ár"
+    "filter_price": "Ár",
+    "filter_instock": "Csak raktáron",
+    "zoom_hint": "Kattints a nagyításhoz"
   }
 }
