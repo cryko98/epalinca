@@ -359,6 +359,7 @@
     "md_silver_l": "ezüstérem",
     "md_bronze_l": "bronzérem",
     "md_champ_l": "kategóriabajnok",
-    "md_medal_l": "érmes"
+    "md_medal_l": "érmes",
+    "bk_date_ph": "éééé. hh. nn."
   }
 }

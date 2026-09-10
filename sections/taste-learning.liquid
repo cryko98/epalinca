@@ -108,7 +108,16 @@
           <p class="demo" style="color:#e8a1a1">{{ form.errors.translated_fields.email | default: '' }}{{ 'zk.bk_error' | t }} — {{ form.errors.messages.email }}</p>
         {%- endif %}
 
-        <label><span>{{ 'zk.bk_date' | t }}</span><input type="date" required id="date" name="contact[Data]"></label>
+        {%- comment -%}
+          A native date field shows the *browser's* locale format as its hint (a Hungarian
+          browser prints "éééé. hh. nn." on the English page too). Start as text with a
+          placeholder in the page language and become the date picker only on focus.
+        {%- endcomment -%}
+        <label><span>{{ 'zk.bk_date' | t }}</span>
+          <input type="text" required id="date" name="contact[Data]" autocomplete="off"
+                 placeholder="{{ 'zk.bk_date_ph' | t }}"
+                 onfocus="this.type='date'; this.min=new Date().toISOString().slice(0,10); try{this.showPicker()}catch(e){}"
+                 onblur="if(!this.value){this.type='text'}"></label>
         <label><span>{{ 'zk.bk_ppl' | t }}</span><select id="ppl" name="contact[Persoane]" required>
             {%- for n in (6..20) -%}<option value="{{ n }}"{% if n == 8 %} selected{% endif %}>{{ n }}</option>{%- endfor -%}
             <option value="25">25</option><option value="30">30</option><option value="35">35</option><option value="40">40</option>

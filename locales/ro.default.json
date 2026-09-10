@@ -359,6 +359,7 @@
     "md_silver_l": "medalie de argint",
     "md_bronze_l": "medalie de bronz",
     "md_champ_l": "campion de categorie",
-    "md_medal_l": "medaliat"
+    "md_medal_l": "medaliat",
+    "bk_date_ph": "zz.ll.aaaa"
   }
 }

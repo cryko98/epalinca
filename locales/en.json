@@ -359,6 +359,7 @@
     "md_silver_l": "silver medal",
     "md_bronze_l": "bronze medal",
     "md_champ_l": "category champion",
-    "md_medal_l": "medallist"
+    "md_medal_l": "medallist",
+    "bk_date_ph": "dd/mm/yyyy"
   }
 }
