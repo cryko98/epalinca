@@ -84,7 +84,8 @@
             <div class="pdp__variants">
               {%- for option in product.options_with_values -%}
                 <label class="pdp__field">
-                  <span>{{ option.name }}</span>
+                  {%- comment -%} The only option in the catalogue is "Volum"; give it its translated name. {%- endcomment -%}
+                  <span>{% if option.name == 'Volum' %}{{ 'zk.spec_volume' | t }}{% else %}{{ option.name }}{% endif %}</span>
                   <select data-opt="{{ option.position }}">
                     {%- for value in option.values -%}
                       <option value="{{ value | escape }}" {% if option.selected_value == value %}selected{% endif %}>{{ value }}</option>
@@ -113,7 +114,7 @@
         <ul class="pdp__specs">
           {%- if vol != blank -%}<li><b>{{ vol }} ml</b><span>{{ 'zk.spec_volume' | t }}</span></li>{%- endif -%}
           {%- if abv != blank -%}<li><b>{{ abv }}%</b><span>{{ 'zk.spec_abv' | t }}</span></li>{%- endif -%}
-          <li><b>Valea Ierului</b><span>{{ 'zk.spec_region' | t }}</span></li>
+          <li><b>{{ 'zk.region_value' | t }}</b><span>{{ 'zk.spec_region' | t }}</span></li>
           {%- if v.sku != blank -%}<li><b>{{ v.sku }}</b><span>{{ 'products.sku' | t }}</span></li>{%- endif -%}
         </ul>
 
@@ -121,7 +122,12 @@
 
         <div class="pdp__rte">{{ product.description }}</div>
 
-        <p class="pdp__warning">{{ settings.alcohol_warning | default: 'Consumul de alcool în exces dăunează sănătății. Interzis minorilor.' }}</p>
+        {%- comment -%} The theme setting only holds Romanian; the other languages read the locale file. {%- endcomment -%}
+        {%- if request.locale.iso_code == 'ro' and settings.alcohol_warning != blank -%}
+          <p class="pdp__warning">{{ settings.alcohol_warning }}</p>
+        {%- else -%}
+          <p class="pdp__warning">{{ 'zk.alcohol_warning' | t }}</p>
+        {%- endif -%}
       </div>
     </div>
 

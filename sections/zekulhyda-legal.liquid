@@ -33,6 +33,9 @@
 
 <section class="zk-legal" id="zk-legal">
   <div class="zk-legal__inner">
+    {%- unless request.locale.iso_code == 'ro' -%}
+      <p class="zk-legal__note">{{ 'zk.legal_ro_note' | t }}</p>
+    {%- endunless -%}
 
     {%- case section.settings.doc -%}
 

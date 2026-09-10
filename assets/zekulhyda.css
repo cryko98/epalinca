@@ -2441,7 +2441,8 @@ footer .wrap { align-items: flex-start; }
 .zk-rte img { border-radius: 3px; margin: 1.6rem 0; }
 .zk-rte hr { border: 0; border-top: 1px solid var(--line); margin: 2.6rem 0; }
 
-.zk-body { padding: 3.5rem 0 6rem; }
+/* padding-top/bottom only: this class sits on .wrap, which needs its side padding. */
+.zk-body { padding-top: 3.5rem; padding-bottom: 6rem; }
 
 /* Article ------------------------------------------------------------------- */
 .zk-article__hero { max-width: 1180px; margin: 0 auto; padding: 0 1.5rem; }
@@ -3014,3 +3015,67 @@ html, body { overflow-x: clip; }
 
 /* Medals are links to the podium category now; make that legible on hover. */
 .badge-m { cursor: pointer; }
+
+
+/* ==========================================================================
+   Cart on paper — the order summary reads like a receipt, not a cellar wall.
+   ========================================================================== */
+.zk-cart { background: var(--paper); color: var(--ink-on-paper); }
+.zk-cart__row, .zk-cart__row:first-child { border-color: var(--line-on-paper); }
+.zk-cart__pic { background: #fff; border-color: var(--line-on-paper); }
+.zk-cart__name { color: var(--ink-on-paper); }
+.zk-cart__name:hover { color: var(--amber); }
+.zk-cart__meta span, .zk-cart__unit, .zk-cart__total span,
+.zk-cart__note, .zk-cart__back, .zk-cart__rm { color: var(--muted-on-paper); }
+.zk-cart__qty { border-color: var(--line-on-paper); background: #fff; }
+.zk-cart__qty button { color: var(--ink-on-paper); }
+.zk-cart__qty button:hover { background: var(--ink-on-paper); color: #fff; }
+.zk-cart__qty input { color: var(--ink-on-paper); }
+.zk-cart__line { color: var(--ink-on-paper); }
+.zk-cart__box { background: #fff; border-color: var(--line-on-paper); box-shadow: 0 24px 60px rgba(23, 23, 26, .07); }
+.zk-cart__total b { color: var(--ink-on-paper); }
+.zk-cart__warn { border-color: var(--line-on-paper); color: var(--muted-on-paper); }
+.zk-cart__back:hover { color: var(--amber); }
+.zk-cart__empty p { color: var(--muted-on-paper); }
+.zk-cart .btn:not(.primary) { border-color: var(--ink-on-paper); color: var(--ink-on-paper); }
+.zk-cart .btn:not(.primary):hover { background: var(--ink-on-paper); color: #fff; }
+
+/* Search page ------------------------------------------------------------- */
+.zk-search {
+  display: flex; max-width: 560px; margin: 0 0 2.6rem;
+  border: 1px solid var(--line); border-radius: 2px; overflow: hidden; background: var(--graphite);
+}
+.zk-search input {
+  flex: 1; min-width: 0; background: transparent; border: 0; padding: .9rem 1.1rem;
+  color: #F3F1EC; font-family: "Manrope", sans-serif; font-size: .95rem;
+}
+.zk-search input::placeholder { color: var(--fog); }
+.zk-search input:focus { outline: none; }
+.zk-search button {
+  background: var(--amber); border: 0; color: var(--ink); padding: 0 1.4rem; cursor: pointer;
+  font-family: "IBM Plex Mono", monospace; font-size: .66rem; letter-spacing: .16em; text-transform: uppercase;
+}
+.zk-search button:hover { background: var(--amber-2); }
+.zk-result {
+  border: 1px solid var(--line); background: var(--graphite); border-radius: 4px;
+  padding: 1.6rem; display: flex; flex-direction: column; gap: .6rem;
+}
+.zk-result__type {
+  font-family: "IBM Plex Mono", monospace; font-size: .62rem; letter-spacing: .16em;
+  text-transform: uppercase; color: var(--amber);
+}
+.zk-result h3 { font-family: "Cormorant Garamond", serif; font-size: 1.5rem; font-weight: 500; margin: 0; }
+.zk-result h3 a { color: #F3F1EC; text-decoration: none; }
+.zk-result h3 a:hover { color: var(--amber-2); }
+.zk-result p { margin: 0; color: var(--silver); font-size: .9rem; line-height: 1.7; flex: 1; }
+.zk-result__link {
+  font-family: "IBM Plex Mono", monospace; font-size: .64rem; letter-spacing: .14em;
+  text-transform: uppercase; color: var(--amber); text-decoration: none;
+}
+.zk-empty { font-family: "Cormorant Garamond", serif; font-style: italic; font-size: 1.3rem; color: var(--silver); }
+
+/* Legal pages are Romanian by law; other languages get a one-line note. */
+.zk-legal__note {
+  margin: 0 0 2rem; padding: .9rem 1.1rem; border: 1px solid var(--line);
+  border-left: 3px solid var(--amber); font-size: .85rem; color: var(--silver);
+}

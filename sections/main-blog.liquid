@@ -20,12 +20,12 @@
             <p class="blog-card__date">{{ article.published_at | date: '%d %B %Y' }}</p>
             <h3 class="blog-card__title"><a href="{{ article.url }}">{{ article.title }}</a></h3>
             <p class="blog-card__excerpt">{{ article.excerpt | strip_html | truncate: 140 }}</p>
-            <a href="{{ article.url }}" class="blog-card__link">Citește mai mult →</a>
+            <a href="{{ article.url }}" class="blog-card__link">{{ 'zk.blog_more' | t }} →</a>
           </div>
         </article>
       {% else %}
         <p style="color:var(--color-cream-dim);font-family:var(--font-serif);font-style:italic;">
-          Nu există articole publicate încă.
+          {{ 'zk.blog_empty' | t }}
         </p>
       {% endfor %}
     </div>

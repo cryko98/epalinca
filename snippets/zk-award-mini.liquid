@@ -40,6 +40,29 @@
 
     assign uid = 'mini' | append: product.id
     assign more = awards.size | minus: 1
+
+    # The metafield is written in Romanian; the words on the medal follow the storefront language.
+    case fig
+      when 'AUR'
+        assign fig = 'zk.bd_gold' | t
+      when 'ARGINT'
+        assign fig = 'zk.bd_silver' | t
+      when 'BRONZ'
+        assign fig = 'zk.bd_bronze' | t
+    endcase
+    assign label_key = label | downcase
+    case label_key
+      when 'medalie de aur'
+        assign label = 'zk.md_gold_l' | t
+      when 'medalie de argint'
+        assign label = 'zk.md_silver_l' | t
+      when 'medalie de bronz'
+        assign label = 'zk.md_bronze_l' | t
+      when 'campion de categorie'
+        assign label = 'zk.md_champ_l' | t
+      when 'medaliat'
+        assign label = 'zk.md_medal_l' | t
+    endcase
   -%}
 
   <span class="zk-mini" title="{{ ring | escape }} — {{ label | escape }}" aria-label="{{ ring | escape }} — {{ label | escape }}">

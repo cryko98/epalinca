@@ -27,12 +27,12 @@
             <h2 class="collection-tile__name">{{ collection.title }}</h2>
             <p class="collection-tile__count">
               {{ collection.all_products_count }}
-              {%- if collection.all_products_count == 1 %} produs{% else %} produse{% endif -%}
+              {%- if collection.all_products_count == 1 %} {{ 'zk.product_one' | t }}{% else %} {{ 'zk.product_many' | t }}{% endif -%}
             </p>
           </div>
         </a>
       {%- else -%}
-        <p class="collections-page__empty">Nu există colecții publicate încă.</p>
+        <p class="collections-page__empty">{{ 'zk.collections_empty' | t }}</p>
       {%- endfor -%}
     </div>
   </div>

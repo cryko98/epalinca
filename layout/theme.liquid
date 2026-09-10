@@ -34,8 +34,14 @@
     <div id="age" class="modal" hidden>
       <div class="box">
         <div class="eyebrow">Zekulhyda</div>
-        <h3>{{ settings.age_gate_title | default: 'Ai peste 18 ani?' }}</h3>
-        <p>{{ settings.age_gate_text | default: 'Vindem băuturi alcoolice doar persoanelor majore. Prin continuare confirmi că ai împlinit 18 ani.' }}</p>
+        {%- comment -%} The settings hold Romanian copy; the other storefront languages read the locale file. {%- endcomment -%}
+        {%- if request.locale.iso_code == 'ro' -%}
+          <h3>{{ settings.age_gate_title | default: 'Ai peste 18 ani?' }}</h3>
+          <p>{{ settings.age_gate_text | default: 'Vindem băuturi alcoolice doar persoanelor majore. Prin continuare confirmi că ai împlinit 18 ani.' }}</p>
+        {%- else -%}
+          <h3>{{ 'zk.age_title' | t }}</h3>
+          <p>{{ 'zk.age_p' | t }}</p>
+        {%- endif -%}
         <div class="btns">
           <button class="btn primary" id="ageYes">{{ settings.age_gate_yes | default: 'Da, am peste 18 ani' }}</button>
           <a class="btn" href="https://www.google.com" id="ageNo">{{ settings.age_gate_no | default: 'Nu' }}</a>
