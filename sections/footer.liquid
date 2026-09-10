@@ -20,12 +20,12 @@
           <a href="{{ block.settings.link | default: '#' }}" {{ block.shopify_attributes }}>{{ block.settings.label }}</a>
         {%- endfor -%}
       {%- else -%}
-        <a href="{{ routes.root_url }}pages/termeni-si-conditii">{{ 'zk.foot_link_terms' | t }}</a>
-        <a href="{{ routes.root_url }}pages/politica-de-confidentialitate">{{ 'zk.foot_link_privacy' | t }}</a>
-        <a href="{{ routes.root_url }}pages/politica-cookies">{{ 'zk.foot_link_cookies' | t }}</a>
-        <a href="{{ routes.root_url }}pages/politica-de-retur">{{ 'zk.foot_link_returns' | t }}</a>
-        <a href="{{ routes.root_url }}pages/livrare-si-plata">{{ 'zk.foot_link_shipping' | t }}</a>
-        <a href="{{ routes.root_url }}pages/contact">{{ 'zk.nav_contact' | t }}</a>
+        <a href="{{ pages['termeni-si-conditii'].url }}">{{ 'zk.foot_link_terms' | t }}</a>
+        <a href="{{ pages['politica-de-confidentialitate'].url }}">{{ 'zk.foot_link_privacy' | t }}</a>
+        <a href="{{ pages['politica-cookies'].url }}">{{ 'zk.foot_link_cookies' | t }}</a>
+        <a href="{{ pages['politica-de-retur'].url }}">{{ 'zk.foot_link_returns' | t }}</a>
+        <a href="{{ pages['livrare-si-plata'].url }}">{{ 'zk.foot_link_shipping' | t }}</a>
+        <a href="{{ pages['contact'].url }}">{{ 'zk.nav_contact' | t }}</a>
         <a href="https://anpc.ro/ce-este-sal/" target="_blank" rel="noopener">ANPC · SAL</a>
         <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">SOL · ODR</a>
       {%- endif -%}
