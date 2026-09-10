@@ -33,56 +33,29 @@
 
 <section class="zk-legal" id="zk-legal">
   <div class="zk-legal__inner">
-    {%- unless request.locale.iso_code == 'ro' -%}
+    {%- if request.locale.iso_code != 'ro' and section.settings.doc != 'termeni' -%}
       <p class="zk-legal__note">{{ 'zk.legal_ro_note' | t }}</p>
-    {%- endunless -%}
+    {%- endif -%}
 
     {%- case section.settings.doc -%}
 
     {%- when 'termeni' -%}
-      <span class="zk-legal__eyebrow">Informații legale</span>
-      <h1 class="zk-legal__title">Termeni și condiții</h1>
-      <p class="zk-legal__updated">Ultima actualizare: {{ updated }}</p>
-
-      <h2>1. Identificarea vânzătorului</h2>
-      {{ firma_block }}
-      <p>Site-ul <strong>epalinca.ro</strong> (denumit în continuare „Site-ul”) este deținut și operat de societatea de mai sus.</p>
-
-      <h2>2. Acceptarea termenilor</h2>
-      <p>Prin accesarea și utilizarea Site-ului, precum și prin plasarea unei comenzi, confirmați că ați citit, ați înțeles și sunteți de acord cu prezentele Termeni și condiții. Dacă nu sunteți de acord, vă rugăm să nu utilizați Site-ul.</p>
-
-      <h2>3. Vârsta minimă (18 ani)</h2>
-      <p>Site-ul comercializează exclusiv băuturi alcoolice. Conform legislației în vigoare, comercializarea și livrarea produselor sunt permise <strong>numai persoanelor care au împlinit vârsta de 18 ani</strong>. Prin plasarea unei comenzi declarați pe propria răspundere că aveți cel puțin 18 ani. Vânzătorul își rezervă dreptul de a solicita dovada vârstei la livrare și de a refuza livrarea către persoane minore.</p>
-
-      <h2>4. Produse și prețuri</h2>
-      <p>Caracteristicile produselor sunt descrise în paginile de produs. Prețurile sunt exprimate în lei (RON) și includ TVA, conform legislației fiscale aplicabile. Vânzătorul își rezervă dreptul de a modifica prețurile în orice moment; prețul aplicabil comenzii este cel afișat la momentul finalizării comenzii.</p>
-
-      <h2>5. Plasarea comenzii și încheierea contractului</h2>
-      <p>Comanda plasată prin Site reprezintă o ofertă de cumpărare. Contractul de vânzare se consideră încheiat în momentul confirmării comenzii de către Vânzător, prin e-mail. Vânzătorul poate refuza o comandă în cazul indisponibilității produsului, al unor erori de preț evidente sau al imposibilității verificării vârstei cumpărătorului.</p>
-
-      <h2>6. Modalități de plată</h2>
-      <p>Plata se poate efectua prin metodele afișate în pagina de finalizare a comenzii (de ex. card bancar, ramburs). Detaliile de plată sunt procesate în condiții de securitate de către procesatorii de plăți parteneri.</p>
-
-      <h2>7. Livrare</h2>
-      <p>Condițiile, termenele și costurile de livrare sunt detaliate în pagina <a href="/pages/livrare-si-plata">Livrare și plată</a>.</p>
-
-      <h2>8. Dreptul de retragere (retur)</h2>
-      <p>Consumatorul beneficiază de dreptul de a se retrage din contract în termen de 14 zile, în condițiile și cu excepțiile prevăzute în pagina <a href="/pages/politica-de-retur">Politica de retur</a>, conform OUG nr. 34/2014.</p>
-
-      <h2>9. Conformitate și garanții</h2>
-      <p>Produsele beneficiază de garanția legală de conformitate conform OUG nr. 140/2021. Vânzătorul răspunde pentru orice lipsă de conformitate existentă la momentul livrării.</p>
-
-      <h2>10. Răspundere</h2>
-      <p>Vânzătorul nu poate fi tras la răspundere pentru consumul iresponsabil al produselor. Consumul excesiv de alcool dăunează grav sănătății. Informațiile de pe Site au caracter informativ și pot conține erori involuntare.</p>
-
-      <h2>11. Protecția datelor cu caracter personal</h2>
-      <p>Prelucrarea datelor personale se realizează conform <a href="/pages/politica-de-confidentialitate">Politicii de confidențialitate</a> și a Regulamentului (UE) 2016/679 (GDPR).</p>
-
-      <h2>12. Soluționarea litigiilor (ANPC / SAL / SOL)</h2>
-      {{ anpc_block }}
-
-      <h2>13. Legea aplicabilă</h2>
-      <p>Prezentele Termeni și condiții sunt guvernate de legea română. Eventualele litigii se vor soluționa pe cale amiabilă sau, în caz contrar, de instanțele competente din România.</p>
+      {%- comment -%}
+        The terms exist in all three storefront languages; the Romanian text is the
+        binding one and the translations say so at the top.
+      {%- endcomment -%}
+      {%- liquid
+        case request.locale.iso_code
+          when 'hu'
+            assign updated_l = section.settings.updated_hu | default: updated
+            render 'zk-legal-termeni-hu', company: company, cui: cui, regcom: regcom, address: address, email: email, phone: phone, updated: updated_l
+          when 'en'
+            assign updated_l = section.settings.updated_en | default: updated
+            render 'zk-legal-termeni-en', company: company, cui: cui, regcom: regcom, address: address, email: email, phone: phone, updated: updated_l
+          else
+            render 'zk-legal-termeni-ro', company: company, cui: cui, regcom: regcom, address: address, email: email, phone: phone, updated: updated
+        endcase
+      -%}
 
     {%- when 'confidentialitate' -%}
       <span class="zk-legal__eyebrow">Protecția datelor</span>
@@ -290,6 +263,18 @@
       "id": "updated",
       "label": "Data ultimei actualizări",
       "default": "septembrie 2026"
+    },
+    {
+      "type": "text",
+      "id": "updated_hu",
+      "label": "Data actualizării (HU)",
+      "default": "2026. szeptember"
+    },
+    {
+      "type": "text",
+      "id": "updated_en",
+      "label": "Data actualizării (EN)",
+      "default": "September 2026"
     }
   ],
   "presets": [
