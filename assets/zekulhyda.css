@@ -3079,3 +3079,32 @@ html, body { overflow-x: clip; }
   margin: 0 0 2rem; padding: .9rem 1.1rem; border: 1px solid var(--line);
   border-left: 3px solid var(--amber); font-size: .85rem; color: var(--silver);
 }
+
+
+/* ==========================================================================
+   Shop link in the header: a faint amber frame with a slow breathing glow, so the
+   one link that sells stands out without shouting.
+   ========================================================================== */
+nav.main a.nav-shop {
+  padding: .38rem .85rem; margin: -.38rem 0;
+  border: 1px solid rgba(201, 150, 59, .45); border-radius: 999px;
+  color: var(--amber-2);
+  animation: zkShopPulse 3.2s ease-in-out infinite;
+}
+nav.main a.nav-shop:hover { border-color: var(--amber-2); color: #fff; animation-play-state: paused; box-shadow: 0 0 14px rgba(201, 150, 59, .35); }
+nav.main a.nav-shop.on::after { display: none; }
+nav.main a.nav-shop.on { border-color: var(--amber-2); }
+
+@keyframes zkShopPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(201, 150, 59, 0); border-color: rgba(201, 150, 59, .35); }
+  50%      { box-shadow: 0 0 12px 1px rgba(201, 150, 59, .28); border-color: rgba(228, 182, 90, .8); }
+}
+@media (prefers-reduced-motion: reduce) {
+  nav.main a.nav-shop { animation: none; border-color: rgba(201, 150, 59, .6); }
+}
+
+/* Mobile panel: same frame, no animation on a stacked list. */
+.zk-mnav__links a.nav-shop {
+  display: inline-block; padding: .3rem .9rem;
+  border: 1px solid rgba(201, 150, 59, .55); border-radius: 999px; color: var(--amber-2);
+}

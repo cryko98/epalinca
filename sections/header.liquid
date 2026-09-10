@@ -54,7 +54,7 @@
         {%- endfor -%}
       {%- else -%}
         <a href="{{ base }}#range">{% render 'zk-t', override: section.settings.nav_palinka, key: 'zk.nav_palinka' %}</a>
-        <a href="{{ base }}#shop">{% render 'zk-t', override: section.settings.nav_shop, key: 'zk.nav_shop' %}</a>
+        <a href="{{ base }}#shop" class="nav-shop">{% render 'zk-t', override: section.settings.nav_shop, key: 'zk.nav_shop' %}</a>
         <a href="{{ base }}#story">{% render 'zk-t', override: section.settings.nav_story, key: 'zk.nav_story' %}</a>
         <a href="{{ base }}#taste">{% render 'zk-t', override: section.settings.nav_taste, key: 'zk.nav_taste' %}</a>
         <a href="{{ base }}#contact">{% render 'zk-t', override: section.settings.nav_contact, key: 'zk.nav_contact' %}</a>
@@ -95,7 +95,7 @@
     <p class="zk-mnav__label">{{ 'zk.nav_menu' | t }}</p>
     <div class="zk-mnav__links">
       <a href="{{ base }}#range">{% render 'zk-t', override: section.settings.nav_palinka, key: 'zk.nav_palinka' %}</a>
-      <a href="{{ base }}#shop">{% render 'zk-t', override: section.settings.nav_shop, key: 'zk.nav_shop' %}</a>
+      <a href="{{ base }}#shop" class="nav-shop">{% render 'zk-t', override: section.settings.nav_shop, key: 'zk.nav_shop' %}</a>
       <a href="{{ base }}#story">{% render 'zk-t', override: section.settings.nav_story, key: 'zk.nav_story' %}</a>
       <a href="{{ base }}#taste">{% render 'zk-t', override: section.settings.nav_taste, key: 'zk.nav_taste' %}</a>
       <a href="{{ base }}#contact">{% render 'zk-t', override: section.settings.nav_contact, key: 'zk.nav_contact' %}</a>
