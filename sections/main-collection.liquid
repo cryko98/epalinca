@@ -21,7 +21,11 @@
       Sibling categories, so a shopper can move between them without going back to the
       homepage. The current one is marked and not a link.
     {%- endcomment -%}
-    {%- assign cats = 'fructe,struguri,wild,barrique,distilat-sticla-albastra' | split: ',' -%}
+    {%- if settings.show_distilat -%}
+      {%- assign cats = 'fructe,struguri,wild,barrique,distilat-sticla-albastra' | split: ',' -%}
+    {%- else -%}
+      {%- assign cats = 'fructe,struguri,wild,barrique' | split: ',' -%}
+    {%- endif -%}
     <div class="filters">
       <a href="{{ routes.all_products_collection_url }}">{{ 'zk.shop_all' | t }}</a>
       {%- for h in cats -%}

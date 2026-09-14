@@ -23,6 +23,7 @@
     "name": "Verificare Vârstă",
     "settings": [
       { "type": "checkbox",  "id": "show_age_gate",   "label": "Activează verificarea vârstei", "default": true },
+      { "type": "checkbox",  "id": "show_distilat",   "label": "Afișează seria Distilat (sticla albastră)", "info": "Debifat: seria dispare de pe prima pagină, din meniu și din filtre. Produsele trebuie activate separat în Produse.", "default": true },
       { "type": "text",      "id": "age_gate_title",  "label": "Titlu popup",                   "default": "Verificare Vârstă" },
       { "type": "textarea",  "id": "age_gate_text",   "label": "Text popup",                    "default": "Acest site conține informații despre produse alcoolice. Aveți cel puțin 18 ani?" },
       { "type": "text",      "id": "age_gate_yes",    "label": "Buton 'Da'",                    "default": "Da, am 18+ ani" },

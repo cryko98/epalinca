@@ -29,6 +29,7 @@
       --amber-2: {{ settings.color_gold_hi | default: '#E4B65A' }};
     }
   </style>
+  <script>window.ZK_FLAGS = { distilat: {{ settings.show_distilat | json }} };</script>
   {% render 'zk-image-map' %}
   {% render 'zk-schema' %}
 </head>

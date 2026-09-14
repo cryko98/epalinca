@@ -18,6 +18,7 @@
     },
     "distilat": {
       "type": "distilat-section",
+      "disabled": true,
       "settings": {}
     },
     "shop": {
@@ -59,6 +60,7 @@
         },
         "f5": {
           "type": "filter",
+          "disabled": true,
           "settings": {
             "collection": "distilat-sticla-albastra"
           }

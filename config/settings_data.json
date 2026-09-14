@@ -10,6 +10,7 @@
     "color_cream_dim": "#a89878",
     "color_light_bg": "#f9f5ef",
     "show_age_gate": true,
+    "show_distilat": false,
     "age_gate_title": "Verificare Vârstă",
     "age_gate_text": "Acest site conține informații despre produse alcoolice. Aveți cel puțin 18 ani?",
     "age_gate_yes": "Da, am 18+ ani",
@@ -51,6 +52,7 @@
           },
           "c5": {
             "type": "category",
+            "disabled": true,
             "settings": {
               "collection": "distilat-sticla-albastra"
             }

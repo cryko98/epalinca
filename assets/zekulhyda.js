@@ -153,6 +153,8 @@ $('#bkPack').addEventListener('change',e=>selectPack(e.target.selectedIndex));
 
 // hero slider
 const SLIDES=[["sl1",ZKI('zk-42.jpg'),"#shop","barrique"],["sl2",ZKI('zk-43.jpg'),"#shop","champion"],["sl3",ZKI('zk-44.jpg'),"#shop","distilat"],["sl4",ZKI('zk-45.jpg'),"#shop","distilat"]];
+// The blue Distilat slides only run while the line is switched on in theme settings.
+if(window.ZK_FLAGS&&!window.ZK_FLAGS.distilat){for(let i=SLIDES.length-1;i>=0;i--){if(SLIDES[i][3]==='distilat')SLIDES.splice(i,1);}}
 let slI=0, slTimer=null;
 function buildSlides(){ $('#slides').innerHTML=SLIDES.map((sl,i)=>`<div class="slide${i===0?' on':''}" style="background-image:url(${sl[1]})"></div>`).join(''); $('#slDots').innerHTML=SLIDES.map((_,i)=>`<button data-i="${i}" aria-label="Slide ${i+1}"></button>`).join(''); $('#slDots').querySelectorAll('button').forEach(b=>b.onclick=()=>goSlide(+b.dataset.i)); }
 function goSlide(i){ slI=(i+SLIDES.length)%SLIDES.length; document.querySelectorAll('#slides .slide').forEach((el,k)=>el.classList.toggle('on',k===slI)); $('#slDots').querySelectorAll('button').forEach((b,k)=>b.classList.toggle('on',k===slI)); const sl=SLIDES[slI]; $('#slNum').textContent=String(slI+1).padStart(2,'0')+' / '+String(SLIDES.length).padStart(2,'0'); const tt=$('#slTitle'); tt.style.animation='none'; void tt.offsetWidth; tt.style.animation=''; tt.textContent=t(sl[0]+'_t'); const c=$('#slCta'); c.textContent=t(sl[0]+'_c'); c.href=sl[2]; c.dataset.f=sl[3]; restartSlides(); }
