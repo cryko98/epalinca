@@ -3108,3 +3108,10 @@ nav.main a.nav-shop.on { border-color: var(--amber-2); }
   display: inline-block; padding: .3rem .9rem;
   border: 1px solid rgba(201, 150, 59, .55); border-radius: 999px; color: var(--amber-2);
 }
+
+/* Photographed award stickers (Quintessence 2026) used in place of the drawn medals. */
+.badge-m .badge-m__photo { width: 132px; height: 132px; border-radius: 50%; display: block; transition: transform .5s cubic-bezier(.2,.7,.2,1), filter .5s; filter: drop-shadow(0 12px 18px rgba(0,0,0,.5)); }
+.badge-m:hover .badge-m__photo { transform: translateY(-6px) rotate(-4deg) scale(1.05); filter: drop-shadow(0 22px 26px rgba(0,0,0,.6)); }
+@media (max-width:600px) { .badge-m .badge-m__photo { width: 100px; height: 100px; } }
+.zk-mini img, .zk-awards .badge-m img { width: 100%; height: 100%; border-radius: 50%; display: block; object-fit: cover; }
+.zk-awards .badge-m img { width: 132px; height: 132px; }

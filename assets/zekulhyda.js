@@ -137,8 +137,10 @@ function medalSVG(key,kind,i){
 <text x="100" y="130" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7.5" letter-spacing="1.6" fill="${b}">${t(key+'_l').toUpperCase()}</text>
 <path d="M40 40 q60 -40 120 0" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="6" stroke-linecap="round"/></svg>`;
 }
+// The 2026 Quintessence stickers exist as photos; the other medals stay drawn until theirs arrive.
+const MEDAL_PHOTO={md3:'zk-medal-gold-2026.png',md4:'zk-medal-champion-2026.png'};
 function renderMedals(){
-  $('#medals').innerHTML = MEDALS.map(([k,kind],i)=>`<a class="badge-m" href="/collections/premiate" data-f="premiate">${medalSVG(k,kind,i)}<span class="l">${t(k+'_ring').split(' · ')[0]}</span></a>`).join('') + `<p class="medals-note">${t('medals_note')}</p>`;
+  $('#medals').innerHTML = MEDALS.map(([k,kind],i)=>`<a class="badge-m" href="/collections/premiate" data-f="premiate">${MEDAL_PHOTO[k]?`<img class="badge-m__photo" src="${ZKI(MEDAL_PHOTO[k])}" alt="${t(k+'_ring')}" width="132" height="132">`:medalSVG(k,kind,i)}<span class="l">${t(k+'_ring').split(' · ')[0]}</span></a>`).join('') + `<p class="medals-note">${t('medals_note')}</p>`;
 }
 function selectPack(i){
   document.querySelectorAll('.pack').forEach(p=>p.classList.toggle('sel',p.dataset.pack==String(i)));

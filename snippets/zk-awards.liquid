@@ -68,9 +68,22 @@
             when 'medaliat'
               assign label = 'zk.md_medal_l' | t
           endcase
+
+          # The 2026 Quintessence stickers were photographed; older awards keep the drawn medal.
+          assign photo = ''
+          if ring contains '2026'
+            if metal == 'champ'
+              assign photo = 'zk-medal-champion-2026.png'
+            elsif metal == 'gold'
+              assign photo = 'zk-medal-gold-2026.png'
+            endif
+          endif
         -%}
 
         <div class="badge-m" title="{{ ring | escape }}">
+          {%- if photo != blank -%}
+          <img src="{{ photo | asset_url }}" alt="{{ ring | escape }} — {{ label | escape }}" width="132" height="132" loading="lazy">
+          {%- else -%}
           <svg viewBox="0 0 200 200" role="img" aria-label="{{ ring | escape }} — {{ label | escape }}">
             <defs>
               <linearGradient id="{{ uid }}a" x1="0" y1="0" x2="1" y2="1">
@@ -93,6 +106,7 @@
             <text x="100" y="130" text-anchor="middle" font-family="IBM Plex Mono,monospace" font-size="7.5" letter-spacing="1.6" fill="{{ c2 }}">{{ label | upcase }}</text>
             <path d="M40 40 q60 -40 120 0" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="6" stroke-linecap="round"/>
           </svg>
+          {%- endif -%}
           <span class="l">{{ ring }}</span>
         </div>
       {%- endfor -%}
