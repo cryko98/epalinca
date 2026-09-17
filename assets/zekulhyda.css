@@ -3340,3 +3340,8 @@ nav.main a { white-space: nowrap; }
 @media (max-width: 560px) { #story .timeline { grid-template-columns: 1fr; } }
 
 @media (max-width: 900px) { #story .wrap { grid-template-columns: 1fr; } #story blockquote { font-size: 1.15rem; padding: 1.2rem 1.2rem 1.1rem 2.6rem; } }
+
+/* The milestones sit in their own row below the text/photo grid, so the sticky photo
+   column is bounded by that grid and can no longer slide over them. */
+#story .wrap--timeline { margin-top: 4.5rem; }
+@media (max-width: 900px) { #story .wrap--timeline { margin-top: 3rem; } }
