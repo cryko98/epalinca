@@ -3181,3 +3181,64 @@ footer .foot-badges { flex-basis: 100%; display: flex; flex-wrap: wrap; gap: .8r
 footer .foot-badges a { margin: 0; line-height: 0; opacity: .92; transition: opacity .2s, transform .2s; }
 footer .foot-badges a:hover { opacity: 1; transform: translateY(-1px); }
 footer .foot-badges img { height: 50px; width: auto; display: block; border-radius: 26px; }
+
+
+/* Partner strip: hand-scrollable (the JS drifts it slowly and loops it) + arrows. */
+.pscroll { position: relative; }
+.marquee { overflow-x: auto; overflow-y: hidden; scrollbar-width: none; -ms-overflow-style: none; padding: 2px 0; }
+.marquee::-webkit-scrollbar { display: none; }
+.marquee .track { animation: none; }
+.marquee .logo { flex: none; }
+.pscroll__arr {
+  position: absolute; top: 50%; transform: translateY(-50%); z-index: 2; width: 46px; height: 46px;
+  border: 1px solid var(--line); border-radius: 50%; background: rgba(8, 8, 9, .82); backdrop-filter: blur(6px);
+  color: #F3F1EC; font-size: 1.1rem; cursor: pointer; transition: border-color .2s, color .2s, background .2s;
+}
+.pscroll__arr.prev { left: 1.2rem; }
+.pscroll__arr.next { right: 1.2rem; }
+.pscroll__arr:hover { border-color: var(--amber); color: var(--amber-2); background: var(--slate); }
+.pactions { text-align: center; margin-top: 2.2rem; }
+
+/* "All locations" list */
+.pall {
+  position: fixed; inset: 0; z-index: 10000; background: rgba(8, 8, 9, .9); backdrop-filter: blur(8px);
+  display: grid; place-items: center; padding: 1.5rem;
+}
+.pall__box {
+  width: min(680px, 100%); max-height: min(86vh, 900px); display: flex; flex-direction: column;
+  background: var(--graphite); border: 1px solid var(--line); border-radius: 3px; box-shadow: 0 40px 80px rgba(0, 0, 0, .7);
+}
+.pall__head { display: flex; justify-content: space-between; align-items: flex-start; gap: 1rem; padding: 1.6rem 1.8rem 1.2rem; border-bottom: 1px solid var(--line); }
+.pall__head .eyebrow { margin-bottom: .4rem; }
+.pall__head h3 { margin: 0; font-family: "Cormorant Garamond", Georgia, serif; font-weight: 500; font-size: 1.9rem; color: #F3F1EC; line-height: 1.05; }
+.pall__x { flex: none; width: 44px; height: 44px; background: transparent; border: 1px solid var(--line); border-radius: 2px; color: #F3F1EC; font-size: 1.1rem; cursor: pointer; }
+.pall__x:hover { border-color: var(--amber); color: var(--amber-2); }
+.pall__list { list-style: none; margin: 0; padding: .4rem 0; overflow-y: auto; overscroll-behavior: contain; flex: 1 1 auto; }
+.pall__list li { margin: 0; }
+.pall__list a {
+  display: grid; grid-template-columns: 44px 1fr auto; align-items: center; gap: 1rem; padding: .9rem 1.8rem;
+  text-decoration: none; color: var(--silver); border-bottom: 1px solid var(--line); transition: background .2s, color .2s;
+}
+.pall__list li:last-child a { border-bottom: 0; }
+.pall__list a:hover { background: var(--slate); color: #F3F1EC; }
+.pall__list a.off { cursor: default; opacity: .55; }
+.pall__list a.off:hover { background: transparent; }
+.pall__ic { width: 44px; height: 44px; display: grid; place-items: center; border: 1px solid var(--line); border-radius: 6px; overflow: hidden; }
+.pall__ic svg { width: 22px; height: 22px; stroke: var(--amber-2); fill: none; stroke-width: 1.2; }
+.pall__ic img { width: 100%; height: 100%; object-fit: cover; }
+.pall__nm { display: flex; flex-direction: column; gap: .15rem; font-family: "Cormorant Garamond", Georgia, serif; font-size: 1.25rem; color: #F3F1EC; line-height: 1.1; }
+.pall__nm small { font-family: "IBM Plex Mono", monospace; font-size: .6rem; letter-spacing: .14em; text-transform: uppercase; color: var(--amber-2); }
+.pall__go { font-family: "IBM Plex Mono", monospace; font-size: .62rem; letter-spacing: .14em; text-transform: uppercase; color: var(--fog); white-space: nowrap; }
+.pall__go:not(:empty)::after { content: " ↗"; }
+.pall__list a:hover .pall__go { color: var(--amber-2); }
+.pall__hint { margin: 0; padding: 1rem 1.8rem 1.3rem; border-top: 1px solid var(--line); font-size: .8rem; color: var(--fog); }
+@media (max-width: 640px) {
+  .pscroll__arr { width: 40px; height: 40px; }
+  .pscroll__arr.prev { left: .6rem; }
+  .pscroll__arr.next { right: .6rem; }
+  .pall { padding: .8rem; }
+  .pall__head { padding: 1.2rem 1.2rem 1rem; }
+  .pall__list a { padding: .8rem 1.2rem; grid-template-columns: 40px 1fr; }
+  .pall__go { display: none; }
+  .pall__hint { padding: .9rem 1.2rem 1.1rem; }
+}

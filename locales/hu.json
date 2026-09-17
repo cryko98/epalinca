@@ -368,6 +368,13 @@
     "pk2_5": "Kóstolópohár",
     "pk3_5": "Kóstolópohár",
     "range_title_five": "Öt sor, <em>egy kézírás.</em>",
-    "legal_contents": "Tartalom"
+    "legal_contents": "Tartalom",
+    "partners_all": "Összes hely",
+    "partners_all_title": "Hol kapható a Zekulhyda pálinka",
+    "partners_map": "Google Maps",
+    "partners_web": "Megnyitás",
+    "partners_hint": "Kattints egy helyre, és megnyílik a Google Maps-ben. A lista folyamatosan bővül az új partnerekkel.",
+    "partners_prev": "Előző",
+    "partners_next": "Következő"
   }
 }

@@ -7,10 +7,31 @@
     </div>
   </div>
   {%- comment -%}
-    The scrolling track is filled by assets/zekulhyda.js from its PARTNERS list, duplicated
-    so the marquee loops seamlessly — same as the reference design.
+    The track and the "all locations" list are filled by assets/zekulhyda.js from its PARTNERS
+    list (name, type, city, url, maps query). The track drifts slowly, loops, and can be
+    scrolled by hand or with the arrows.
   {%- endcomment -%}
-  <div class="marquee"><div class="track" id="ptrack"></div></div>
+  <div class="pscroll">
+    <button type="button" class="pscroll__arr prev" id="pPrev" aria-label="{{ 'zk.partners_prev' | t }}">&larr;</button>
+    <div class="marquee" id="pwrap"><div class="track" id="ptrack"></div></div>
+    <button type="button" class="pscroll__arr next" id="pNext" aria-label="{{ 'zk.partners_next' | t }}">&rarr;</button>
+  </div>
+  <div class="wrap pactions reveal">
+    <button type="button" class="btn" id="pAllBtn">{{ 'zk.partners_all' | t }}</button>
+  </div>
+  <div class="pall" id="pAll" hidden role="dialog" aria-modal="true" aria-labelledby="pAllTitle">
+    <div class="pall__box">
+      <div class="pall__head">
+        <div>
+          <div class="eyebrow">{{ 'zk.partners_eyebrow' | t }}</div>
+          <h3 id="pAllTitle">{{ 'zk.partners_all_title' | t }}</h3>
+        </div>
+        <button type="button" class="pall__x" id="pAllX" aria-label="{{ 'general.close' | t }}">&#10005;</button>
+      </div>
+      <ul class="pall__list" id="pAllList" data-map="{{ 'zk.partners_map' | t }}" data-web="{{ 'zk.partners_web' | t }}"></ul>
+      <p class="pall__hint">{{ 'zk.partners_hint' | t }}</p>
+    </div>
+  </div>
 </section>
 
 {% schema %}

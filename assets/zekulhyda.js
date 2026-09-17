@@ -101,20 +101,54 @@ $('#coForm').onsubmit=e=>{e.preventDefault(); $('#checkout').hidden=true; Object
 
 const PARTNERS = [
   {name:"epalinca.ro", type:"shop", city:"Zekulhyda webshop", url:"https://epalinca.ro", style:"mono", real:true},
-  {name:"Zekulhyda Taste & Learning", type:"bar", city:"Székelyhíd", url:"#taste", style:"", real:true},
-  {name:"Old Chef Restaurant", type:"rest", city:"Biharia", url:"https://www.facebook.com/Oldchefbiharia/", style:"", img:ZKI('zk-41.jpg'), real:true},
-  {name:"Étterem partner", type:"rest", city:"Nagyvárad · Oradea", url:"#", style:""},
-  {name:"Borbár partner", type:"bar", city:"Kolozsvár · Cluj", url:"#", style:"sans"},
-  {name:"Hotel partner", type:"hotel", city:"Félixfürdő · Băile Felix", url:"#", style:""},
-  {name:"Delikátesz partner", type:"deli", city:"Debrecen", url:"#", style:"mono"},
-  {name:"Étterem partner", type:"rest", city:"Székelyhíd · Săcueni", url:"#", style:"sans"},
+  {name:"Zekulhyda Taste & Learning", type:"bar", city:"Székelyhíd", url:"#taste", style:"", real:true, maps:"Zekulhyda, Strada Petőfi Sándor 116, Săcueni 417435"},
+  {name:"Old Chef Restaurant", type:"rest", city:"Biharia", url:"https://www.facebook.com/Oldchefbiharia/", style:"", img:ZKI('zk-41.jpg'), real:true, maps:"Old Chef Restaurant, Biharia, Bihor"},
+  {name:"Étterem partner", type:"rest", city:"Nagyvárad · Oradea", url:"#", style:"", maps:"Oradea"},
+  {name:"Borbár partner", type:"bar", city:"Kolozsvár · Cluj", url:"#", style:"sans", maps:"Cluj-Napoca"},
+  {name:"Hotel partner", type:"hotel", city:"Félixfürdő · Băile Felix", url:"#", style:"", maps:"Băile Felix"},
+  {name:"Delikátesz partner", type:"deli", city:"Debrecen", url:"#", style:"mono", maps:"Debrecen"},
+  {name:"Étterem partner", type:"rest", city:"Székelyhíd · Săcueni", url:"#", style:"sans", maps:"Săcueni, Bihor"},
   {name:"Webshop partner", type:"shop", city:"România", url:"#", style:""},
 ];
 const PICON = {rest:'<svg viewBox="0 0 24 24"><path d="M6 3v8a3 3 0 0 0 3 3v7M9 3v8M12 3v8M17 3c-2 1-3 4-3 8h3v10"/></svg>',shop:'<svg viewBox="0 0 24 24"><path d="M4 8h16l-1.2 12H5.2zM8 8V6a4 4 0 0 1 8 0v2"/></svg>',bar:'<svg viewBox="0 0 24 24"><path d="M5 4h14l-7 8zm7 8v8m-4 0h8"/></svg>',hotel:'<svg viewBox="0 0 24 24"><path d="M3 20V6l9-3 9 3v14M9 20v-5h6v5M8 10h2m4 0h2M8 14h2m4 0h2"/></svg>',deli:'<svg viewBox="0 0 24 24"><path d="M4 10a8 8 0 0 1 16 0zM3 13h18M5 13l1 7h12l1-7"/></svg>'};
+const mapsUrl = q => 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(q);
+function partnerHref(p){ return p.maps ? mapsUrl(p.maps) : (p.url && p.url !== '#' ? p.url : ''); }
 function renderPartners(){
   const items = PARTNERS.map(p=>`<a class="logo" href="${p.url}" ${p.url.startsWith('http')?'target="_blank" rel="noopener"':''}>${p.img?`<img class="pl" src="${p.img}" alt="${p.name}">`:PICON[p.type]+`<span class="nm ${p.style}">${p.name}</span>`}<span class="ty">${t('partners_type_'+p.type)} · ${p.city}</span></a>`).join('');
   $('#ptrack').innerHTML = items + items;
+  const list = $('#pAllList');
+  if (list) list.innerHTML = PARTNERS.map(p=>{
+    const href = partnerHref(p);
+    const go = p.maps ? list.dataset.map : (href ? list.dataset.web : '');
+    const open = href ? `<a href="${href}" target="_blank" rel="noopener">` : '<a class="off" tabindex="-1">';
+    return `<li>${open}<span class="pall__ic">${p.img?`<img src="${p.img}" alt="">`:PICON[p.type]}</span><span class="pall__nm">${p.name}<small>${t('partners_type_'+p.type)} · ${p.city}</small></span><span class="pall__go">${go}</span></a></li>`;
+  }).join('');
 }
+// Partner strip: slow drift that loops, pauses while the visitor is on it, arrows scroll by one card.
+(function(){
+  const wrap = $('#pwrap'); if (!wrap) return;
+  let idle = true, half = 0, pos = 0, last = 0;
+  const measure = () => { half = wrap.scrollWidth / 2; };
+  const wrapAround = () => { if (!half) measure(); if (wrap.scrollLeft >= half) wrap.scrollLeft -= half; else if (wrap.scrollLeft < 0) wrap.scrollLeft += half; pos = wrap.scrollLeft; };
+  // Time-based drift (~36px/s) kept in a float so sub-pixel steps are not rounded away.
+  const tick = now => { const dt = Math.min(64, now - (last || now)); last = now; if (idle && document.visibilityState === 'visible') { if (Math.abs(wrap.scrollLeft - pos) > 2) pos = wrap.scrollLeft; pos += dt * 0.036; wrap.scrollLeft = Math.round(pos); wrapAround(); } else { pos = wrap.scrollLeft; } requestAnimationFrame(tick); };
+  ['pointerenter','touchstart','focusin','wheel'].forEach(ev => wrap.addEventListener(ev, () => { idle = false; }, { passive: true }));
+  ['pointerleave','touchend','focusout'].forEach(ev => wrap.addEventListener(ev, () => { setTimeout(() => { idle = true; }, 1500); }, { passive: true }));
+  wrap.addEventListener('scroll', wrapAround, { passive: true });
+  const step = dir => { measure(); const card = wrap.querySelector('.logo'); const w = card ? card.getBoundingClientRect().width + 16 : 260; idle = false; if (dir < 0 && wrap.scrollLeft < w) wrap.scrollLeft += half; wrap.scrollBy({ left: dir * w, behavior: 'smooth' }); setTimeout(() => { idle = true; }, 2500); };
+  $('#pPrev').onclick = () => step(-1);
+  $('#pNext').onclick = () => step(1);
+  window.addEventListener('resize', measure);
+  requestAnimationFrame(now => { measure(); tick(now); });
+  // "All locations" modal
+  const m = $('#pAll'); if (!m) return;
+  const openM = () => { m.hidden = false; document.body.style.overflow = 'hidden'; $('#pAllX').focus(); };
+  const closeM = () => { m.hidden = true; document.body.style.overflow = ''; };
+  $('#pAllBtn').onclick = openM;
+  $('#pAllX').onclick = closeM;
+  m.addEventListener('click', e => { if (e.target === m) closeM(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && !m.hidden) closeM(); });
+})();
 const FLAVORS = [["ds-lamaie","#F2E24A"],["ds-portocale","#F2A23A"],["ds-mandarina","#F0B84A"],["ds-grepfrut","#E85C8A"],["ds-lime","#8BD24A"],["ds-banane","#F5D93A"],["ds-ghimbir","#E5405A"]];
 function renderFlavors(){
   $('#flavors').innerHTML = `<span style="width:100%;font-family:'IBM Plex Mono',monospace;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase">${t('ds_seven')}</span>` + FLAVORS.map(([id,c])=>{const p=PRODUCTS.find(x=>x.id===id); return `<button data-go="${id}"><i style="background:${c}"></i>${t('fruit_'+p.fruit)}</button>`;}).join('');

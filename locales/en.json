@@ -368,6 +368,13 @@
     "pk2_5": "Tasting glass",
     "pk3_5": "Tasting glass",
     "range_title_five": "Five lines, <em>one signature.</em>",
-    "legal_contents": "Contents"
+    "legal_contents": "Contents",
+    "partners_all": "All locations",
+    "partners_all_title": "Where to find Zekulhyda palinka",
+    "partners_map": "Google Maps",
+    "partners_web": "Open",
+    "partners_hint": "Tap a location to open it in Google Maps. The list grows as we add new partners.",
+    "partners_prev": "Previous",
+    "partners_next": "Next"
   }
 }

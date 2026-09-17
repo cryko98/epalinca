@@ -368,6 +368,13 @@
     "pk2_5": "Pahar de degustare",
     "pk3_5": "Pahar de degustare",
     "range_title_five": "Cinci linii, <em>o singură semnătură.</em>",
-    "legal_contents": "Cuprins"
+    "legal_contents": "Cuprins",
+    "partners_all": "Toate locațiile",
+    "partners_all_title": "Unde găsești pălinca Zekulhyda",
+    "partners_map": "Google Maps",
+    "partners_web": "Deschide",
+    "partners_hint": "Apasă pe o locație pentru a o deschide în Google Maps. Lista se completează pe măsură ce adăugăm parteneri noi.",
+    "partners_prev": "Înapoi",
+    "partners_next": "Înainte"
   }
 }
