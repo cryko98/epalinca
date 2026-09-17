@@ -8,35 +8,8 @@
   assign updated = section.settings.updated
 -%}
 
-{%- capture firma_block -%}
-<div class="zk-legal__firma">
-  <p><strong>{{ company }}</strong></p>
-  <p>Sediu social: {{ address }}</p>
-  <p>CUI / CIF: {{ cui }} &nbsp;·&nbsp; Nr. Reg. Com.: {{ regcom }}</p>
-  <p>E-mail: <a href="mailto:{{ email }}">{{ email }}</a>{%- if phone != blank %} &nbsp;·&nbsp; Telefon: {{ phone }}{%- endif -%}</p>
-</div>
-{%- endcapture -%}
-
-{%- capture anpc_block -%}
-<div class="zk-legal__anpc">
-  <p>Pentru soluționarea pe cale amiabilă a eventualelor litigii vă puteți adresa:</p>
-  <ul>
-    <li><strong>ANPC</strong> – Autoritatea Națională pentru Protecția Consumatorilor:
-      <a href="https://anpc.ro/" target="_blank" rel="noopener nofollow">anpc.ro</a></li>
-    <li><strong>SAL</strong> – Soluționarea Alternativă a Litigiilor:
-      <a href="https://anpc.ro/ce-este-sal/" target="_blank" rel="noopener nofollow">anpc.ro/ce-este-sal</a></li>
-    <li><strong>SOL</strong> – Platforma europeană de Soluționare Online a Litigiilor:
-      <a href="https://ec.europa.eu/consumers/odr/" target="_blank" rel="noopener nofollow">ec.europa.eu/consumers/odr</a></li>
-  </ul>
-</div>
-{%- endcapture -%}
-
 <section class="zk-legal" id="zk-legal">
   <div class="zk-legal__inner">
-    {%- if request.locale.iso_code != 'ro' and section.settings.doc != 'termeni' -%}
-      <p class="zk-legal__note">{{ 'zk.legal_ro_note' | t }}</p>
-    {%- endif -%}
-
     {%- case section.settings.doc -%}
 
     {%- when 'termeni' -%}
@@ -57,120 +30,32 @@
         endcase
       -%}
 
-    {%- when 'confidentialitate' -%}
-      <span class="zk-legal__eyebrow">Protecția datelor</span>
-      <h1 class="zk-legal__title">Politica de confidențialitate</h1>
-      <p class="zk-legal__updated">Ultima actualizare: {{ updated }}</p>
-
-      <p>Protejarea datelor dumneavoastră cu caracter personal este importantă pentru noi. Prezenta politică explică modul în care colectăm, utilizăm și protejăm datele, în conformitate cu Regulamentul (UE) 2016/679 (GDPR).</p>
-
-      <h2>1. Operatorul de date</h2>
-      {{ firma_block }}
-
-      <h2>2. Datele pe care le colectăm</h2>
-      <ul>
-        <li>Date de identificare și contact: nume, prenume, adresă, e-mail, telefon;</li>
-        <li>Date de livrare și facturare;</li>
-        <li>Date privind comenzile și istoricul acestora;</li>
-        <li>Date tehnice: adresă IP, tip de browser, cookie-uri (vezi <a href="/pages/politica-cookies">Politica de cookie-uri</a>);</li>
-        <li>Confirmarea vârstei (18+).</li>
-      </ul>
-
-      <h2>3. Scopurile și temeiul legal al prelucrării</h2>
-      <ul>
-        <li>Procesarea și livrarea comenzilor – executarea contractului;</li>
-        <li>Emiterea documentelor fiscale – obligație legală;</li>
-        <li>Comunicări de marketing – numai pe baza consimțământului;</li>
-        <li>Îmbunătățirea serviciilor și securitate – interes legitim;</li>
-        <li>Verificarea vârstei minime de 18 ani – obligație legală.</li>
-      </ul>
-
-      <h2>4. Durata stocării</h2>
-      <p>Datele sunt păstrate pe durata necesară îndeplinirii scopurilor, respectiv termenele impuse de legislația fiscală și contabilă (de regulă 10 ani pentru documentele financiar-contabile).</p>
-
-      <h2>5. Destinatarii datelor</h2>
-      <p>Datele pot fi transmise către: firme de curierat (pentru livrare), procesatori de plăți, furnizorul platformei de e-commerce (Shopify), furnizori de servicii contabile și autorități publice, când legea o impune.</p>
-
-      <h2>6. Drepturile dumneavoastră</h2>
-      <p>Conform GDPR aveți dreptul de acces, rectificare, ștergere („dreptul de a fi uitat”), restricționare, portabilitate, opoziție, precum și dreptul de a nu fi supus unei decizii automate. Vă puteți retrage oricând consimțământul. Pentru exercitarea acestor drepturi ne puteți contacta la <a href="mailto:{{ email }}">{{ email }}</a>.</p>
-
-      <h2>7. Autoritatea de supraveghere</h2>
-      <p>Aveți dreptul de a depune o plângere la <strong>ANSPDCP</strong> – Autoritatea Națională de Supraveghere a Prelucrării Datelor cu Caracter Personal:
-        <a href="https://www.dataprotection.ro/" target="_blank" rel="noopener nofollow">dataprotection.ro</a>.</p>
-
-      <h2>8. Securitatea datelor</h2>
-      <p>Aplicăm măsuri tehnice și organizatorice adecvate pentru protejarea datelor împotriva accesului neautorizat, pierderii sau divulgării.</p>
-
-    {%- when 'cookies' -%}
-      <span class="zk-legal__eyebrow">Informații legale</span>
-      <h1 class="zk-legal__title">Politica de cookie-uri</h1>
-      <p class="zk-legal__updated">Ultima actualizare: {{ updated }}</p>
-
-      <h2>1. Ce sunt cookie-urile</h2>
-      <p>Cookie-urile sunt fișiere text de mici dimensiuni stocate de browserul dumneavoastră atunci când vizitați un site. Acestea permit funcționarea corectă a Site-ului și îmbunătățirea experienței de navigare.</p>
-
-      <h2>2. Tipuri de cookie-uri utilizate</h2>
-      <ul>
-        <li><strong>Cookie-uri strict necesare</strong> – esențiale pentru funcționarea Site-ului (coș de cumpărături, sesiune, confirmarea vârstei 18+);</li>
-        <li><strong>Cookie-uri de performanță / analitice</strong> – ne ajută să înțelegem modul de utilizare a Site-ului;</li>
-        <li><strong>Cookie-uri de marketing</strong> – utilizate numai cu consimțământul dumneavoastră.</li>
-      </ul>
-
-      <h2>3. Cookie-uri ale platformei</h2>
-      <p>Site-ul folosește platforma Shopify, care poate seta cookie-uri necesare pentru funcționarea magazinului online și a procesului de plată.</p>
-
-      <h2>4. Gestionarea cookie-urilor</h2>
-      <p>Puteți controla și șterge cookie-urile din setările browserului dumneavoastră. Dezactivarea cookie-urilor strict necesare poate afecta funcționarea Site-ului.</p>
-
-      <h2>5. Confirmarea vârstei</h2>
-      <p>Pentru a reține că ați confirmat vârsta de 18 ani, stocăm local o setare în browserul dumneavoastră, astfel încât fereastra de verificare să nu apară la fiecare vizită.</p>
-
-    {%- when 'retur' -%}
-      <span class="zk-legal__eyebrow">Drepturile consumatorului</span>
-      <h1 class="zk-legal__title">Politica de retur și dreptul de retragere</h1>
-      <p class="zk-legal__updated">Ultima actualizare: {{ updated }}</p>
-
-      <h2>1. Dreptul legal de retragere (14 zile)</h2>
-      <p>Conform OUG nr. 34/2014, consumatorul are dreptul de a se retrage din contractul încheiat la distanță, fără a fi nevoit să justifice decizia, în termen de <strong>14 zile calendaristice</strong> de la data la care intră în posesia fizică a produsului.</p>
-
-      <h2>2. Excepții de la dreptul de retragere</h2>
-      <p>Nu pot fi returnate produsele sigilate care nu pot fi returnate din motive de protecție a sănătății sau din motive de igienă și care au fost desigilate după livrare. În consecință, <strong>sticlele desigilate / deschise nu pot fi returnate</strong>. Produsele returnate trebuie să fie în starea originală, sigilate și nedeteriorate.</p>
-
-      <h2>3. Procedura de retur</h2>
-      <p>Pentru exercitarea dreptului de retragere ne puteți transmite o cerere clară la <a href="mailto:{{ email }}">{{ email }}</a>{%- if phone != blank %} sau telefonic la {{ phone }}{%- endif -%}, în termenul de 14 zile. Puteți folosi un formular de retragere, fără ca acesta să fie obligatoriu.</p>
-
-      <h2>4. Rambursarea</h2>
-      <p>Vă vom rambursa sumele primite (inclusiv costurile de livrare standard) fără întârzieri nejustificate și în cel mult 14 zile de la data la care suntem informați cu privire la decizia de retragere. Putem amâna rambursarea până la primirea produselor returnate. Costurile directe de returnare a produselor sunt suportate de consumator, cu excepția cazului în care produsul este neconform.</p>
-
-      <h2>5. Produse deteriorate sau neconforme</h2>
-      <p>Dacă ați primit un produs deteriorat în timpul transportului sau neconform comenzii, vă rugăm să ne contactați în cel mai scurt timp. În aceste cazuri, costurile de returnare și înlocuire sunt suportate de Vânzător, conform garanției legale de conformitate (OUG nr. 140/2021).</p>
-
-      <h2>6. Soluționarea litigiilor</h2>
-      {{ anpc_block }}
-
-    {%- when 'livrare' -%}
-      <span class="zk-legal__eyebrow">Informații utile</span>
-      <h1 class="zk-legal__title">Livrare și plată</h1>
-      <p class="zk-legal__updated">Ultima actualizare: {{ updated }}</p>
-
-      <h2>1. Zone și modalități de livrare</h2>
-      <p>Livrăm în toată România prin curier rapid. Coletele sunt ambalate în siguranță pentru protejarea sticlelor pe durata transportului.</p>
-
-      <h2>2. Termene de livrare</h2>
-      <p>Comenzile sunt procesate și expediate în cel mai scurt timp posibil. Termenul estimativ de livrare este de [COMPLETAȚI: ex. 1–3 zile lucrătoare] de la confirmarea comenzii, în funcție de localitate și de curier.</p>
-
-      <h2>3. Costuri de livrare</h2>
-      <p>Costul livrării este [COMPLETAȚI: ex. tarif fix / gratuit peste o anumită valoare] și este afișat la finalizarea comenzii, înainte de plată.</p>
-
-      <h2>4. Verificarea vârstei la livrare (18+)</h2>
-      <p>Întrucât comercializăm băuturi alcoolice, curierul poate solicita un act de identitate la livrare. Coletele nu vor fi predate persoanelor care nu au împlinit vârsta de <strong>18 ani</strong>.</p>
-
-      <h2>5. Modalități de plată</h2>
-      <ul>
-        <li>Plată cu cardul bancar online (în condiții de securitate);</li>
-        <li>Plată ramburs la livrare [COMPLETAȚI dacă este disponibilă];</li>
-      </ul>
-      <p>Toate prețurile includ TVA. Pentru fiecare comandă se emite document fiscal conform legislației.</p>
+    {%- when 'confidentialitate', 'cookies', 'retur', 'livrare' -%}
+      {%- comment -%}
+        Privacy, cookies, returns, delivery & payment — one snippet per language, each holding
+        the four documents. Romanian is the binding text; HU/EN carry a note saying so.
+      {%- endcomment -%}
+      {%- liquid
+        assign doc = section.settings.doc
+        assign ship_days = section.settings.ship_days | default: '1–3 zile lucrătoare'
+        assign ship_cost = section.settings.ship_cost | default: '20 lei / comandă, în toată România'
+        assign cod = section.settings.cod | default: true
+        assign cod = cod | append: ''
+        case request.locale.iso_code
+          when 'hu'
+            assign updated_l = section.settings.updated_hu | default: updated
+            assign ship_days = section.settings.ship_days_hu | default: '1–3 munkanap'
+            assign ship_cost = section.settings.ship_cost_hu | default: '20 lej / rendelés, egész Romániában'
+            render 'zk-legal-docs-hu', doc: doc, company: company, cui: cui, regcom: regcom, address: address, email: email, phone: phone, updated: updated_l, ship_days: ship_days, ship_cost: ship_cost, cod: cod
+          when 'en'
+            assign updated_l = section.settings.updated_en | default: updated
+            assign ship_days = section.settings.ship_days_en | default: '1–3 working days'
+            assign ship_cost = section.settings.ship_cost_en | default: '20 lei per order, anywhere in Romania'
+            render 'zk-legal-docs-en', doc: doc, company: company, cui: cui, regcom: regcom, address: address, email: email, phone: phone, updated: updated_l, ship_days: ship_days, ship_cost: ship_cost, cod: cod
+          else
+            render 'zk-legal-docs-ro', doc: doc, company: company, cui: cui, regcom: regcom, address: address, email: email, phone: phone, updated: updated, ship_days: ship_days, ship_cost: ship_cost, cod: cod
+        endcase
+      -%}
 
     {%- else -%}
       <h1 class="zk-legal__title">{{ page.title | default: 'Informații legale' }}</h1>
@@ -321,6 +206,53 @@
       "id": "updated_hu",
       "label": "Data actualizării (HU)",
       "default": "2026. szeptember"
+    },
+    {
+      "type": "header",
+      "content": "Livrare și plată"
+    },
+    {
+      "type": "text",
+      "id": "ship_days",
+      "label": "Termen de livrare (RO)",
+      "default": "1–3 zile lucrătoare"
+    },
+    {
+      "type": "text",
+      "id": "ship_days_hu",
+      "label": "Termen de livrare (HU)",
+      "default": "1–3 munkanap"
+    },
+    {
+      "type": "text",
+      "id": "ship_days_en",
+      "label": "Termen de livrare (EN)",
+      "default": "1–3 working days"
+    },
+    {
+      "type": "text",
+      "id": "ship_cost",
+      "label": "Cost livrare (RO)",
+      "default": "20 lei / comandă, în toată România",
+      "info": "Trebuie să corespundă tarifului configurat în Shopify › Setări › Livrare."
+    },
+    {
+      "type": "text",
+      "id": "ship_cost_hu",
+      "label": "Cost livrare (HU)",
+      "default": "20 lej / rendelés, egész Romániában"
+    },
+    {
+      "type": "text",
+      "id": "ship_cost_en",
+      "label": "Cost livrare (EN)",
+      "default": "20 lei per order, anywhere in Romania"
+    },
+    {
+      "type": "checkbox",
+      "id": "cod",
+      "label": "Plata ramburs este disponibilă",
+      "default": true
     },
     {
       "type": "text",

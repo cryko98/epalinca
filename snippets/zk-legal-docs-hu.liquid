@@ -1,0 +1,199 @@
+{%- comment -%}
+  Hungarian translation of the four shorter legal documents. Informative translation; the
+  Romanian text is the binding one. Same params as zk-legal-docs-ro.
+{%- endcomment -%}
+
+{%- capture firma -%}
+<div class="zk-legal__firma">
+  <p class="zk-legal__firma-name">{{ company }}</p>
+  <p><span>Székhely</span>{{ address }}</p>
+  <p><span>CUI / CIF</span>{{ cui }}</p>
+  <p><span>Cégjegyzékszám</span>{{ regcom }}</p>
+  <p><span>E-mail</span><a href="mailto:{{ email }}">{{ email }}</a></p>
+  {%- if phone != blank %}<p><span>Telefon</span>{{ phone }}</p>{% endif %}
+  <p><span>Weboldal</span>www.epalinca.ro</p>
+</div>
+{%- endcapture -%}
+
+{%- capture anpc -%}
+<div class="zk-legal__anpc">
+  <p>Ha békés úton nem sikerül megoldást találni, a következő szervekhez fordulhatsz:</p>
+  <ul>
+    <li><strong>ANPC</strong> — Országos Fogyasztóvédelmi Hatóság, Bd. Aviatorilor 72, 1. kerület, Bukarest · fogyasztói vonal 021 9551 · <a href="https://anpc.ro/" target="_blank" rel="noopener nofollow">anpc.ro</a></li>
+    <li><strong>SAL</strong> — alternatív vitarendezés, az ANPC SAL Igazgatósága által a 38/2015. sz. kormányrendelet szerint lefolytatott ingyenes eljárás · <a href="https://anpc.ro/ce-este-sal/" target="_blank" rel="noopener nofollow">anpc.ro/ce-este-sal</a></li>
+    <li><strong>SOL</strong> — az európai online vitarendezési platform 2025. július 20-án megszűnt ((EU) 2024/3228 rendelet); határon átnyúló vitákkal a romániai Európai Fogyasztói Központhoz lehet fordulni · <a href="https://www.eccromania.ro/" target="_blank" rel="noopener nofollow">eccromania.ro</a></li>
+  </ul>
+</div>
+{%- endcapture -%}
+
+{%- capture note -%}
+<p class="zk-legal__note">Ez a szöveg tájékoztató jellegű fordítás. Eltérés esetén a román nyelvű változat az irányadó.</p>
+{%- endcapture -%}
+
+{%- case doc -%}
+
+{%- when 'confidentialitate' -%}
+<div class="zk-legal__head">
+  <span class="zk-legal__eyebrow">Adatvédelem</span>
+  <h1 class="zk-legal__title">Adatkezelési tájékoztató</h1>
+  <p class="zk-legal__updated">Utolsó frissítés: {{ updated }} · a <strong>www.epalinca.ro</strong> webáruházra vonatkozik</p>
+  {{ note }}
+</div>
+
+<h2 id="s1"><span>01</span>Az adatkezelő</h2>
+<p><strong>1.1.</strong> Személyes adataidat az alábbi társaság kezeli adatkezelőként, az (EU) 2016/679 rendelet (GDPR) és a 190/2018. sz. törvény szerint.</p>
+{{ firma }}
+<p><strong>1.2.</strong> Az adataiddal kapcsolatos bármilyen kérdéssel a <a href="mailto:{{ email }}">{{ email }}</a> címen kereshetsz minket.</p>
+
+<h2 id="s2"><span>02</span>Milyen adatokat gyűjtünk</h2>
+<p><strong>2.1.</strong> Rendelés leadásakor vagy üzenetküldéskor a következő adatokat gyűjtjük:</p>
+<ul>
+  <li>azonosító és kapcsolattartási adatok: név, e-mail-cím, telefonszám;</li>
+  <li>szállítási cím és — ha eltér — számlázási cím; cégek esetén a cég számlázási adatai;</li>
+  <li>a rendelés adatai: megrendelt termékek, érték, választott fizetési mód, rendelési előzmények;</li>
+  <li>a kapcsolatfelvételi űrlapon vagy a kóstolófoglalásban küldött üzenetek tartalma;</li>
+  <li>technikai adatok: IP-cím, böngésző- és eszköztípus, meglátogatott oldalak, sütik (lásd a <a href="{{ pages['politica-cookies'].url }}">Cookie-szabályzatot</a>);</li>
+  <li>annak megerősítése, hogy elmúltál 18 éves.</li>
+</ul>
+<p><strong>2.2.</strong> A bankkártya adatai nem jutnak el hozzánk: a fizetést közvetlenül a fizetési szolgáltató dolgozza fel, biztonságos körülmények között.</p>
+
+<h2 id="s3"><span>03</span>Az adatkezelés célja és jogalapja</h2>
+<ul>
+  <li><strong>A rendelések felvétele, kiszállítása és számlázása</strong> — szerződés teljesítése (GDPR 6. cikk (1) b);</li>
+  <li><strong>Számviteli bizonylatok kiállítása és megőrzése</strong> — jogi kötelezettség (GDPR 6. cikk (1) c, adótörvénykönyv, számviteli törvény);</li>
+  <li><strong>A 18 éves korhatár ellenőrzése</strong> — jogi kötelezettség (61/1991. és 148/2000. sz. törvény);</li>
+  <li><strong>Válasz az üzenetekre és foglalásokra</strong> — a kérésedre tett, szerződéskötést megelőző lépések;</li>
+  <li><strong>Hírlevél és kereskedelmi közlemények</strong> — kizárólag hozzájárulás alapján, amely bármikor visszavonható (506/2004. sz. törvény);</li>
+  <li><strong>Az oldal biztonsága, csalásmegelőzés, használati statisztikák</strong> — jogos érdekünk (GDPR 6. cikk (1) f).</li>
+</ul>
+
+<h2 id="s4"><span>04</span>Meddig őrizzük meg az adatokat</h2>
+<p><strong>4.1.</strong> A rendelési adatokat és a számviteli bizonylatokat a számviteli jogszabályok szerint a pénzügyi év lezárásától számított 10 évig őrizzük.</p>
+<p><strong>4.2.</strong> A kapcsolatfelvételi üzeneteket legfeljebb az utolsó levélváltástól számított 2 évig őrizzük. A hírlevél-adatokat a leiratkozásig tároljuk.</p>
+<p><strong>4.3.</strong> A technikai adatok és a sütik megőrzési idejét a Cookie-szabályzat tartalmazza.</p>
+
+<h2 id="s5"><span>05</span>Kinek adjuk át az adatokat</h2>
+<p><strong>5.1.</strong> Az adatokat kizárólag a szükséges mértékben adjuk át: a futárcégeknek (név, telefon, szállítási cím), a fizetési szolgáltatónak, a Shopify International Ltd.-nek — a webáruház platformszolgáltatójának (EU-s és — általános szerződési feltételek alapján — EU-n kívüli szerverekkel), a könyvelési szolgáltatónak, az ANAF RO e-Factura rendszerének, valamint a hatóságoknak, ha jogszabály előírja.</p>
+<p><strong>5.2.</strong> Az adataidat nem adjuk el és nem adjuk bérbe.</p>
+
+<h2 id="s6"><span>06</span>A jogaid</h2>
+<p><strong>6.1.</strong> Jogod van a hozzáféréshez, a helyesbítéshez, a törléshez („elfeledtetéshez való jog”), az adatkezelés korlátozásához, az adathordozhatósághoz, a tiltakozáshoz, a hozzájárulás visszavonásához, valamint ahhoz, hogy ne terjedjen ki rád kizárólag automatizált adatkezelésen alapuló döntés.</p>
+<p><strong>6.2.</strong> A kérelmeket a <a href="mailto:{{ email }}">{{ email }}</a> címre küldheted; legfeljebb 30 napon belül válaszolunk.</p>
+<div class="zk-legal__callout">
+  <strong>Felügyeleti hatóság</strong>
+  <p>Panaszt tehetsz az <strong>ANSPDCP</strong>-nél — Országos Személyesadat-kezelést Felügyelő Hatóság, B-dul G-ral Gheorghe Magheru 28-30, Bukarest · <a href="https://www.dataprotection.ro/" target="_blank" rel="noopener nofollow">dataprotection.ro</a>.</p>
+</div>
+
+<h2 id="s7"><span>07</span>Adatbiztonság</h2>
+<p><strong>7.1.</strong> Az oldal titkosított kapcsolatot (HTTPS) használ, a rendelési adatokhoz pedig csak az azokat feldolgozó személyek férnek hozzá. Megfelelő technikai és szervezési intézkedéseket alkalmazunk a jogosulatlan hozzáférés, az adatvesztés és a nyilvánosságra kerülés ellen.</p>
+<p><strong>7.2.</strong> Az oldal nem kiskorúaknak szól. 18 éven aluliak adatait tudatosan nem kezeljük.</p>
+
+<h2 id="s8"><span>08</span>Módosítások</h2>
+<p><strong>8.1.</strong> Ezt a tájékoztatót frissíthetjük; a hatályos változat mindig az ezen az oldalon közzétett, a tetején feltüntetett frissítési dátummal.</p>
+<p class="zk-legal__contactline">{{ company }} · {{ address }} · {{ email }}</p>
+
+{%- when 'cookies' -%}
+<div class="zk-legal__head">
+  <span class="zk-legal__eyebrow">Jogi információk</span>
+  <h1 class="zk-legal__title">Cookie-szabályzat</h1>
+  <p class="zk-legal__updated">Utolsó frissítés: {{ updated }} · a <strong>www.epalinca.ro</strong> webáruházra vonatkozik</p>
+  {{ note }}
+</div>
+
+<h2 id="s1"><span>01</span>Mik azok a sütik</h2>
+<p><strong>1.1.</strong> A sütik (cookie-k) kis szövegfájlok, amelyeket a weboldal a böngésződben tárol. Ezek működtetik a kosarat, megjegyzik a beállításaidat, és segítenek megérteni, hogyan használják az oldalt. Használatukat az 506/2004. sz. törvény és a GDPR szabályozza.</p>
+
+<h2 id="s2"><span>02</span>Milyen sütiket használunk</h2>
+<ul>
+  <li><strong>Feltétlenül szükséges</strong> — nélkülük az oldal nem működik: kosár, rendelési munkamenet, választott nyelv, csalásvédelem. Nem igényelnek hozzájárulást.</li>
+  <li><strong>Korhatár-megerősítés</strong> — miután megerősítetted, hogy elmúltál 18 éves, ezt a választást helyben, a böngésződben mentjük, hogy az ellenőrző ablak ne jelenjen meg minden látogatáskor.</li>
+  <li><strong>Statisztikai</strong> — a Shopify statisztikái összesített formában mutatják a látogatók számát és a megtekintett oldalakat. Személyedet nem azonosítják.</li>
+  <li><strong>Marketing</strong> — csak a hozzájárulásoddal használnánk; jelenleg nem használunk harmadik féltől származó marketingsütiket.</li>
+</ul>
+
+<h2 id="s3"><span>03</span>A platform sütijei</h2>
+<p><strong>3.1.</strong> A webáruház a Shopify platformon fut, amely a bolt és a fizetési folyamat működéséhez szükséges technikai sütiket helyezi el. A teljes listát és a megőrzési időket a Shopify teszi közzé: <a href="https://www.shopify.com/legal/cookies" target="_blank" rel="noopener nofollow">shopify.com/legal/cookies</a>.</p>
+<p><strong>3.2.</strong> A kapcsolat oldalon lévő térképet a Google Maps tölti be, amely a vele való interakciókor saját sütiket helyezhet el.</p>
+
+<h2 id="s4"><span>04</span>Hogyan szabályozhatod</h2>
+<p><strong>4.1.</strong> A sütiket a böngésző beállításaiban (Chrome, Safari, Firefox, Edge) törölheted vagy letilthatod. A feltétlenül szükséges sütik letiltása esetén előfordulhat, hogy nem tudsz rendelést leadni.</p>
+<p><strong>4.2.</strong> Az opcionális sütikhez adott hozzájárulásodat bármikor visszavonhatod a sütik böngészőből való törlésével.</p>
+
+<h2 id="s5"><span>05</span>Személyes adatok</h2>
+<p><strong>5.1.</strong> A sütiken keresztül gyűjtött adatok kezelését az <a href="{{ pages['politica-de-confidentialitate'].url }}">Adatkezelési tájékoztató</a> írja le.</p>
+<p class="zk-legal__contactline">{{ company }} · {{ address }} · {{ email }}</p>
+
+{%- when 'retur' -%}
+<div class="zk-legal__head">
+  <span class="zk-legal__eyebrow">Fogyasztói jogok</span>
+  <h1 class="zk-legal__title">Elállás és visszaküldés</h1>
+  <p class="zk-legal__updated">Utolsó frissítés: {{ updated }} · a <strong>www.epalinca.ro</strong> webáruházra vonatkozik</p>
+  {{ note }}
+</div>
+
+<h2 id="s1"><span>01</span>Elállási jog 14 napon belül</h2>
+<div class="zk-legal__callout">
+  <strong>14 naptári nap</strong>
+  <p>A 34/2014. sz. sürgősségi kormányrendelet szerint indoklás nélkül elállhatsz a szerződéstől attól a naptól számított 14 napon belül, amikor te vagy az általad megjelölt személy a termékeket fizikailag átveszi.</p>
+</div>
+<p><strong>1.1.</strong> Az elállási jog a fogyasztónak minősülő magánszemélyeket illeti meg. A cégek által leadott rendelésekre a Polgári törvénykönyv vonatkozik.</p>
+
+<h2 id="s2"><span>02</span>Mit nem lehet visszaküldeni</h2>
+<p><strong>2.1.</strong> A 34/2014. sz. sürgősségi kormányrendelet 16. cikkének e) pontja alapján nem küldhetők vissza azok a lezárt termékek, amelyek egészségvédelmi vagy higiéniai okokból nem küldhetők vissza, és amelyeket a kiszállítás után felbontottak. Ennek megfelelően <strong>a felbontott vagy kinyitott üvegek nem küldhetők vissza</strong>.</p>
+<p><strong>2.2.</strong> A visszaküldött termékeknek lezártnak, eredeti állapotban és csomagolásban, sérülésmentesnek kell lenniük, ép címkével és zárjeggyel.</p>
+
+<h2 id="s3"><span>03</span>Hogyan zajlik a visszaküldés</h2>
+<p><strong>3.1.</strong> A 14 napos határidőn belül küldj egy egyértelmű elállási nyilatkozatot a <a href="mailto:{{ email }}">{{ email }}</a> címre{%- if phone != blank %} vagy telefonon a {{ phone }} számra{%- endif -%}, a rendelés számával. Használhatod a 34/2014. sz. rendelet mellékletében szereplő mintanyilatkozatot, de ez nem kötelező.</p>
+<p><strong>3.2.</strong> A termékeket az elállás közlésétől számított legfeljebb 14 napon belül add fel az alábbi címre, úgy csomagolva, hogy az üvegek a szállítás alatt védve legyenek.</p>
+{{ firma }}
+<p><strong>3.3.</strong> A visszaküldés közvetlen költségeit a fogyasztó viseli, kivéve a hibás vagy a szállítás során sérült termékek esetét.</p>
+
+<h2 id="s4"><span>04</span>Visszatérítés</h2>
+<p><strong>4.1.</strong> Minden kifizetett összeget — a szokásos szállítási költséggel együtt — indokolatlan késedelem nélkül, legkésőbb az elállásról szóló értesítés kézhezvételétől számított 14 napon belül visszatérítünk, a rendelésnél használt fizetési móddal, hacsak másban nem állapodunk meg.</p>
+<p><strong>4.2.</strong> A visszatérítést visszatarthatjuk a termékek visszaérkezéséig vagy a feladás igazolásának bemutatásáig, amelyik előbb történik.</p>
+
+<h2 id="s5"><span>05</span>Sérült vagy hibás termék</h2>
+<p><strong>5.1.</strong> Kérjük, átvételkor ellenőrizd a csomagot. Ha az üveg törötten érkezett, vagy a termék nem egyezik a rendeléssel, legfeljebb 48 órán belül jelezd nekünk, a csomagról és a termékről készült fotókkal.</p>
+<p><strong>5.2.</strong> Ilyen esetben kicseréljük a terméket vagy visszatérítjük az árát, a szállítási költséget pedig mi viseljük, a jogszabályi megfelelőségi szavatosság szerint (140/2021. sz. sürgősségi kormányrendelet — a kiszállítástól számított 2 év).</p>
+
+<h2 id="s6"><span>06</span>Vitarendezés</h2>
+<p><strong>6.1.</strong> Minden panaszt először a <a href="mailto:{{ email }}">{{ email }}</a> címre küldj; legfeljebb 15 napon belül válaszolunk.</p>
+{{ anpc }}
+<p class="zk-legal__contactline">{{ company }} · {{ address }} · {{ email }}</p>
+
+{%- when 'livrare' -%}
+<div class="zk-legal__head">
+  <span class="zk-legal__eyebrow">Hasznos információk</span>
+  <h1 class="zk-legal__title">Szállítás és fizetés</h1>
+  <p class="zk-legal__updated">Utolsó frissítés: {{ updated }} · a <strong>www.epalinca.ro</strong> webáruházra vonatkozik</p>
+  {{ note }}
+</div>
+
+<h2 id="s1"><span>01</span>Hová szállítunk</h2>
+<p><strong>1.1.</strong> Egész Romániába szállítunk gyorsfutárral. Az üvegeket egyenként, védett dobozba csomagoljuk, hogy épségben érkezzenek.</p>
+<p><strong>1.2.</strong> Románián kívüli szállításhoz rendelés előtt írj nekünk a <a href="mailto:{{ email }}">{{ email }}</a> címre.</p>
+
+<h2 id="s2"><span>02</span>Szállítási határidő</h2>
+<p><strong>2.1.</strong> A rendeléseket a visszaigazolást követő munkanapon adjuk fel. A becsült szállítási idő a feladástól számítva <strong>{{ ship_days }}</strong>, településtől és futártól függően. A rendelés visszaigazolását és a csomag követési számát e-mailben küldjük.</p>
+<p><strong>2.2.</strong> A törvényes maximális szállítási határidő a szerződéskötéstől számított 30 nap (34/2014. sz. sürgősségi kormányrendelet, 18. cikk).</p>
+
+<h2 id="s3"><span>03</span>Szállítási költség</h2>
+<div class="zk-legal__callout">
+  <strong>{{ ship_cost }}</strong>
+  <p>A szállítási költség a rendelés véglegesítésekor, a fizetés előtt jelenik meg, és a számlán külön tételként szerepel.</p>
+</div>
+
+<h2 id="s4"><span>04</span>Életkor ellenőrzése átvételkor</h2>
+<p><strong>4.1.</strong> Alkoholtartalmú italokat forgalmazunk, ezért a csomagot csak <strong>18. életévét betöltött</strong> személynek adjuk át. A futár személyazonosító okmányt kérhet; ha az életkor nem igazolható, a csomag visszakerül hozzánk, és a termékek árát visszatérítjük.</p>
+
+<h2 id="s5"><span>05</span>Fizetési módok</h2>
+<ul>
+  <li><strong>Online bankkártya</strong> — Visa, Mastercard; a fizetést a fizetési szolgáltató biztonságosan dolgozza fel, a kártyaadatok nem jutnak el hozzánk.</li>
+  {%- if cod == 'true' -%}
+  <li><strong>Utánvét</strong> — készpénzes vagy kártyás fizetés a futárnál, a csomag átvételekor.</li>
+  {%- endif -%}
+</ul>
+<p><strong>5.1.</strong> Minden ár lejben értendő és tartalmazza az áfát. Minden rendelésről számlát állítunk ki, amelyet elektronikusan, és ha szükséges, a RO e-Factura rendszeren keresztül küldünk.</p>
+<p class="zk-legal__contactline">{{ company }} · {{ address }} · {{ email }}</p>
+
+{%- endcase -%}

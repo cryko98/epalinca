@@ -1,0 +1,194 @@
+{%- comment -%}
+  The four shorter legal documents in Romanian (the binding language): privacy, cookies,
+  returns, delivery & payment. Same structure as zk-legal-termeni-ro so the contents rail
+  and the design apply. Rendered by sections/zekulhyda-legal.liquid.
+
+  Params: doc, company, cui, regcom, address, email, phone, updated, ship_cost, ship_days, cod
+{%- endcomment -%}
+
+{%- capture firma -%}
+<div class="zk-legal__firma">
+  <p class="zk-legal__firma-name">{{ company }}</p>
+  <p><span>Sediu social</span>{{ address }}</p>
+  <p><span>CUI / CIF</span>{{ cui }}</p>
+  <p><span>Nr. Reg. Com.</span>{{ regcom }}</p>
+  <p><span>E-mail</span><a href="mailto:{{ email }}">{{ email }}</a></p>
+  {%- if phone != blank %}<p><span>Telefon</span>{{ phone }}</p>{% endif %}
+  <p><span>Site</span>www.epalinca.ro</p>
+</div>
+{%- endcapture -%}
+
+{%- capture anpc -%}
+<div class="zk-legal__anpc">
+  <p>Dacă nu ajungem la o soluție pe cale amiabilă, vă puteți adresa:</p>
+  <ul>
+    <li><strong>ANPC</strong> — Autoritatea Națională pentru Protecția Consumatorilor, Bd. Aviatorilor 72, sector 1, București · telefonul consumatorului 021 9551 · <a href="https://anpc.ro/" target="_blank" rel="noopener nofollow">anpc.ro</a></li>
+    <li><strong>SAL</strong> — soluționarea alternativă a litigiilor, procedură gratuită derulată de Direcția SAL din cadrul ANPC conform OG nr. 38/2015 · <a href="https://anpc.ro/ce-este-sal/" target="_blank" rel="noopener nofollow">anpc.ro/ce-este-sal</a></li>
+    <li><strong>SOL</strong> — platforma europeană de soluționare online a litigiilor a fost închisă la 20 iulie 2025 (Regulamentul (UE) 2024/3228); pentru litigii transfrontaliere vă puteți adresa Centrului European al Consumatorilor din România · <a href="https://www.eccromania.ro/" target="_blank" rel="noopener nofollow">eccromania.ro</a></li>
+  </ul>
+</div>
+{%- endcapture -%}
+
+{%- case doc -%}
+
+{%- when 'confidentialitate' -%}
+<div class="zk-legal__head">
+  <span class="zk-legal__eyebrow">Protecția datelor</span>
+  <h1 class="zk-legal__title">Politica de confidențialitate</h1>
+  <p class="zk-legal__updated">Ultima actualizare: {{ updated }} · se aplică magazinului online <strong>www.epalinca.ro</strong></p>
+</div>
+
+<h2 id="s1"><span>01</span>Operatorul de date</h2>
+<p><strong>1.1.</strong> Datele dumneavoastră cu caracter personal sunt prelucrate de societatea de mai jos, în calitate de operator, în conformitate cu Regulamentul (UE) 2016/679 (GDPR) și cu Legea nr. 190/2018.</p>
+{{ firma }}
+<p><strong>1.2.</strong> Pentru orice întrebare legată de datele dumneavoastră ne puteți scrie la <a href="mailto:{{ email }}">{{ email }}</a>.</p>
+
+<h2 id="s2"><span>02</span>Ce date colectăm</h2>
+<p><strong>2.1.</strong> La plasarea unei comenzi sau la trimiterea unui mesaj colectăm:</p>
+<ul>
+  <li>date de identificare și de contact: nume, prenume, adresă de e-mail, număr de telefon;</li>
+  <li>adresa de livrare și, dacă diferă, adresa de facturare; pentru persoane juridice, datele de facturare ale firmei;</li>
+  <li>datele comenzii: produsele comandate, valoarea, modalitatea de plată aleasă, istoricul comenzilor;</li>
+  <li>conținutul mesajelor trimise prin formularul de contact sau prin cererea de rezervare la degustare;</li>
+  <li>date tehnice: adresa IP, tipul de browser și dispozitiv, paginile vizitate, cookie-uri (vezi <a href="{{ pages['politica-cookies'].url }}">Politica de cookie-uri</a>);</li>
+  <li>confirmarea că aveți cel puțin 18 ani.</li>
+</ul>
+<p><strong>2.2.</strong> Datele cardului bancar nu ajung la noi: plata este procesată direct de procesatorul de plăți, în condiții de securitate.</p>
+
+<h2 id="s3"><span>03</span>Scopurile și temeiul prelucrării</h2>
+<ul>
+  <li><strong>Preluarea, livrarea și facturarea comenzilor</strong> — executarea contractului (art. 6 alin. 1 lit. b GDPR);</li>
+  <li><strong>Emiterea și păstrarea documentelor fiscale</strong> — obligație legală (art. 6 alin. 1 lit. c GDPR, Codul fiscal, Legea contabilității);</li>
+  <li><strong>Verificarea vârstei minime de 18 ani</strong> — obligație legală (Legea nr. 61/1991, Legea nr. 148/2000);</li>
+  <li><strong>Răspunsul la mesaje și rezervări</strong> — demersuri la cererea dumneavoastră înainte de încheierea unui contract;</li>
+  <li><strong>Newsletter și comunicări comerciale</strong> — exclusiv pe baza consimțământului, care poate fi retras oricând (Legea nr. 506/2004);</li>
+  <li><strong>Securitatea site-ului, prevenirea fraudelor, statistici de utilizare</strong> — interesul nostru legitim (art. 6 alin. 1 lit. f GDPR).</li>
+</ul>
+
+<h2 id="s4"><span>04</span>Cât timp păstrăm datele</h2>
+<p><strong>4.1.</strong> Datele comenzilor și documentele fiscale se păstrează 10 ani de la încheierea exercițiului financiar, conform legislației contabile.</p>
+<p><strong>4.2.</strong> Mesajele din formularul de contact se păstrează cel mult 2 ani de la ultima corespondență. Datele pentru newsletter se păstrează până la dezabonare.</p>
+<p><strong>4.3.</strong> Datele tehnice și cookie-urile se păstrează pe duratele indicate în Politica de cookie-uri.</p>
+
+<h2 id="s5"><span>05</span>Cui transmitem datele</h2>
+<p><strong>5.1.</strong> Datele pot fi transmise, strict în măsura necesară, către: firmele de curierat (nume, telefon, adresă de livrare), procesatorul de plăți, Shopify International Ltd. — furnizorul platformei magazinului (cu sedii și servere în UE și, în baza clauzelor contractuale standard, în afara UE), furnizorul de servicii de contabilitate, sistemul RO e-Factura al ANAF, precum și autoritățile publice atunci când legea o impune.</p>
+<p><strong>5.2.</strong> Nu vindem și nu închiriem datele dumneavoastră.</p>
+
+<h2 id="s6"><span>06</span>Drepturile dumneavoastră</h2>
+<p><strong>6.1.</strong> Aveți dreptul de acces, de rectificare, de ștergere („dreptul de a fi uitat”), de restricționare a prelucrării, de portabilitate a datelor, dreptul la opoziție, dreptul de a vă retrage consimțământul și dreptul de a nu face obiectul unei decizii bazate exclusiv pe prelucrare automată.</p>
+<p><strong>6.2.</strong> Cererile se trimit la <a href="mailto:{{ email }}">{{ email }}</a>; răspundem în cel mult 30 de zile.</p>
+<div class="zk-legal__callout">
+  <strong>Autoritatea de supraveghere</strong>
+  <p>Aveți dreptul de a depune o plângere la <strong>ANSPDCP</strong> — Autoritatea Națională de Supraveghere a Prelucrării Datelor cu Caracter Personal, B-dul G-ral Gheorghe Magheru 28-30, București · <a href="https://www.dataprotection.ro/" target="_blank" rel="noopener nofollow">dataprotection.ro</a>.</p>
+</div>
+
+<h2 id="s7"><span>07</span>Securitatea datelor</h2>
+<p><strong>7.1.</strong> Site-ul folosește conexiuni criptate (HTTPS), iar accesul la datele comenzilor este limitat la persoanele care le prelucrează. Aplicăm măsuri tehnice și organizatorice adecvate împotriva accesului neautorizat, pierderii sau divulgării datelor.</p>
+<p><strong>7.2.</strong> Site-ul nu se adresează minorilor. Nu prelucrăm cu bună știință date ale persoanelor sub 18 ani.</p>
+
+<h2 id="s8"><span>08</span>Modificări</h2>
+<p><strong>8.1.</strong> Putem actualiza această politică; versiunea în vigoare este cea publicată pe această pagină, cu data actualizării afișată la început.</p>
+<p class="zk-legal__contactline">{{ company }} · {{ address }} · {{ email }}</p>
+
+{%- when 'cookies' -%}
+<div class="zk-legal__head">
+  <span class="zk-legal__eyebrow">Informații legale</span>
+  <h1 class="zk-legal__title">Politica de cookie-uri</h1>
+  <p class="zk-legal__updated">Ultima actualizare: {{ updated }} · se aplică magazinului online <strong>www.epalinca.ro</strong></p>
+</div>
+
+<h2 id="s1"><span>01</span>Ce sunt cookie-urile</h2>
+<p><strong>1.1.</strong> Cookie-urile sunt fișiere text de mici dimensiuni pe care un site le salvează în browserul dumneavoastră. Ele permit funcționarea coșului de cumpărături, rețin preferințele și ne ajută să înțelegem cum este folosit site-ul. Folosirea lor este reglementată de Legea nr. 506/2004 și de GDPR.</p>
+
+<h2 id="s2"><span>02</span>Ce cookie-uri folosim</h2>
+<ul>
+  <li><strong>Strict necesare</strong> — fără ele site-ul nu funcționează: coșul de cumpărături, sesiunea de comandă, limba aleasă, protecția împotriva fraudelor. Nu necesită consimțământ.</li>
+  <li><strong>Confirmarea vârstei</strong> — după ce confirmați că aveți 18 ani, salvăm local în browser această alegere, ca fereastra de verificare să nu apară la fiecare vizită.</li>
+  <li><strong>Statistice</strong> — statisticile Shopify ne arată, în formă agregată, câți vizitatori avem și ce pagini sunt vizitate. Nu vă identifică personal.</li>
+  <li><strong>Marketing</strong> — le-am folosi doar cu acordul dumneavoastră; în prezent nu folosim cookie-uri de marketing ale terților.</li>
+</ul>
+
+<h2 id="s3"><span>03</span>Cookie-urile platformei</h2>
+<p><strong>3.1.</strong> Magazinul funcționează pe platforma Shopify, care setează cookie-urile tehnice necesare magazinului și procesului de plată. Lista completă și duratele lor sunt publicate de Shopify: <a href="https://www.shopify.com/legal/cookies" target="_blank" rel="noopener nofollow">shopify.com/legal/cookies</a>.</p>
+<p><strong>3.2.</strong> Harta din pagina de contact este încărcată de Google Maps, care poate seta propriile cookie-uri atunci când interacționați cu ea.</p>
+
+<h2 id="s4"><span>04</span>Cum le puteți controla</h2>
+<p><strong>4.1.</strong> Puteți șterge sau bloca cookie-urile din setările browserului (Chrome, Safari, Firefox, Edge). Blocarea cookie-urilor strict necesare poate face imposibilă plasarea unei comenzi.</p>
+<p><strong>4.2.</strong> Consimțământul pentru cookie-urile opționale poate fi retras oricând prin ștergerea cookie-urilor din browser.</p>
+
+<h2 id="s5"><span>05</span>Datele personale</h2>
+<p><strong>5.1.</strong> Modul în care prelucrăm datele colectate prin cookie-uri este descris în <a href="{{ pages['politica-de-confidentialitate'].url }}">Politica de confidențialitate</a>.</p>
+<p class="zk-legal__contactline">{{ company }} · {{ address }} · {{ email }}</p>
+
+{%- when 'retur' -%}
+<div class="zk-legal__head">
+  <span class="zk-legal__eyebrow">Drepturile consumatorului</span>
+  <h1 class="zk-legal__title">Politica de retur și dreptul de retragere</h1>
+  <p class="zk-legal__updated">Ultima actualizare: {{ updated }} · se aplică magazinului online <strong>www.epalinca.ro</strong></p>
+</div>
+
+<h2 id="s1"><span>01</span>Dreptul de retragere în 14 zile</h2>
+<div class="zk-legal__callout">
+  <strong>14 zile calendaristice</strong>
+  <p>Conform OUG nr. 34/2014, aveți dreptul să vă retrageți din contract, fără a invoca un motiv, în termen de 14 zile de la data la care dumneavoastră sau o persoană desemnată de dumneavoastră intră în posesia fizică a produselor.</p>
+</div>
+<p><strong>1.1.</strong> Dreptul de retragere aparține consumatorilor persoane fizice. Comenzile plasate de persoane juridice se supun Codului civil.</p>
+
+<h2 id="s2"><span>02</span>Ce nu poate fi returnat</h2>
+<p><strong>2.1.</strong> Potrivit art. 16 lit. e) din OUG nr. 34/2014, nu pot fi returnate produsele sigilate care nu pot fi returnate din motive de protecție a sănătății sau de igienă și care au fost desigilate după livrare. În consecință, <strong>sticlele desigilate sau deschise nu pot fi returnate</strong>.</p>
+<p><strong>2.2.</strong> Produsele returnate trebuie să fie sigilate, în starea și ambalajul original, nedeteriorate, cu eticheta și timbrul fiscal intacte.</p>
+
+<h2 id="s3"><span>03</span>Cum se face returul</h2>
+<p><strong>3.1.</strong> Trimiteți-ne, în termenul de 14 zile, o declarație clară de retragere la <a href="mailto:{{ email }}">{{ email }}</a>{%- if phone != blank %} sau telefonic la {{ phone }}{%- endif -%}, cu numărul comenzii. Puteți folosi formularul-model din anexa OUG nr. 34/2014, fără să fie obligatoriu.</p>
+<p><strong>3.2.</strong> Expediați produsele la adresa de mai jos în cel mult 14 zile de la comunicarea retragerii, ambalate astfel încât sticlele să fie protejate pe durata transportului.</p>
+{{ firma }}
+<p><strong>3.3.</strong> Costurile directe ale returnării sunt suportate de consumator, cu excepția produselor neconforme sau deteriorate la transport.</p>
+
+<h2 id="s4"><span>04</span>Rambursarea</h2>
+<p><strong>4.1.</strong> Rambursăm toate sumele primite, inclusiv costul livrării standard, fără întârzieri nejustificate și în cel mult 14 zile de la data la care am fost informați despre retragere, prin aceeași modalitate de plată folosită la comandă, dacă nu ați convenit altfel.</p>
+<p><strong>4.2.</strong> Putem amâna rambursarea până la primirea produselor sau până la prezentarea dovezii de expediere, oricare intervine prima.</p>
+
+<h2 id="s5"><span>05</span>Produse deteriorate sau neconforme</h2>
+<p><strong>5.1.</strong> Vă rugăm să verificați coletul la primire. Dacă sticla a ajuns spartă sau produsul nu corespunde comenzii, contactați-ne în cel mult 48 de ore, cu fotografii ale coletului și ale produsului.</p>
+<p><strong>5.2.</strong> În aceste cazuri înlocuim produsul sau returnăm contravaloarea, iar costurile de transport sunt suportate de noi, conform garanției legale de conformitate (OUG nr. 140/2021 — 2 ani de la livrare).</p>
+
+<h2 id="s6"><span>06</span>Soluționarea litigiilor</h2>
+<p><strong>6.1.</strong> Orice reclamație se trimite mai întâi la <a href="mailto:{{ email }}">{{ email }}</a>; răspundem în cel mult 15 zile.</p>
+{{ anpc }}
+<p class="zk-legal__contactline">{{ company }} · {{ address }} · {{ email }}</p>
+
+{%- when 'livrare' -%}
+<div class="zk-legal__head">
+  <span class="zk-legal__eyebrow">Informații utile</span>
+  <h1 class="zk-legal__title">Livrare și plată</h1>
+  <p class="zk-legal__updated">Ultima actualizare: {{ updated }} · se aplică magazinului online <strong>www.epalinca.ro</strong></p>
+</div>
+
+<h2 id="s1"><span>01</span>Unde livrăm</h2>
+<p><strong>1.1.</strong> Livrăm în toată România, prin curier rapid. Sticlele sunt ambalate individual, în cutii cu protecție, pentru a ajunge intacte.</p>
+<p><strong>1.2.</strong> Pentru livrări în afara României vă rugăm să ne scrieți la <a href="mailto:{{ email }}">{{ email }}</a> înainte de a comanda.</p>
+
+<h2 id="s2"><span>02</span>Termenul de livrare</h2>
+<p><strong>2.1.</strong> Comenzile se expediază în ziua lucrătoare următoare confirmării. Termenul estimat de livrare este de <strong>{{ ship_days }}</strong> de la expediere, în funcție de localitate și de curier. Primiți pe e-mail confirmarea comenzii și numărul de urmărire al coletului.</p>
+<p><strong>2.2.</strong> Termenul maxim legal de livrare este de 30 de zile de la încheierea contractului (OUG nr. 34/2014, art. 18).</p>
+
+<h2 id="s3"><span>03</span>Costul livrării</h2>
+<div class="zk-legal__callout">
+  <strong>{{ ship_cost }}</strong>
+  <p>Costul livrării este afișat la finalizarea comenzii, înainte de plată, și apare separat pe factură.</p>
+</div>
+
+<h2 id="s4"><span>04</span>Verificarea vârstei la livrare</h2>
+<p><strong>4.1.</strong> Comercializăm băuturi alcoolice, de aceea coletul se predă doar persoanelor care au împlinit <strong>18 ani</strong>. Curierul poate solicita un act de identitate; dacă vârsta nu poate fi verificată, coletul se returnează, iar contravaloarea produselor se rambursează.</p>
+
+<h2 id="s5"><span>05</span>Modalități de plată</h2>
+<ul>
+  <li><strong>Card bancar online</strong> — Visa, Mastercard; plata este procesată în condiții de securitate de procesatorul de plăți, datele cardului nu ajung la noi.</li>
+  {%- if cod == 'true' -%}
+  <li><strong>Ramburs la livrare</strong> — plata în numerar sau cu cardul la curier, la primirea coletului.</li>
+  {%- endif -%}
+</ul>
+<p><strong>5.1.</strong> Toate prețurile sunt exprimate în lei și includ TVA. Pentru fiecare comandă emitem factură, transmisă electronic și, dacă este cazul, prin sistemul RO e-Factura.</p>
+<p class="zk-legal__contactline">{{ company }} · {{ address }} · {{ email }}</p>
+
+{%- endcase -%}

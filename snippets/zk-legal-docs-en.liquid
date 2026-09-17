@@ -1,0 +1,199 @@
+{%- comment -%}
+  English translation of the four shorter legal documents. Informative translation; the
+  Romanian text is the binding one. Same params as zk-legal-docs-ro.
+{%- endcomment -%}
+
+{%- capture firma -%}
+<div class="zk-legal__firma">
+  <p class="zk-legal__firma-name">{{ company }}</p>
+  <p><span>Registered office</span>{{ address }}</p>
+  <p><span>VAT / Tax ID</span>{{ cui }}</p>
+  <p><span>Trade Register</span>{{ regcom }}</p>
+  <p><span>E-mail</span><a href="mailto:{{ email }}">{{ email }}</a></p>
+  {%- if phone != blank %}<p><span>Phone</span>{{ phone }}</p>{% endif %}
+  <p><span>Website</span>www.epalinca.ro</p>
+</div>
+{%- endcapture -%}
+
+{%- capture anpc -%}
+<div class="zk-legal__anpc">
+  <p>If we cannot settle the matter amicably, you may turn to:</p>
+  <ul>
+    <li><strong>ANPC</strong> — the National Authority for Consumer Protection, Bd. Aviatorilor 72, District 1, Bucharest · consumer hotline 021 9551 · <a href="https://anpc.ro/" target="_blank" rel="noopener nofollow">anpc.ro</a></li>
+    <li><strong>SAL</strong> — alternative dispute resolution, a free procedure run by ANPC's SAL Directorate under Government Ordinance 38/2015 · <a href="https://anpc.ro/ce-este-sal/" target="_blank" rel="noopener nofollow">anpc.ro/ce-este-sal</a></li>
+    <li><strong>ODR</strong> — the EU online dispute resolution platform closed on 20 July 2025 (Regulation (EU) 2024/3228); for cross-border disputes you may contact the European Consumer Centre Romania · <a href="https://www.eccromania.ro/" target="_blank" rel="noopener nofollow">eccromania.ro</a></li>
+  </ul>
+</div>
+{%- endcapture -%}
+
+{%- capture note -%}
+<p class="zk-legal__note">This translation is provided for convenience. In case of any discrepancy, the Romanian version prevails.</p>
+{%- endcapture -%}
+
+{%- case doc -%}
+
+{%- when 'confidentialitate' -%}
+<div class="zk-legal__head">
+  <span class="zk-legal__eyebrow">Data protection</span>
+  <h1 class="zk-legal__title">Privacy policy</h1>
+  <p class="zk-legal__updated">Last updated: {{ updated }} · applies to the online shop <strong>www.epalinca.ro</strong></p>
+  {{ note }}
+</div>
+
+<h2 id="s1"><span>01</span>Data controller</h2>
+<p><strong>1.1.</strong> Your personal data is processed by the company below, as data controller, in accordance with Regulation (EU) 2016/679 (GDPR) and Romanian Law 190/2018.</p>
+{{ firma }}
+<p><strong>1.2.</strong> For any question about your data, write to <a href="mailto:{{ email }}">{{ email }}</a>.</p>
+
+<h2 id="s2"><span>02</span>What we collect</h2>
+<p><strong>2.1.</strong> When you place an order or send us a message we collect:</p>
+<ul>
+  <li>identification and contact details: name, e-mail address, phone number;</li>
+  <li>the delivery address and, if different, the billing address; for companies, the company's billing details;</li>
+  <li>order details: products ordered, value, chosen payment method, order history;</li>
+  <li>the content of messages sent through the contact form or the tasting booking request;</li>
+  <li>technical data: IP address, browser and device type, pages visited, cookies (see the <a href="{{ pages['politica-cookies'].url }}">Cookie policy</a>);</li>
+  <li>your confirmation that you are at least 18 years old.</li>
+</ul>
+<p><strong>2.2.</strong> Card details never reach us: payment is processed directly and securely by the payment processor.</p>
+
+<h2 id="s3"><span>03</span>Purposes and legal basis</h2>
+<ul>
+  <li><strong>Taking, delivering and invoicing orders</strong> — performance of a contract (Art. 6(1)(b) GDPR);</li>
+  <li><strong>Issuing and keeping accounting documents</strong> — legal obligation (Art. 6(1)(c) GDPR, the Fiscal Code, the Accounting Law);</li>
+  <li><strong>Checking the minimum age of 18</strong> — legal obligation (Laws 61/1991 and 148/2000);</li>
+  <li><strong>Replying to messages and bookings</strong> — steps taken at your request before entering into a contract;</li>
+  <li><strong>Newsletter and commercial communications</strong> — only with your consent, which you can withdraw at any time (Law 506/2004);</li>
+  <li><strong>Site security, fraud prevention, usage statistics</strong> — our legitimate interest (Art. 6(1)(f) GDPR).</li>
+</ul>
+
+<h2 id="s4"><span>04</span>How long we keep data</h2>
+<p><strong>4.1.</strong> Order data and accounting documents are kept for 10 years from the end of the financial year, as required by accounting law.</p>
+<p><strong>4.2.</strong> Contact-form messages are kept for at most 2 years after the last exchange. Newsletter data is kept until you unsubscribe.</p>
+<p><strong>4.3.</strong> Technical data and cookies are kept for the periods stated in the Cookie policy.</p>
+
+<h2 id="s5"><span>05</span>Who we share data with</h2>
+<p><strong>5.1.</strong> Data may be shared, only as far as necessary, with: courier companies (name, phone, delivery address), the payment processor, Shopify International Ltd. — the shop platform provider (with servers in the EU and, under standard contractual clauses, outside the EU), our accounting provider, the ANAF RO e-Factura system, and public authorities where the law requires it.</p>
+<p><strong>5.2.</strong> We never sell or rent your data.</p>
+
+<h2 id="s6"><span>06</span>Your rights</h2>
+<p><strong>6.1.</strong> You have the right of access, rectification, erasure ("right to be forgotten"), restriction of processing, data portability, the right to object, the right to withdraw consent, and the right not to be subject to a decision based solely on automated processing.</p>
+<p><strong>6.2.</strong> Send requests to <a href="mailto:{{ email }}">{{ email }}</a>; we reply within 30 days.</p>
+<div class="zk-legal__callout">
+  <strong>Supervisory authority</strong>
+  <p>You have the right to lodge a complaint with <strong>ANSPDCP</strong> — the National Supervisory Authority for Personal Data Processing, B-dul G-ral Gheorghe Magheru 28-30, Bucharest · <a href="https://www.dataprotection.ro/" target="_blank" rel="noopener nofollow">dataprotection.ro</a>.</p>
+</div>
+
+<h2 id="s7"><span>07</span>Data security</h2>
+<p><strong>7.1.</strong> The site uses encrypted connections (HTTPS), and access to order data is limited to the people who process it. We apply appropriate technical and organisational measures against unauthorised access, loss or disclosure.</p>
+<p><strong>7.2.</strong> The site is not intended for minors. We do not knowingly process data of anyone under 18.</p>
+
+<h2 id="s8"><span>08</span>Changes</h2>
+<p><strong>8.1.</strong> We may update this policy; the version in force is the one published on this page, with the update date shown at the top.</p>
+<p class="zk-legal__contactline">{{ company }} · {{ address }} · {{ email }}</p>
+
+{%- when 'cookies' -%}
+<div class="zk-legal__head">
+  <span class="zk-legal__eyebrow">Legal information</span>
+  <h1 class="zk-legal__title">Cookie policy</h1>
+  <p class="zk-legal__updated">Last updated: {{ updated }} · applies to the online shop <strong>www.epalinca.ro</strong></p>
+  {{ note }}
+</div>
+
+<h2 id="s1"><span>01</span>What cookies are</h2>
+<p><strong>1.1.</strong> Cookies are small text files a website saves in your browser. They make the shopping cart work, remember your preferences and help us understand how the site is used. Their use is governed by Law 506/2004 and the GDPR.</p>
+
+<h2 id="s2"><span>02</span>Cookies we use</h2>
+<ul>
+  <li><strong>Strictly necessary</strong> — the site does not work without them: the cart, the checkout session, your chosen language, fraud protection. No consent is required.</li>
+  <li><strong>Age confirmation</strong> — once you confirm you are 18, we store that choice locally in your browser so the age gate does not appear on every visit.</li>
+  <li><strong>Statistics</strong> — Shopify analytics show us, in aggregate, how many visitors we have and which pages are viewed. They do not identify you personally.</li>
+  <li><strong>Marketing</strong> — we would only use these with your consent; we currently use no third-party marketing cookies.</li>
+</ul>
+
+<h2 id="s3"><span>03</span>Platform cookies</h2>
+<p><strong>3.1.</strong> The shop runs on Shopify, which sets the technical cookies needed for the store and the checkout. The full list and their lifetimes are published by Shopify: <a href="https://www.shopify.com/legal/cookies" target="_blank" rel="noopener nofollow">shopify.com/legal/cookies</a>.</p>
+<p><strong>3.2.</strong> The map on the contact page is loaded from Google Maps, which may set its own cookies when you interact with it.</p>
+
+<h2 id="s4"><span>04</span>How to control them</h2>
+<p><strong>4.1.</strong> You can delete or block cookies in your browser settings (Chrome, Safari, Firefox, Edge). Blocking strictly necessary cookies may make it impossible to place an order.</p>
+<p><strong>4.2.</strong> Consent to optional cookies can be withdrawn at any time by deleting the cookies from your browser.</p>
+
+<h2 id="s5"><span>05</span>Personal data</h2>
+<p><strong>5.1.</strong> How we process data collected through cookies is described in the <a href="{{ pages['politica-de-confidentialitate'].url }}">Privacy policy</a>.</p>
+<p class="zk-legal__contactline">{{ company }} · {{ address }} · {{ email }}</p>
+
+{%- when 'retur' -%}
+<div class="zk-legal__head">
+  <span class="zk-legal__eyebrow">Consumer rights</span>
+  <h1 class="zk-legal__title">Returns and right of withdrawal</h1>
+  <p class="zk-legal__updated">Last updated: {{ updated }} · applies to the online shop <strong>www.epalinca.ro</strong></p>
+  {{ note }}
+</div>
+
+<h2 id="s1"><span>01</span>14-day right of withdrawal</h2>
+<div class="zk-legal__callout">
+  <strong>14 calendar days</strong>
+  <p>Under Emergency Ordinance 34/2014 you may withdraw from the contract, without giving a reason, within 14 days from the day you, or a person you designate, take physical possession of the goods.</p>
+</div>
+<p><strong>1.1.</strong> The right of withdrawal belongs to consumers (natural persons). Orders placed by companies are governed by the Civil Code.</p>
+
+<h2 id="s2"><span>02</span>What cannot be returned</h2>
+<p><strong>2.1.</strong> Under Art. 16(e) of Emergency Ordinance 34/2014, sealed goods which are not suitable for return for health-protection or hygiene reasons and were unsealed after delivery cannot be returned. Consequently, <strong>unsealed or opened bottles cannot be returned</strong>.</p>
+<p><strong>2.2.</strong> Returned goods must be sealed, in their original condition and packaging, undamaged, with the label and tax stamp intact.</p>
+
+<h2 id="s3"><span>03</span>How to return</h2>
+<p><strong>3.1.</strong> Within the 14-day period, send us a clear statement of withdrawal to <a href="mailto:{{ email }}">{{ email }}</a>{%- if phone != blank %} or by phone at {{ phone }}{%- endif -%}, quoting your order number. You may use the model form annexed to Ordinance 34/2014, but it is not mandatory.</p>
+<p><strong>3.2.</strong> Ship the goods to the address below within 14 days of notifying us, packed so that the bottles are protected in transit.</p>
+{{ firma }}
+<p><strong>3.3.</strong> The direct cost of returning the goods is borne by the consumer, except for non-conforming goods or goods damaged in transit.</p>
+
+<h2 id="s4"><span>04</span>Refund</h2>
+<p><strong>4.1.</strong> We refund all sums received, including the standard delivery cost, without undue delay and within 14 days of being informed of your withdrawal, using the same payment method as the order unless agreed otherwise.</p>
+<p><strong>4.2.</strong> We may withhold the refund until we receive the goods or you provide proof of shipment, whichever comes first.</p>
+
+<h2 id="s5"><span>05</span>Damaged or non-conforming goods</h2>
+<p><strong>5.1.</strong> Please check the parcel on delivery. If a bottle arrived broken or the product does not match your order, contact us within 48 hours with photos of the parcel and the product.</p>
+<p><strong>5.2.</strong> In these cases we replace the product or refund its price, and we bear the shipping costs, under the legal guarantee of conformity (Emergency Ordinance 140/2021 — 2 years from delivery).</p>
+
+<h2 id="s6"><span>06</span>Dispute resolution</h2>
+<p><strong>6.1.</strong> Any complaint should first be sent to <a href="mailto:{{ email }}">{{ email }}</a>; we reply within 15 days.</p>
+{{ anpc }}
+<p class="zk-legal__contactline">{{ company }} · {{ address }} · {{ email }}</p>
+
+{%- when 'livrare' -%}
+<div class="zk-legal__head">
+  <span class="zk-legal__eyebrow">Useful information</span>
+  <h1 class="zk-legal__title">Delivery and payment</h1>
+  <p class="zk-legal__updated">Last updated: {{ updated }} · applies to the online shop <strong>www.epalinca.ro</strong></p>
+  {{ note }}
+</div>
+
+<h2 id="s1"><span>01</span>Where we deliver</h2>
+<p><strong>1.1.</strong> We deliver anywhere in Romania by express courier. Each bottle is packed individually in a protective box so it arrives intact.</p>
+<p><strong>1.2.</strong> For delivery outside Romania, please write to <a href="mailto:{{ email }}">{{ email }}</a> before ordering.</p>
+
+<h2 id="s2"><span>02</span>Delivery time</h2>
+<p><strong>2.1.</strong> Orders are dispatched on the working day after confirmation. Estimated delivery is <strong>{{ ship_days }}</strong> from dispatch, depending on location and courier. You receive the order confirmation and the parcel tracking number by e-mail.</p>
+<p><strong>2.2.</strong> The legal maximum delivery time is 30 days from the conclusion of the contract (Emergency Ordinance 34/2014, Art. 18).</p>
+
+<h2 id="s3"><span>03</span>Delivery cost</h2>
+<div class="zk-legal__callout">
+  <strong>{{ ship_cost }}</strong>
+  <p>The delivery cost is shown at checkout, before payment, and appears as a separate line on the invoice.</p>
+</div>
+
+<h2 id="s4"><span>04</span>Age check on delivery</h2>
+<p><strong>4.1.</strong> We sell alcoholic beverages, so the parcel is handed over only to persons aged <strong>18 or over</strong>. The courier may ask for ID; if age cannot be verified, the parcel is returned to us and the price of the goods is refunded.</p>
+
+<h2 id="s5"><span>05</span>Payment methods</h2>
+<ul>
+  <li><strong>Online card payment</strong> — Visa, Mastercard; payment is processed securely by the payment processor, card details never reach us.</li>
+  {%- if cod == 'true' -%}
+  <li><strong>Cash on delivery</strong> — pay the courier in cash or by card when you receive the parcel.</li>
+  {%- endif -%}
+</ul>
+<p><strong>5.1.</strong> All prices are in Romanian lei and include VAT. We issue an invoice for every order, sent electronically and, where applicable, through the RO e-Factura system.</p>
+<p class="zk-legal__contactline">{{ company }} · {{ address }} · {{ email }}</p>
+
+{%- endcase -%}
