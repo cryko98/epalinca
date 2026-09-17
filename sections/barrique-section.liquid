@@ -1,12 +1,47 @@
 <section id="barrique" class="band feature" style="background-image:url({{ 'zk-06.jpg' | asset_url }})"><div class="wrap">
   <div class="reveal"><div class="eyebrow">{% render 'zk-t', override: section.settings.bq_eyebrow, key: 'zk.bq_eyebrow' %}</div><h2 style="margin:.6rem 0 1.2rem">{% render 'zk-t', override: section.settings.bq_title, key: 'zk.bq_title' %}</h2><p>{% render 'zk-t', override: section.settings.bq_p, key: 'zk.bq_p' %}</p><a class="btn primary" href="#shop" data-f="barrique">{% render 'zk-t', override: section.settings.bq_cta, key: 'zk.bq_cta' %}</a></div>
-  <div class="pics reveal"><img src="{{ 'zk-09.jpg' | asset_url }}" alt="Barrique plum in smoke"><img src="{{ 'zk-10.jpg' | asset_url }}" alt="Barrique grape distillate in smoke"></div>
+  {%- comment -%}
+    The two bottles photographed are the plum and the grape Barrique; each picture links to
+    its product page. The products can be swapped in the theme editor.
+  {%- endcomment -%}
+  {%- assign bq1 = section.settings.bq_p1 | default: all_products['prune-barrique'] -%}
+  {%- assign bq2 = section.settings.bq_p2 | default: all_products['struguri-barrique'] -%}
+  <div class="pics reveal">
+    {%- if bq1 != blank -%}
+    <a class="pics__link" href="{{ bq1.url }}" aria-label="{{ bq1.title | escape }}">
+      <img src="{{ 'zk-09.jpg' | asset_url }}" alt="{{ bq1.title | escape }}" width="720" height="1200">
+      <span class="pics__cap"><span class="pics__name">{{ bq1.title }}</span><span class="pics__price">{{ bq1.price | money }} →</span></span>
+    </a>
+    {%- else -%}
+    <img src="{{ 'zk-09.jpg' | asset_url }}" alt="Barrique" width="720" height="1200">
+    {%- endif -%}
+    {%- if bq2 != blank -%}
+    <a class="pics__link" href="{{ bq2.url }}" aria-label="{{ bq2.title | escape }}">
+      <img src="{{ 'zk-10.jpg' | asset_url }}" alt="{{ bq2.title | escape }}" width="720" height="1200">
+      <span class="pics__cap"><span class="pics__name">{{ bq2.title }}</span><span class="pics__price">{{ bq2.price | money }} →</span></span>
+    </a>
+    {%- else -%}
+    <img src="{{ 'zk-10.jpg' | asset_url }}" alt="Barrique" width="720" height="1200">
+    {%- endif -%}
+  </div>
 </div></section>
 
 {% schema %}
 {
   "name": "Barrique",
   "settings": [
+    {
+      "type": "product",
+      "id": "bq_p1",
+      "label": "Produs poza stânga",
+      "info": "Gol = Prune Barrique"
+    },
+    {
+      "type": "product",
+      "id": "bq_p2",
+      "label": "Produs poza dreapta",
+      "info": "Gol = Struguri Barrique"
+    },
     {
       "type": "text",
       "id": "bq_eyebrow",
