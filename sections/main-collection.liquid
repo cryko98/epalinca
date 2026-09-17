@@ -58,9 +58,10 @@
       {%- if collection.products.size > 0 -%}
         <div class="grid">
           {%- for product in collection.products -%}
-            <div class="card">
+            <div class="card{% unless product.available %} card--soldout{% endunless %}">
               <a class="pic{% if product.featured_image %} photo{% endif %}" href="{{ product.url }}">
                 {% render 'zk-product-image', product: product %}
+                {%- unless product.available -%}<span class="soldout-tag">{{ 'products.sold_out' | t }}</span>{%- endunless -%}
                 {% render 'zk-award-mini', product: product %}
                 {%- for tag in product.tags -%}
                   {%- if tag contains 'badge:' -%}

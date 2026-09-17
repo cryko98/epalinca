@@ -3115,3 +3115,34 @@ nav.main a.nav-shop.on { border-color: var(--amber-2); }
 @media (max-width:600px) { .badge-m .badge-m__photo { width: 100px; height: 100px; } }
 .zk-mini img, .zk-awards .badge-m img { width: 100%; height: 100%; border-radius: 50%; display: block; object-fit: cover; }
 .zk-awards .badge-m img { width: 132px; height: 132px; }
+
+
+/* ==========================================================================
+   Award badge in the top-right corner of the artwork, on cards and the product stage.
+   ========================================================================== */
+.zk-mini { top: .55rem; bottom: auto; }
+.pdp__stage .zk-mini { top: 1rem; bottom: auto; }
+.card:hover .zk-mini { transform: translateY(4px) rotate(6deg) scale(1.06); }
+
+/* Product stage with a real photo: white ground, the photo fills the frame, no fake shadow. */
+.pdp__stage.has-photo { background: #fff; border-color: var(--line-on-paper); }
+.pdp__stage.has-photo::after { display: none; }
+.pdp__stage.has-photo img { max-height: 100%; max-width: 100%; width: 100%; height: 100%; object-fit: contain; filter: none; }
+.pdp__stage img { transition: transform .12s ease-out; }
+.pdp__stage:hover img { transition: none; }
+
+/* Sold-out products: greyed artwork, muted price, a small tag on the picture. */
+.card--soldout .pic img { filter: grayscale(1) opacity(.45); }
+.card--soldout .pic svg { opacity: .35; }
+.card--soldout .price { color: var(--muted-on-paper); }
+.card--soldout h3 a { color: var(--muted-on-paper); }
+.card--soldout .add[disabled] { background: #E4E0D7; border-color: #E4E0D7; color: #8D877C; cursor: not-allowed; }
+.card--soldout .zk-mini { filter: grayscale(.6) opacity(.7); }
+.soldout-tag {
+  position: absolute; left: .7rem; top: .7rem; z-index: 2;
+  font-family: "IBM Plex Mono", monospace; font-size: .6rem; letter-spacing: .14em; text-transform: uppercase;
+  background: #4A4740; color: #F3F1EC; padding: .28rem .55rem; border-radius: 2px;
+}
+.card--soldout .badge { display: none; }
+.card--soldout .pic.has-alt:hover > img:not(.pic-alt) { opacity: 1; }
+.card--soldout .pic.has-alt:hover > .pic-alt { opacity: 0; }

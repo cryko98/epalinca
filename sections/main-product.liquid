@@ -30,7 +30,7 @@
     <div class="pdp__top">
 
       <div class="pdp__media">
-        <div class="pdp__stage" id="zkStage" title="{{ 'zk.zoom_hint' | t }}">
+        <div class="pdp__stage{% if product.featured_image %} has-photo{% endif %}" id="zkStage" title="{{ 'zk.zoom_hint' | t }}">
           {%- if product.featured_image -%}
             <img id="MainImg"
                  src="{{ product.featured_image | image_url: width: 1100 }}"
@@ -52,6 +52,7 @@
             {%- for image in product.images -%}
               <button type="button" class="pdp__thumb{% if forloop.first %} on{% endif %}"
                       data-full="{{ image | image_url: width: 1100 }}"
+                      data-srcset="{{ image | image_url: width: 600 }} 600w, {{ image | image_url: width: 900 }} 900w, {{ image | image_url: width: 1100 }} 1100w, {{ image | image_url: width: 1600 }} 1600w"
                       aria-label="{{ product.title | escape }} {{ forloop.index }}">
                 <img src="{{ image | image_url: width: 160 }}" alt="" loading="lazy" width="80" height="100">
               </button>
@@ -212,7 +213,7 @@
         var r = stage.getBoundingClientRect();
         var x = ((e.clientX - r.left) / r.width) * 100, y = ((e.clientY - r.top) / r.height) * 100;
         img.style.transformOrigin = x + '% ' + y + '%';
-        img.style.transform = 'scale(1.8)';
+        img.style.transform = 'scale(2.2)';
       });
       stage.addEventListener('mouseleave', function () {
         var img = stage.querySelector('img'); if (!img) return;
@@ -225,7 +226,10 @@
     document.querySelectorAll('.pdp__thumb').forEach(function (t) {
       t.addEventListener('click', function () {
         if (!main) return;
+        // srcset wins over src, so both have to change or the browser keeps the old picture.
+        main.srcset = t.getAttribute('data-srcset') || '';
         main.src = t.getAttribute('data-full');
+        main.style.transform = ''; main.style.transformOrigin = '';
         document.querySelectorAll('.pdp__thumb').forEach(function (x) { x.classList.remove('on'); });
         t.classList.add('on');
       });
