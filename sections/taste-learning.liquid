@@ -48,7 +48,7 @@
             </div>
             <div class="incl">{{ 'zk.pk_incl' | t }}</div>
             <ul>
-              {%- for i in (1..4) -%}
+              {%- for i in (1..5) -%}
                 {%- liquid
                   assign sk = 'item_' | append: i
                   assign val = block.settings[sk]
@@ -56,7 +56,7 @@
                   assign translated = tkey | t
                 -%}
                 {%- comment -%}
-                  Packs have 3 or 4 bullets, so the 4th key legitimately does not exist for
+                  Packs have 3 to 5 bullets, so the later keys legitimately do not exist for
                   every pack. The `t` filter returns 'Translation missing: ...' rather than
                   the key itself, so that is what has to be detected.
                 {%- endcomment -%}
