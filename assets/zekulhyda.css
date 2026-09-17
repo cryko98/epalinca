@@ -3162,3 +3162,12 @@ nav.main a.nav-shop.on { border-color: var(--amber-2); }
 .badge-m:hover .badge-m__stack.n3 .badge-m__photo:nth-child(2) { transform: translate(4px, -20px) scale(.82); }
 .badge-m:hover .badge-m__stack.n3 .badge-m__photo:nth-child(3) { transform: translate(38px, 6px) scale(.76) rotate(6deg); }
 @media (max-width:600px) { .badge-m__stack { width: 100px; height: 100px; } .badge-m__stack .badge-m__photo { width: 100px; height: 100px; } }
+
+/* Contact: the wordmark leads, the legal company name sits under it, small and quiet. */
+#contact .contact__logo { width: min(280px, 72%); color: #F3F1EC; margin: 0 0 2rem; }
+#contact .contact__logo svg { width: 100%; height: auto; display: block; }
+#contact .contact__firm {
+  margin: .9rem 0 1.1rem; font-family: "IBM Plex Mono", monospace; font-weight: 500;
+  font-size: .72rem; letter-spacing: .16em; text-transform: uppercase; color: var(--fog);
+}
+@media (max-width: 600px) { #contact .contact__logo { width: 200px; } }
