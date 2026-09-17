@@ -22,9 +22,9 @@
       homepage. The current one is marked and not a link.
     {%- endcomment -%}
     {%- if settings.show_distilat -%}
-      {%- assign cats = 'fructe,struguri,wild,barrique,distilat-sticla-albastra' | split: ',' -%}
+      {%- assign cats = 'fructe,struguri,wild,premiate,barrique,distilat-sticla-albastra' | split: ',' -%}
     {%- else -%}
-      {%- assign cats = 'fructe,struguri,wild,barrique' | split: ',' -%}
+      {%- assign cats = 'fructe,struguri,wild,premiate,barrique' | split: ',' -%}
     {%- endif -%}
     <div class="filters">
       <a href="{{ routes.all_products_collection_url }}">{{ 'zk.shop_all' | t }}</a>

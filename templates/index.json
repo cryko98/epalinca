@@ -66,14 +66,7 @@
           }
         }
       },
-      "block_order": [
-        "f0",
-        "f1",
-        "f2",
-        "f3",
-        "f4",
-        "f5"
-      ]
+      "block_order": ["f1", "f2", "f3", "f0", "f4", "f5"]
     },
     "partners": {
       "type": "partners-marquee",
