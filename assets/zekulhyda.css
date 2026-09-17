@@ -3370,3 +3370,12 @@ nav.main a { white-space: nowrap; }
 .zk-seotext p { margin: 0 0 1rem; }
 .zk-seotext a { color: var(--amber-2); }
 .pdp__specs .pdp__spec--wide { grid-column: 1 / -1; }
+
+/* Mobile hero: the slide bar used to float over the bottom of the text (absolute, with a
+   fixed 9rem reserve that the longer lead outgrew on phones). Below 860px it now sits in
+   the flow under the text, so nothing can be covered whatever the font or line count. */
+@media (max-width: 860px) {
+  .hero .wrap { padding-bottom: 2.4rem; }
+  .slidebar { position: relative; z-index: 3; background: rgba(11, 11, 12, .55); }
+  .slidebar .wrap { padding-top: 1rem; padding-bottom: 1.1rem; row-gap: .9rem; }
+}
