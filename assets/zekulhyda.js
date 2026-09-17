@@ -101,19 +101,19 @@ $('#coForm').onsubmit=e=>{e.preventDefault(); $('#checkout').hidden=true; Object
 
 const PARTNERS = [
   {name:"epalinca.ro", type:"shop", city:"Zekulhyda webshop", url:"https://epalinca.ro", style:"mono", real:true},
-  {name:"Zekulhyda Taste & Learning", type:"bar", city:"Székelyhíd · Săcueni", url:"#taste", style:"", real:true, maps:"Zekulhyda, Strada Petőfi Sándor 116, Săcueni 417435"},
-  {name:"Old Chef Restaurant", type:"rest", city:"Biharia", url:"https://www.facebook.com/Oldchefbiharia/", style:"", img:ZKI('zk-41.jpg'), real:true, maps:"Old Chef Restaurant, Biharia, Bihor"},
-  {name:"Artemis Leto", type:"rest", city:"Nagyvárad · Oradea", url:"https://artemisleto.ro/", style:"", img:ZKI('zk-partner-artemis.jpg'), real:true, maps:"Artemis Leto, Calea Aradului 91P, Oradea"},
+  {name:"Zekulhyda Taste & Learning", type:"bar", city:"Székelyhíd · Săcueni", url:"#taste", style:"", real:true, maps:"Zekulhyda Taste & Learning, Strada Petőfi Sándor 116, Săcueni 417435"},
+  {name:"Old Chef Restaurant", type:"rest", city:"Biharia", url:"https://www.facebook.com/Oldchefbiharia/", style:"", img:ZKI('zk-41.jpg'), real:true, maps:"Restaurant Old Chef, Biharia, Bihor"},
+  {name:"Artemis Leto", type:"rest", city:"Nagyvárad · Oradea", url:"https://artemisleto.ro/", style:"", img:ZKI('zk-partner-artemis.jpg'), real:true, maps:"Artemis Leto, Calea Aradului 91P, Oradea 410224"},
   {name:"Botanic by Armonia", type:"rest", city:"Nagyvárad · Oradea", url:"https://botanicbyarmonia.ro/", style:"", img:ZKI('zk-partner-botanic.jpg'), real:true, maps:"Botanic by Armonia, Strada Cele Trei Crișuri 4, Oradea"},
-  {name:"Mercure Oradea · Grand Hotel West", type:"hotel", city:"Nagyvárad · Oradea", url:"https://all.accor.com/hotel/C1R7/index.en.shtml", style:"", img:ZKI('zk-partner-mercure.jpg'), real:true, maps:"Mercure Oradea, Oradea"},
+  {name:"Mercure Oradea · Grand Hotel West", type:"hotel", city:"Nagyvárad · Oradea", url:"https://all.accor.com/hotel/C1R7/index.en.shtml", style:"", img:ZKI('zk-partner-mercure.jpg'), real:true, maps:"Mercure Oradea, Strada Ceyrat 37, Oradea 410087"},
   {name:"Muma Codrului", type:"rest", city:"Colești · Bihor", url:"https://www.facebook.com/MumaCodruluiColesti/", style:"", real:true, maps:"Muma Codrului, Colești, Bihor"},
-  {name:"Noo'vo Resto Lounge", type:"rest", city:"Nagyvárad · Oradea", url:"https://noovo.ro/", style:"", img:ZKI('zk-partner-noovo.jpg'), real:true, maps:"Noo'vo Resto Lounge, Strada Vasile Alecsandri 5, Oradea"},
-  {name:"Lotus Therm Spa & Luxury Resort", type:"hotel", city:"Félixfürdő · Băile Felix", url:"https://lotustherm.ro/", style:"", img:ZKI('zk-partner-lotus.jpg'), real:true, maps:"Lotus Therm Spa & Luxury Resort, Băile Felix"},
-  {name:"Marty Restaurants", type:"rest", city:"Nagyvárad · Oradea", url:"https://martyrestaurants.ro/", style:"", img:ZKI('zk-partner-marty.jpg'), real:true, maps:"Marty Restaurants, Strada Zorelelor 14, Oradea"},
+  {name:"Noo'vo Resto Lounge", type:"rest", city:"Nagyvárad · Oradea", url:"https://noovo.ro/", style:"", img:ZKI('zk-partner-noovo.jpg'), real:true, maps:"Noo'vo Resto Lounge, Strada Vasile Alecsandri 5, Oradea 410072"},
+  {name:"Lotus Therm Spa & Luxury Resort", type:"hotel", city:"Félixfürdő · Băile Felix", url:"https://lotustherm.ro/", style:"", img:ZKI('zk-partner-lotus.jpg'), real:true, maps:"Lotus Therm Spa & Luxury Resort, Strada Victoria 20, Băile Felix 417500"},
+  {name:"Marty Restaurants", type:"rest", city:"Nagyvárad · Oradea", url:"https://martyrestaurants.ro/", style:"", img:ZKI('zk-partner-marty.jpg'), real:true, maps:"Marty Restaurants, Strada Zorelelor 14A, Oradea"},
   {name:"Crinul Alb", type:"rest", city:"Nagyvárad · Oradea", url:"https://crinulalboradea.ro/", style:"", img:ZKI('zk-partner-crinul.jpg'), real:true, maps:"Restaurant Crinul Alb, Parcul Traian 31, Oradea"},
   {name:"Stokker Restaurant", type:"rest", city:"Nagyvárad · Oradea", url:"https://www.stokkerhotel.ro/", style:"", img:ZKI('zk-partner-stokker.jpg'), real:true, maps:"Restaurant Stokker, Parcul Petőfi Sándor 16, Oradea"},
-  {name:"Corsarul", type:"rest", city:"Nagyvárad · Oradea", url:"https://itl.restaurantcorsarul.ro/", style:"", img:ZKI('zk-partner-corsarul.jpg'), real:true, maps:"Restaurant Corsarul, Aleea Emanuil Gojdu 41, Oradea"},
-  {name:"Midtown Six", type:"rest", city:"Nagyvárad · Oradea", url:"https://www.facebook.com/MidtownSixRestaurant/", style:"", img:ZKI('zk-partner-midtown.jpg'), real:true, maps:"Midtown Six, Strada Vasile Alecsandri 6, Oradea"},
+  {name:"Corsarul", type:"rest", city:"Nagyvárad · Oradea", url:"https://itl.restaurantcorsarul.ro/", style:"", img:ZKI('zk-partner-corsarul.jpg'), real:true, maps:"Restaurant Corsarul, Cetatea Oradea Corp J, Oradea 410067"},
+  {name:"Midtown Six", type:"rest", city:"Nagyvárad · Oradea", url:"https://www.facebook.com/MidtownSixRestaurant/", style:"", img:ZKI('zk-partner-midtown.jpg'), real:true, maps:"Midtown Six, Strada Vasile Alecsandri 6, Oradea 410072"},
   {name:"Romconex Wine & Spirits", type:"dist", city:"Nagyvárad · Oradea", url:"https://www.facebook.com/winespiritsoradea", style:"sans", real:true, maps:"Romconex, Strada Căii Ferate 13, Oradea"},
   {name:"Citadin Wine & Spirits", type:"store", city:"Nagyvárad · Oradea", url:"https://www.instagram.com/citadin_oradea/", style:"sans", real:true, maps:"Citadin Wine & Spirits, Strada Oneștilor 17, Oradea"},
 ];
@@ -121,7 +121,7 @@ const PICON = {dist:'<svg viewBox="0 0 24 24"><path d="M3 9l9-5 9 5v11H3zM9 20v-
 const mapsUrl = q => 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(q);
 function partnerHref(p){ return p.maps ? mapsUrl(p.maps) : (p.url && p.url !== '#' ? p.url : ''); }
 function renderPartners(){
-  const items = PARTNERS.map(p=>`<a class="logo${p.img?' has-pic':''}" href="${p.url}" ${p.url.startsWith('http')?'target="_blank" rel="noopener"':''}>${p.img?`<img class="pl" src="${p.img}" alt="${p.name}" loading="lazy">`:PICON[p.type]}<span class="nm ${p.style}">${p.name}</span><span class="ty">${t('partners_type_'+p.type)} · ${p.city}</span></a>`).join('');
+  const items = PARTNERS.map(p=>{const href=p.maps?mapsUrl(p.maps):p.url; return `<a class="logo${p.img?' has-pic':''}" href="${href}" ${href.startsWith('http')?'target="_blank" rel="noopener"':''} title="${p.maps?t('partners_map'):''}">${p.img?`<img class="pl" src="${p.img}" alt="${p.name}" loading="lazy">`:PICON[p.type]}<span class="nm ${p.style}">${p.name}</span><span class="ty">${t('partners_type_'+p.type)} · ${p.city}</span></a>`;}).join('');
   $('#ptrack').innerHTML = items + items;
   const list = $('#pAllList');
   if (list) list.innerHTML = PARTNERS.map(p=>{
