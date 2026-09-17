@@ -3,97 +3,105 @@
   Paraméterek: company, cui, regcom, address, email, phone, updated
 {%- endcomment -%}
 
-<span class="zk-legal__eyebrow">Jogi információk</span>
-<h1 class="zk-legal__title">Általános szerződési feltételek</h1>
-<p class="zk-legal__updated">Utolsó frissítés: {{ updated }}</p>
-<p class="zk-legal__note">Ez a szöveg tájékoztató jellegű fordítás. Eltérés esetén a román nyelvű „Termeni și condiții” az irányadó.</p>
-
-<h2>1. Az eladó adatai</h2>
-<div class="zk-legal__firma">
-  <p><strong>{{ company }}</strong></p>
-  <p>Székhely: {{ address }}</p>
-  <p>Adószám (CUI/CIF): {{ cui }} &nbsp;·&nbsp; Cégjegyzékszám: {{ regcom }}</p>
-  <p>E-mail: <a href="mailto:{{ email }}">{{ email }}</a>{% if phone != blank %} &nbsp;·&nbsp; Telefon: {{ phone }}{% endif %}</p>
+<div class="zk-legal__head">
+  <span class="zk-legal__eyebrow">Jogi információk</span>
+  <h1 class="zk-legal__title">Általános szerződési feltételek</h1>
+  <p class="zk-legal__updated">Utolsó frissítés: {{ updated }} · a <strong>www.epalinca.ro</strong> webáruházra vonatkozik</p>
+  <p class="zk-legal__note">Ez a szöveg tájékoztató jellegű fordítás. Eltérés esetén a román nyelvű „Termeni și condiții” az irányadó.</p>
 </div>
-<p>Az <strong>epalinca.ro</strong> webáruházat (a továbbiakban: „Weboldal”) a fenti társaság (a továbbiakban: „Eladó”) üzemelteti, amely a <strong>Zekulhyda</strong> márkanév alatt forgalmazott szeszes italok gyártója.</p>
 
-<h2>2. Fogalmak</h2>
+<h2 id="s1"><span>01</span>Fogalmak</h2>
+<p><strong>1.1. Az Eladó.</strong> A www.epalinca.ro webáruház tulajdonosa és üzemeltetője:</p>
+<div class="zk-legal__firma">
+  <p class="zk-legal__firma-name">{{ company }}</p>
+  <p><span>Székhely</span>{{ address }}</p>
+  <p><span>Adószám (CUI)</span>{{ cui }}</p>
+  <p><span>Cégjegyzékszám</span>{{ regcom }}</p>
+  <p><span>E-mail</span><a href="mailto:{{ email }}">{{ email }}</a></p>
+  {%- if phone != blank %}<p><span>Telefon</span>{{ phone }}</p>{% endif %}
+  <p><span>Márka</span>Zekulhyda — prémium pálinka az Érmellékről, Székelyhíd, Bihar</p>
+</div>
+<p><strong>1.2. Weboldal</strong> — a www.epalinca.ro domain, aldomainjei és minden rajtuk keresztül elérhető oldal.</p>
+<p><strong>1.3. Tartalom</strong> — a Weboldalon megtekinthető vagy elérhető minden információ: szövegek, képek, grafikák, arculati elemek, termékleírások, árak, valamint a Vásárlónak elektronikus úton küldött közlemények tartalma.</p>
+<p><strong>1.4. Vásárló / Fogyasztó</strong> — a Weboldalt használó, illetve rendelést leadó nagykorú természetes személy vagy jogi személy. <em>Fogyasztó</em> az a természetes személy, aki kereskedelmi, ipari, termelő, kézműves vagy szabadfoglalkozású tevékenységén kívül eső célból jár el (OUG 34/2014, OG 21/1992).</p>
+<p><strong>1.5. Rendelés</strong> — az az elektronikus dokumentum, amellyel a Vásárló a kiválasztott Termékek megvásárlására irányuló szándékát kifejezi a jelen feltételek szerint.</p>
+<p><strong>1.6. Távollévők között kötött szerződés</strong> — az Eladó és a Vásárló között a Weboldalon, a felek egyidejű fizikai jelenléte nélkül létrejött szerződés (OUG 34/2014).</p>
+<p><strong>1.7. Termékek</strong> — a Weboldalon eladásra kínált szeszes italok (pálinka, gyümölcspárlatok) és kiegészítők.</p>
+<p><strong>1.8. Tranzakció</strong> — egy Termék értékesítéséből eredő összeg beszedése vagy visszatérítése az Eladó által biztosított fizetési módokon.</p>
+
+<h2 id="s2"><span>02</span>Általános rendelkezések</h2>
+<p><strong>2.1.</strong> A Weboldal használata és a rendelés leadása a jelen feltételek, valamint az <a href="{{ pages['politica-de-confidentialitate'].url }}">Adatvédelmi tájékoztató</a>, a <a href="{{ pages['politica-cookies'].url }}">Cookie-szabályzat</a>, a <a href="{{ pages['livrare-si-plata'].url }}">Szállítás és fizetés</a> és az <a href="{{ pages['politica-de-retur'].url }}">Elállás és visszaküldés</a> oldal — mint a szerződés szerves részei — elolvasását, megértését és teljes elfogadását jelenti.</p>
+<p><strong>2.2.</strong> Az Eladó a feltételeket bármikor frissítheti. Egy rendelésre a leadás napján hatályos változat vonatkozik, amelyet a visszaigazoló e-mailben tartós adathordozón bocsátunk rendelkezésedre.</p>
+<div class="zk-legal__callout">
+  <strong>2.3. A Weboldal kizárólag 18. életévüket betöltött személyeknek szól.</strong>
+  <p>A Weboldal kizárólag alkoholtartalmú italokat forgalmaz. A 61/1991. sz. (újra kihirdetett) és a 148/2000. sz. törvény értelmében alkohol kiskorúnak történő értékesítése és kiszállítása tilos. A belépéskori korhatár-nyilatkozattal és a rendelés leadásával saját felelősségedre kijelented, hogy nagykorú vagy. A csomagot kizárólag nagykorú személynek adjuk át; a futár személyazonosító okmányt kérhet, és megtagadhatja az átadást, ha az életkor nem ellenőrizhető — ilyenkor a rendelést töröljük, a kifizetett összeget a ténylegesen felmerült szállítási költség levonásával visszatérítjük. Az Eladó megtagadhat minden olyan rendelést, amelyről észszerűen feltételezhető, hogy kiskorú adta le vagy kiskorú részére készült.</p>
+</div>
+<p><strong>2.4.</strong> A Vásárló felel a fiókján vagy rendelési adatain keresztül végzett minden tevékenységért, és vállalja, hogy a Weboldalt a jogszabályoknak és a jó erkölcsnek megfelelően használja. <strong>A túlzott alkoholfogyasztás súlyosan károsítja az egészséget.</strong> Alkohol hatása alatt ne vezess.</p>
+
+<h2 id="s3"><span>03</span>Tartalom és szellemi tulajdon</h2>
+<p><strong>3.1.</strong> A Weboldal teljes Tartalma — a Zekulhyda védjegy, az epalinca.ro név, a szövegek, fotók, grafikák, címkék és arculati elemek — az Eladó tulajdona vagy a jogosultak engedélyével kerül felhasználásra, és a szerzői jogról szóló 8/1996. sz., valamint a védjegyekről szóló 84/1998. sz. törvény védi. Másolása, többszörözése, terjesztése, módosítása vagy újraközlése — egészben vagy részben — az Eladó előzetes írásos engedélye nélkül tilos.</p>
+<p><strong>3.2.</strong> A termékképek illusztrációk; az egyes tételek között kisebb szín- vagy címkeeltérés előfordulhat, ami a Termék minőségét nem érinti. Az Eladó mindent megtesz a Tartalom pontosságáért, de a nyilvánvaló elírások és számítási hibák nem kötelezik.</p>
+<p><strong>3.3.</strong> A „Pălincă” az (EU) 2019/787 rendelet alapján oltalom alatt álló földrajzi jelzés szeszes italokra. A Termékek lényeges jellemzőit (kategória, alkoholtartalom, nettó térfogat, gyártó) a címke és a termékoldal tartalmazza az 1169/2011/EU rendeletnek megfelelően.</p>
+
+<h2 id="s4"><span>04</span>Kapcsolat és közlemények</h2>
+<p><strong>4.1.</strong> Az Eladó teljes elérhetőségét a Weboldalon közzéteszi: {{ address }} · <a href="mailto:{{ email }}">{{ email }}</a>{% if phone != blank %} · {{ phone }}{% endif %}.</p>
+<p><strong>4.2.</strong> Egy űrlap kitöltésével vagy rendelés leadásával a Vásárló hozzájárul, hogy az Eladó a rendeléssel vagy kérésével kapcsolatban bármely elérhető módon (e-mail, telefon, SMS) felvegye vele a kapcsolatot. A Vásárló által megadott e-mail-címre küldött közlemény kézbesítettnek tekintendő.</p>
+<p><strong>4.3.</strong> Kereskedelmi közleményt (hírlevél, ajánlat) csak a Vásárló előzetes, kifejezett hozzájárulásával küldünk az 506/2004. sz. törvény 12. cikke szerint; a leiratkozás bármikor lehetséges az üzenetekben található linkkel vagy a fenti e-mail-címen.</p>
+
+<h2 id="s5"><span>05</span>Személyes adatok</h2>
+<p><strong>5.1.</strong> A személyes adatokat az (EU) 2016/679 rendelet (GDPR) és a 190/2018. sz. törvény szerint, az <a href="{{ pages['politica-de-confidentialitate'].url }}">Adatvédelmi tájékoztatóban</a> részletezett feltételekkel kezeljük.</p>
+<p><strong>5.2.</strong> A rendeléskor megadott adatokat a szerződés teljesítésére (feldolgozás, számlázás, kiszállítás), az adó- és számviteli kötelezettségek teljesítésére és — hozzájárulásoddal — kereskedelmi közleményekre használjuk. Az adatokat a rendelés teljesítésében részt vevő szolgáltatóknak (futár, fizetési szolgáltató, webáruház-platform), valamint megkeresésre az illetékes hatóságoknak adhatjuk át.</p>
+<p><strong>5.3.</strong> Jogod van a hozzáféréshez, helyesbítéshez, törléshez, korlátozáshoz, adathordozhatósághoz és tiltakozáshoz, valamint panaszt tehetsz az ANSPDCP-nél (<a href="https://www.dataprotection.ro/" target="_blank" rel="noopener nofollow">dataprotection.ro</a>). A kérelmeket a <a href="mailto:{{ email }}">{{ email }}</a> címre kell küldeni.</p>
+<p><strong>5.4.</strong> A Weboldal sütiket használ; a részleteket és a beállítási lehetőségeket a <a href="{{ pages['politica-cookies'].url }}">Cookie-szabályzat</a> tartalmazza.</p>
+
+<h2 id="s6"><span>06</span>Rendelés és a szolgáltatás igénybevétele</h2>
+<p><strong>6.1.</strong> A rendelés a kosár lépéseinek végigjárásával és a fizetési kötelezettséget egyértelműen jelző gomb („Megrendelés”) megnyomásával adható le (OUG 34/2014, 8. cikk). A rendelés az Eladónak címzett vételi ajánlat.</p>
+<p><strong>6.2.</strong> Leadás után a Vásárló automatikus e-mailt kap a rendelés rögzítéséről az elektronikus kereskedelemről szóló 365/2002. sz. törvény szerint. Ez az e-mail a rendelés beérkezését igazolja, nem annak elfogadását.</p>
+<p><strong>6.3.</strong> A szerződés akkor jön létre, amikor az Eladó a rendelés feladásáról szóló visszaigazolást elküldi, kártyás fizetés esetén pedig a fizetés visszaigazolásakor.</p>
+<p><strong>6.4.</strong> Az Eladó — a Vásárló tájékoztatása mellett — megtagadhatja vagy törölheti a rendelést, ha:</p>
 <ul>
-  <li><strong>Fogyasztó</strong> – az a természetes személy, aki kereskedelmi, ipari, termelő, kézműves vagy szabadfoglalkozású tevékenységén kívül eső célból jár el (34/2014. sz. sürgősségi kormányrendelet – OUG 34/2014; 21/1992. sz. kormányrendelet – OG 21/1992).</li>
-  <li><strong>Vásárló</strong> – a Weboldalon rendelést leadó nagykorú természetes személy vagy jogi személy.</li>
-  <li><strong>Rendelés</strong> – az az elektronikus dokumentum, amellyel a Vásárló a kiválasztott termékek megvásárlására irányuló szándékát kifejezi.</li>
-  <li><strong>Távollévők között kötött szerződés</strong> – az Eladó és a Vásárló között a Weboldalon, a felek egyidejű fizikai jelenléte nélkül létrejött szerződés az OUG 34/2014 értelmében.</li>
-  <li><strong>Termékek</strong> – a Weboldalon eladásra kínált szeszes italok (pálinka, gyümölcspárlatok) és kiegészítők.</li>
+  <li>a tranzakciót a kártyakibocsátó bank nem engedélyezi, vagy a fizetés nem igazolódik vissza;</li>
+  <li>a Vásárló által megadott adatok hiányosak vagy hibásak;</li>
+  <li>a megrendelt Termék már nem elérhető, vagy a feltüntetett ár nyilvánvaló hibát tartalmaz;</li>
+  <li>a Vásárló életkora nem ellenőrizhető, vagy csalásra, rosszhiszeműségre utaló észszerű jelek vannak;</li>
+  <li>a Vásárló korábbi csomagokat ismételten nem vett át, vagy megszegte a jelen feltételeket.</li>
 </ul>
+<p><strong>6.5.</strong> Ha egy Termék a rendelés leadása után válik elérhetetlenné, a Vásárlót a lehető leghamarabb tájékoztatjuk, és választhat a csere, a halasztás vagy a rendelés törlése között, a teljes összeg visszatérítésével.</p>
 
-<h2>3. A feltételek elfogadása</h2>
-<p>A Weboldal használatával és a rendelés leadásával megerősíted, hogy a jelen Általános szerződési feltételeket, valamint az <a href="{{ pages['politica-de-confidentialitate'].url }}">Adatvédelmi tájékoztatót</a>, a <a href="{{ pages['politica-cookies'].url }}">Cookie-szabályzatot</a>, a <a href="{{ pages['livrare-si-plata'].url }}">Szállítás és fizetés</a>, valamint az <a href="{{ pages['politica-de-retur'].url }}">Elállás és visszaküldés</a> oldalt – amelyek a szerződés szerves részét képezik – elolvastad, megértetted és teljes egészében elfogadod. Az Eladó a feltételeket frissítheti; egy adott rendelésre a leadás napján hatályos változat vonatkozik, amelyet tartós adathordozón (visszaigazoló e-mail) bocsátunk rendelkezésedre.</p>
+<h2 id="s7"><span>07</span>Termékek, árak, fizetés és szállítás</h2>
+<p><strong>7.1. Árak.</strong> Minden ár román lejben (RON) értendő, tartalmazza az áfát és az alkoholtartalmú italokra vonatkozó jövedéki adót a román adótörvénykönyv szerint. Az ár nem tartalmazza a szállítási költséget, amelyet a rendelés véglegesítése előtt külön tüntetünk fel (OUG 34/2014, 6. cikk). A rendelés leadásakor megjelenített ár az irányadó.</p>
+<p><strong>7.2.</strong> Árcsökkentés esetén feltüntetjük a korábbi árat, azaz a kedvezmény alkalmazását megelőző 30 napban alkalmazott legalacsonyabb árat az 58/2022. sz. kormányrendelettel módosított OG 21/1992 szerint.</p>
+<p><strong>7.3. Fizetés.</strong> A fizetés a véglegesítéskor megjelenített módokon történhet: <strong>bankkártyával</strong> a partner fizetési szolgáltató biztonságos rendszerén keresztül (az Eladó a kártyaadatokat nem tárolja), vagy — ahol elérhető — <strong>utánvéttel</strong>. Kártyás fizetésért külön díjat nem számítunk fel.</p>
+<p><strong>7.4. Számlázás.</strong> A számla a Vásárló által megadott adatok alapján készül, amelyek helyességéért a Vásárló felel. A számlát elektronikusan küldjük a megadott e-mail-címre, és ahol a törvény előírja, a román RO e-Factura rendszeren keresztül továbbítjuk (296/2023. sz. törvény, OUG 120/2021). A feltételek elfogadásával a Vásárló hozzájárul az elektronikus számlához.</p>
+<p><strong>7.5. Szállítás.</strong> A kiszállítás futárszolgálattal, kizárólag Románia területén, a rendelésben megadott címre történik. A várható határidőt és költségeket a <a href="{{ pages['livrare-si-plata'].url }}">Szállítás és fizetés</a> oldal tartalmazza; eltérő megállapodás hiányában a Termékeket a szerződés létrejöttétől számított legfeljebb 30 napon belül szállítjuk (OUG 34/2014, 18. cikk). A kárveszély a Termékek fizikai birtokbavételével száll át a Vásárlóra (20. cikk).</p>
+<p><strong>7.6.</strong> Javasoljuk a csomag átvételkori ellenőrzését a futár jelenlétében. A látható sérüléseket a futár jegyzőkönyvében kell rögzíteni és mielőbb jelezni az Eladónak. A Termékek jövedéki termékek, amelyeket lezárt csomagolásban, a gyártó által felhelyezett zárjeggyel szállítunk.</p>
 
-<h2>4. Alsó korhatár – 18 év</h2>
-<p>A Weboldal <strong>kizárólag alkoholtartalmú italokat</strong> forgalmaz. A hatályos jogszabályok (az újra kihirdetett 61/1991. sz. törvény és a reklámról szóló 148/2000. sz. törvény) értelmében alkoholtartalmú ital kiskorúnak történő értékesítése és kiszállítása <strong>tilos</strong>. Ennek megfelelően:</p>
-<ul>
-  <li>rendelést csak <strong>18. életévét betöltött</strong> személy adhat le; a Weboldalra való belépéskor tett korhatár-nyilatkozattal és a rendelés leadásával saját felelősségedre kijelented, hogy nagykorú vagy;</li>
-  <li>a csomagot kizárólag nagykorú személynek adjuk át; a futár személyazonosító okmányt kérhet, és megtagadhatja az átadást, ha az életkor nem ellenőrizhető – ilyenkor a rendelést töröljük, a kifizetett összeget a ténylegesen felmerült szállítási költség levonásával visszatérítjük;</li>
-  <li>az Eladó fenntartja a jogot, hogy megtagadja vagy törölje azt a rendelést, amelyről észszerűen feltételezhető, hogy kiskorú adta le, vagy kiskorú részére készült.</li>
-</ul>
-<p><strong>A túlzott alkoholfogyasztás súlyosan károsítja az egészséget.</strong> Alkohol hatása alatt ne vezess.</p>
+<h2 id="s8"><span>08</span>Fogyasztói jogok és felelősség</h2>
+<div class="zk-legal__callout">
+  <strong>8.1. Elállási jog — 14 nap.</strong>
+  <p>Fogyasztóként indokolás nélkül elállhatsz a szerződéstől attól a naptól számított 14 naptári napon belül, amelyen te vagy az általad kijelölt, a fuvarozótól eltérő harmadik személy a Termékeket birtokba veszi (OUG 34/2014, 9. cikk), a <a href="mailto:{{ email }}">{{ email }}</a> címre küldött egyértelmű nyilatkozattal vagy az <a href="{{ pages['politica-de-retur'].url }}">Elállás és visszaküldés</a> oldalon található nyilatkozat-mintával.</p>
+</div>
+<p><strong>8.2.</strong> A Termékeket indokolatlan késedelem nélkül, legkésőbb az elállás közlésétől számított 14 napon belül vissza kell küldeni; a visszaküldés közvetlen költsége a Vásárlót terheli (14. cikk). Az Eladó a kifizetett teljes összeget — a szokásos kiszállítás költségével együtt — legkésőbb a tájékoztatástól számított 14 napon belül visszatéríti, a visszatérítést a Termékek visszaérkezéséig vagy a feladás igazolásáig visszatarthatja (13. cikk). A Vásárló felel a Termékek értékcsökkenéséért, ha az a jellegük és tulajdonságaik megállapításához szükségesen túlmenő használatból ered.</p>
+<p><strong>8.3. Kivétel</strong> (OUG 34/2014, 16. cikk e) pont): az elállási jog nem gyakorolható olyan zárt csomagolású Termék esetében, amelyet a kiszállítás után felbontottak, és egészségvédelmi vagy higiéniai okból nem küldhető vissza. A felbontott vagy sérült zárjeggyel, kupakkal, illetve zárszalaggal ellátott palackok nem küldhetők vissza, kivéve, ha a Termék hibás.</p>
+<p><strong>8.4. Megfelelőség.</strong> Az Eladó a kiszállításkor fennálló bármely hibáért az OUG 140/2021 szerint felel, 2 évig. Hiba esetén — a törvényben meghatározott sorrendben — jogosult vagy a megfelelőség helyreállítására (csere), arányos árleszállításra vagy a szerződéstől való elállásra, költségmentesen. Nem minősül hibának a gyümölcspárlatok természetes üledéke, a tételek közötti természetes színeltérés vagy a kiszállítást követő helytelen tárolásból eredő károsodás.</p>
+<p><strong>8.5. Panaszok.</strong> Panaszt a <a href="mailto:{{ email }}">{{ email }}</a> címen{% if phone != blank %} vagy a {{ phone }} telefonszámon{% endif %} tehetsz; legfeljebb 30 naptári napon belül válaszolunk.</p>
+<p><strong>8.6. Felelősség.</strong> Az Eladó a fogyasztóval szemben a törvény szerint felel. Nem felel a Termékek felelőtlen vagy a jogszabályi előírásokkal ellentétes fogyasztásáért, a vis maior miatti nemteljesítésért (előre nem látható és elháríthatatlan események, ideértve a futár- vagy fizetési szolgáltatás rajta kívül álló okból történő kiesését), sem azon harmadik fél weboldalak tartalmáért, amelyekre a Weboldal hivatkozhat. A jelen feltételek egyetlen rendelkezése sem korlátozza a fogyasztókat a kötelező jogszabályok alapján megillető jogokat.</p>
 
-<h2>5. Termékek és tájékoztatás</h2>
-<p>A Termékek lényeges jellemzőit (megnevezés, kategória, alkoholtartalom, nettó térfogat, gyártó, adott esetben allergének) az egyes termékoldalak és a termék címkéje tartalmazza, a fogyasztók élelmiszerekkel kapcsolatos tájékoztatásáról szóló 1169/2011/EU rendeletnek és a szeszes italokról szóló (EU) 2019/787 rendeletnek megfelelően. A legalább 10% alkoholtartalmú szeszes italok esetében minőségmegőrzési idő feltüntetése nem kötelező.</p>
-<p>A képek illusztrációk; az egyes tételek között kisebb szín- vagy címkeeltérés előfordulhat, ami a termék minőségét nem érinti. Az Eladó minden tőle elvárhatót megtesz az adatok pontosságáért, azonban a nyilvánvaló elírások és számítási hibák nem kötelezik.</p>
-<p>A készlet a Weboldalon valós időben jelenik meg. Ha egy megrendelt termék elérhetetlenné válik, a lehető leghamarabb értesítünk, és felajánljuk a cserét, a halasztást vagy a rendelés törlését a teljes vételár visszatérítésével.</p>
-
-<h2>6. Árak</h2>
-<p>Minden ár <strong>román lejben (RON)</strong> értendő, és <strong>tartalmazza az áfát</strong> és az alkoholtartalmú italokra vonatkozó jövedéki adót a román adótörvénykönyv szerint. Az ár nem tartalmazza a szállítási költséget, amelyet a rendelés véglegesítése előtt külön tüntetünk fel (OUG 34/2014, 6. cikk). Árcsökkentés esetén feltüntetjük a korábbi árat, azaz a kedvezmény alkalmazását megelőző 30 napban alkalmazott legalacsonyabb árat, az 58/2022. sz. kormányrendelettel módosított OG 21/1992 szerint.</p>
-<p>A rendelés leadásakor megjelenített ár az irányadó. Az Eladó az árakat bármikor módosíthatja; ez a már visszaigazolt rendeléseket nem érinti.</p>
-
-<h2>7. A rendelés leadása és a szerződés létrejötte</h2>
-<p>A rendelés a kosár lépéseinek végigjárásával és a fizetési kötelezettséget egyértelműen jelző gomb („Megrendelés” / „Fizetés”) megnyomásával adható le (OUG 34/2014, 8. cikk). A rendelés vételi ajánlatnak minősül. Leadás után automatikus e-mailt kapsz a rendelés rögzítéséről az elektronikus kereskedelemről szóló 365/2002. sz. törvény szerint.</p>
-<p><strong>A szerződés akkor jön létre</strong>, amikor az Eladó a rendelés feladásáról szóló visszaigazolást elküldi, kártyás fizetés esetén pedig a fizetés visszaigazolásakor. Az Eladó – a Vásárló tájékoztatása mellett – megtagadhatja vagy törölheti a rendelést a következő esetekben: a termék nem elérhető, nyilvánvaló ár- vagy megjelenítési hiba, észszerű csalásgyanú, az életkor ellenőrzésének lehetetlensége, hiányos szállítási adatok vagy a csomagok ismételt átvételi megtagadása.</p>
-
-<h2>8. Fizetési módok és számlázás</h2>
-<p>A fizetés a rendelés véglegesítésekor megjelenített módokon történhet: <strong>bankkártyával</strong> (a partner fizetési szolgáltató biztonságos rendszerén keresztül; az Eladó a kártyaadatokat nem tárolja) vagy – ahol elérhető – <strong>utánvéttel</strong> az átvételkor. Kártyás fizetésért külön díjat nem számítunk fel.</p>
-<p>Minden rendelésről elektronikus számlát állítunk ki, amelyet a megadott e-mail-címre küldünk, és ahol a törvény előírja, a román nemzeti RO e-Factura rendszeren keresztül továbbítunk a 296/2023. sz. törvény és a módosított 120/2021. sz. sürgősségi kormányrendelet szerint. A jelen feltételek elfogadásával hozzájárulsz a számla elektronikus formában történő kézbesítéséhez.</p>
-
-<h2>9. Szállítás</h2>
-<p>A kiszállítás futárszolgálattal, kizárólag Románia területén, a rendelésben megadott címre történik. A várható szállítási időt a <a href="{{ pages['livrare-si-plata'].url }}">Szállítás és fizetés</a> oldal tartalmazza; eltérő megállapodás hiányában a Termékeket a szerződés létrejöttétől számított legfeljebb 30 napon belül szállítjuk (OUG 34/2014, 18. cikk). A Termékek elvesztésének vagy sérülésének kockázata akkor száll át a Vásárlóra, amikor ő vagy az általa kijelölt, a fuvarozótól eltérő harmadik személy a Termékeket fizikailag birtokba veszi (OUG 34/2014, 20. cikk).</p>
-<p>Javasoljuk, hogy a csomagot átvételkor, a futár jelenlétében ellenőrizd; a látható sérüléseket a futár jegyzőkönyvében rögzítsd, és a lehető leghamarabb jelezd a fenti e-mail-címen. A Termékek jövedéki termékek, amelyeket lezárt csomagolásban, a gyártó által felhelyezett zárjeggyel szállítunk.</p>
-
-<h2>10. Elállási jog (visszaküldés)</h2>
-<p>Fogyasztóként <strong>indokolás nélkül, 14 naptári napon belül</strong> elállhatsz a szerződéstől attól a naptól számítva, amelyen te vagy az általad kijelölt, a fuvarozótól eltérő harmadik személy a Termékeket birtokba veszi (OUG 34/2014, 9. cikk). Az elálláshoz a határidő lejárta előtt egyértelmű nyilatkozatot kell tenned (e-mailben a fenti címre, postai úton vagy az <a href="{{ pages['politica-de-retur'].url }}">Elállás és visszaküldés</a> oldalon található elállási nyilatkozat-mintával).</p>
-<ul>
-  <li>A Termékeket indokolatlan késedelem nélkül, legkésőbb az elállás közlésétől számított 14 napon belül vissza kell küldened; <strong>a visszaküldés közvetlen költsége</strong> téged terhel (14. cikk).</li>
-  <li>A kifizetett teljes összeget – a szokásos kiszállítás költségével együtt – indokolatlan késedelem nélkül, legkésőbb az elállásról való tudomásszerzéstől számított 14 napon belül visszatérítjük; a visszatérítést a Termékek visszaérkezéséig vagy a feladás igazolásáig visszatarthatjuk (13. cikk).</li>
-  <li>Felelsz a Termékek értékcsökkenéséért, ha az a jellegük és tulajdonságaik megállapításához szükségesen túlmenő használatból ered.</li>
-</ul>
-<p><strong>Kivétel (OUG 34/2014, 16. cikk e) pont):</strong> az elállási jog <strong>nem gyakorolható</strong> olyan zárt csomagolású Termék esetében, amelyet a kiszállítás után felbontottak, és egészségvédelmi vagy higiéniai okból nem küldhető vissza. A felbontott vagy sérült zárjeggyel, kupakkal, illetve zárszalaggal ellátott palackok nem küldhetők vissza, kivéve, ha a Termék hibás.</p>
-
-<h2>11. Megfelelőség és jótállás</h2>
-<p>Az Eladó a fogyasztóval szemben a Termékek kiszállításkor fennálló bármely hibájáért az <strong>áruk adásvételéről szóló 140/2021. sz. sürgősségi kormányrendelet (OUG 140/2021)</strong> szerint felel, a kiszállítástól számított 2 évig. Hiba esetén – a törvényben meghatározott sorrendben – jogosult vagy a megfelelőség helyreállítására (csere), arányos árleszállításra vagy a szerződéstől való elállásra, költségmentesen. A kiszállítástól számított 12 hónapon belül jelentkező hibáról az ellenkező bizonyításáig vélelmezni kell, hogy már a kiszállításkor fennállt.</p>
-<p>Nem minősül hibának a gyümölcspárlatok természetes üledéke, a tételek közötti természetes színeltérés, illetve a kiszállítást követő helytelen tárolásból (napfény, szélsőséges hőmérséklet) eredő károsodás.</p>
-
-<h2>12. Panaszok és vitarendezés</h2>
-<p>Panaszt a <a href="mailto:{{ email }}">{{ email }}</a> címen{% if phone != blank %} vagy a {{ phone }} telefonszámon{% endif %} tehetsz. A beérkezéstől számított legfeljebb 30 naptári napon belül válaszolunk, és minden kifogást békés úton igyekszünk rendezni.</p>
+<h2 id="s9"><span>09</span>Vitarendezés</h2>
+<p><strong>9.1.</strong> Az esetleges vitás kérdéseket elsősorban békés úton, az Eladóval való közvetlen kapcsolatfelvétellel rendezzük.</p>
 <div class="zk-legal__anpc">
-  <p>Ha a megoldással nem vagy elégedett, a következő szervekhez fordulhatsz:</p>
+  <p><strong>9.2.</strong> Ha a megoldással nem vagy elégedett, a következő szervekhez fordulhatsz:</p>
   <ul>
-    <li><strong>ANPC</strong> – Országos Fogyasztóvédelmi Hatóság (Autoritatea Națională pentru Protecția Consumatorilor), Bd. Aviatorilor 72, 1. kerület, Bukarest; fogyasztói vonal: 021 9551; <a href="https://anpc.ro/" target="_blank" rel="noopener nofollow">anpc.ro</a> és <a href="https://reclamatiisal.anpc.ro/" target="_blank" rel="noopener nofollow">reclamatiisal.anpc.ro</a>.</li>
-    <li><strong>SAL</strong> – alternatív vitarendezés, az ANPC SAL Igazgatósága által a 38/2015. sz. kormányrendelet szerint lefolytatott ingyenes eljárás: <a href="https://anpc.ro/ce-este-sal/" target="_blank" rel="noopener nofollow">anpc.ro/ce-este-sal</a>.</li>
-    <li><strong>SOL</strong> – az európai online vitarendezési platform (ec.europa.eu/consumers/odr) az (EU) 2024/3228 rendelet alapján 2025. július 20-án megszűnt; határon átnyúló vitákkal a romániai Európai Fogyasztói Központhoz (<a href="https://www.eccromania.ro/" target="_blank" rel="noopener nofollow">eccromania.ro</a>) lehet fordulni.</li>
+    <li><strong>ANPC</strong> — Országos Fogyasztóvédelmi Hatóság, Bd. Aviatorilor 72, 1. kerület, Bukarest · fogyasztói vonal 021 9551 · <a href="https://anpc.ro/" target="_blank" rel="noopener nofollow">anpc.ro</a> · <a href="https://reclamatiisal.anpc.ro/" target="_blank" rel="noopener nofollow">reclamatiisal.anpc.ro</a></li>
+    <li><strong>SAL</strong> — alternatív vitarendezés, az ANPC SAL Igazgatósága által a 38/2015. sz. kormányrendelet szerint lefolytatott ingyenes eljárás · <a href="https://anpc.ro/ce-este-sal/" target="_blank" rel="noopener nofollow">anpc.ro/ce-este-sal</a></li>
+    <li><strong>SOL</strong> — az európai online vitarendezési platform 2025. július 20-án megszűnt ((EU) 2024/3228 rendelet); határon átnyúló vitákkal a romániai Európai Fogyasztói Központhoz lehet fordulni · <a href="https://www.eccromania.ro/" target="_blank" rel="noopener nofollow">eccromania.ro</a></li>
   </ul>
 </div>
+<p><strong>9.3.</strong> A békés úton vagy SAL-eljárásban nem rendezhető jogvitákban a hatáskörrel és illetékességgel rendelkező romániai bíróságok járnak el; fogyasztók esetében az illetékességet a fogyasztóvédelmi szabályok szerint kell megállapítani.</p>
 
-<h2>13. Felelősség</h2>
-<p>Az Eladó a fogyasztónak okozott károkért a törvény szerint felel. Nem felel a Termékek felelőtlen vagy a jogszabályi előírásokkal ellentétes fogyasztásáért, a vis maior (előre nem látható és elháríthatatlan események, ideértve a futár- vagy fizetési szolgáltatás rajta kívül álló okból történő kiesését) miatti nemteljesítésért, sem a Weboldal rendeltetésellenes használatából eredő károkért. A jelen feltételek egyetlen rendelkezése sem korlátozza a fogyasztókat a kötelező jogszabályok alapján megillető jogokat.</p>
-
-<h2>14. Szellemi tulajdon</h2>
-<p>A Zekulhyda védjegy, az epalinca.ro név, a Weboldal szövegei, fotói, grafikái és arculati elemei az Eladó tulajdonát képezik, vagy a jogosultak engedélyével kerülnek felhasználásra, és a szerzői jogról szóló 8/1996. sz. törvény, valamint a védjegyekről szóló 84/1998. sz. törvény védelme alatt állnak. Írásos engedély nélküli többszörözésük vagy felhasználásuk tilos. A „Pălincă” az (EU) 2019/787 rendelet alapján oltalom alatt álló földrajzi jelzés szeszes italokra.</p>
-
-<h2>15. Személyes adatok védelme</h2>
-<p>A személyes adatokat az (EU) 2016/679 rendelet (GDPR) és a 190/2018. sz. törvény szerint, kizárólag a szerződés teljesítése, a jogszabályi (adó- és számviteli) kötelezettségek teljesítése, valamint – hozzájárulásoddal – kereskedelmi közlemények küldése céljából kezeljük. A részletek, ideértve jogaidat és a román adatvédelmi hatóság (ANSPDCP) elérhetőségét, az <a href="{{ pages['politica-de-confidentialitate'].url }}">Adatvédelmi tájékoztatóban</a> találhatók. E-mailes kereskedelmi közleményt csak előzetes hozzájárulásoddal küldünk az 506/2004. sz. törvény 12. cikke szerint, és bármikor leiratkozhatsz.</p>
-
-<h2>16. Alkalmazandó jog és joghatóság</h2>
-<p>A jelen feltételekre a román jog az irányadó. A békés úton vagy SAL-eljárásban nem rendezhető jogvitákban a hatáskörrel és illetékességgel rendelkező romániai bíróságok járnak el; fogyasztók esetében az illetékességet a fogyasztóvédelmi szabályok szerint kell megállapítani. Ha valamely rendelkezés érvénytelennek bizonyul, a többi rendelkezés hatályban marad.</p>
-
-<h2>17. Kapcsolat</h2>
-<p>{{ company }} · {{ address }} · <a href="mailto:{{ email }}">{{ email }}</a>{% if phone != blank %} · {{ phone }}{% endif %}</p>
+<h2 id="s10"><span>10</span>Záró rendelkezések</h2>
+<p><strong>10.1.</strong> Az Eladó fenntartja a jogot a Weboldal szerkezetének és tartalmának, valamint a jelen feltételeknek előzetes értesítés nélküli módosítására; a módosítások a közzétételük után leadott rendelésekre vonatkoznak.</p>
+<p><strong>10.2.</strong> Ha a jelen feltételek valamely rendelkezése érvénytelennek vagy alkalmazhatatlannak bizonyul, a többi rendelkezés hatályban marad.</p>
+<p><strong>10.3.</strong> A jelen feltételekre a román jog az irányadó.</p>
+<p><strong>10.4.</strong> A rendelés leadásával a Vásárló megerősíti, hogy a jelen feltételeket elolvasta és fenntartás nélkül elfogadja.</p>
+<p class="zk-legal__contactline">{{ company }} · {{ address }} · <a href="mailto:{{ email }}">{{ email }}</a>{% if phone != blank %} · {{ phone }}{% endif %} · www.epalinca.ro</p>

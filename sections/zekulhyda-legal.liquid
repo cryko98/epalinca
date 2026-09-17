@@ -181,6 +181,58 @@
   </div>
 </section>
 
+<script>
+  (function () {
+    // Build the two-column layout: everything after the head goes into a body column,
+    // with a sticky contents rail listing the chapters. Works for every legal document.
+    var inner = document.querySelector('#zk-legal .zk-legal__inner');
+    if (!inner) return;
+    var kids = [].slice.call(inner.children);
+    var head = inner.querySelector('.zk-legal__head');
+    if (!head) {
+      head = document.createElement('div'); head.className = 'zk-legal__head';
+      kids.forEach(function (k) {
+        if (k.matches('.zk-legal__eyebrow, .zk-legal__title, .zk-legal__updated, .zk-legal__note')) head.appendChild(k);
+      });
+      inner.insertBefore(head, inner.firstChild);
+      kids = [].slice.call(inner.children);
+    }
+    var layout = document.createElement('div'); layout.className = 'zk-legal__layout';
+    var toc = document.createElement('nav'); toc.className = 'zk-legal__toc'; toc.setAttribute('aria-label', 'Cuprins');
+    var body = document.createElement('div'); body.className = 'zk-legal__body';
+    kids.forEach(function (k) { if (k !== head) body.appendChild(k); });
+    var h2s = [].slice.call(body.querySelectorAll('h2'));
+    if (h2s.length > 1) {
+      var ol = document.createElement('ol');
+      h2s.forEach(function (h, i) {
+        if (!h.id) h.id = 's' + (i + 1);
+        var num = h.querySelector('span') ? h.querySelector('span').textContent : String(i + 1).padStart(2, '0');
+        var text = h.textContent.replace(num, '').replace(/^\s*\d+\.\s*/, '').trim();
+        var li = document.createElement('li');
+        li.innerHTML = '<a href="#' + h.id + '"><span>' + num + '</span>' + text + '</a>';
+        ol.appendChild(li);
+      });
+      var label = document.createElement('p'); label.className = 'zk-legal__toc-label'; label.textContent = {{ 'zk.legal_contents' | t | json }};
+      toc.appendChild(label); toc.appendChild(ol);
+      layout.appendChild(toc);
+    }
+    layout.appendChild(body);
+    inner.appendChild(layout);
+
+    // Scroll-spy: mark the chapter in view.
+    var links = [].slice.call(toc.querySelectorAll('a'));
+    if (links.length && 'IntersectionObserver' in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          links.forEach(function (a) { a.classList.toggle('on', a.getAttribute('href') === '#' + e.target.id); });
+        });
+      }, { rootMargin: '-100px 0px -70% 0px' });
+      h2s.forEach(function (h) { io.observe(h); });
+    }
+  })();
+</script>
+
 {% schema %}
 {
   "name": "Zekulhyda - Legal",
