@@ -3151,3 +3151,14 @@ nav.main a.nav-shop.on { border-color: var(--amber-2); }
 .zk-lightbox { z-index: 10000; }
 .zk-lightbox img { cursor: zoom-out; }
 .zk-lightbox__x { z-index: 1; width: 52px; height: 52px; font-size: 1.4rem; }
+
+/* Several stickers for one strip entry (the 2026 gold / silver / bronze set), fanned. */
+.badge-m__stack { position: relative; display: block; width: 132px; height: 132px; }
+.badge-m__stack .badge-m__photo { position: absolute; left: 0; top: 0; }
+.badge-m__stack.n3 .badge-m__photo:nth-child(1) { z-index: 3; transform: translate(-26px, 0) scale(.86); }
+.badge-m__stack.n3 .badge-m__photo:nth-child(2) { z-index: 2; transform: translate(4px, -14px) scale(.78); }
+.badge-m__stack.n3 .badge-m__photo:nth-child(3) { z-index: 1; transform: translate(30px, 8px) scale(.72); }
+.badge-m:hover .badge-m__stack.n3 .badge-m__photo:nth-child(1) { transform: translate(-34px, -4px) scale(.9) rotate(-6deg); }
+.badge-m:hover .badge-m__stack.n3 .badge-m__photo:nth-child(2) { transform: translate(4px, -20px) scale(.82); }
+.badge-m:hover .badge-m__stack.n3 .badge-m__photo:nth-child(3) { transform: translate(38px, 6px) scale(.76) rotate(6deg); }
+@media (max-width:600px) { .badge-m__stack { width: 100px; height: 100px; } .badge-m__stack .badge-m__photo { width: 100px; height: 100px; } }
