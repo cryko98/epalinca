@@ -3174,8 +3174,8 @@ nav.main a.nav-shop.on { border-color: var(--amber-2); }
 
 
 /* Range tiers on photos: the picture shows through, text sits on a gradient. */
-.tier::before { opacity: .48; filter: grayscale(.1) contrast(1.05); }
-.tier:hover::before { opacity: .78; filter: grayscale(0) contrast(1.05); }
-.tier::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11,11,12,.10) 0%, rgba(11,11,12,.45) 45%, rgba(11,11,12,.86) 100%); pointer-events: none; }
+.tier::before { opacity: .62; filter: grayscale(0) contrast(1.05); }
+.tier:hover::before { opacity: .9; filter: grayscale(0) contrast(1.05); }
+.tier::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11,11,12,.05) 0%, rgba(11,11,12,.35) 50%, rgba(11,11,12,.85) 100%); pointer-events: none; }
 .tier > * { position: relative; z-index: 1; }
 .tier p { color: var(--silver); }
