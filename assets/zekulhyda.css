@@ -3179,3 +3179,18 @@ nav.main a.nav-shop.on { border-color: var(--amber-2); }
 .tier::after { content: ""; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(11,11,12,.05) 0%, rgba(11,11,12,.35) 50%, rgba(11,11,12,.85) 100%); pointer-events: none; }
 .tier > * { position: relative; z-index: 1; }
 .tier p { color: var(--silver); }
+
+/* Five tiers in one even row; six (with Distilat on) as two rows of three. */
+.tiers { grid-template-columns: repeat(5, 1fr); }
+.tiers:has(.tier:nth-child(6)) { grid-template-columns: repeat(3, 1fr); }
+.tiers .tier { grid-column: auto; padding: 1.6rem 1.3rem; }
+.tier h3 { font-size: 1.25rem; }
+@media (max-width: 1000px) {
+  .tiers { grid-template-columns: repeat(2, 1fr); }
+  /* an odd last tile stretches across so no hole is left */
+  .tiers .tier:nth-child(odd):last-child { grid-column: 1 / -1; }
+}
+@media (max-width: 560px) {
+  .tiers { grid-template-columns: 1fr; }
+  .tiers .tier:nth-child(odd):last-child { grid-column: auto; }
+}
