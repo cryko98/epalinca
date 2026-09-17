@@ -202,23 +202,28 @@
         document.documentElement.style.overflow = 'hidden';
       };
       var close = function () { box.hidden = true; document.documentElement.style.overflow = ''; };
-      stage.addEventListener('click', function (e) { if (e.target.closest('img')) open(); });
-      box.addEventListener('click', function (e) { if (e.target === box || e.target.id === 'zkLightboxX') close(); });
+      var reset = function () {
+        var img = stage.querySelector('img'); if (!img) return;
+        img.style.transform = ''; img.style.transformOrigin = '';
+      };
+      stage.addEventListener('click', function (e) { if (e.target.closest('img')) { reset(); open(); } });
+      // A tap or click anywhere on the overlay closes it - there is no Esc key on a phone.
+      box.addEventListener('click', close);
       document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && !box.hidden) close(); });
 
       // Hover pan: shift the image's origin toward the pointer so the cursor magnifies
-      // the part of the bottle it is over.
-      stage.addEventListener('mousemove', function (e) {
-        var img = stage.querySelector('img'); if (!img) return;
-        var r = stage.getBoundingClientRect();
-        var x = ((e.clientX - r.left) / r.width) * 100, y = ((e.clientY - r.top) / r.height) * 100;
-        img.style.transformOrigin = x + '% ' + y + '%';
-        img.style.transform = 'scale(2.2)';
-      });
-      stage.addEventListener('mouseleave', function () {
-        var img = stage.querySelector('img'); if (!img) return;
-        img.style.transform = ''; img.style.transformOrigin = '';
-      });
+      // the part of the bottle it is over. Mouse only: on a touch screen the browser
+      // fakes a mousemove on tap and mouseleave never comes, so the zoom would stick.
+      if (window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+        stage.addEventListener('mousemove', function (e) {
+          var img = stage.querySelector('img'); if (!img) return;
+          var r = stage.getBoundingClientRect();
+          var x = ((e.clientX - r.left) / r.width) * 100, y = ((e.clientY - r.top) / r.height) * 100;
+          img.style.transformOrigin = x + '% ' + y + '%';
+          img.style.transform = 'scale(2.2)';
+        });
+        stage.addEventListener('mouseleave', reset);
+      }
     }
 
     // Swap the main image from a thumbnail.

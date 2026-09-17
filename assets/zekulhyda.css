@@ -3146,3 +3146,8 @@ nav.main a.nav-shop.on { border-color: var(--amber-2); }
 .card--soldout .badge { display: none; }
 .card--soldout .pic.has-alt:hover > img:not(.pic-alt) { opacity: 1; }
 .card--soldout .pic.has-alt:hover > .pic-alt { opacity: 0; }
+
+/* Lightbox above everything (the header is sticky at 50, the grain overlay at 9998). */
+.zk-lightbox { z-index: 10000; }
+.zk-lightbox img { cursor: zoom-out; }
+.zk-lightbox__x { z-index: 1; width: 52px; height: 52px; font-size: 1.4rem; }

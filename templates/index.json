@@ -126,6 +126,7 @@
     },
     "winners": {
       "type": "award-winners",
+      "disabled": true,
       "settings": {}
     }
   },
