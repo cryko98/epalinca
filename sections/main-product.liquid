@@ -117,16 +117,61 @@
           </div>
         </form>
 
+        {%- comment -%}
+          Specs come from the zekulhyda.* metafields (volume_ml, abv, fruit_variety, aging,
+          pairing); the abv:/vol: tags remain as a fallback for older products.
+        {%- endcomment -%}
+        {%- liquid
+          assign mf = product.metafields.zekulhyda
+          if mf.volume_ml.value != blank
+            assign vol = mf.volume_ml.value
+          endif
+          if mf.abv.value != blank
+            assign abv = mf.abv.value
+          endif
+        -%}
+        {%- liquid
+          assign loc = request.locale.iso_code
+          assign variety = mf.fruit_variety.value
+          assign aging = mf.aging.value
+          assign pairing = mf.pairing.value
+          if loc == 'hu'
+            if mf.fruit_variety_hu.value != blank
+              assign variety = mf.fruit_variety_hu.value
+            endif
+            if mf.aging_hu.value != blank
+              assign aging = mf.aging_hu.value
+            endif
+            if mf.pairing_hu.value != blank
+              assign pairing = mf.pairing_hu.value
+            endif
+          elsif loc == 'en'
+            if mf.fruit_variety_en.value != blank
+              assign variety = mf.fruit_variety_en.value
+            endif
+            if mf.aging_en.value != blank
+              assign aging = mf.aging_en.value
+            endif
+            if mf.pairing_en.value != blank
+              assign pairing = mf.pairing_en.value
+            endif
+          endif
+        -%}
         <ul class="pdp__specs">
           {%- if vol != blank -%}<li><b>{{ vol }} ml</b><span>{{ 'zk.spec_volume' | t }}</span></li>{%- endif -%}
-          {%- if abv != blank -%}<li><b>{{ abv }}%</b><span>{{ 'zk.spec_abv' | t }}</span></li>{%- endif -%}
+          {%- if abv != blank -%}<li><b>{{ abv }}% vol.</b><span>{{ 'zk.spec_abv' | t }}</span></li>{%- endif -%}
+          {%- if variety != blank -%}<li><b>{{ variety }}</b><span>{{ 'zk.spec_variety' | t }}</span></li>{%- endif -%}
+          {%- if aging != blank -%}<li><b>{{ aging }}</b><span>{{ 'zk.spec_aging' | t }}</span></li>{%- endif -%}
           <li><b>{{ 'zk.region_value' | t }}</b><span>{{ 'zk.spec_region' | t }}</span></li>
+          {%- if pairing != blank -%}<li class="pdp__spec--wide"><b>{{ pairing }}</b><span>{{ 'zk.spec_pairing' | t }}</span></li>{%- endif -%}
           {%- if v.sku != blank -%}<li><b>{{ v.sku }}</b><span>{{ 'products.sku' | t }}</span></li>{%- endif -%}
         </ul>
 
         {% render 'zk-awards', product: product %}
 
         <div class="pdp__rte">{{ product.description }}</div>
+
+        {% render 'zk-faq', items: product.metafields.zekulhyda.faq.value %}
 
         {%- comment -%} The theme setting only holds Romanian; the other languages read the locale file. {%- endcomment -%}
         {%- if request.locale.iso_code == 'ro' and settings.alcohol_warning != blank -%}

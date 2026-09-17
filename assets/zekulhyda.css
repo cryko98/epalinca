@@ -3345,3 +3345,28 @@ nav.main a { white-space: nowrap; }
    column is bounded by that grid and can no longer slide over them. */
 #story .wrap--timeline { margin-top: 4.5rem; }
 @media (max-width: 900px) { #story .wrap--timeline { margin-top: 3rem; } }
+
+
+/* FAQ accordion (metafield-driven) and collection SEO copy */
+.zk-faq { margin: 2.6rem 0 0; }
+.zk-faq__title { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 500; font-size: 1.6rem; color: #F3F1EC; margin: 0 0 .8rem; }
+.zk-faq__item { border-top: 1px solid var(--line); }
+.zk-faq__item:last-child { border-bottom: 1px solid var(--line); }
+.zk-faq__item summary {
+  list-style: none; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 1rem;
+  padding: .95rem 0; font-family: "Manrope", sans-serif; font-weight: 600; font-size: .95rem; color: #F3F1EC;
+}
+.zk-faq__item summary::-webkit-details-marker { display: none; }
+.zk-faq__item summary i { flex: none; width: 22px; height: 22px; position: relative; border: 1px solid var(--line); border-radius: 50%; transition: border-color .2s, transform .3s; }
+.zk-faq__item summary i::before, .zk-faq__item summary i::after { content: ""; position: absolute; left: 50%; top: 50%; width: 10px; height: 1px; background: var(--amber-2); transform: translate(-50%, -50%); }
+.zk-faq__item summary i::after { transform: translate(-50%, -50%) rotate(90deg); transition: transform .3s; }
+.zk-faq__item[open] summary i { border-color: var(--amber); }
+.zk-faq__item[open] summary i::after { transform: translate(-50%, -50%) rotate(0); }
+.zk-faq__answer { padding: 0 2.4rem 1.1rem 0; font-size: .92rem; line-height: 1.75; color: var(--silver); max-width: 68ch; }
+.zk-shop .zk-faq { max-width: 74ch; margin-top: 3.5rem; }
+.zk-seotext { max-width: 74ch; margin: 3.5rem 0 0; padding-top: 2.4rem; border-top: 1px solid var(--line); color: var(--silver); font-size: .95rem; line-height: 1.8; }
+.zk-seotext h2, .zk-seotext h3 { font-family: "Cormorant Garamond", Georgia, serif; font-weight: 500; color: #F3F1EC; margin: 1.6rem 0 .6rem; }
+.zk-seotext h2 { font-size: 1.6rem; } .zk-seotext h3 { font-size: 1.25rem; }
+.zk-seotext p { margin: 0 0 1rem; }
+.zk-seotext a { color: var(--amber-2); }
+.pdp__specs .pdp__spec--wide { grid-column: 1 / -1; }

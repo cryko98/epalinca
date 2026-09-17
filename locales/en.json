@@ -378,6 +378,10 @@
     "partners_next": "Next",
     "md_results_btn": "Official Quintessence 2026 results",
     "md_results_hint": "On the page that opens, type “Zekulhyda” into the table’s search box — we copy it to your clipboard when you click the button.",
-    "md_results_copied": "“Zekulhyda” is on your clipboard — paste it into the search box on the page that opened."
+    "md_results_copied": "“Zekulhyda” is on your clipboard — paste it into the search box on the page that opened.",
+    "faq_title": "Frequently asked questions",
+    "spec_variety": "Variety / fruit",
+    "spec_aging": "Aging",
+    "spec_pairing": "Serve with"
   }
 }

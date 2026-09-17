@@ -6,4 +6,5 @@
 
 {% schema %}
 {"name": "Main Pagina", "settings": []}
-{% endschema %}
+{% endschema %}  {%- if page.metafields.zekulhyda.faq.value != blank -%}<div class="wrap">{% render 'zk-faq', items: page.metafields.zekulhyda.faq.value %}</div>{%- endif -%}
+

@@ -1,0 +1,23 @@
+{%- comment -%}
+  FAQ accordion fed by the zekulhyda.faq metafield (a list of zk_faq metaobjects with
+  question / answer). Field values come back already translated for the storefront
+  language. The same list is emitted as a FAQPage entity by zk-schema, so the visible
+  text and the structured data always match — which is what Google requires.
+
+  Usage: {% render 'zk-faq', items: product.metafields.zekulhyda.faq.value %}
+{%- endcomment -%}
+{%- if items != blank and items.size > 0 -%}
+<section class="zk-faq" id="zk-faq">
+  <h2 class="zk-faq__title">{{ 'zk.faq_title' | t }}</h2>
+  <div class="zk-faq__list">
+    {%- for item in items -%}
+      {%- if item.question != blank and item.answer != blank -%}
+      <details class="zk-faq__item"{% if forloop.first %} open{% endif %}>
+        <summary><span>{{ item.question }}</span><i aria-hidden="true"></i></summary>
+        <div class="zk-faq__answer">{{ item.answer | newline_to_br }}</div>
+      </details>
+      {%- endif -%}
+    {%- endfor -%}
+  </div>
+</section>
+{%- endif -%}

@@ -92,8 +92,35 @@
           assign vol = tag | remove: 'vol:'
         endif
       endfor
-      assign awards = product.metafields.zekulhyda.awards.value
+      assign mf = product.metafields.zekulhyda
+      if mf.volume_ml.value != blank
+        assign vol = mf.volume_ml.value
+      endif
+      if mf.abv.value != blank
+        assign abv = mf.abv.value
+      endif
+      assign awards = mf.awards.value
       assign home_col = product.collections | first
+      assign rating = product.metafields.reviews.rating.value
+      assign rating_count = product.metafields.reviews.rating_count.value
+      assign loc = request.locale.iso_code
+      assign variety = mf.fruit_variety.value
+      assign aging = mf.aging.value
+      if loc == 'hu'
+        if mf.fruit_variety_hu.value != blank
+          assign variety = mf.fruit_variety_hu.value
+        endif
+        if mf.aging_hu.value != blank
+          assign aging = mf.aging_hu.value
+        endif
+      elsif loc == 'en'
+        if mf.fruit_variety_en.value != blank
+          assign variety = mf.fruit_variety_en.value
+        endif
+        if mf.aging_en.value != blank
+          assign aging = mf.aging_en.value
+        endif
+      endif
     -%}
     ,{
       "@type": "Product",
@@ -123,10 +150,19 @@
         {%- endfor -%}
       ],
       {%- endif -%}
+      {%- if v.barcode != blank -%}"gtin13": {{ v.barcode | json }},{%- endif -%}
+      {%- if rating != blank and rating_count != blank and rating_count > 0 -%}
+      "aggregateRating": { "@type": "AggregateRating", "ratingValue": {{ rating.value | json }}, "bestRating": {{ rating.scale_max | default: 5 | json }}, "ratingCount": {{ rating_count | json }} },
+      {%- endif -%}
       "additionalProperty": [
-        {%- if vol != blank -%}{ "@type": "PropertyValue", "name": "Volum", "value": {{ vol | append: ' ml' | json }} }{%- endif -%}
-        {%- if vol != blank and abv != blank -%},{%- endif -%}
-        {%- if abv != blank -%}{ "@type": "PropertyValue", "name": "Alcool", "value": {{ abv | append: '% vol.' | json }} }{%- endif -%}
+        {%- capture props -%}
+          {%- if vol != blank -%}{ "@type": "PropertyValue", "name": {{ 'zk.spec_volume' | t | json }}, "value": {{ vol | append: ' ml' | json }} },{%- endif -%}
+          {%- if abv != blank -%}{ "@type": "PropertyValue", "name": {{ 'zk.spec_abv' | t | json }}, "value": {{ abv | append: '% vol.' | json }} },{%- endif -%}
+          {%- if variety != blank -%}{ "@type": "PropertyValue", "name": {{ 'zk.spec_variety' | t | json }}, "value": {{ variety | json }} },{%- endif -%}
+          {%- if aging != blank -%}{ "@type": "PropertyValue", "name": {{ 'zk.spec_aging' | t | json }}, "value": {{ aging | json }} },{%- endif -%}
+          { "@type": "PropertyValue", "name": {{ 'zk.spec_region' | t | json }}, "value": {{ 'zk.region_value' | t | json }} }
+        {%- endcapture -%}
+        {{ props | strip }}
       ],
       "offers": {
         "@type": "Offer",
@@ -212,6 +248,28 @@
       "itemListElement": [
         { "@type": "ListItem", "position": 1, "name": {{ home_name | json }}, "item": {{ shop.url | append: routes.root_url | json }} },
         { "@type": "ListItem", "position": 2, "name": {{ page.title | json }}, "item": {{ shop.url | append: page.url | json }} }
+      ]
+    }
+    {%- endif -%}
+
+    {%- liquid
+      assign faq_items = blank
+      if template.name == 'product'
+        assign faq_items = product.metafields.zekulhyda.faq.value
+      elsif template.name == 'collection'
+        assign faq_items = collection.metafields.zekulhyda.faq.value
+      elsif template.name == 'page'
+        assign faq_items = page.metafields.zekulhyda.faq.value
+      endif
+    -%}
+    {%- if faq_items != blank and faq_items.size > 0 -%}
+    ,{
+      "@type": "FAQPage",
+      "@id": {{ canonical_url | append: '#faq' | json }},
+      "mainEntity": [
+        {%- for item in faq_items -%}
+          { "@type": "Question", "name": {{ item.question | json }}, "acceptedAnswer": { "@type": "Answer", "text": {{ item.answer | newline_to_br | json }} } }{% unless forloop.last %},{% endunless %}
+        {%- endfor -%}
       ]
     }
     {%- endif -%}

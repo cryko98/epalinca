@@ -8,10 +8,41 @@
   assign meta = count | append: ' ' | append: word
 -%}
 
+{%- comment -%}
+  Metafields are not translatable on this plan, so the Romanian field has HU/EN siblings
+  (subtitle_hu, seo_text_en …) and the storefront language picks the right one, falling
+  back to Romanian when a translation is missing.
+{%- endcomment -%}
+{%- liquid
+  assign lead = collection.description
+  assign eyebrow = 'zk.shop_eyebrow' | t
+  assign cmf = collection.metafields.zekulhyda
+  assign loc = request.locale.iso_code
+  assign sub = cmf.subtitle.value
+  assign seo_mf = cmf.seo_text
+  if loc == 'hu'
+    if cmf.subtitle_hu.value != blank
+      assign sub = cmf.subtitle_hu.value
+    endif
+    if cmf.seo_text_hu.value != blank
+      assign seo_mf = cmf.seo_text_hu
+    endif
+  elsif loc == 'en'
+    if cmf.subtitle_en.value != blank
+      assign sub = cmf.subtitle_en.value
+    endif
+    if cmf.seo_text_en.value != blank
+      assign seo_mf = cmf.seo_text_en
+    endif
+  endif
+  if sub != blank
+    assign lead = sub
+  endif
+-%}
 {% render 'zk-page-head',
-   eyebrow: collection.title,
+   eyebrow: eyebrow,
    title: collection.title,
-   lead: collection.description,
+   lead: lead,
    meta: meta %}
 
 <section class="zk-shop">
@@ -97,6 +128,15 @@
         <div class="zk-pager">{{ paginate | default_pagination }}</div>
       {%- endif -%}
     {% endpaginate %}
+
+    {%- comment -%}
+      Category copy for search engines and shoppers who read: the rich-text
+      zekulhyda.seo_text metafield below the grid, then the FAQ (also FAQPage schema).
+    {%- endcomment -%}
+    {%- if seo_mf.value != blank -%}
+      <div class="zk-seotext rte">{{ seo_mf | metafield_tag }}</div>
+    {%- endif -%}
+    {% render 'zk-faq', items: collection.metafields.zekulhyda.faq.value %}
 
   </div>
 </section>
