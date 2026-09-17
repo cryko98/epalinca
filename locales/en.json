@@ -382,6 +382,8 @@
     "faq_title": "Frequently asked questions",
     "spec_variety": "Variety / fruit",
     "spec_aging": "Aging",
-    "spec_pairing": "Serve with"
+    "spec_pairing": "Serve with",
+    "partners_type_dist": "distributor",
+    "partners_type_store": "shop"
   }
 }

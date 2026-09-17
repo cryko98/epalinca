@@ -3379,3 +3379,13 @@ nav.main a { white-space: nowrap; }
   .slidebar { position: relative; z-index: 3; background: rgba(11, 11, 12, .55); }
   .slidebar .wrap { padding-top: 1rem; padding-bottom: 1.1rem; row-gap: .9rem; }
 }
+
+
+/* Partner cards: real logos on tiles, with the name under them. */
+.logo { width: 250px; height: auto; min-height: 150px; padding: 1rem .9rem .95rem; gap: .3rem; justify-content: center; }
+.logo .pl { width: 64px; height: 64px; border-radius: 8px; margin-bottom: .3rem; object-fit: cover; }
+.logo.has-pic .nm { font-size: 1.15rem; letter-spacing: .03em; }
+.logo .nm { line-height: 1.15; }
+.logo svg { width: 30px; height: 30px; margin-bottom: .1rem; }
+.pall__ic { background: var(--graphite); }
+@media (max-width: 640px) { .logo { width: 210px; } }

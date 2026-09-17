@@ -382,6 +382,8 @@
     "faq_title": "Întrebări frecvente",
     "spec_variety": "Soi / fruct",
     "spec_aging": "Maturare",
-    "spec_pairing": "Recomandare de servire"
+    "spec_pairing": "Recomandare de servire",
+    "partners_type_dist": "distribuitor",
+    "partners_type_store": "magazin"
   }
 }
