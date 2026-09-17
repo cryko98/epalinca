@@ -26,12 +26,19 @@
         <a href="{{ pages['politica-de-retur'].url }}">{{ 'zk.foot_link_returns' | t }}</a>
         <a href="{{ pages['livrare-si-plata'].url }}">{{ 'zk.foot_link_shipping' | t }}</a>
         <a href="{{ pages['contact'].url }}">{{ 'zk.nav_contact' | t }}</a>
-        <a href="https://anpc.ro/ce-este-sal/" target="_blank" rel="noopener">ANPC · SAL</a>
-        <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener">SOL · ODR</a>
       {%- endif -%}
     </div>
 
     {% render 'zk-social' %}
+
+    {%- comment -%}
+      The two ANPC pictograms consumer law asks a Romanian shop to show on its first page,
+      each linking where the order says: SAL to ANPC, SOL to the EU ODR platform.
+    {%- endcomment -%}
+    <div class="foot-badges">
+      <a href="https://anpc.ro/ce-este-sal/" target="_blank" rel="noopener nofollow" title="ANPC – Soluționarea Alternativă a Litigiilor"><img src="{{ 'zk-anpc-sal.webp' | asset_url }}" alt="ANPC – Soluționarea Alternativă a Litigiilor" width="250" height="62" loading="lazy"></a>
+      <a href="https://ec.europa.eu/consumers/odr" target="_blank" rel="noopener nofollow" title="Soluționarea Online a Litigiilor"><img src="{{ 'zk-anpc-sol.webp' | asset_url }}" alt="Soluționarea Online a Litigiilor" width="250" height="62" loading="lazy"></a>
+    </div>
   </div>
 </footer>
 

@@ -3175,3 +3175,9 @@ a.tier { text-decoration: none; color: inherit; cursor: pointer; }
   .zk-legal__toc-label { display: none; }
   .zk-legal__firma p { grid-template-columns: 1fr; gap: .1rem; }
 }
+
+/* ANPC SAL / SOL pictograms in the footer, full row under everything else. */
+footer .foot-badges { flex-basis: 100%; display: flex; flex-wrap: wrap; gap: .8rem 1.2rem; justify-content: center; padding-top: 1.4rem; margin-top: .4rem; border-top: 1px solid var(--line); }
+footer .foot-badges a { margin: 0; line-height: 0; opacity: .92; transition: opacity .2s, transform .2s; }
+footer .foot-badges a:hover { opacity: 1; transform: translateY(-1px); }
+footer .foot-badges img { height: 50px; width: auto; display: block; border-radius: 26px; }
