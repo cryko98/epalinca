@@ -375,6 +375,9 @@
     "partners_web": "Deschide",
     "partners_hint": "Apasă pe o locație pentru a o deschide în Google Maps. Lista se completează pe măsură ce adăugăm parteneri noi.",
     "partners_prev": "Înapoi",
-    "partners_next": "Înainte"
+    "partners_next": "Înainte",
+    "md_results_btn": "Rezultatele oficiale Quintessence 2026",
+    "md_results_hint": "Pe pagina care se deschide, scrie „Zekulhyda” în căsuța de căutare a tabelului — o copiem în clipboard când apeși butonul.",
+    "md_results_copied": "„Zekulhyda” a fost copiat — lipește-l în căsuța de căutare de pe pagina deschisă."
   }
 }

@@ -375,6 +375,9 @@
     "partners_web": "Megnyitás",
     "partners_hint": "Kattints egy helyre, és megnyílik a Google Maps-ben. A lista folyamatosan bővül az új partnerekkel.",
     "partners_prev": "Előző",
-    "partners_next": "Következő"
+    "partners_next": "Következő",
+    "md_results_btn": "Hivatalos Quintessence 2026 eredmények",
+    "md_results_hint": "A megnyíló oldalon írd a táblázat keresőjébe: „Zekulhyda” — a gombra kattintva a vágólapra másoljuk.",
+    "md_results_copied": "A „Zekulhyda” a vágólapon van — illeszd be a megnyílt oldal keresőjébe."
   }
 }
