@@ -75,13 +75,13 @@
     "tier_core": "Linia de bază",
     "tier_core_d": "Mere, prune, struguri — pălinca de zi cu zi.",
     "tier_varietal": "Pălinci de struguri",
-    "tier_varietal_d": "Șapte pălinci dintr-un singur soi de strugure: Fetească Neagră, Fetească Regală, Irsai Oliver, Muscat Ottonel, Pinot Gris, Chardonnay.",
-    "tier_orchard": "Linia de livadă",
-    "tier_orchard_d": "Caise, cireșe, pere, coacăze negre.",
+    "tier_varietal_d": "Pălinci de struguri: Fetească Neagră, Muscat Ottonel, struguri și tescovină.",
+    "tier_orchard": "Linia de fructe",
+    "tier_orchard_d": "Mere, prune, caise, pere, cireșe, gutui, vișine — pălinca de livadă.",
     "tier_wild": "Linia sălbatică",
-    "tier_wild_d": "Afine, mure, zmeură — 20–25 kg de fruct pe litru.",
-    "tier_champion": "Campioni și învechite",
-    "tier_champion_d": "Mere barrique, vișine sălbatice, Fetească Neagră Strong, distilat de vin, tescovină Izabella.",
+    "tier_wild_d": "Mure, zmeură, căpșuni, coacăze negre — 20–25 kg de fruct pe litru.",
+    "tier_champion": "Pălinci campioane",
+    "tier_champion_d": "Mere Barrique, vișine sălbatice, Fetească Neagră, pere, mure — medalii Quintessence 2025–2026.",
     "shop_eyebrow": "Magazin online",
     "shop_sub": "Livrare gratuită peste 250 lei în România. Nu vindem alcool persoanelor sub 18 ani.",
     "filter_all": "Toate",
@@ -366,6 +366,7 @@
     "range_title_six": "Șase linii, <em>o singură semnătură.</em>",
     "range_sub_short": "Pălincile clasice în sticle de 0,35 l, seria Barrique în 0,5 l. Loturi mici, fără zahăr sau arome adăugate — fructele vin de pe o rază de 30 km.",
     "pk2_5": "Pahar de degustare",
-    "pk3_5": "Pahar de degustare"
+    "pk3_5": "Pahar de degustare",
+    "range_title_five": "Cinci linii, <em>o singură semnătură.</em>"
   }
 }

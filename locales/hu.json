@@ -75,13 +75,13 @@
     "tier_core": "Alap sor",
     "tier_core_d": "Alma, szilva, szőlő — a hétköznapok pálinkája.",
     "tier_varietal": "Szőlőpálinkák",
-    "tier_varietal_d": "Hét egyfajtás szőlőpálinka: Fekete Leányka, Királyleányka, Irsai Olivér, Ottonel muskotály, Szürkebarát, Chardonnay.",
-    "tier_orchard": "Gyümölcsös sor",
-    "tier_orchard_d": "Kajszi, cseresznye, körte, feketeribizli.",
+    "tier_varietal_d": "Szőlőpálinkák: Fetească Neagră, Muscat Ottonel, vegyes szőlő és törköly.",
+    "tier_orchard": "Gyümölcs sor",
+    "tier_orchard_d": "Alma, szilva, kajszi, körte, cseresznye, birs, meggy — a gyümölcsös pálinkái.",
     "tier_wild": "Vad sor",
-    "tier_wild_d": "Áfonya, szeder, málna — 20–25 kg gyümölcs literenként.",
-    "tier_champion": "Bajnokok és érleltek",
-    "tier_champion_d": "Barrique alma, vadmeggy, Érmelléki Fekete Leányka Strong, borpárlat, Izabella törköly.",
+    "tier_wild_d": "Szeder, málna, eper, feketeribizli — 20–25 kg gyümölcs literenként.",
+    "tier_champion": "Bajnok pálinkák",
+    "tier_champion_d": "Alma Barrique, vadmeggy, Fetească Neagră, körte, szeder — Quintessence-érmek 2025–2026.",
     "shop_eyebrow": "Webshop",
     "shop_sub": "Ingyenes szállítás 250 lej felett Romániában. 18 éven aluliaknak alkoholt nem szolgálunk ki.",
     "filter_all": "Mind",
@@ -366,6 +366,7 @@
     "range_title_six": "Hat sor, <em>egy kézírás.</em>",
     "range_sub_short": "Klasszikus pálinkák 0,35 literes, a Barrique sorozat 0,5 literes üvegben. Kis tételben, hozzáadott cukor és aroma nélkül — a gyümölcs 30 kilométeres körből.",
     "pk2_5": "Kóstolópohár",
-    "pk3_5": "Kóstolópohár"
+    "pk3_5": "Kóstolópohár",
+    "range_title_five": "Öt sor, <em>egy kézírás.</em>"
   }
 }

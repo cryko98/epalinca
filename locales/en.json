@@ -75,13 +75,13 @@
     "tier_core": "Core line",
     "tier_core_d": "Apple, plum, grape — the everyday palinka.",
     "tier_varietal": "Grape palinka",
-    "tier_varietal_d": "Seven single-varietal grape spirits: Fetească Neagră, Fetească Regală, Irsai Olivér, Muscat Ottonel, Pinot Gris, Chardonnay.",
-    "tier_orchard": "Orchard line",
-    "tier_orchard_d": "Apricot, cherry, pear, blackcurrant.",
+    "tier_varietal_d": "Grape palinka: Fetească Neagră, Muscat Ottonel, grape and pomace.",
+    "tier_orchard": "Fruit line",
+    "tier_orchard_d": "Apple, plum, apricot, pear, cherry, quince, sour cherry — the orchard palinka.",
     "tier_wild": "Wild line",
-    "tier_wild_d": "Blueberry, blackberry, raspberry — 20–25 kg of fruit per litre.",
-    "tier_champion": "Champions & aged",
-    "tier_champion_d": "Barrique apple, wild sour cherry, Fetească Neagră Strong, wine distillate, Izabella pomace.",
+    "tier_wild_d": "Blackberry, raspberry, strawberry, blackcurrant — 20–25 kg of fruit per litre.",
+    "tier_champion": "Champion palinka",
+    "tier_champion_d": "Apple Barrique, wild sour cherry, Fetească Neagră, pear, blackberry — Quintessence medals 2025–2026.",
     "shop_eyebrow": "Shop",
     "shop_sub": "Free delivery over 250 lei within Romania. We do not sell alcohol to anyone under 18.",
     "filter_all": "All",
@@ -366,6 +366,7 @@
     "range_title_six": "Six lines, <em>one signature.</em>",
     "range_sub_short": "Classic palinka in 0.35 l bottles, the Barrique series in 0.5 l. Small batches, no added sugar or flavouring — fruit from within 30 km.",
     "pk2_5": "Tasting glass",
-    "pk3_5": "Tasting glass"
+    "pk3_5": "Tasting glass",
+    "range_title_five": "Five lines, <em>one signature.</em>"
   }
 }
