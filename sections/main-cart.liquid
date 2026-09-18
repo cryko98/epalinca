@@ -71,6 +71,9 @@
 
               <p class="zk-cart__note">{{ 'zk.cart_shipping_note' | t }}</p>
 
+              {%- comment -%} Invoices are issued by hand in the ANAF-connected program, so B2B buyers leave their company details here; the note lands on the order in the admin. {%- endcomment -%}
+              <label class="zk-cart__notefield"><span>{{ 'zk.cart_order_note' | t }}</span><textarea name="note" rows="3" placeholder="{{ 'zk.cart_order_note_ph' | t | escape }}">{{ cart.note }}</textarea></label>
+
               <p class="zk-cart__warn">{{ 'zk.cart_age_note' | t }}</p>
 
               <button type="submit" name="checkout" class="btn primary zk-cart__checkout">

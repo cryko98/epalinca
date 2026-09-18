@@ -395,6 +395,8 @@
     "bk_est_pog": "extra pogácsa",
     "pk_incl_cold": "Hidegtál az alapcsomagban",
     "bk_food_base2": "A hidegtál az alapcsomag része; a pogácsa adag fejenként adható hozzá.",
-    "pk_incl_pog": "Pogácsa az alapcsomagban"
+    "pk_incl_pog": "Pogácsa az alapcsomagban",
+    "cart_order_note": "Számlázási adatok / megjegyzés",
+    "cart_order_note_ph": "Céges számlához: cégnév, adószám (CUI), cím. Bármilyen más megjegyzés a rendeléshez."
   }
 }

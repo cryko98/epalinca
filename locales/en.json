@@ -395,6 +395,8 @@
     "bk_est_pog": "extra pogácsa",
     "pk_incl_cold": "Cold platter included",
     "bk_food_base2": "The cold platter is included; a pogácsa portion can be added per person.",
-    "pk_incl_pog": "Pogácsa included"
+    "pk_incl_pog": "Pogácsa included",
+    "cart_order_note": "Invoicing details / notes",
+    "cart_order_note_ph": "For a company invoice: company name, VAT number, address. Any other note for the order."
   }
 }

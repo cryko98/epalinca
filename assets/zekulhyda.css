@@ -3446,3 +3446,9 @@ nav.main a { white-space: nowrap; }
 .pack__add.is-incl i { background: var(--amber); border-color: var(--amber); opacity: .75; }
 .pack__add.is-incl i::after { opacity: 1; }
 .pack__add.is-incl:hover { border-color: var(--line); color: var(--silver); }
+
+/* Cart: order note for invoicing details (company, CUI) */
+.zk-cart__notefield { display: block; margin: 1rem 0 0; }
+.zk-cart__notefield span { display: block; font-family: "IBM Plex Mono", monospace; font-size: .6rem; letter-spacing: .14em; text-transform: uppercase; color: var(--muted-on-paper); margin-bottom: .4rem; }
+.zk-cart__notefield textarea { width: 100%; padding: .7rem .8rem; border: 1px solid var(--line-on-paper); border-radius: 2px; background: #fff; color: var(--ink-on-paper); font: inherit; font-size: .88rem; resize: vertical; }
+.zk-cart__notefield textarea:focus { outline: none; border-color: var(--amber); }

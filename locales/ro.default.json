@@ -395,6 +395,8 @@
     "bk_est_pog": "pogăcele extra",
     "pk_incl_cold": "Platou rece inclus",
     "bk_food_base2": "Platoul rece este inclus în pachet; porția de pogăcele se adaugă pe persoană.",
-    "pk_incl_pog": "Pogăcele incluse"
+    "pk_incl_pog": "Pogăcele incluse",
+    "cart_order_note": "Date de facturare / observații",
+    "cart_order_note_ph": "Pentru factură pe firmă: denumire, CUI, adresă. Orice altă observație la comandă."
   }
 }
