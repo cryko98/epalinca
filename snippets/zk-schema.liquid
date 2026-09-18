@@ -98,6 +98,10 @@
       endif
       if mf.abv.value != blank
         assign abv = mf.abv.value
+        assign abv_r = abv | round
+        if abv == abv_r
+          assign abv = abv_r
+        endif
       endif
       assign awards = mf.awards.value
       assign home_col = product.collections | first
