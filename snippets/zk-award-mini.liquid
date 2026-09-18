@@ -64,13 +64,26 @@
         assign label = 'zk.md_bronze_l' | t
       when 'campion de categorie'
         assign label = 'zk.md_champ_l' | t
+      when 'akovita-prune'
+        assign label = 'zk.md_akovita_l' | t
+
       when 'medaliat'
         assign label = 'zk.md_medal_l' | t
     endcase
 
     # The 2026 Quintessence stickers were photographed; older awards keep the drawn medal.
     assign photo = ''
-    if ring contains '2026'
+    if ring contains 'ÁKOVITA' or ring contains 'AKOVITA'
+      if metal == 'champ'
+        assign photo = 'zk-medal-akovita-champion-2026.png'
+      elsif metal == 'gold'
+        assign photo = 'zk-medal-akovita-gold-2026.png'
+      elsif metal == 'silver'
+        assign photo = 'zk-medal-akovita-silver-2026.png'
+      elsif metal == 'bronze'
+        assign photo = 'zk-medal-akovita-bronze-2026.png'
+      endif
+    elsif ring contains '2026'
       if metal == 'champ'
         assign photo = 'zk-medal-champion-2026.png'
       elsif metal == 'gold'
