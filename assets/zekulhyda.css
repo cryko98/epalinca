@@ -3396,3 +3396,11 @@ nav.main a { white-space: nowrap; }
 .pdp__stage .zk-mini-stack { top: 1rem; right: 1rem; gap: .5rem; }
 .card:hover .zk-mini { transform: translateY(3px) scale(1.04); }
 .zk-winner__ring .zk-mini-stack { position: static; flex-direction: row; }
+
+
+/* Medal strip: two-sticker fan (2025 summary) and a second label line under each medal. */
+.badge-m__stack.n2 .badge-m__photo:nth-child(1) { z-index: 2; transform: translate(-20px, 0) scale(.9); }
+.badge-m__stack.n2 .badge-m__photo:nth-child(2) { z-index: 1; transform: translate(24px, 8px) scale(.78); }
+.badge-m:hover .badge-m__stack.n2 .badge-m__photo:nth-child(1) { transform: translate(-26px, -4px) scale(.94) rotate(-5deg); }
+.badge-m:hover .badge-m__stack.n2 .badge-m__photo:nth-child(2) { transform: translate(30px, 6px) scale(.82) rotate(5deg); }
+.badge-m .l small { display: block; margin-top: .25rem; font-size: .56rem; letter-spacing: .12em; color: var(--amber-2); }
