@@ -145,8 +145,25 @@
       {%- if awards != blank and awards.size > 0 -%}
       "award": [
         {%- for line in awards -%}
-          {%- assign parts = line | split: '|' -%}
-          {{ parts[1] | strip | append: ' — ' | append: parts[3] | strip | json }}{% unless forloop.last %},{% endunless %}
+          {%- liquid
+            assign parts = line | split: '|'
+            assign lbl = parts[3] | strip | downcase
+            case lbl
+              when 'medalie de aur'
+                assign lbl = 'zk.md_gold_l' | t
+              when 'medalie de argint'
+                assign lbl = 'zk.md_silver_l' | t
+              when 'medalie de bronz'
+                assign lbl = 'zk.md_bronze_l' | t
+              when 'campion de categorie'
+                assign lbl = 'zk.md_champ_l' | t
+              when 'akovita-prune'
+                assign lbl = 'zk.md_akovita_l' | t
+              when 'medaliat'
+                assign lbl = 'zk.md_medal_l' | t
+            endcase
+          -%}
+          {{ parts[1] | strip | append: ' — ' | append: lbl | json }}{% unless forloop.last %},{% endunless %}
         {%- endfor -%}
       ],
       {%- endif -%}
