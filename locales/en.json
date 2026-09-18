@@ -390,10 +390,11 @@
     "md7_c": "★",
     "md7_l": "medals",
     "pk_add_cold": "Add a cold platter",
-    "pk_add_pogacsa": "Add a pogácsa portion",
+    "pk_add_pogacsa": "Add an extra pogácsa portion",
     "bk_food_base": "Pogácsa is included in the package; add-ons are per person.",
     "bk_est_pog": "extra pogácsa",
     "pk_incl_cold": "Cold platter included",
-    "bk_food_base2": "The cold platter is included; a pogácsa portion can be added per person."
+    "bk_food_base2": "The cold platter is included; a pogácsa portion can be added per person.",
+    "pk_incl_pog": "Pogácsa included"
   }
 }

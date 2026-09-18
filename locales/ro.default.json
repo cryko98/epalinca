@@ -390,10 +390,11 @@
     "md7_c": "★",
     "md7_l": "medalii",
     "pk_add_cold": "Adaugă platou rece",
-    "pk_add_pogacsa": "Adaugă o porție de pogăcele",
+    "pk_add_pogacsa": "Adaugă o porție extra de pogăcele",
     "bk_food_base": "Pogăcelele sunt incluse în pachet; opțiunile se adaugă pe persoană.",
     "bk_est_pog": "pogăcele extra",
     "pk_incl_cold": "Platou rece inclus",
-    "bk_food_base2": "Platoul rece este inclus în pachet; porția de pogăcele se adaugă pe persoană."
+    "bk_food_base2": "Platoul rece este inclus în pachet; porția de pogăcele se adaugă pe persoană.",
+    "pk_incl_pog": "Pogăcele incluse"
   }
 }

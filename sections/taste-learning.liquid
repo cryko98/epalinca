@@ -75,6 +75,7 @@
             {%- endcomment -%}
             <div class="pack__adds">
               {%- if tk == 'pk1' -%}
+                <div class="pack__add is-incl"><i aria-hidden="true"></i><span>{{ 'zk.pk_incl_pog' | t }}</span><b>{{ 'zk.pk_incl' | t }}</b></div>
                 <button type="button" class="pack__add" data-add="cold"><i aria-hidden="true"></i><span>{{ 'zk.pk_add_cold' | t }}</span><b>+45 {{ 'zk.pk_per' | t }}</b></button>
               {%- else -%}
                 <div class="pack__add is-incl"><i aria-hidden="true"></i><span>{{ 'zk.pk_incl_cold' | t }}</span><b>{{ 'zk.pk_incl' | t }}</b></div>
