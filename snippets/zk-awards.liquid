@@ -98,6 +98,12 @@
             elsif metal == 'bronze'
               assign photo = 'zk-medal-bronze-2026.png'
             endif
+          elsif ring contains '2025'
+            if metal == 'champ'
+              assign photo = 'zk-medal-champion-2025.png'
+            elsif metal == 'gold'
+              assign photo = 'zk-medal-gold-2025.png'
+            endif
           endif
         -%}
 
