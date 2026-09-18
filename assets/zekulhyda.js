@@ -179,7 +179,7 @@ function medalSVG(key,kind,i){
 <path d="M40 40 q60 -40 120 0" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="6" stroke-linecap="round"/></svg>`;
 }
 // The 2026 Quintessence stickers exist as photos; the other medals stay drawn until theirs arrive.
-const MEDAL_PHOTO={md1:['zk-medal-gold-2025.png','zk-medal-champion-2025.png'],md3:['zk-medal-gold-2026.png','zk-medal-silver-2026.png','zk-medal-bronze-2026.png'],md4:['zk-medal-champion-2026.png'],md7:['zk-medal-akovita-gold-2026.png','zk-medal-akovita-silver-2026.png','zk-medal-akovita-bronze-2026.png'],md5:['zk-medal-akovita-champion-2026.png']};
+const MEDAL_PHOTO={md1:['zk-medal-champion-2025.png','zk-medal-gold-2025.png','zk-medal-silver-2025.png','zk-medal-bronze-2025.png'],md3:['zk-medal-gold-2026.png','zk-medal-silver-2026.png','zk-medal-bronze-2026.png'],md4:['zk-medal-champion-2026.png'],md7:['zk-medal-akovita-gold-2026.png','zk-medal-akovita-silver-2026.png','zk-medal-akovita-bronze-2026.png'],md5:['zk-medal-akovita-champion-2026.png']};
 function renderMedals(){
   $('#medals').innerHTML = MEDALS.map(([k,kind],i)=>`<a class="badge-m" href="/collections/premiate" data-f="premiate">${MEDAL_PHOTO[k]?`<span class="badge-m__stack n${MEDAL_PHOTO[k].length}">${MEDAL_PHOTO[k].map(f=>`<img class="badge-m__photo" src="${ZKI(f)}" alt="${t(k+'_ring')}" width="132" height="132">`).join('')}</span>`:medalSVG(k,kind,i)}<span class="l">${t(k+'_ring').split(' · ')[0]}${t(k+'_ring').split(' · ')[1]?`<small>${t(k+'_ring').split(' · ')[1]}</small>`:''}</span></a>`).join('') + `<p class="medals-note">${t('medals_note')}</p>`;
 }

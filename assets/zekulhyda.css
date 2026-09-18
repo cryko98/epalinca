@@ -3404,3 +3404,14 @@ nav.main a { white-space: nowrap; }
 .badge-m:hover .badge-m__stack.n2 .badge-m__photo:nth-child(1) { transform: translate(-26px, -4px) scale(.94) rotate(-5deg); }
 .badge-m:hover .badge-m__stack.n2 .badge-m__photo:nth-child(2) { transform: translate(30px, 6px) scale(.82) rotate(5deg); }
 .badge-m .l small { display: block; margin-top: .25rem; font-size: .56rem; letter-spacing: .12em; color: var(--amber-2); }
+
+
+/* Medal strip: four-sticker fan (2025 summary: champion, gold, silver, bronze). */
+.badge-m__stack.n4 .badge-m__photo:nth-child(1) { z-index: 4; transform: translate(-34px, 2px) scale(.8); }
+.badge-m__stack.n4 .badge-m__photo:nth-child(2) { z-index: 3; transform: translate(-8px, -14px) scale(.74); }
+.badge-m__stack.n4 .badge-m__photo:nth-child(3) { z-index: 2; transform: translate(18px, -4px) scale(.68); }
+.badge-m__stack.n4 .badge-m__photo:nth-child(4) { z-index: 1; transform: translate(40px, 12px) scale(.62); }
+.badge-m:hover .badge-m__stack.n4 .badge-m__photo:nth-child(1) { transform: translate(-42px, -2px) scale(.84) rotate(-6deg); }
+.badge-m:hover .badge-m__stack.n4 .badge-m__photo:nth-child(2) { transform: translate(-10px, -20px) scale(.78) rotate(-2deg); }
+.badge-m:hover .badge-m__stack.n4 .badge-m__photo:nth-child(3) { transform: translate(22px, -8px) scale(.72) rotate(3deg); }
+.badge-m:hover .badge-m__stack.n4 .badge-m__photo:nth-child(4) { transform: translate(48px, 10px) scale(.66) rotate(7deg); }
