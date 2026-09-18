@@ -236,7 +236,7 @@
     "bk_ppl": "Létszám",
     "bk_pack": "Csomag",
     "bk_food": "Étel",
-    "bk_food_none": "Csak pogácsa",
+    "bk_food_none": "Pogácsa (benne van)",
     "bk_food_cold": "Hidegtál",
     "bk_name": "Név",
     "bk_phone": "Telefon / e-mail",
@@ -388,6 +388,10 @@
     "md_akovita_l": "legjobb erdélyi szilvapárlat",
     "md7_ring": "ÁKOVITA 2026 · ÉRMEK",
     "md7_c": "★",
-    "md7_l": "érmek"
+    "md7_l": "érmek",
+    "pk_add_cold": "Hidegtál hozzáadása",
+    "pk_add_pogacsa": "Pogácsa adag hozzáadása",
+    "bk_food_base": "A pogácsa az alapcsomag része; a kiegészítők fejenként értendők.",
+    "bk_est_pog": "extra pogácsa"
   }
 }

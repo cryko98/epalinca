@@ -68,6 +68,13 @@
                 {%- endif -%}
               {%- endfor -%}
             </ul>
+            {%- if tk == 'pk1' -%}
+              {%- comment -%} Pogăcele are part of this package; the platter and an extra pogăcele portion are optional, per person. {%- endcomment -%}
+              <div class="pack__adds">
+                <button type="button" class="pack__add" data-add="cold"><i aria-hidden="true"></i><span>{{ 'zk.pk_add_cold' | t }}</span><b>+45 {{ 'zk.pk_per' | t }}</b></button>
+                <button type="button" class="pack__add" data-add="pogacsa"><i aria-hidden="true"></i><span>{{ 'zk.pk_add_pogacsa' | t }}</span><b>+15 {{ 'zk.pk_per' | t }}</b></button>
+              </div>
+            {%- endif -%}
             <a class="btn{% if block.settings.highlight %} primary{% endif %}" href="#booking">{{ 'zk.pk_book' | t }}</a>
           </div>
         {%- endif -%}
@@ -138,12 +145,12 @@
             {%- endfor -%}
           </select>
         </label>
-        <label><span>{{ 'zk.bk_food' | t }}</span>
-          <select id="food" name="contact[Mancare]">
-            <option>{{ 'zk.bk_food_none' | t }}</option>
-            <option>{{ 'zk.bk_food_cold' | t }}</option>
-          </select>
-        </label>
+        <fieldset class="bk-adds" id="bkAdds">
+          <legend>{{ 'zk.pk_addons' | t }}</legend>
+          <label class="bk-adds__opt"><input type="checkbox" id="addCold" name="contact[Platou rece]" value="da"><span>{{ 'zk.pk_add_cold' | t }}</span><em>+45 {{ 'zk.pk_per' | t }}</em></label>
+          <label class="bk-adds__opt"><input type="checkbox" id="addPog" name="contact[Pogacele extra]" value="da"><span>{{ 'zk.pk_add_pogacsa' | t }}</span><em>+15 {{ 'zk.pk_per' | t }}</em></label>
+          <small>{{ 'zk.bk_food_base' | t }}</small>
+        </fieldset>
         <label><span>{{ 'zk.bk_name' | t }}</span><input required name="contact[Nume]"></label>
         <label><span>{{ 'zk.bk_phone' | t }}</span><input required type="email" name="contact[email]"></label>
 

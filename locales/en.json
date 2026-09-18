@@ -236,7 +236,7 @@
     "bk_ppl": "Group size",
     "bk_pack": "Package",
     "bk_food": "Food",
-    "bk_food_none": "Pogácsa only",
+    "bk_food_none": "Pogácsa (included)",
     "bk_food_cold": "Cold platter",
     "bk_name": "Name",
     "bk_phone": "Phone / e-mail",
@@ -388,6 +388,10 @@
     "md_akovita_l": "best Transylvanian plum spirit",
     "md7_ring": "ÁKOVITA 2026 · MEDALS",
     "md7_c": "★",
-    "md7_l": "medals"
+    "md7_l": "medals",
+    "pk_add_cold": "Add a cold platter",
+    "pk_add_pogacsa": "Add a pogácsa portion",
+    "bk_food_base": "Pogácsa is included in the package; add-ons are per person.",
+    "bk_est_pog": "extra pogácsa"
   }
 }

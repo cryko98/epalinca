@@ -3415,3 +3415,29 @@ nav.main a { white-space: nowrap; }
 .badge-m:hover .badge-m__stack.n4 .badge-m__photo:nth-child(2) { transform: translate(-10px, -20px) scale(.78) rotate(-2deg); }
 .badge-m:hover .badge-m__stack.n4 .badge-m__photo:nth-child(3) { transform: translate(22px, -8px) scale(.72) rotate(3deg); }
 .badge-m:hover .badge-m__stack.n4 .badge-m__photo:nth-child(4) { transform: translate(48px, 10px) scale(.66) rotate(7deg); }
+
+
+/* Tasting package add-ons: toggle buttons on the card, checkboxes in the booking form. */
+.pack__adds { display: grid; gap: .45rem; margin: .2rem 0 1.1rem; }
+.pack__add {
+  display: flex; align-items: center; gap: .6rem; width: 100%; text-align: left;
+  padding: .6rem .75rem; background: rgba(255, 255, 255, .03); border: 1px solid var(--line); border-radius: 2px;
+  color: var(--silver); font-family: "Manrope", sans-serif; font-size: .82rem; cursor: pointer;
+  transition: border-color .2s, background .2s, color .2s;
+}
+.pack__add i { flex: none; width: 16px; height: 16px; border: 1px solid var(--fog); border-radius: 3px; position: relative; transition: background .2s, border-color .2s; }
+.pack__add i::after { content: ""; position: absolute; left: 4px; top: 1px; width: 5px; height: 9px; border: solid var(--ink); border-width: 0 2px 2px 0; transform: rotate(45deg); opacity: 0; }
+.pack__add span { flex: 1 1 auto; }
+.pack__add b { flex: none; font-family: "IBM Plex Mono", monospace; font-size: .62rem; letter-spacing: .08em; font-weight: 500; color: var(--amber-2); }
+.pack__add:hover { border-color: var(--amber); color: #F3F1EC; }
+.pack__add.on { border-color: var(--amber); background: rgba(201, 150, 59, .1); color: #F3F1EC; }
+.pack__add.on i { background: var(--amber); border-color: var(--amber); }
+.pack__add.on i::after { opacity: 1; }
+.bk-adds { border: 1px solid var(--line); border-radius: 2px; padding: .8rem .9rem .7rem; margin: 0; grid-column: 1 / -1; display: grid; gap: .45rem; }
+.bk-adds legend { font-family: "IBM Plex Mono", monospace; font-size: .6rem; letter-spacing: .16em; text-transform: uppercase; color: var(--fog); padding: 0 .4rem; }
+.bk-adds__opt { display: flex !important; align-items: center; gap: .6rem; width: auto !important; cursor: pointer; font-size: .88rem; color: var(--silver); }
+.bk-adds__opt input { accent-color: var(--amber); width: 16px; height: 16px; margin: 0; }
+.bk-adds__opt span { flex: 1 1 auto; }
+.bk-adds__opt em { font-style: normal; font-family: "IBM Plex Mono", monospace; font-size: .62rem; letter-spacing: .08em; color: var(--amber-2); }
+.bk-adds small { color: var(--fog); font-size: .74rem; }
+.bk-adds[hidden] { display: none; }

@@ -236,7 +236,7 @@
     "bk_ppl": "Nr. persoane",
     "bk_pack": "Pachet",
     "bk_food": "Mâncare",
-    "bk_food_none": "Doar pogăcele",
+    "bk_food_none": "Pogăcele (incluse)",
     "bk_food_cold": "Platou rece",
     "bk_name": "Nume",
     "bk_phone": "Telefon / e-mail",
@@ -388,6 +388,10 @@
     "md_akovita_l": "cea mai bună pălincă de prune din Transilvania",
     "md7_ring": "ÁKOVITA 2026 · MEDALII",
     "md7_c": "★",
-    "md7_l": "medalii"
+    "md7_l": "medalii",
+    "pk_add_cold": "Adaugă platou rece",
+    "pk_add_pogacsa": "Adaugă o porție de pogăcele",
+    "bk_food_base": "Pogăcelele sunt incluse în pachet; opțiunile se adaugă pe persoană.",
+    "bk_est_pog": "pogăcele extra"
   }
 }
