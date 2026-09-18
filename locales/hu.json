@@ -392,6 +392,8 @@
     "pk_add_cold": "Hidegtál hozzáadása",
     "pk_add_pogacsa": "Pogácsa adag hozzáadása",
     "bk_food_base": "A pogácsa az alapcsomag része; a kiegészítők fejenként értendők.",
-    "bk_est_pog": "extra pogácsa"
+    "bk_est_pog": "extra pogácsa",
+    "pk_incl_cold": "Hidegtál az alapcsomagban",
+    "bk_food_base2": "A hidegtál az alapcsomag része; a pogácsa adag fejenként adható hozzá."
   }
 }

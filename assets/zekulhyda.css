@@ -3441,3 +3441,8 @@ nav.main a { white-space: nowrap; }
 .bk-adds__opt em { font-style: normal; font-family: "IBM Plex Mono", monospace; font-size: .62rem; letter-spacing: .08em; color: var(--amber-2); }
 .bk-adds small { color: var(--fog); font-size: .74rem; }
 .bk-adds[hidden] { display: none; }
+
+.pack__add.is-incl { cursor: default; border-style: dashed; color: var(--silver); }
+.pack__add.is-incl i { background: var(--amber); border-color: var(--amber); opacity: .75; }
+.pack__add.is-incl i::after { opacity: 1; }
+.pack__add.is-incl:hover { border-color: var(--line); color: var(--silver); }
