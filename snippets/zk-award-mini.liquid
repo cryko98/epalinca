@@ -1,12 +1,10 @@
 {%- comment -%}
-  Small award medal for the corner of a product card.
+  Award medals for the top-right corner of a product picture (cards and the product
+  page stage). Every award in the zekulhyda.awards metafield is drawn, stacked under
+  each other, so a bottle with several distinctions shows all of them.
 
-  Reads the first entry of the product's zekulhyda.awards metafield (same format as
-  zk-awards: metal|ring text|figure|label) and draws a compact version of the same ring,
-  so an award-winning bottle is recognisable straight from the grid.
-
-  Only the first award is shown - the corner of a card is not the place for a list; the
-  product page shows them all via zk-awards.
+  Line format: metal|ring text|figure|label   e.g. gold|QUINTESSENCE 2026|AUR|medalie de aur
+  The 2026 Quintessence and ÁKOVITA stickers are photographs; older awards get a drawn ring.
 
   Renders nothing when the product has no awards recorded.
 
@@ -16,8 +14,10 @@
 {%- assign awards = product.metafields.zekulhyda.awards.value -%}
 
 {%- if awards != blank and awards.size > 0 -%}
+<span class="zk-mini-stack">
+  {%- for line in awards -%}
   {%- liquid
-    assign parts = awards[0] | split: '|'
+    assign parts = line | split: '|'
     assign metal = parts[0] | strip | downcase
     assign ring  = parts[1] | strip
     assign fig   = parts[2] | strip
@@ -42,8 +42,7 @@
         assign c3 = '#7A5416'
     endcase
 
-    assign uid = 'mini' | append: product.id
-    assign more = awards.size | minus: 1
+    assign uid = 'mini' | append: product.id | append: forloop.index
 
     # The metafield is written in Romanian; the words on the medal follow the storefront language.
     case fig
@@ -66,12 +65,10 @@
         assign label = 'zk.md_champ_l' | t
       when 'akovita-prune'
         assign label = 'zk.md_akovita_l' | t
-
       when 'medaliat'
         assign label = 'zk.md_medal_l' | t
     endcase
 
-    # The 2026 Quintessence stickers were photographed; older awards keep the drawn medal.
     assign photo = ''
     if ring contains 'ÁKOVITA' or ring contains 'AKOVITA'
       if metal == 'champ'
@@ -95,7 +92,6 @@
       endif
     endif
   -%}
-
   <span class="zk-mini" title="{{ ring | escape }} — {{ label | escape }}" aria-label="{{ ring | escape }} — {{ label | escape }}">
     {%- if photo != blank -%}
     <img src="{{ photo | asset_url }}" alt="{{ ring | escape }} — {{ label | escape }}" width="52" height="52" loading="lazy">
@@ -114,6 +110,7 @@
       <path d="M42 42 q58 -38 116 0" fill="none" stroke="#fff" stroke-opacity=".35" stroke-width="9" stroke-linecap="round"/>
     </svg>
     {%- endif -%}
-    {%- if more > 0 -%}<i class="zk-mini__more">+{{ more }}</i>{%- endif -%}
   </span>
+  {%- endfor -%}
+</span>
 {%- endif -%}

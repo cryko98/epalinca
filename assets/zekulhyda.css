@@ -3389,3 +3389,10 @@ nav.main a { white-space: nowrap; }
 .logo svg { width: 30px; height: 30px; margin-bottom: .1rem; }
 .pall__ic { background: var(--graphite); }
 @media (max-width: 640px) { .logo { width: 210px; } }
+
+/* Several awards on one bottle: stacked under each other in the top-right corner. */
+.zk-mini-stack { position: absolute; top: .55rem; right: .55rem; z-index: 2; display: flex; flex-direction: column; align-items: flex-end; gap: .35rem; pointer-events: none; }
+.zk-mini-stack .zk-mini { position: static; }
+.pdp__stage .zk-mini-stack { top: 1rem; right: 1rem; gap: .5rem; }
+.card:hover .zk-mini { transform: translateY(3px) scale(1.04); }
+.zk-winner__ring .zk-mini-stack { position: static; flex-direction: row; }
